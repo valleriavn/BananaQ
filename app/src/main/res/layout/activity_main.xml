@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/banana_cream">
 
-    <!-- White Header -->
+    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/white"
-        android:paddingHorizontal="16dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="17dp"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/logoIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
+<!--dshcbschs-->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="BananaQ"
-            android:textColor="@color/banana_green"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/logoIcon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/logoIcon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="BananaQ"
+                android:textColor="@color/banana_green"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <!-- Language Toggle -->
         <LinearLayout
@@ -53,21 +58,21 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button_bg"
                 android:backgroundTint="@color/banana_green"
-                android:paddingHorizontal="12dp"
+                android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
                 android:text="EN"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
+                android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
                 android:text="TL"
-                android:textColor="@color/banana_text_dark"
-                android:textSize="12sp" />
+                android:textColor="@color/banana_yellow"
+                android:textSize="14sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/header">
 
@@ -82,84 +88,197 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingHorizontal="24dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Good day, User!"
                 android:textColor="@color/banana_text_dark"
-                android:textSize="24sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ivSoil"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="380dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/img_banana_plant" />
 
-            <!-- Scan Actions -->
-            <LinearLayout
+            <!-- Date/Time Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                app:cardCornerRadius="30dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
-                    android:id="@+id/selectButton"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_bg"
-                    android:backgroundTint="@color/banana_green"
-                    android:gravity="center"
-                    android:padding="12dp">
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/dateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Friday, 2026"
+                            android:textColor="#555555"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/dayMonthText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="May 15"
+                            android:textColor="#555555"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
                     <TextView
+                        android:id="@+id/timeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gallery"
-                        android:textColor="@color/white"
+                        android:text="05:40:37 PM"
+                        android:textColor="@color/banana_text_dark"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Disease Library"
+                android:textColor="@color/banana_text_dark"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <!-- Library Horizontal Scroll -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:scrollbars="none">
 
                 <LinearLayout
-                    android:id="@+id/cameraButton"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_bg"
-                    android:backgroundTint="@color/banana_green"
-                    android:gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Camera"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/detectButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_bg"
-                    android:backgroundTint="@color/banana_green"
-                    android:gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Black Sigatoka Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardBlackSigatoka"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:text="Live Scan"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="2dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_logo"
+                                android:background="#F0F0F0"
+                                app:cardCornerRadius="15dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:paddingHorizontal="4dp"
+                                android:text="Black Sigatoka"
+                                android:textColor="@color/banana_text_dark"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Panama Disease Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardPanama"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="2dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_logo"
+                                android:background="#F0F0F0" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:paddingHorizontal="4dp"
+                                android:text="Panama Disease"
+                                android:textColor="@color/banana_text_dark"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Cordana Spot Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardCordana"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="2dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_logo"
+                                android:background="#F0F0F0" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:paddingHorizontal="4dp"
+                                android:text="Cordana Spot"
+                                android:textColor="@color/banana_text_dark"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
                 </LinearLayout>
-            </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/statusText"
@@ -170,144 +289,25 @@
                 android:textColor="#FF0000"
                 android:visibility="gone" />
 
-            <!-- Date/Time Card -->
+            <!-- Hidden Scan Buttons from original logic -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/date_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/dateText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Friday, 2026"
-                        android:textColor="#555555"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/dayMonthText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="May 15"
-                        android:textColor="#555555"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/timeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="05:40:37 PM"
-                    android:textColor="@color/banana_green"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Disease Library"
-                android:textColor="@color/banana_text_dark"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <!-- Library Horizontal Scroll -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- Black Sigatoka Card -->
-                    <LinearLayout
-                        android:id="@+id/cardBlackSigatoka"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_logo"
-                            android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="#E8E8E8" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Black Sigatoka"
-                            android:textColor="@color/banana_text_dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <!-- Panama Disease Card -->
-                    <LinearLayout
-                        android:id="@+id/cardPanama"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_logo"
-                            android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="#E8E8E8" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Panama Disease"
-                            android:textColor="@color/banana_text_dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <!-- Cordana Spot Card -->
-                    <LinearLayout
-                        android:id="@+id/cardCordana"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_logo"
-                            android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="#E8E8E8" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Cordana Spot"
-                            android:textColor="@color/banana_text_dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:id="@+id/selectButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:visibility="gone" />
+            <LinearLayout
+                android:id="@+id/cameraButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:visibility="gone" />
+            <LinearLayout
+                android:id="@+id/detectButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>
@@ -316,9 +316,9 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/white"
-        app:itemIconTint="@color/banana_green"
-        app:itemTextColor="@color/banana_text_dark"
+        android:background="@drawable/nav_top_border"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled" />
