@@ -2,6 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- BananaQ Colors -->
+    <color name="banana_green">#71C35E</color>
+    <color name="banana_cream">#F8F5E9</color>
+    <color name="banana_yellow">#F2D597</color>
+    <color name="banana_text_dark">#4A773C</color>
+
+    <!-- Old Colors (keeping for compatibility) -->
     <color name="brown_primary">#795548</color>
     <color name="brown_dark">#5D4037</color>
     <color name="brown_light">#A18879</color>

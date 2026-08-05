@@ -1,13 +1,13 @@
-# WatDaSoil: Technical & Operational Manual
+# BananaQ: Technical & Operational Manual
 
 ## 1. Project Overview
-**WatDaSoil** is an AI-powered Android application designed to identify different types of soil (Black, Red, and Yellow) using machine learning. The app provides detailed agricultural information, including descriptions, primary uses, and advantages/disadvantages for each identified soil type.
+**BananaQ** is an AI-powered Android application designed to identify different types of soil (Black, Red, and Yellow) using machine learning. The app provides detailed agricultural information, including descriptions, primary uses, and advantages/disadvantages for each identified soil type.
 
 ## 2. Technical Stack
 *   **Language:** Kotlin
 *   **UI Framework:** Android XML (Material Design)
 *   **AI Engine:** TensorFlow Lite (TFLite)
-*   **Model:** Custom-trained CNN (`watdasoil_model.tflite`)
+*   **Model:** Custom-trained CNN (`BananaQ_model.tflite`)
 *   **Minimum SDK:** API 24 (Android 7.0)
 *   **Target SDK:** API 35 (Android 15)
 
@@ -45,4 +45,4 @@
 2.  **Dynamic Content:** Content is injected into a `LinearLayout` container based on the active tab.
 
 ---
-*Generated for WatDaSoil Project Documentation.*
+*Generated for BananaQ Project Documentation.*

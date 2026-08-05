@@ -1,4 +1,4 @@
-package com.example.watdasoil
+package com.example.bananaq
 
 import org.junit.Test
 

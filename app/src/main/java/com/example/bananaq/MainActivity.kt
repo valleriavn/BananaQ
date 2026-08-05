@@ -1,4 +1,4 @@
-package com.example.watdasoil
+package com.example.bananaq
 
 import android.Manifest
 import android.content.Intent
@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.scale
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
 import java.nio.ByteBuffer
@@ -32,7 +33,7 @@ import java.util.Locale
 class MainActivity : AppCompatActivity() {
 
     private lateinit var interpreter: Interpreter
-    private lateinit var soilImage: ImageView
+    private lateinit var ivSoil: ImageView
     private lateinit var selectButton: LinearLayout
     private lateinit var cameraButton: LinearLayout
     private lateinit var detectButton: LinearLayout
@@ -44,9 +45,9 @@ class MainActivity : AppCompatActivity() {
     private var selectedBitmap: Bitmap? = null
 
     private val labels = arrayOf(
-        "Black Soil",
-        "Red Soil",
-        "Yellow Soil"
+        "Black Sigatoka",
+        "Panama Disease",
+        "Cordana Leaf Spot"
     )
 
     private val handler = Handler(Looper.getMainLooper())
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         ) { bitmap: Bitmap? ->
             if (bitmap != null) {
                 selectedBitmap = bitmap
-                soilImage.setImageBitmap(bitmap)
+                ivSoil.setImageBitmap(bitmap)
             }
         }
 
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        soilImage = findViewById(R.id.soilImage)
+        ivSoil = findViewById(R.id.ivSoil)
         selectButton = findViewById(R.id.selectButton)
         cameraButton = findViewById(R.id.cameraButton)
         detectButton = findViewById(R.id.detectButton)
@@ -106,6 +107,17 @@ class MainActivity : AppCompatActivity() {
         timeText = findViewById(R.id.timeText)
         dateText = findViewById(R.id.dateText)
         dayMonthText = findViewById(R.id.dayMonthText)
+
+        // Disease Library Card Listeners
+        findViewById<View>(R.id.cardBlackSigatoka).setOnClickListener {
+            showDiseaseDetails("Black Sigatoka")
+        }
+        findViewById<View>(R.id.cardPanama).setOnClickListener {
+            showDiseaseDetails("Panama Disease")
+        }
+        findViewById<View>(R.id.cardCordana).setOnClickListener {
+            showDiseaseDetails("Cordana Leaf Spot")
+        }
 
         try {
             interpreter = Interpreter(loadModelFile())
@@ -127,19 +139,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         detectButton.setOnClickListener {
-            val bitmap = selectedBitmap
-            if (bitmap == null) {
-                statusText.visibility = View.VISIBLE
-                statusText.text = "Please select or capture a soil image first."
-            } else if (!::interpreter.isInitialized) {
-                statusText.visibility = View.VISIBLE
-                statusText.text = "The AI model is not available."
-            } else {
-                classifyImage(bitmap)
-            }
+            startActivity(Intent(this, ScannerActivity::class.java))
         }
 
         handler.post(timeUpdater)
+        setupBottomNavigation()
+    }
+
+    private fun setupBottomNavigation() {
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        bottomNavigation.selectedItemId = R.id.nav_home
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> true
+                R.id.nav_history -> {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    true
+                }
+                R.id.nav_scan -> {
+                    startActivity(Intent(this, ScannerActivity::class.java))
+                    true
+                }
+                R.id.nav_feedback -> {
+                    startActivity(Intent(this, FeedbackActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun updateDateTime() {
@@ -159,7 +186,7 @@ class MainActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 if (bitmap != null) {
                     selectedBitmap = bitmap
-                    soilImage.setImageBitmap(bitmap)
+                    ivSoil.setImageBitmap(bitmap)
                 }
             }
         } catch (error: Exception) {
@@ -217,7 +244,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadModelFile(): ByteBuffer {
-        val fileDescriptor = assets.openFd("watdasoil_model.tflite")
+        val fileDescriptor = assets.openFd("bananaq_model.tflite")
         val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
         val fileChannel = inputStream.channel
         return fileChannel.map(
@@ -225,6 +252,14 @@ class MainActivity : AppCompatActivity() {
             fileDescriptor.startOffset,
             fileDescriptor.declaredLength
         )
+    }
+
+    private fun showDiseaseDetails(diseaseName: String) {
+        val intent = Intent(this, ResultActivity::class.java).apply {
+            putExtra("SOIL_TYPE", diseaseName)
+            putExtra("CONFIDENCE", 100f)
+        }
+        startActivity(intent)
     }
 
     override fun onDestroy() {

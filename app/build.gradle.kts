@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.watdasoil"
+    namespace = "com.example.bananaq"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.watdasoil"
+        applicationId = "com.example.bananaq"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -35,7 +35,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
-    implementation("org.tensorflow:tensorflow-lite:2.17.0")
+    implementation(libs.tensorflow.lite)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)

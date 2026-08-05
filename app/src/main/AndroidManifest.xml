@@ -13,20 +13,50 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WatDaSoil">
+        android:theme="@style/Theme.BananaQ">
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LanguageActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".GetStartedActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".FeedbackDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ScannerActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".ResultActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

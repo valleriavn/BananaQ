@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/ivScan"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_logo"
+            android:background="@drawable/rounded_button_bg"
+            android:backgroundTint="#F5F5F5" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDiseaseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Black Sigatoka"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="May 15, 2026 at 2:15 PM"
+                android:textColor="#888888"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvAccuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accuracy: 95.8%"
+                android:textColor="#888888"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button_bg"
+            android:backgroundTint="#FFEBEE"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="Diseased"
+            android:textColor="#E57373"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

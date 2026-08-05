@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_button_bg"
+        android:backgroundTint="#80000000"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <!-- Overlay Frame -->
+    <View
+        android:id="@+id/scanFrame"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:background="@drawable/scanner_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Align the banana leaf within the frame to scan"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scanFrame" />
+
+    <!-- Scanner Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnGallery"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_button_bg"
+            android:backgroundTint="#80000000"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnCapture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="32dp"
+            android:background="@drawable/circle_capture"
+            android:src="@android:drawable/ic_menu_camera"
+            android:visibility="invisible" />
+
+        <!-- The big white circle in design -->
+        <View
+            android:id="@+id/captureCircle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="32dp"
+            android:background="@drawable/circle_white" />
+
+        <ImageButton
+            android:id="@+id/btnFlash"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_button_bg"
+            android:backgroundTint="#80000000"
+            android:src="@android:drawable/ic_menu_compass"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- Prediction Pill -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/predictionCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp"
+        android:visibility="gone"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:background="#DDDDDD" />
+
+            <TextView
+                android:id="@+id/tvPrediction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Prediction: Panama Disease (92%)"
+                android:textColor="@color/banana_text_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tap to see details"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        app:itemIconTint="@color/banana_green"
+        app:itemTextColor="@color/banana_text_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
