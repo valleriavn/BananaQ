@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="25dp"
-        android:paddingVertical="20dp"
+        android:paddingTop="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,6 +46,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_button_bg"
             android:backgroundTint="#F2EBDC"
             android:orientation="horizontal"
@@ -74,6 +76,12 @@
                 android:textColor="@color/banana_yellow"
                 android:textSize="14sp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -87,13 +95,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="24dp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
                 android:text="Good day, User!"
                 android:textColor="@color/banana_text_dark"
                 android:textSize="32sp"
@@ -103,7 +111,7 @@
                 android:id="@+id/ivSoil"
                 android:layout_width="match_parent"
                 android:layout_height="380dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="0dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/img_banana_plant" />
 
@@ -111,21 +119,24 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="4dp">
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginHorizontal="15dp"
+                app:cardCornerRadius="35dp"
+                app:cardElevation="25dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="16dp">
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="13dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -163,6 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
                 android:text="Disease Library"
                 android:textColor="@color/banana_text_dark"
                 android:textSize="32sp"
@@ -179,7 +191,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp">
 
                     <!-- Black Sigatoka Card -->
                     <androidx.cardview.widget.CardView
