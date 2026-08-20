@@ -40,16 +40,16 @@ class ScanHistoryAdapter(
         } else if (holder is ItemViewHolder) {
             holder.tvDiseaseName.text = item.diseaseName
             holder.tvDateTime.text = item.dateTime
-            holder.tvAccuracy.text = "Accuracy: ${item.accuracy}%"
+            holder.tvAccuracy.text = if (item.accuracy?.endsWith("%") == true) item.accuracy else "${item.accuracy}%"
             holder.tvStatus.text = if (item.isHealthy) "Healthy" else "Diseased"
-            holder.tvStatus.setBackgroundResource(R.drawable.rounded_button_bg)
+            holder.tvStatus.setBackgroundResource(R.drawable.status_badge_bg)
             
             if (item.isHealthy) {
-                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#E8F5E9"))
-                holder.tvStatus.setTextColor(android.graphics.Color.parseColor("#4CAF50"))
+                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#71C35E"))
+                holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
             } else {
-                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFEBEE"))
-                holder.tvStatus.setTextColor(android.graphics.Color.parseColor("#E57373"))
+                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#F25C5C"))
+                holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
             }
 
             holder.itemView.setOnClickListener {
