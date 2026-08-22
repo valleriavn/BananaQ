@@ -9,6 +9,9 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.LinearLayout
+import android.graphics.Color
+import android.view.Gravity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +20,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.cardview.widget.CardView
 import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
 import java.nio.ByteBuffer
@@ -28,8 +33,13 @@ import java.util.concurrent.Executors
 class ScannerActivity : AppCompatActivity() {
 
     private lateinit var viewFinder: PreviewView
-    private lateinit var tvPrediction: TextView
-    private lateinit var predictionCard: View
+    private lateinit var fullResultCard: View
+    private lateinit var resultContentContainer: LinearLayout
+    private lateinit var resultSectionTitle: TextView
+    private lateinit var tabSymptoms: TextView
+    private lateinit var tabTreatment: TextView
+    private lateinit var tabPrevention: TextView
+    
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var interpreter: Interpreter
     
@@ -38,8 +48,9 @@ class ScannerActivity : AppCompatActivity() {
     private var lastConfidence = 0f
 
     private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val cameraGranted = permissions[Manifest.permission.CAMERA] ?: false
+            if (cameraGranted) {
                 startCamera()
             } else {
                 Toast.makeText(this, "Camera permission is required", Toast.LENGTH_SHORT).show()
@@ -52,27 +63,33 @@ class ScannerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_scanner)
 
         viewFinder = findViewById(R.id.viewFinder)
-        tvPrediction = findViewById(R.id.tvPrediction)
-        predictionCard = findViewById(R.id.predictionCard)
+        fullResultCard = findViewById(R.id.fullResultCard)
+        resultContentContainer = findViewById(R.id.resultContentContainer)
+        resultSectionTitle = findViewById(R.id.resultSectionTitle)
+        tabSymptoms = findViewById(R.id.tabSymptoms)
+        tabTreatment = findViewById(R.id.tabTreatment)
+        tabPrevention = findViewById(R.id.tabPrevention)
 
         findViewById<View>(R.id.btnBack).setOnClickListener {
-            finish()
-        }
-
-        findViewById<View>(R.id.captureCircle).setOnClickListener {
-            if (lastPrediction.isNotEmpty()) {
-                val intent = Intent(this, ResultActivity::class.java).apply {
-                    putExtra("SOIL_TYPE", lastPrediction)
-                    putExtra("CONFIDENCE", lastConfidence * 100)
-                }
-                startActivity(intent)
+            if (fullResultCard.visibility == View.VISIBLE) {
+                fullResultCard.visibility = View.GONE
+            } else {
+                finish()
             }
         }
 
+        findViewById<View>(R.id.captureCircle).setOnClickListener {
+            handleScanClick()
+        }
+
         findViewById<View>(R.id.btnGallery).setOnClickListener {
-            // Gallery logic could go here
             Toast.makeText(this, "Gallery opening...", Toast.LENGTH_SHORT).show()
         }
+
+        // Tab Listeners for Result
+        tabSymptoms.setOnClickListener { selectTab(1) }
+        tabTreatment.setOnClickListener { selectTab(2) }
+        tabPrevention.setOnClickListener { selectTab(3) }
 
         try {
             interpreter = Interpreter(loadModelFile())
@@ -82,24 +99,205 @@ class ScannerActivity : AppCompatActivity() {
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        checkPermissionAndStart()
-        setupBottomNavigation()
+        if (hasPermissions()) {
+            startCamera()
+        }
         
-        predictionCard.setOnClickListener {
-            val intent = Intent(this, ResultActivity::class.java).apply {
-                putExtra("SOIL_TYPE", lastPrediction)
-                putExtra("CONFIDENCE", lastConfidence * 100)
+        // Check for incoming data from MainActivity
+        val incomingDisease = intent.getStringExtra("DISEASE_NAME")
+        val incomingConfidence = intent.getIntExtra("CONFIDENCE", 0)
+        if (incomingDisease != null) {
+            lastPrediction = incomingDisease
+            lastConfidence = incomingConfidence / 100f
+            showFullResult()
+        }
+        
+        setupBottomNavigation()
+
+        // Bottom Sheet Behavior
+        val behavior = BottomSheetBehavior.from(fullResultCard as CardView)
+        val extraDetails = findViewById<View>(R.id.extraDetailsLayout)
+        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    extraDetails.visibility = View.VISIBLE
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    extraDetails.visibility = View.INVISIBLE
+                }
             }
-            startActivity(intent)
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                extraDetails.visibility = View.VISIBLE
+                extraDetails.alpha = slideOffset
+            }
+        })
+    }
+
+    private fun hasPermissions(): Boolean {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun handleScanClick() {
+        if (!hasPermissions()) {
+            showPermissionExplanationDialog()
+        } else if (lastPrediction.isNotEmpty() && lastConfidence > 0.6) {
+            showFullResult()
+        } else {
+            Toast.makeText(this, "Align leaf properly and try again", Toast.LENGTH_SHORT).show()
+            startCamera()
         }
     }
 
-    private fun checkPermissionAndStart() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            startCamera()
-        } else {
-            requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+    private fun showFullResult() {
+        fullResultCard.visibility = View.VISIBLE
+        
+        findViewById<TextView>(R.id.resultDiseaseName).text = lastPrediction
+        findViewById<TextView>(R.id.resultScientificName).text = when(lastPrediction) {
+            "Panama Disease" -> "Fusarium oxysporum f. sp. cubense"
+            "Black Sigatoka" -> "Mycosphaerella fijiensis"
+            "Cordana Leaf Spot" -> "Cordana musae"
+            else -> "Musa acuminata"
         }
+        val confidenceInt = (lastConfidence * 100).toInt()
+        findViewById<TextView>(R.id.resultAccuracyValue).text = "$confidenceInt%"
+        findViewById<android.widget.ProgressBar>(R.id.resultAccuracyProgress).progress = confidenceInt
+        
+        selectTab(1)
+    }
+
+    private fun selectTab(index: Int) {
+        val selectedColor = Color.parseColor("#F2D597") // banana_yellow
+        val unselectedColor = Color.parseColor("#F2EBDC") // light_cream
+
+        tabSymptoms.backgroundTintList = android.content.res.ColorStateList.valueOf(if (index == 1) selectedColor else unselectedColor)
+        tabSymptoms.setTypeface(null, if (index == 1) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
+        
+        tabTreatment.backgroundTintList = android.content.res.ColorStateList.valueOf(if (index == 2) selectedColor else unselectedColor)
+        tabTreatment.setTypeface(null, if (index == 2) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
+        
+        tabPrevention.backgroundTintList = android.content.res.ColorStateList.valueOf(if (index == 3) selectedColor else unselectedColor)
+        tabPrevention.setTypeface(null, if (index == 3) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
+
+        resultContentContainer.removeAllViews()
+
+        when (index) {
+            1 -> {
+                resultSectionTitle.text = "Visual Characteristics"
+                showSymptoms()
+            }
+            2 -> {
+                resultSectionTitle.text = "Recommended actions"
+                showTreatment()
+            }
+            3 -> {
+                resultSectionTitle.text = "Best practices to avoid spread"
+                showPrevention()
+            }
+        }
+    }
+
+    private fun showSymptoms() {
+        when (lastPrediction) {
+            "Panama Disease" -> {
+                addContentItem(1, "Yellowing leaves", "Yellowing starts from the leaf margins, and eventually the whole leaf turns yellow.")
+                addContentItem(2, "Brown discoloration", "If you slice the stem, you'll see brown or reddish-brown streaks inside.")
+                addContentItem(3, "Wilting and leaf drop", "Lower leaves wilt and collapse first, moving upwards.")
+            }
+            "Black Sigatoka" -> {
+                addContentItem(1, "Small dark spots", "First appears as tiny, dark-brown reddish spots on the underside.")
+                addContentItem(2, "Streaks development", "Spots expand into long, dark streaks parallel to veins.")
+                addContentItem(3, "Leaf necrosis", "Large areas of the leaf turn brown and dry out.")
+            }
+            "Cordana Leaf Spot" -> {
+                addContentItem(1, "Oval spots", "Large, oval spots with brown centers and bright yellow halos.")
+                addContentItem(2, "Zonate patterns", "Spots often show concentric rings and can merge together.")
+                addContentItem(3, "Edge infection", "Often starts at the leaf edges where water collects.")
+            }
+        }
+    }
+
+    private fun showTreatment() {
+        when (lastPrediction) {
+            "Panama Disease" -> {
+                addContentItem(1, "Isolate affected plants", "Remove and bag infected plants immediately. Do not compost.")
+                addContentItem(2, "Soil Treatment", "Apply calcium cyanamide to reduce fungal load.")
+            }
+            "Black Sigatoka" -> {
+                addContentItem(1, "Fungicide application", "Apply systemic or contact fungicides regularly.")
+                addContentItem(2, "Sanitation", "Remove and burn severely infected leaves.")
+            }
+        }
+    }
+
+    private fun showPrevention() {
+        when (lastPrediction) {
+            "Panama Disease" -> {
+                addContentItem(1, "Sanitize tools", "Disinfect knives and spades with 70% alcohol.")
+                addContentItem(2, "Improved drainage", "Waterlogged soil accelerates fungal spread.")
+            }
+        }
+    }
+
+    private fun addContentItem(number: Int, title: String, description: String) {
+        val itemLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(0, 0, 0, (16 * resources.displayMetrics.density).toInt())
+        }
+
+        val numberCircle = TextView(this).apply {
+            text = number.toString()
+            gravity = android.view.Gravity.CENTER
+            setTextColor(Color.parseColor("#4A773C"))
+            setBackgroundResource(R.drawable.rounded_button_bg)
+            backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#F2D597"))
+            textSize = 12f
+            layoutParams = LinearLayout.LayoutParams(
+                (28 * resources.displayMetrics.density).toInt(),
+                (28 * resources.displayMetrics.density).toInt()
+            ).apply {
+                marginEnd = (16 * resources.displayMetrics.density).toInt()
+            }
+        }
+
+        val textLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+        }
+
+        val titleView = TextView(this).apply {
+            text = title
+            textSize = 14f
+            setTextColor(Color.BLACK)
+            setTypeface(null, android.graphics.Typeface.BOLD)
+        }
+
+        val descView = TextView(this).apply {
+            text = description
+            textSize = 12f
+            setTextColor(Color.parseColor("#666666"))
+        }
+
+        textLayout.addView(titleView)
+        textLayout.addView(descView)
+        itemLayout.addView(numberCircle)
+        itemLayout.addView(textLayout)
+        resultContentContainer.addView(itemLayout)
+    }
+
+    private fun showPermissionExplanationDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Permissions Required")
+            .setMessage("Will you allow BananaQ to access camera and files to scan banana leaves?")
+            .setPositiveButton("Allow") { _, _ ->
+                val permissions = arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                requestPermissionLauncher.launch(permissions)
+            }
+            .setNegativeButton("Deny") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
     }
 
     private fun startCamera() {
@@ -152,11 +350,12 @@ class ScannerActivity : AppCompatActivity() {
             lastConfidence = probabilities[maxIndex]
 
             runOnUiThread {
-                if (lastConfidence > 0.7) {
-                    predictionCard.visibility = View.VISIBLE
-                    tvPrediction.text = "Prediction: $lastPrediction (${(lastConfidence * 100).toInt()}%)"
+                if (lastConfidence > 0.7 && fullResultCard.visibility != View.VISIBLE) {
+                    findViewById<View>(R.id.captureCircle).backgroundTintList = 
+                        android.content.res.ColorStateList.valueOf(android.graphics.Color.LTGRAY)
                 } else {
-                    predictionCard.visibility = View.GONE
+                    findViewById<View>(R.id.captureCircle).backgroundTintList = 
+                        android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE)
                 }
             }
         }

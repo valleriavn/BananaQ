@@ -53,10 +53,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <activity
-            android:name=".ResultActivity"
-            android:exported="false" />
-
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -9,19 +10,6 @@
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <!-- Back Button -->
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/rounded_button_bg"
-        android:backgroundTint="#80000000"
-        android:src="@android:drawable/ic_menu_revert"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
 
     <!-- Overlay Frame -->
     <View
@@ -36,6 +24,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <TextView
+        android:id="@+id/tvInstruction"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
@@ -43,107 +32,261 @@
         android:gravity="center"
         android:text="Align the banana leaf within the frame to scan"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scanFrame" />
 
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
     <!-- Scanner Controls -->
     <LinearLayout
+        android:id="@+id/controlsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="110dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
             android:id="@+id/btnGallery"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_button_bg"
             android:backgroundTint="#80000000"
+            android:padding="15dp"
+            android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_gallery"
             app:tint="@color/white" />
 
-        <ImageButton
-            android:id="@+id/btnCapture"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginHorizontal="32dp"
-            android:background="@drawable/circle_capture"
-            android:src="@android:drawable/ic_menu_camera"
-            android:visibility="invisible" />
-
-        <!-- The big white circle in design -->
+        <!-- Capture Button (The big white circle) -->
         <View
             android:id="@+id/captureCircle"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:layout_marginHorizontal="32dp"
             android:background="@drawable/circle_white" />
 
         <ImageButton
             android:id="@+id/btnFlash"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/rounded_button_bg"
             android:backgroundTint="#80000000"
+            android:padding="15dp"
+            android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_compass"
             app:tint="@color/white" />
     </LinearLayout>
 
-    <!-- Prediction Pill -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/predictionCard"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-10dp"
-        android:visibility="gone"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <!-- Full Result Card (Bottom Sheet) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fullResultCard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="20dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:behavior_peekHeight="180dp"
+            app:behavior_hideable="true">
 
-            <View
-                android:layout_width="40dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:background="#DDDDDD" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingTop="24dp">
 
-            <TextView
-                android:id="@+id/tvPrediction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Prediction: Panama Disease (92%)"
-                android:textColor="@color/banana_text_dark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:background="#E0E0E0" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tap to see details"
-                android:textColor="#888888"
-                android:textSize="12sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/resultDiseaseName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/banana_text_dark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/accuracyLayout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Panama Disease" />
+
+                    <TextView
+                        android:id="@+id/resultScientificName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/resultDiseaseName"
+                        tools:text="Fusarium oxysporum f. sp. cubense" />
+
+                    <LinearLayout
+                        android:id="@+id/accuracyLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/resultAccuracyValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#E57373"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            tools:text="92%" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Accuracy"
+                            android:textColor="#BDBDBD"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ProgressBar
+                    android:id="@+id/resultAccuracyProgress"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="16dp"
+                    android:progressTint="#71C35E"
+                    tools:progress="92" />
+
+                <!-- Swipable part -->
+                <LinearLayout
+                    android:id="@+id/extraDetailsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <!-- Tabs -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tabSymptoms"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_button_bg"
+                            android:backgroundTint="@color/banana_yellow"
+                            android:gravity="center"
+                            android:paddingVertical="10dp"
+                            android:text="Symptoms"
+                            android:textColor="@color/banana_text_dark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tabTreatment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_button_bg"
+                            android:backgroundTint="#F2EBDC"
+                            android:gravity="center"
+                            android:paddingVertical="10dp"
+                            android:text="Treatment"
+                            android:textColor="@color/banana_text_dark" />
+
+                        <TextView
+                            android:id="@+id/tabPrevention"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_button_bg"
+                            android:backgroundTint="#F2EBDC"
+                            android:gravity="center"
+                            android:paddingVertical="10dp"
+                            android:text="Prevention"
+                            android:textColor="@color/banana_text_dark" />
+
+                    </LinearLayout>
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/resultSectionTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:text="Visual Characteristics" />
+
+                            <LinearLayout
+                                android:id="@+id/resultContentContainer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:orientation="vertical">
+                                <!-- Dynamic content items -->
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.core.widget.NestedScrollView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/white"
-        app:itemIconTint="@color/banana_green"
-        app:itemTextColor="@color/banana_text_dark"
+        android:background="@drawable/nav_top_border"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:itemIconSize="32dp"
+        app:itemBackground="@android:color/transparent"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemTextAppearanceActive="@style/NavTextSmall"
+        app:itemTextAppearanceInactive="@style/NavTextSmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled" />

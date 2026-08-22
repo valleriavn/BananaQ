@@ -212,10 +212,9 @@ class MainActivity : AppCompatActivity() {
             val prediction = labels[highestIndex]
             val confidence = probabilities[highestIndex] * 100
             
-            val intent = Intent(this, ResultActivity::class.java).apply {
-                putExtra("SOIL_TYPE", prediction)
-                putExtra("CONFIDENCE", confidence)
-                putExtra("SOIL_IMAGE", resizedBitmap)
+            val intent = Intent(this, ScannerActivity::class.java).apply {
+                putExtra("DISEASE_NAME", prediction)
+                putExtra("CONFIDENCE", confidence.toInt())
             }
             startActivity(intent)
             
@@ -254,9 +253,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDiseaseDetails(diseaseName: String) {
-        val intent = Intent(this, ResultActivity::class.java).apply {
-            putExtra("SOIL_TYPE", diseaseName)
-            putExtra("CONFIDENCE", 100f)
+        val intent = Intent(this, ScannerActivity::class.java).apply {
+            putExtra("DISEASE_NAME", diseaseName)
+            putExtra("CONFIDENCE", 100)
         }
         startActivity(intent)
     }
