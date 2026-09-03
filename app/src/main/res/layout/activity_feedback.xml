@@ -1,103 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/banana_cream">
 
-    <!-- White Header -->
+    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/white"
-        android:paddingHorizontal="16dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="25dp"
+        android:paddingTop="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/logoIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_logo"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+            <ImageView
+                android:id="@+id/logoIcon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="BananaQ"
+                android:textColor="@color/banana_green"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Language Toggle -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="BananaQ"
-            android:textColor="@color/banana_green"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/logoIcon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_button_bg"
             android:backgroundTint="#F2EBDC"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"
-            android:text="English"
-            android:textColor="@color/banana_text_dark"
-            android:textSize="12sp"
+            android:orientation="horizontal"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_bg"
+                android:backgroundTint="@color/banana_green"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="EN"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="TL"
+                android:textColor="@color/banana_yellow"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/titleFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
         android:text="Feedback"
         android:textColor="@color/banana_text_dark"
-        android:textSize="22sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header" />
 
     <!-- Empty State -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/emptyState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/date_time_bg"
-        android:gravity="center"
-        android:padding="40dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
         android:visibility="gone"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
         app:layout_constraintTop_toBottomOf="@id/titleFeedback">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No scans yet. Use smart scanner."
-            android:textColor="@color/banana_text_dark"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:background="@drawable/item_history_border"
+            android:padding="20dp"
+            android:gravity="start">
 
-    <!-- Scan Selection List -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No scans yet. Use smart scanner."
+                android:textColor="@color/banana_text_dark"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Feedback List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFeedbackSelection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="24dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/titleFeedback" />
+        app:layout_constraintTop_toBottomOf="@id/titleFeedback"
+        tools:listitem="@layout/item_history_scan" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/white"
-        app:itemIconTint="@color/banana_green"
-        app:itemTextColor="@color/banana_text_dark"
+        android:background="@drawable/nav_top_border"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:itemIconSize="32dp"
+        app:itemBackground="@android:color/transparent"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemTextAppearanceActive="@style/NavTextSmall"
+        app:itemTextAppearanceInactive="@style/NavTextSmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled" />
