@@ -8,7 +8,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class DiseaseClassifier(private val model: TFLiteModel) {
-    // Preserve the training/export order documented with the original model.
+    // Must match train_generator.class_indices from BananaQ_CNN_Model.ipynb.
     private val labels = arrayOf("Black Sigatoka", "Cordana Leaf Spot", "Healthy", "Panama Disease")
 
     fun classify(bitmap: Bitmap): ClassificationResult {
@@ -18,7 +18,9 @@ class DiseaseClassifier(private val model: TFLiteModel) {
         require(shape.size == 4 && shape[0] == 1 && shape[3] == 3 && shape[1] > 0 && shape[2] > 0) {
             "Expected a single RGB image tensor"
         }
-        val resized = Bitmap.createScaledBitmap(bitmap, shape[2], shape[1], true)
+        // Keras flow_from_directory/load_img used target_size=(224, 224),
+        // keep_aspect_ratio=false and the default nearest-neighbor interpolation.
+        val resized = Bitmap.createScaledBitmap(bitmap, shape[2], shape[1], false)
         try {
             val buffer = ImagePreprocessor.createInputBuffer(resized, input)
             val output = interpreter.getOutputTensor(0)
@@ -44,7 +46,7 @@ class DiseaseClassifier(private val model: TFLiteModel) {
             val index = PredictionScores.winner(probabilities)
             val confidence = probabilities[index]
             val level = ConfidenceLevel.fromConfidence(confidence)
-            return ClassificationResult(labels[index], confidence, level, level != ConfidenceLevel.VERY_LOW)
+            return ClassificationResult(labels[index], confidence, level, level.isReliable)
         } finally {
             if (resized !== bitmap) resized.recycle()
         }

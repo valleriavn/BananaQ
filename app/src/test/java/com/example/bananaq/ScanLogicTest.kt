@@ -15,6 +15,9 @@ class ScanLogicTest {
         assertEquals(ConfidenceLevel.LOW, ConfidenceLevel.fromConfidence(0.3f))
         assertEquals(ConfidenceLevel.MODERATE, ConfidenceLevel.fromConfidence(0.6f))
         assertEquals(ConfidenceLevel.HIGH, ConfidenceLevel.fromConfidence(0.8f))
+        assertFalse(ConfidenceLevel.LOW.isReliable)
+        assertTrue(ConfidenceLevel.MODERATE.isReliable)
+        assertTrue(ConfidenceLevel.HIGH.isReliable)
     }
 
     @Test fun quantizationSaturatesInsteadOfWrapping() {

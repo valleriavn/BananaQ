@@ -11,15 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:paddingHorizontal="25dp"
         android:paddingTop="20dp"
-=======
-        android:layout_height="80dp"
-        android:background="@color/white"
-        android:paddingLeft="16dp" android:paddingRight="16dp"
->>>>>>> 68b1555 (updated camera and disease assets logic)
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -55,16 +49,8 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_button_bg"
             android:backgroundTint="#F2EBDC"
-<<<<<<< HEAD
             android:orientation="horizontal"
             android:padding="4dp"
-=======
-            android:paddingLeft="16dp" android:paddingRight="16dp"
-            android:paddingTop="6dp" android:paddingBottom="6dp"
-            android:text="English"
-            android:textColor="@color/banana_text_dark"
-            android:textSize="12sp"
->>>>>>> 68b1555 (updated camera and disease assets logic)
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -144,14 +130,10 @@
         android:id="@+id/rvFeedbackSelection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-<<<<<<< HEAD
         android:layout_marginTop="8dp"
         android:paddingHorizontal="24dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
-=======
-        android:paddingLeft="20dp" android:paddingRight="20dp"
->>>>>>> 68b1555 (updated camera and disease assets logic)
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/titleFeedback"
         tools:listitem="@layout/item_history_scan" />

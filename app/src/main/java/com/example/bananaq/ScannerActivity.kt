@@ -267,7 +267,7 @@ class ScannerActivity : AppCompatActivity() {
         val confidence = (intent.getIntExtra("CONFIDENCE", 0) / 100f).coerceIn(0f, 1f)
         val level = ConfidenceLevel.fromConfidence(confidence)
         classificationResult = ClassificationResult(diseaseName, confidence, level,
-            intent.getBooleanExtra("LIBRARY", false) || level != ConfidenceLevel.VERY_LOW)
+            intent.getBooleanExtra("LIBRARY", false) || level.isReliable)
         displayResult(classificationResult!!)
     }
 

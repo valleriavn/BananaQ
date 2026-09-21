@@ -23,7 +23,7 @@ class TFLiteModel(
         context: Context
     ): ByteBuffer {
 
-        return context.assets.openFd("bananaq_model.tflite").use { descriptor ->
+        return context.assets.openFd("diseases/BananaQ_CNN_Final.tflite").use { descriptor ->
             FileInputStream(descriptor.fileDescriptor).use { input ->
                 input.channel.map(FileChannel.MapMode.READ_ONLY,
                     descriptor.startOffset, descriptor.declaredLength)
