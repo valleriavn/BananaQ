@@ -1,0 +1,54 @@
+{
+  "diseaseName": "Cordana Leaf Spot",
+  "scientificName": "Cordana musae",
+  "symptoms": [
+    {
+      "title": "Oval leaf spots",
+      "description": "Large oval or elongated spots may develop on banana leaves, often with brown or tan centers."
+    },
+    {
+      "title": "Yellowish halos",
+      "description": "Lesions may be surrounded by yellowish areas that contrast with the healthy green tissue."
+    },
+    {
+      "title": "Zonate patterns",
+      "description": "Some lesions may develop concentric or zonate patterns as they enlarge."
+    },
+    {
+      "title": "Edge infection",
+      "description": "Lesions may occur near leaf margins and can expand into larger damaged areas."
+    }
+  ],
+  "treatment": [
+    {
+      "title": "Remove affected leaves",
+      "description": "Remove severely affected plant material and dispose of it properly to reduce sources of infection."
+    },
+    {
+      "title": "Improve sanitation",
+      "description": "Keep the growing area clean and remove infected plant debris."
+    },
+    {
+      "title": "Reduce leaf wetness",
+      "description": "Improve airflow and avoid unnecessary prolonged wetness of banana leaves."
+    }
+  ],
+  "prevention": [
+    {
+      "title": "Maintain sanitation",
+      "description": "Remove infected plant material and keep the area around banana plants clean."
+    },
+    {
+      "title": "Avoid prolonged leaf wetness",
+      "description": "Good airflow and appropriate water management can help reduce conditions favorable to leaf diseases."
+    },
+    {
+      "title": "Monitor leaves regularly",
+      "description": "Inspect leaves frequently so new lesions can be identified before they become extensive."
+    },
+    {
+      "title": "Remove infected debris",
+      "description": "Dispose of heavily infected fallen leaves and plant material appropriately to reduce potential sources of infection."
+    }
+  ]
+}

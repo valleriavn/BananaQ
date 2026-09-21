@@ -40,11 +40,14 @@ class ScanHistoryAdapter(
         } else if (holder is ItemViewHolder) {
             holder.tvDiseaseName.text = item.diseaseName
             holder.tvDateTime.text = item.dateTime
-            holder.tvAccuracy.text = if (item.accuracy?.endsWith("%") == true) item.accuracy else "${item.accuracy}%"
-            holder.tvStatus.text = if (item.isHealthy) "Healthy" else "Diseased"
+            holder.tvAccuracy.text = item.accuracy?.let { if (it.endsWith("%")) it else "$it%" } ?: "—"
+            holder.tvStatus.text = if (!item.isValid) "Uncertain" else if (item.isHealthy) "Healthy" else "Diseased"
             holder.tvStatus.setBackgroundResource(R.drawable.status_badge_bg)
             
-            if (item.isHealthy) {
+            if (!item.isValid) {
+                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.GRAY)
+                holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
+            } else if (item.isHealthy) {
                 holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#71C35E"))
                 holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
             } else {
@@ -78,6 +81,8 @@ class ScanHistoryAdapter(
         val diseaseName: String? = null,
         val dateTime: String? = null,
         val accuracy: String? = null,
-        val isHealthy: Boolean = false
+        val isHealthy: Boolean = false,
+        val isValid: Boolean = true,
+        val scanId: String? = null
     )
 }

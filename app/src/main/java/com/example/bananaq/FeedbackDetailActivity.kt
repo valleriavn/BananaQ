@@ -18,6 +18,7 @@ class FeedbackDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_feedback_detail)
+        applySystemInsets()
 
         val diseaseName = intent.getStringExtra("DISEASE_NAME") ?: "Unknown"
         val dateTime = intent.getStringExtra("DATE_TIME") ?: ""
@@ -29,13 +30,26 @@ class FeedbackDetailActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.btnBack).setOnClickListener { finish() }
 
+        selectedRating = savedInstanceState?.getString("rating") ?: ""
         setupRatingOptions()
 
         findViewById<View>(R.id.btnSubmitFeedback).setOnClickListener {
             if (selectedRating.isEmpty()) {
                 Toast.makeText(this, "Please select a rating", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Feedback submitted successfully!", Toast.LENGTH_LONG).show()
+                val scanId = intent.getStringExtra("SCAN_ID")
+                if (scanId.isNullOrEmpty()) {
+                    Toast.makeText(this, "Select a scan from your history first.", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+                val feedback = org.json.JSONObject().apply {
+                    put("rating", selectedRating)
+                    put("comments", findViewById<EditText>(R.id.etComments).text.toString().trim())
+                    put("time", System.currentTimeMillis())
+                }
+                getSharedPreferences("scan_feedback", MODE_PRIVATE).edit()
+                    .putString(scanId, feedback.toString()).apply()
+                Toast.makeText(this, "Feedback saved on this device.", Toast.LENGTH_LONG).show()
                 finish()
             }
         }
@@ -62,7 +76,13 @@ class FeedbackDetailActivity : AppCompatActivity() {
                 // Highlight selected
                 findViewById<View>(viewId).setBackgroundResource(R.drawable.rounded_button_bg)
             }
+            if (selectedRating == ratingName) findViewById<View>(viewId).setBackgroundResource(R.drawable.rounded_button_bg)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("rating", selectedRating)
+        super.onSaveInstanceState(outState)
     }
 
     private fun setupBottomNavigation() {
@@ -71,7 +91,7 @@ class FeedbackDetailActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
                     finish()
                     true
                 }
@@ -85,7 +105,10 @@ class FeedbackDetailActivity : AppCompatActivity() {
                     finish()
                     true
                 }
-                R.id.nav_feedback -> true
+                R.id.nav_feedback -> {
+                    finish()
+                    true
+                }
                 else -> false
             }
         }

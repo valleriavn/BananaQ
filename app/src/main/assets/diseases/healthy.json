@@ -1,0 +1,42 @@
+{
+  "diseaseName": "Healthy",
+  "scientificName": "No disease detected",
+  "symptoms": [
+    {
+      "title": "Healthy leaf",
+      "description": "No obvious disease symptoms were detected by the model."
+    },
+    {
+      "title": "Normal appearance",
+      "description": "The scanned leaf does not show the characteristic patterns associated with the disease classes."
+    },
+    {
+      "title": "Good leaf condition",
+      "description": "The leaf appears generally green and does not show prominent disease-related lesions or discoloration."
+    }
+  ],
+  "treatment": [
+    {
+      "title": "Continue proper care",
+      "description": "Maintain appropriate watering, nutrition, sanitation, and growing conditions."
+    },
+    {
+      "title": "Monitor regularly",
+      "description": "Continue checking leaves regularly for changes or new disease symptoms."
+    }
+  ],
+  "prevention": [
+    {
+      "title": "Inspect regularly",
+      "description": "Check banana leaves regularly so early symptoms can be identified quickly."
+    },
+    {
+      "title": "Maintain sanitation",
+      "description": "Keep tools and the growing area clean to reduce the possibility of disease spread."
+    },
+    {
+      "title": "Maintain plant health",
+      "description": "Provide appropriate water and nutrients and avoid conditions that can weaken the plant."
+    }
+  ]
+}

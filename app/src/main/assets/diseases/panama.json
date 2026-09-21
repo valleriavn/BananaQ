@@ -1,0 +1,58 @@
+{
+  "diseaseName": "Panama Disease",
+  "scientificName": "Fusarium oxysporum f. sp. cubense",
+  "symptoms": [
+    {
+      "title": "Yellowing leaves",
+      "description": "Yellowing commonly begins with older or lower leaves and may gradually become more extensive."
+    },
+    {
+      "title": "Brown discoloration",
+      "description": "When the pseudostem is cut, brown or reddish-brown vascular discoloration may be visible inside."
+    },
+    {
+      "title": "Wilting and leaf collapse",
+      "description": "Affected leaves may wilt, collapse, and eventually hang downward around the plant."
+    },
+    {
+      "title": "Progressive plant decline",
+      "description": "The disease can cause gradual weakening and decline of the banana plant."
+    }
+  ],
+  "treatment": [
+    {
+      "title": "Isolate affected plants",
+      "description": "Separate affected plants where practical and avoid moving contaminated soil or plant material to healthy areas."
+    },
+    {
+      "title": "Remove severely affected plants",
+      "description": "Where recommended by local agricultural authorities, remove and properly dispose of severely infected plants."
+    },
+    {
+      "title": "Improve sanitation",
+      "description": "Clean and disinfect tools and equipment after working with potentially infected plants."
+    },
+    {
+      "title": "Avoid unnecessary soil movement",
+      "description": "Avoid transferring soil from affected areas to healthy banana-growing areas."
+    }
+  ],
+  "prevention": [
+    {
+      "title": "Sanitize tools",
+      "description": "Clean and disinfect tools after working with potentially infected plants or soil."
+    },
+    {
+      "title": "Avoid moving contaminated soil",
+      "description": "Contaminated soil can contribute to disease spread, so avoid moving soil from affected areas."
+    },
+    {
+      "title": "Use healthy planting material",
+      "description": "Obtain planting material from reliable sources and avoid using material showing signs of disease."
+    },
+    {
+      "title": "Limit movement between fields",
+      "description": "Reduce unnecessary movement of soil, plant debris, tools, and equipment between affected and healthy areas."
+    }
+  ]
+}

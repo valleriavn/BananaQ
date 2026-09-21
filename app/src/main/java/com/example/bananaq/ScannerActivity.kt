@@ -4,56 +4,83 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.graphics.Typeface
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.LinearLayout
-import android.graphics.Color
-import android.view.Gravity
+import android.content.res.ColorStateList
+
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+
+import data.DiseaseRepository
+import ml.DiseaseClassifier
+import ml.TFLiteModel
+import model.ClassificationResult
+import model.ConfidenceLevel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.cardview.widget.CardView
-import org.tensorflow.lite.Interpreter
-import java.io.FileInputStream
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-import java.nio.channels.FileChannel
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import androidx.core.graphics.toColorInt
 
 class ScannerActivity : AppCompatActivity() {
 
-    private lateinit var viewFinder: PreviewView
+    private lateinit var viewFinder: View
     private lateinit var fullResultCard: View
     private lateinit var resultContentContainer: LinearLayout
     private lateinit var resultSectionTitle: TextView
+
     private lateinit var tabSymptoms: TextView
     private lateinit var tabTreatment: TextView
     private lateinit var tabPrevention: TextView
-    
-    private lateinit var cameraExecutor: ExecutorService
-    private lateinit var interpreter: Interpreter
-    
-    private val labels = arrayOf("Black Sigatoka", "Panama Disease", "Cordana Leaf Spot")
-    private var lastPrediction = ""
-    private var lastConfidence = 0f
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val cameraGranted = permissions[Manifest.permission.CAMERA] ?: false
-            if (cameraGranted) {
-                startCamera()
-            } else {
-                Toast.makeText(this, "Camera permission is required", Toast.LENGTH_SHORT).show()
+    private lateinit var resultDiseaseName: TextView
+    private lateinit var resultScientificName: TextView
+    private lateinit var resultAccuracyValue: TextView
+    private lateinit var resultAccuracyProgress: ProgressBar
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+
+    private lateinit var liteModel: TFLiteModel
+    private lateinit var classifier: DiseaseClassifier
+    private lateinit var diseaseRepository: DiseaseRepository
+
+    private var classificationResult: ClassificationResult? = null
+
+    private var isProcessing = false
+
+    private val worker = java.util.concurrent.Executors.newSingleThreadExecutor()
+    private var imageCapture: androidx.camera.core.ImageCapture? = null
+    private var camera: androidx.camera.core.Camera? = null
+    private var cameraProvider: androidx.camera.lifecycle.ProcessCameraProvider? = null
+    private var selectedImage: String? = null
+    private var scanId = java.util.UUID.randomUUID().toString()
+    private var capturePending = false
+
+    private val requestCameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) startCamera()
+            else Toast.makeText(this, "Camera permission denied. You can still select a photo.", Toast.LENGTH_LONG).show()
+        }
+
+    private val imagePicker =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            if (uri != null) {
+                try {
+                    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                } catch (_: SecurityException) {
+                    // Some providers only issue a temporary grant.
+                }
+                loadSelectedImage(uri)
             }
         }
 
@@ -61,345 +88,649 @@ class ScannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_scanner)
-
-        viewFinder = findViewById(R.id.viewFinder)
-        fullResultCard = findViewById(R.id.fullResultCard)
-        resultContentContainer = findViewById(R.id.resultContentContainer)
-        resultSectionTitle = findViewById(R.id.resultSectionTitle)
-        tabSymptoms = findViewById(R.id.tabSymptoms)
-        tabTreatment = findViewById(R.id.tabTreatment)
-        tabPrevention = findViewById(R.id.tabPrevention)
-
+        applySystemInsets()
+        initializeViews()
+        diseaseRepository = DiseaseRepository(applicationContext)
+        setupBottomNavigation()
+        setupBottomSheet()
         findViewById<View>(R.id.btnBack).setOnClickListener {
-            if (fullResultCard.visibility == View.VISIBLE) {
-                fullResultCard.visibility = View.GONE
-            } else {
-                finish()
+            if (fullResultCard.visibility == View.VISIBLE) hideResult() else finish()
+        }
+        onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (fullResultCard.visibility == View.VISIBLE) hideResult() else finish()
             }
-        }
-
-        findViewById<View>(R.id.captureCircle).setOnClickListener {
-            handleScanClick()
-        }
-
+        })
+        findViewById<View>(R.id.captureCircle).setOnClickListener { capturePhoto() }
         findViewById<View>(R.id.btnGallery).setOnClickListener {
-            Toast.makeText(this, "Gallery opening...", Toast.LENGTH_SHORT).show()
+            if (!isProcessing && !capturePending) openGallery()
         }
-
-        // Tab Listeners for Result
         tabSymptoms.setOnClickListener { selectTab(1) }
         tabTreatment.setOnClickListener { selectTab(2) }
         tabPrevention.setOnClickListener { selectTab(3) }
-
-        try {
-            interpreter = Interpreter(loadModelFile())
-        } catch (e: Exception) {
-            Log.e("Scanner", "Model failed to load", e)
+        selectedImage = savedInstanceState?.getString("selectedImage")
+        scanId = savedInstanceState?.getString("scanId") ?: scanId
+        val savedDisease = savedInstanceState?.getString("resultDisease")
+        if (savedDisease != null) {
+            val confidence = savedInstanceState.getFloat("resultConfidence")
+            classificationResult = ClassificationResult(savedDisease, confidence,
+                ConfidenceLevel.fromConfidence(confidence), savedInstanceState.getBoolean("resultValid"))
+            displayResult(classificationResult!!)
+        } else if (selectedImage != null) {
+            loadSelectedImage(Uri.parse(selectedImage), restoring = true)
+        } else if (savedInstanceState == null) {
+            handleIncomingData()
         }
+        if (savedInstanceState == null && intent.getStringExtra("SOURCE") == "gallery") openGallery()
+        else if (intent.getStringExtra("DISEASE_NAME") == null) openCamera()
+    }
 
-        cameraExecutor = Executors.newSingleThreadExecutor()
-
-        if (hasPermissions()) {
+    private fun openCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startCamera()
-        }
-        
-        // Check for incoming data from MainActivity
-        val incomingDisease = intent.getStringExtra("DISEASE_NAME")
-        val incomingConfidence = intent.getIntExtra("CONFIDENCE", 0)
-        if (incomingDisease != null) {
-            lastPrediction = incomingDisease
-            lastConfidence = incomingConfidence / 100f
-            showFullResult()
-        }
-        
-        setupBottomNavigation()
-
-        // Bottom Sheet Behavior
-        val behavior = BottomSheetBehavior.from(fullResultCard as CardView)
-        val extraDetails = findViewById<View>(R.id.extraDetailsLayout)
-        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    extraDetails.visibility = View.VISIBLE
-                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    extraDetails.visibility = View.INVISIBLE
-                }
-            }
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                extraDetails.visibility = View.VISIBLE
-                extraDetails.alpha = slideOffset
-            }
-        })
-    }
-
-    private fun hasPermissions(): Boolean {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun handleScanClick() {
-        if (!hasPermissions()) {
-            showPermissionExplanationDialog()
-        } else if (lastPrediction.isNotEmpty() && lastConfidence > 0.6) {
-            showFullResult()
         } else {
-            Toast.makeText(this, "Align leaf properly and try again", Toast.LENGTH_SHORT).show()
-            startCamera()
+            requestCameraPermission.launch(Manifest.permission.CAMERA)
         }
-    }
-
-    private fun showFullResult() {
-        fullResultCard.visibility = View.VISIBLE
-        
-        findViewById<TextView>(R.id.resultDiseaseName).text = lastPrediction
-        findViewById<TextView>(R.id.resultScientificName).text = when(lastPrediction) {
-            "Panama Disease" -> "Fusarium oxysporum f. sp. cubense"
-            "Black Sigatoka" -> "Mycosphaerella fijiensis"
-            "Cordana Leaf Spot" -> "Cordana musae"
-            else -> "Musa acuminata"
-        }
-        val confidenceInt = (lastConfidence * 100).toInt()
-        findViewById<TextView>(R.id.resultAccuracyValue).text = "$confidenceInt%"
-        findViewById<android.widget.ProgressBar>(R.id.resultAccuracyProgress).progress = confidenceInt
-        
-        selectTab(1)
-    }
-
-    private fun selectTab(index: Int) {
-        val selectedColor = Color.parseColor("#F2D597") // banana_yellow
-        val unselectedColor = Color.parseColor("#F2EBDC") // light_cream
-
-        tabSymptoms.backgroundTintList = android.content.res.ColorStateList.valueOf(if (index == 1) selectedColor else unselectedColor)
-        tabSymptoms.setTypeface(null, if (index == 1) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
-        
-        tabTreatment.backgroundTintList = android.content.res.ColorStateList.valueOf(if (index == 2) selectedColor else unselectedColor)
-        tabTreatment.setTypeface(null, if (index == 2) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
-        
-        tabPrevention.backgroundTintList = android.content.res.ColorStateList.valueOf(if (index == 3) selectedColor else unselectedColor)
-        tabPrevention.setTypeface(null, if (index == 3) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
-
-        resultContentContainer.removeAllViews()
-
-        when (index) {
-            1 -> {
-                resultSectionTitle.text = "Visual Characteristics"
-                showSymptoms()
-            }
-            2 -> {
-                resultSectionTitle.text = "Recommended actions"
-                showTreatment()
-            }
-            3 -> {
-                resultSectionTitle.text = "Best practices to avoid spread"
-                showPrevention()
-            }
-        }
-    }
-
-    private fun showSymptoms() {
-        when (lastPrediction) {
-            "Panama Disease" -> {
-                addContentItem(1, "Yellowing leaves", "Yellowing starts from the leaf margins, and eventually the whole leaf turns yellow.")
-                addContentItem(2, "Brown discoloration", "If you slice the stem, you'll see brown or reddish-brown streaks inside.")
-                addContentItem(3, "Wilting and leaf drop", "Lower leaves wilt and collapse first, moving upwards.")
-            }
-            "Black Sigatoka" -> {
-                addContentItem(1, "Small dark spots", "First appears as tiny, dark-brown reddish spots on the underside.")
-                addContentItem(2, "Streaks development", "Spots expand into long, dark streaks parallel to veins.")
-                addContentItem(3, "Leaf necrosis", "Large areas of the leaf turn brown and dry out.")
-            }
-            "Cordana Leaf Spot" -> {
-                addContentItem(1, "Oval spots", "Large, oval spots with brown centers and bright yellow halos.")
-                addContentItem(2, "Zonate patterns", "Spots often show concentric rings and can merge together.")
-                addContentItem(3, "Edge infection", "Often starts at the leaf edges where water collects.")
-            }
-        }
-    }
-
-    private fun showTreatment() {
-        when (lastPrediction) {
-            "Panama Disease" -> {
-                addContentItem(1, "Isolate affected plants", "Remove and bag infected plants immediately. Do not compost.")
-                addContentItem(2, "Soil Treatment", "Apply calcium cyanamide to reduce fungal load.")
-            }
-            "Black Sigatoka" -> {
-                addContentItem(1, "Fungicide application", "Apply systemic or contact fungicides regularly.")
-                addContentItem(2, "Sanitation", "Remove and burn severely infected leaves.")
-            }
-        }
-    }
-
-    private fun showPrevention() {
-        when (lastPrediction) {
-            "Panama Disease" -> {
-                addContentItem(1, "Sanitize tools", "Disinfect knives and spades with 70% alcohol.")
-                addContentItem(2, "Improved drainage", "Waterlogged soil accelerates fungal spread.")
-            }
-        }
-    }
-
-    private fun addContentItem(number: Int, title: String, description: String) {
-        val itemLayout = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setPadding(0, 0, 0, (16 * resources.displayMetrics.density).toInt())
-        }
-
-        val numberCircle = TextView(this).apply {
-            text = number.toString()
-            gravity = android.view.Gravity.CENTER
-            setTextColor(Color.parseColor("#4A773C"))
-            setBackgroundResource(R.drawable.rounded_button_bg)
-            backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#F2D597"))
-            textSize = 12f
-            layoutParams = LinearLayout.LayoutParams(
-                (28 * resources.displayMetrics.density).toInt(),
-                (28 * resources.displayMetrics.density).toInt()
-            ).apply {
-                marginEnd = (16 * resources.displayMetrics.density).toInt()
-            }
-        }
-
-        val textLayout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-        }
-
-        val titleView = TextView(this).apply {
-            text = title
-            textSize = 14f
-            setTextColor(Color.BLACK)
-            setTypeface(null, android.graphics.Typeface.BOLD)
-        }
-
-        val descView = TextView(this).apply {
-            text = description
-            textSize = 12f
-            setTextColor(Color.parseColor("#666666"))
-        }
-
-        textLayout.addView(titleView)
-        textLayout.addView(descView)
-        itemLayout.addView(numberCircle)
-        itemLayout.addView(textLayout)
-        resultContentContainer.addView(itemLayout)
-    }
-
-    private fun showPermissionExplanationDialog() {
-        androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("Permissions Required")
-            .setMessage("Will you allow BananaQ to access camera and files to scan banana leaves?")
-            .setPositiveButton("Allow") { _, _ ->
-                val permissions = arrayOf(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                requestPermissionLauncher.launch(permissions)
-            }
-            .setNegativeButton("Deny") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .setCancelable(false)
-            .show()
     }
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            val preview = Preview.Builder().build().also {
-                it.surfaceProvider = viewFinder.surfaceProvider
-            }
-
-            val imageAnalyzer = ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build()
-                .also {
-                    it.setAnalyzer(cameraExecutor) { imageProxy ->
-                        processImage(imageProxy)
+        val future = androidx.camera.lifecycle.ProcessCameraProvider.getInstance(this)
+        future.addListener({
+            if (isDestroyed || isFinishing) return@addListener
+            try {
+                val provider = future.get()
+                cameraProvider = provider
+                val selector = when {
+                    provider.hasCamera(androidx.camera.core.CameraSelector.DEFAULT_BACK_CAMERA) ->
+                        androidx.camera.core.CameraSelector.DEFAULT_BACK_CAMERA
+                    provider.hasCamera(androidx.camera.core.CameraSelector.DEFAULT_FRONT_CAMERA) ->
+                        androidx.camera.core.CameraSelector.DEFAULT_FRONT_CAMERA
+                    else -> throw IllegalStateException("No camera is available")
+                }
+                val previewView = viewFinder as androidx.camera.view.PreviewView
+                previewView.implementationMode = androidx.camera.view.PreviewView.ImplementationMode.COMPATIBLE
+                val preview = androidx.camera.core.Preview.Builder().build()
+                preview.setSurfaceProvider(previewView.surfaceProvider)
+                val capture = androidx.camera.core.ImageCapture.Builder()
+                    .setCaptureMode(androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY).build()
+                provider.unbindAll()
+                camera = provider.bindToLifecycle(this, selector, preview, capture)
+                imageCapture = capture
+                findViewById<View>(R.id.btnFlash).apply {
+                    isEnabled = camera?.cameraInfo?.hasFlashUnit() == true
+                    alpha = if (isEnabled) 1f else 0.4f
+                    setOnClickListener {
+                        val activeCamera = camera ?: return@setOnClickListener
+                        val enabled = activeCamera.cameraInfo.torchState.value != androidx.camera.core.TorchState.ON
+                        activeCamera.cameraControl.enableTorch(enabled)
                     }
                 }
-
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
-            } catch (e: Exception) {
-                Log.e("Scanner", "Use case binding failed", e)
+            } catch (error: Exception) {
+                Toast.makeText(this, "Camera unavailable. Select a photo instead.", Toast.LENGTH_LONG).show()
+                Log.e("ScannerActivity", "Camera initialization failed", error)
             }
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun processImage(imageProxy: ImageProxy) {
-        val bitmap = imageProxy.toBitmap()?.let {
-            Bitmap.createScaledBitmap(it, 224, 224, true)
+    private fun capturePhoto() {
+        if (isProcessing || capturePending) return
+        val capture = imageCapture
+        if (capture == null) {
+            openCamera()
+            return
         }
+        capture.targetRotation = viewFinder.display?.rotation ?: android.view.Surface.ROTATION_0
+        val file = try {
+            java.io.File.createTempFile("scan_", ".jpg", cacheDir)
+        } catch (_: java.io.IOException) {
+            Toast.makeText(this, "Unable to save photo. Check available storage.", Toast.LENGTH_LONG).show()
+            return
+        }
+        capturePending = true
+        capture.takePicture(androidx.camera.core.ImageCapture.OutputFileOptions.Builder(file).build(),
+            ContextCompat.getMainExecutor(this), object : androidx.camera.core.ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(output: androidx.camera.core.ImageCapture.OutputFileResults) {
+                    capturePending = false
+                    if (!isDestroyed && !isFinishing) loadSelectedImage(Uri.fromFile(file))
+                }
+                override fun onError(error: androidx.camera.core.ImageCaptureException) {
+                    capturePending = false
+                    file.delete()
+                    if (!isDestroyed) Toast.makeText(this@ScannerActivity, "Unable to capture photo. Try again.", Toast.LENGTH_LONG).show()
+                }
+            })
+    }
 
-        if (bitmap != null && ::interpreter.isInitialized) {
-            val inputBuffer = convertBitmapToByteBuffer(bitmap)
-            val output = Array(1) { FloatArray(3) }
-            interpreter.run(inputBuffer, output)
+    private fun openGallery() {
+        try {
+            imagePicker.launch(arrayOf("image/*"))
+        } catch (_: android.content.ActivityNotFoundException) {
+            Toast.makeText(this, "No photo picker is installed.", Toast.LENGTH_LONG).show()
+        }
+    }
 
-            val probabilities = output[0]
-            var maxIndex = 0
-            for (i in probabilities.indices) {
-                if (probabilities[i] > probabilities[maxIndex]) maxIndex = i
-            }
-
-            lastPrediction = labels[maxIndex]
-            lastConfidence = probabilities[maxIndex]
-
-            runOnUiThread {
-                if (lastConfidence > 0.7 && fullResultCard.visibility != View.VISIBLE) {
-                    findViewById<View>(R.id.captureCircle).backgroundTintList = 
-                        android.content.res.ColorStateList.valueOf(android.graphics.Color.LTGRAY)
-                } else {
-                    findViewById<View>(R.id.captureCircle).backgroundTintList = 
-                        android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE)
+    private fun loadSelectedImage(uri: Uri, restoring: Boolean = false) {
+        if (isProcessing) return
+        if (!restoring) scanId = java.util.UUID.randomUUID().toString()
+        val currentScanId = scanId
+        selectedImage = uri.toString()
+        intent.removeExtra("LIBRARY")
+        intent.removeExtra("DISEASE_NAME")
+        intent.removeExtra("CONFIDENCE")
+        classificationResult = null
+        fullResultCard.visibility = View.GONE
+        isProcessing = true
+        findViewById<TextView>(R.id.tvInstruction).text = "Processing photo..."
+        worker.execute {
+            var bitmap: Bitmap? = null
+            try {
+                if (!::liteModel.isInitialized) liteModel = TFLiteModel(applicationContext)
+                if (!::classifier.isInitialized) classifier = DiseaseClassifier(liteModel)
+                bitmap = ml.ScanImageLoader.load(applicationContext, uri)
+                val result = classifier.classify(bitmap)
+                data.ScanHistoryStore(applicationContext).add(result, currentScanId)
+                runOnUiThread {
+                    if (!isDestroyed && !isFinishing) {
+                        classificationResult = result
+                        displayResult(result)
+                    }
+                }
+            } catch (error: Exception) {
+                reportScanError(error)
+            } catch (error: LinkageError) {
+                reportScanError(error)
+            } finally {
+                bitmap?.recycle()
+                runOnUiThread {
+                    isProcessing = false
+                    if (!isDestroyed) findViewById<TextView>(R.id.tvInstruction).text = "Align the banana leaf within the frame to scan"
                 }
             }
         }
-        imageProxy.close()
     }
 
-    private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
-        val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
-        byteBuffer.order(ByteOrder.nativeOrder())
-        val intValues = IntArray(224 * 224)
-        bitmap.getPixels(intValues, 0, 224, 0, 0, 224, 224)
-        for (pixelValue in intValues) {
-            byteBuffer.putFloat((pixelValue shr 16 and 0xFF) / 255f)
-            byteBuffer.putFloat((pixelValue shr 8 and 0xFF) / 255f)
-            byteBuffer.putFloat((pixelValue and 0xFF) / 255f)
+    private fun reportScanError(error: Throwable) {
+        Log.e("ScannerActivity", "Scan failed", error)
+        runOnUiThread {
+            if (!isDestroyed && !isFinishing) Toast.makeText(this,
+                "Unable to scan this photo. Try another image or restart the app.", Toast.LENGTH_LONG).show()
         }
-        return byteBuffer
     }
 
-    private fun loadModelFile(): ByteBuffer {
-        val fileDescriptor = assets.openFd("bananaq_model.tflite")
-        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
-        val fileChannel = inputStream.channel
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, fileDescriptor.startOffset, fileDescriptor.declaredLength)
+    private fun displayResult(result: ClassificationResult) {
+        if (result.isValid) showFullResult() else showUncertainResult(result)
     }
 
+    private fun handleIncomingData() {
+        val diseaseName = intent.getStringExtra("DISEASE_NAME") ?: return
+        if (diseaseRepository.getDiseaseInfo(diseaseName) == null) return
+        val confidence = (intent.getIntExtra("CONFIDENCE", 0) / 100f).coerceIn(0f, 1f)
+        val level = ConfidenceLevel.fromConfidence(confidence)
+        classificationResult = ClassificationResult(diseaseName, confidence, level,
+            intent.getBooleanExtra("LIBRARY", false) || level != ConfidenceLevel.VERY_LOW)
+        displayResult(classificationResult!!)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("selectedImage", selectedImage)
+        outState.putString("scanId", scanId)
+        classificationResult?.let {
+            outState.putString("resultDisease", it.diseaseName)
+            outState.putFloat("resultConfidence", it.confidence)
+            outState.putBoolean("resultValid", it.isValid)
+        }
+        super.onSaveInstanceState(outState)
+    }
+    private fun initializeViews() {
+        viewFinder =
+            findViewById(R.id.viewFinder)
+        fullResultCard =
+            findViewById(R.id.fullResultCard)
+        resultContentContainer =
+            findViewById(R.id.resultContentContainer)
+        resultSectionTitle =
+            findViewById(R.id.resultSectionTitle)
+        tabSymptoms =
+            findViewById(R.id.tabSymptoms)
+        tabTreatment =
+            findViewById(R.id.tabTreatment)
+        tabPrevention =
+            findViewById(R.id.tabPrevention)
+        resultDiseaseName =
+            findViewById(R.id.resultDiseaseName)
+        resultScientificName =
+            findViewById(R.id.resultScientificName)
+        resultAccuracyValue =
+            findViewById(R.id.resultAccuracyValue)
+        resultAccuracyProgress =
+            findViewById(R.id.resultAccuracyProgress)
+        fullResultCard.visibility = View.GONE
+        val defaultColor =
+            "#F2EBDC".toColorInt()
+        tabSymptoms.backgroundTintList =
+            ColorStateList.valueOf(defaultColor)
+        tabTreatment.backgroundTintList =
+            ColorStateList.valueOf(defaultColor)
+        tabPrevention.backgroundTintList =
+            ColorStateList.valueOf(defaultColor)
+    }
+    private fun showFullResult() {
+        val result =
+            classificationResult
+                ?: return
+        if (!result.isValid) {
+            showUncertainResult(result)
+            return
+        }
+        fullResultCard.visibility =
+            View.VISIBLE
+        bottomSheetBehavior.state =
+            BottomSheetBehavior.STATE_COLLAPSED
+        resultDiseaseName.text =
+            result.diseaseName
+        val diseaseInfo =
+            diseaseRepository.getDiseaseInfo(
+                result.diseaseName
+            )
+        resultScientificName.text =
+            diseaseInfo?.scientificName
+                ?: "Unknown"
+        val confidenceInt =
+            (
+                    result.confidence * 100
+                    )
+                .coerceIn(
+                    0f,
+                    100f
+                )
+                .toInt()
+        resultAccuracyValue.text =
+            "$confidenceInt%"
+        resultAccuracyProgress.progress =
+            confidenceInt
+        if (intent.getBooleanExtra("LIBRARY", false)) {
+            resultAccuracyValue.text = "Library"
+            resultAccuracyProgress.visibility = View.GONE
+        } else {
+            resultAccuracyProgress.visibility = View.VISIBLE
+        }
+        selectTab(1)
+    }
+    private fun showUncertainResult(
+        result: ClassificationResult
+    ) {
+        fullResultCard.visibility =
+            View.VISIBLE
+        bottomSheetBehavior.state =
+            BottomSheetBehavior.STATE_COLLAPSED
+        resultDiseaseName.text =
+            "Unable to confidently identify"
+        resultScientificName.text =
+            "Please capture another image with better lighting and focus."
+        val confidenceInt =
+            (
+                    result.confidence * 100
+                    )
+                .coerceIn(
+                    0f,
+                    100f
+                )
+                .toInt()
+        resultAccuracyValue.text =
+            "$confidenceInt%"
+        resultAccuracyProgress.progress =
+            confidenceInt
+        resultSectionTitle.text =
+            "Try another scan"
+        resultContentContainer
+            .removeAllViews()
+        addContentItem(
+            1,
+            "Use good lighting",
+            "Make sure the banana leaf is clearly visible and well illuminated."
+        )
+        addContentItem(
+            2,
+            "Keep the leaf in focus",
+            "Avoid blurry images and try to keep the affected area clearly visible."
+        )
+        addContentItem(
+            3,
+            "Show the leaf clearly",
+            "Avoid excessive background objects, shadows, or obstructions."
+        )
+        updateTabStyle(
+            tabSymptoms,
+            false,
+            Color.parseColor("#F2D597"),
+            Color.parseColor("#F2EBDC")
+        )
+        updateTabStyle(
+            tabTreatment,
+            false,
+            Color.parseColor("#F2D597"),
+            Color.parseColor("#F2EBDC")
+        )
+        updateTabStyle(
+            tabPrevention,
+            false,
+            Color.parseColor("#F2D597"),
+            Color.parseColor("#F2EBDC")
+        )
+    }
+    private fun setupBottomSheet() {
+        bottomSheetBehavior =
+            BottomSheetBehavior.from(
+                fullResultCard as CardView
+            )
+        val extraDetails =
+            findViewById<View>(
+                R.id.extraDetailsLayout
+            )
+        bottomSheetBehavior.state =
+            BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.addBottomSheetCallback(
+            object :
+                BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(
+                    bottomSheet: View,
+                    newState: Int
+                ) {
+                    when (newState) {
+                        BottomSheetBehavior.STATE_EXPANDED -> {
+                            extraDetails.visibility =
+                                View.VISIBLE
+                            extraDetails.alpha = 1f
+                        }
+                        BottomSheetBehavior.STATE_COLLAPSED -> {
+                            extraDetails.visibility =
+                                View.INVISIBLE
+                            extraDetails.alpha = 0f
+                        }
+                        BottomSheetBehavior.STATE_HIDDEN -> {
+                            fullResultCard.visibility =
+                                View.GONE
+                        }
+                        else -> {}
+                    }
+                }
+                override fun onSlide(
+                    bottomSheet: View,
+                    slideOffset: Float
+                ) {
+                    if (slideOffset > 0f) {
+                        extraDetails.visibility =
+                            View.VISIBLE
+                        extraDetails.alpha =
+                            slideOffset.coerceIn(
+                                0f,
+                                1f
+                            )
+                    }
+                }
+            }
+        )
+    }
+    private fun selectTab(
+        index: Int
+    ) {
+        val result =
+            classificationResult
+                ?: return
+        if (!result.isValid) return
+        val info =
+            diseaseRepository.getDiseaseInfo(
+                result.diseaseName
+            )
+                ?: return
+        val selectedColor =
+            Color.parseColor("#F2D597")
+        val unselectedColor =
+            Color.parseColor("#F2EBDC")
+        updateTabStyle(
+            tabSymptoms,
+            index == 1,
+            selectedColor,
+            unselectedColor
+        )
+        updateTabStyle(
+            tabTreatment,
+            index == 2,
+            selectedColor,
+            unselectedColor
+        )
+        updateTabStyle(
+            tabPrevention,
+            index == 3,
+            selectedColor,
+            unselectedColor
+        )
+        resultContentContainer
+            .removeAllViews()
+        when (index) {
+            1 -> {
+                resultSectionTitle.text =
+                    if (
+                        result.diseaseName ==
+                        "Healthy"
+                    ) {
+                        "Leaf Condition"
+                    } else {
+                        "Visual Characteristics"
+                    }
+                showSymptoms(info)
+            }
+            2 -> {
+                resultSectionTitle.text =
+                    "Recommended actions"
+                showTreatment(info)
+            }
+            3 -> {
+                resultSectionTitle.text =
+                    "Best practices to avoid spread"
+                showPrevention(info)
+            }
+        }
+    }
+    private fun updateTabStyle(
+        textView: TextView,
+        isSelected: Boolean,
+        selectedColor: Int,
+        unselectedColor: Int
+    ) {
+        textView.backgroundTintList =
+            ColorStateList.valueOf(
+                if (isSelected)
+                    selectedColor
+                else
+                    unselectedColor
+            )
+        textView.setTypeface(
+            null,
+            if (isSelected)
+                Typeface.BOLD
+            else
+                Typeface.NORMAL
+        )
+    }
+    private fun showSymptoms(
+        info: model.DiseaseInfo
+    ) {
+        info.symptoms.forEachIndexed {
+                index,
+                tip ->
+            addContentItem(
+                index + 1,
+                tip.title,
+                tip.description
+            )
+        }
+    }
+    private fun showTreatment(
+        info: model.DiseaseInfo
+    ) {
+        info.treatment.forEachIndexed {
+                index,
+                tip ->
+            addContentItem(
+                index + 1,
+                tip.title,
+                tip.description
+            )
+        }
+    }
+    private fun showPrevention(
+        info: model.DiseaseInfo
+    ) {
+        info.prevention.forEachIndexed {
+                index,
+                tip ->
+            addContentItem(
+                index + 1,
+                tip.title,
+                tip.description
+            )
+        }
+    }
+    private fun addContentItem(
+        number: Int,
+        title: String,
+        description: String
+    ) {
+        val density =
+            resources.displayMetrics.density
+        val itemLayout =
+            LinearLayout(this).apply {
+                orientation =
+                    LinearLayout.HORIZONTAL
+                setPadding(
+                    0,
+                    0,
+                    0,
+                    (16 * density).toInt()
+                )
+            }
+        val numberCircle =
+            TextView(this).apply {
+                text =
+                    number.toString()
+                gravity =
+                    Gravity.CENTER
+                setTextColor(
+                    Color.parseColor("#4A773C")
+                )
+                setBackgroundResource(
+                    R.drawable.rounded_button_bg
+                )
+                backgroundTintList =
+                    ColorStateList.valueOf(
+                        Color.parseColor("#F2D597")
+                    )
+                textSize = 12f
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        (28 * density).toInt(),
+                        (28 * density).toInt()
+                    ).apply {
+                        marginEnd =
+                            (16 * density).toInt()
+                    }
+            }
+        val textLayout =
+            LinearLayout(this).apply {
+                orientation =
+                    LinearLayout.VERTICAL
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1f
+                    )
+            }
+        val titleView =
+            TextView(this).apply {
+                text = title
+                textSize = 14f
+                setTextColor(Color.BLACK)
+                setTypeface(
+                    null,
+                    Typeface.BOLD
+                )
+            }
+        val descView =
+            TextView(this).apply {
+                text = description
+                textSize = 12f
+                setTextColor(
+                    Color.parseColor("#666666")
+                )
+            }
+        textLayout.addView(
+            titleView
+        )
+        textLayout.addView(
+            descView
+        )
+        itemLayout.addView(
+            numberCircle
+        )
+        itemLayout.addView(
+            textLayout
+        )
+        resultContentContainer.addView(
+            itemLayout
+        )
+    }
+    private fun hideResult() {
+        classificationResult = null
+        selectedImage = null
+        fullResultCard.visibility =
+            View.GONE
+        if (
+            ::bottomSheetBehavior.isInitialized
+        ) {
+            bottomSheetBehavior.state =
+                BottomSheetBehavior.STATE_HIDDEN
+        }
+    }
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_scan
-        bottomNavigation.setOnItemSelectedListener { item ->
+        val bottomNavigation =
+            findViewById<BottomNavigationView>(
+                R.id.bottomNavigation
+            )
+        bottomNavigation.selectedItemId =
+            R.id.nav_scan
+        bottomNavigation.setOnItemSelectedListener {
+                item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(
+                        Intent(
+                            this,
+                            MainActivity::class.java
+                        ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    )
                     finish()
                     true
                 }
                 R.id.nav_scan -> true
                 R.id.nav_history -> {
-                    startActivity(Intent(this, HistoryActivity::class.java))
+                    startActivity(
+                        Intent(
+                            this,
+                            HistoryActivity::class.java
+                        )
+                    )
                     finish()
                     true
                 }
                 R.id.nav_feedback -> {
-                    startActivity(Intent(this, FeedbackActivity::class.java))
+                    startActivity(
+                        Intent(
+                            this,
+                            FeedbackActivity::class.java
+                        )
+                    )
                     finish()
                     true
                 }
@@ -407,10 +738,11 @@ class ScannerActivity : AppCompatActivity() {
             }
         }
     }
-
     override fun onDestroy() {
+        cameraProvider?.unbindAll()
+        // Close on the inference queue so the interpreter cannot close during a scan.
+        worker.execute { if (::liteModel.isInitialized) liteModel.close() }
+        worker.shutdown()
         super.onDestroy()
-        cameraExecutor.shutdown()
-        if (::interpreter.isInitialized) interpreter.close()
     }
 }

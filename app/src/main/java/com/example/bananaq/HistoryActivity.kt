@@ -15,12 +15,21 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_history)
+        applySystemInsets()
 
+        setupBottomNavigation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshScans()
+    }
+
+    private fun refreshScans() {
         val rvHistory = findViewById<RecyclerView>(R.id.rvHistory)
         val emptyState = findViewById<View>(R.id.emptyState)
 
-        // Initialize with empty list (non-prototype)
-        val historyItems = listOf<ScanHistoryAdapter.HistoryItem>()
+        val historyItems = data.ScanHistoryStore(this).items()
 
         if (historyItems.isEmpty()) {
             emptyState.visibility = View.VISIBLE
@@ -29,10 +38,14 @@ class HistoryActivity : AppCompatActivity() {
             emptyState.visibility = View.GONE
             rvHistory.visibility = View.VISIBLE
             rvHistory.layoutManager = LinearLayoutManager(this)
-            rvHistory.adapter = ScanHistoryAdapter(historyItems)
+            rvHistory.adapter = ScanHistoryAdapter(historyItems) { item ->
+                startActivity(Intent(this, ScannerActivity::class.java).apply {
+                    putExtra("DISEASE_NAME", item.diseaseName)
+                    putExtra("CONFIDENCE", item.accuracy?.toIntOrNull() ?: 0)
+                })
+            }
         }
 
-        setupBottomNavigation()
     }
 
     private fun setupBottomNavigation() {
@@ -41,7 +54,7 @@ class HistoryActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
                     finish()
                     true
                 }
