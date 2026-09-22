@@ -64,7 +64,64 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, ScannerActivity::class.java))
         }
 
+        setupLanguageToggle()
         setupBottomNavigation()
+    }
+
+    private fun setupLanguageToggle() {
+        val tvLangEN = findViewById<TextView>(R.id.tvLangEN)
+        val tvLangTL = findViewById<TextView>(R.id.tvLangTL)
+
+        // Read current language from preferences
+        val sharedPrefs = getSharedPreferences("settings", MODE_PRIVATE)
+        var currentLang = sharedPrefs.getString("language", "en") ?: "en"
+
+        fun updateToggleUI(lang: String) {
+            if (lang == "en") {
+                tvLangEN.setBackgroundResource(R.drawable.rounded_button_bg)
+                tvLangEN.backgroundTintList = android.content.res.ColorStateList.valueOf(
+                    androidx.core.content.ContextCompat.getColor(this, R.color.banana_green)
+                )
+                tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
+                tvLangEN.setTypeface(null, android.graphics.Typeface.BOLD)
+
+                tvLangTL.background = null
+                tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.banana_yellow))
+                tvLangTL.setTypeface(null, android.graphics.Typeface.NORMAL)
+            } else {
+                tvLangTL.setBackgroundResource(R.drawable.rounded_button_bg)
+                tvLangTL.backgroundTintList = android.content.res.ColorStateList.valueOf(
+                    androidx.core.content.ContextCompat.getColor(this, R.color.banana_green)
+                )
+                tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
+                tvLangTL.setTypeface(null, android.graphics.Typeface.BOLD)
+
+                tvLangEN.background = null
+                tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.banana_yellow))
+                tvLangEN.setTypeface(null, android.graphics.Typeface.NORMAL)
+            }
+        }
+
+        // Initialize UI based on saved preference
+        updateToggleUI(currentLang)
+
+        tvLangEN.setOnClickListener {
+            if (currentLang != "en") {
+                currentLang = "en"
+                sharedPrefs.edit().putString("language", "en").apply()
+                updateToggleUI("en")
+                // Here you would typically trigger activity recreation or string updates
+            }
+        }
+
+        tvLangTL.setOnClickListener {
+            if (currentLang != "tl") {
+                currentLang = "tl"
+                sharedPrefs.edit().putString("language", "tl").apply()
+                updateToggleUI("tl")
+                // Here you would typically trigger activity recreation or string updates
+            }
+        }
     }
 
     private fun setupBottomNavigation() {
@@ -116,6 +173,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         findViewById<BottomNavigationView>(R.id.bottomNavigation).selectedItemId = R.id.nav_home
+        
+        // Refresh language toggle in case it was changed elsewhere
+        setupLanguageToggle()
+        
         handler.post(timeUpdater)
     }
 

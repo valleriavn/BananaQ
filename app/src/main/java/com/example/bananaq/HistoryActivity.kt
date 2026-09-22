@@ -17,6 +17,7 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_history)
         applySystemInsets()
 
+        setupLanguageToggle()
         setupBottomNavigation()
     }
 

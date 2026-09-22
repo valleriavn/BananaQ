@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BananaQ</string>
+    <string name="language_english">English</string>
+    <string name="language_tagalog">Tagalog</string>
 </resources>

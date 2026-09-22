@@ -42,7 +42,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Language Toggle -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +55,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tvLangEN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button_bg"
@@ -65,16 +65,21 @@
                 android:text="EN"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
+                android:id="@+id/tvLangTL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
                 android:text="TL"
                 android:textColor="@color/banana_yellow"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
 
         <View

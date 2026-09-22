@@ -16,9 +16,8 @@ class GetStartedActivity : AppCompatActivity() {
 
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
         btnGetStarted.setOnClickListener {
-            getSharedPreferences("settings", MODE_PRIVATE).edit().putBoolean("onboarded", true).apply()
-            startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
-            finish()
+            // Flow change: leads directly to UserAgreement activity
+            startActivity(Intent(this, UserAgreement::class.java))
         }
     }
 }

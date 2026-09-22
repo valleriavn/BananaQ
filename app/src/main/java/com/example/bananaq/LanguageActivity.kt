@@ -2,29 +2,76 @@ package com.example.bananaq
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.bananaq.R
 
 class LanguageActivity : AppCompatActivity() {
+
+    private lateinit var btnEnglish: Button
+    private lateinit var btnTagalog: Button
+    private var selectedLanguage: String = "en"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_language)
-        applySystemInsets()
-        // Only English resources are currently bundled; do not silently promise a translation.
-        findViewById<Button>(R.id.btnTagalog).setOnClickListener {
-            android.widget.Toast.makeText(this, "Tagalog translation is not available yet.", android.widget.Toast.LENGTH_LONG).show()
-        }
-        findViewById<Button>(R.id.btnEnglish).setOnClickListener {
-            getSharedPreferences("settings", MODE_PRIVATE).edit().putString("language", "en").apply()
+        
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
 
+        btnEnglish = findViewById(R.id.btnEnglish)
+        btnTagalog = findViewById(R.id.btnTagalog)
         val btnContinue = findViewById<Button>(R.id.btnContinue)
+
+        btnEnglish.setOnClickListener {
+            selectLanguage("en")
+        }
+
+        btnTagalog.setOnClickListener {
+            selectLanguage("tl")
+        }
+
         btnContinue.setOnClickListener {
+            getSharedPreferences("settings", MODE_PRIVATE).edit().putString("language", selectedLanguage).apply()
             startActivity(Intent(this, GetStartedActivity::class.java))
             finish()
+        }
+
+        // Initialize with default language
+        updateButtonStates()
+    }
+
+    private fun selectLanguage(lang: String) {
+        selectedLanguage = lang
+        updateButtonStates()
+    }
+
+    private fun updateButtonStates() {
+        if (selectedLanguage == "en") {
+            // English Active
+            btnEnglish.setBackgroundResource(R.drawable.btn_language_green)
+            btnEnglish.setTextColor(ContextCompat.getColor(this, R.color.white))
+
+            // Tagalog Inactive
+            btnTagalog.setBackgroundResource(R.drawable.btn_language_yellow)
+            btnTagalog.setTextColor(ContextCompat.getColor(this, R.color.banana_text_dark))
+        } else {
+            // Tagalog Active
+            btnTagalog.setBackgroundResource(R.drawable.btn_language_green)
+            btnTagalog.setTextColor(ContextCompat.getColor(this, R.color.white))
+
+            // English Inactive
+            btnEnglish.setBackgroundResource(R.drawable.btn_language_yellow)
+            btnEnglish.setTextColor(ContextCompat.getColor(this, R.color.banana_text_dark))
         }
     }
 }

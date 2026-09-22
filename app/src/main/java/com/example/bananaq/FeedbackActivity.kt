@@ -17,6 +17,7 @@ class FeedbackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feedback)
         applySystemInsets()
 
+        setupLanguageToggle()
         setupBottomNavigation()
     }
 
