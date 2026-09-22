@@ -70,10 +70,13 @@
 
     <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/agreementScroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:scrollbars="none"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:scrollbarStyle="insideOverlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header">
 
@@ -109,6 +112,7 @@
 
             <!-- User Agreement Card -->
             <LinearLayout
+                android:id="@+id/userAgreementContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -267,6 +271,7 @@
 
             <!-- Terms of Use Card -->
             <LinearLayout
+                android:id="@+id/termsOfUseContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -429,6 +434,7 @@
 
             <!-- Privacy Policy Card -->
             <LinearLayout
+                android:id="@+id/privacyPolicyContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -628,6 +634,7 @@
 
             <!-- Bottom Confirmation Section -->
             <LinearLayout
+                android:id="@+id/agreementConfirmation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -655,6 +662,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/agreementActions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

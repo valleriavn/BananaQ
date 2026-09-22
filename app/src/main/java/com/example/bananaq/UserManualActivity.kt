@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UserManualActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +28,3 @@ class UserManualActivity : AppCompatActivity() {
         }
     }
 }
-
-internal fun AppCompatActivity.bindLegalLinks() {
-    listOf(R.id.termsRow to R.string.terms_of_use,
-        R.id.privacyRow to R.string.privacy_policy,
-        R.id.agreementRow to R.string.user_agreement).forEach { (id, title) ->
-        findViewById<View>(id).setOnClickListener {
-            MaterialAlertDialogBuilder(this)
-                .setTitle(title)
-                .setMessage(R.string.legal_not_available)
-                .setPositiveButton(android.R.string.ok, null)
-                .show()
-        }
-    }
-}
-

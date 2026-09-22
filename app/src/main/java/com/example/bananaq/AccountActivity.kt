@@ -16,6 +16,15 @@ class AccountActivity : AppCompatActivity() {
         findViewById<View>(R.id.manualRow).setOnClickListener {
             startActivity(Intent(this, UserManualActivity::class.java))
         }
-        bindLegalLinks()
+        mapOf(
+            R.id.termsRow to UserAgreement.SECTION_TERMS,
+            R.id.privacyRow to UserAgreement.SECTION_PRIVACY,
+            R.id.agreementRow to UserAgreement.SECTION_AGREEMENT
+        ).forEach { (id, section) ->
+            findViewById<View>(id).setOnClickListener {
+                startActivity(Intent(this, UserAgreement::class.java)
+                    .putExtra(UserAgreement.EXTRA_SECTION, section))
+            }
+        }
     }
 }

@@ -67,7 +67,10 @@
         <activity
             android:name=".ManualTopicActivity"
             android:exported="false" />
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
