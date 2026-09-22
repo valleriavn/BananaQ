@@ -142,6 +142,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, FeedbackActivity::class.java))
                     true
                 }
+                R.id.nav_account -> {
+                    startActivity(Intent(this, AccountActivity::class.java))
+                    false
+                }
                 else -> false
             }
         }

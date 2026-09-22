@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/banana_cream">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="12dp">
+        <ImageButton android:id="@+id/backButton" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_manual_back" android:contentDescription="@string/back_label" />
+        <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="@string/user_manual" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/banana_text_dark" />
+    </LinearLayout>
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp">
+            <TextView style="@style/ManualTopicSection" android:text="@string/manual_getting_started" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/manual_card" android:clipToOutline="true">
+                <TextView android:id="@+id/howToRow" style="@style/ManualTopicRow" android:text="@string/manual_how_to" android:drawableEnd="@drawable/ic_manual_arrow" android:drawablePadding="12dp" />
+            </LinearLayout>
+            <TextView style="@style/ManualTopicSection" android:text="@string/manual_scanning" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/manual_card" android:clipToOutline="true">
+                <TextView android:id="@+id/scanLeafRow" style="@style/ManualTopicRow" android:text="@string/manual_scan_leaf" android:drawableEnd="@drawable/ic_manual_arrow" android:drawablePadding="12dp" />
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:layout_marginEnd="18dp" android:background="#E0E6D9" />
+                <TextView android:id="@+id/understandRow" style="@style/ManualTopicRow" android:text="@string/manual_understand" android:drawableEnd="@drawable/ic_manual_arrow" android:drawablePadding="12dp" />
+            </LinearLayout>
+            <TextView style="@style/ManualTopicSection" android:text="@string/manual_recommendations" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/manual_card" android:clipToOutline="true">
+                <TextView android:id="@+id/treatmentRow" style="@style/ManualTopicRow" android:text="@string/manual_treatment" android:drawableEnd="@drawable/ic_manual_arrow" android:drawablePadding="12dp" />
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:layout_marginEnd="18dp" android:background="#E0E6D9" />
+                <TextView android:id="@+id/preventionRow" style="@style/ManualTopicRow" android:text="@string/manual_prevention" android:drawableEnd="@drawable/ic_manual_arrow" android:drawablePadding="12dp" />
+            </LinearLayout>
+            <TextView style="@style/ManualTopicSection" android:text="@string/manual_tips" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/manual_card" android:clipToOutline="true">
+                <TextView android:id="@+id/photoRow" style="@style/ManualTopicRow" android:text="@string/manual_photo" android:drawableEnd="@drawable/ic_manual_arrow" android:drawablePadding="12dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

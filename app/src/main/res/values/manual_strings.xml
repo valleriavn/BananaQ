@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_title">Account</string>
+    <string name="user_manual">User Manual</string>
+    <string name="manual_heading">How can we help?</string>
+    <string name="manual_intro">Learn how to use BananaQ.</string>
+    <string name="getting_started">GETTING STARTED</string>
+    <string name="important_information">IMPORTANT INFORMATION</string>
+    <string name="capture_title">Capture a leaf</string>
+    <string name="capture_description">Take a clear photo. Keep the banana leaf in focus and use good lighting.</string>
+    <string name="analyze_title">Analyze</string>
+    <string name="analyze_description">Let BananaQ scan it. Open Scan, take a photo or select one from your gallery, and wait for the analysis.</string>
+    <string name="results_title">View results</string>
+    <string name="results_description">Check the diagnosis and recommendations. You can revisit saved scans in History.</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="user_agreement">User Agreement</string>
+    <string name="legal_not_available">This document has not been provided yet.</string>
+    <string name="back_label">Go back</string>
+    <string name="account_section">ACCOUNT</string>
+    <string name="settings_section">SETTINGS</string>
+    <string name="legal_section">LEGAL &amp; PRIVACY</string>
+    <string name="guest_name">Guest</string>
+    <string name="guest_description">Using BananaQ on this device</string>
+    <string name="profile_label">Profile</string>
+    <string name="notifications_label">Notifications</string>
+    <string name="settings_label">Settings</string>
+    <string name="logout_label">Log Out</string>
+    <string name="account_unavailable">Profile, settings, and sign-in are not available in this version.</string>
+</resources>

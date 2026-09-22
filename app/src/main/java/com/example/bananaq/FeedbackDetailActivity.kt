@@ -109,6 +109,10 @@ class FeedbackDetailActivity : AppCompatActivity() {
                     finish()
                     true
                 }
+                R.id.nav_account -> {
+                    startActivity(Intent(this, AccountActivity::class.java))
+                    false
+                }
                 else -> false
             }
         }

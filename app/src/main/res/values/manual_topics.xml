@@ -1,0 +1,18 @@
+<resources>
+    <string name="manual_getting_started">Getting Started</string>
+    <string name="manual_scanning">Scanning &amp; Detection</string>
+    <string name="manual_recommendations">Recommendations</string>
+    <string name="manual_tips">Tips for Better Detection</string>
+    <string name="manual_how_to">How to Use BananaQ</string>
+    <string name="manual_scan_leaf">Scan a Banana Leaf</string>
+    <string name="manual_understand">Understanding Results</string>
+    <string name="manual_treatment">Treatment Recommendations</string>
+    <string name="manual_prevention">Prevention Recommendations</string>
+    <string name="manual_photo">Taking a Good Leaf Photo</string>
+    <string name="manual_how_to_body">1. Open Scan from the bottom navigation.\n\n2. Take a photo of a banana leaf or choose a photo from your gallery. BananaQ analyzes the image.\n\n3. Review the detected condition, confidence, and available recommendations.\n\n4. Open History to revisit saved scans. Use the Disease Library on Home to explore the supported conditions.</string>
+    <string name="manual_scan_leaf_body">1. Open Scan and allow camera access when prompted.\n\n2. Frame one banana leaf clearly and tap the capture button. You can also use the gallery button to select an existing photo.\n\n3. Keep the app open while the image is analyzed.\n\n4. Review the result. If the image cannot be assessed or the result is uncertain, take another photo with better lighting and focus.</string>
+    <string name="manual_understand_body">The result shows the predicted condition and a confidence score. Confidence describes how strongly the model favors its prediction; it does not guarantee that the diagnosis is correct.\n\nReview the condition information alongside the visible signs on the leaf. The app supports Healthy, Black Sigatoka, Panama Disease, and Cordana Leaf Spot.\n\nAn uncertain result is a reason to retake the photo. A Healthy result does not rule out every plant problem. Seek advice from an agricultural professional if symptoms persist or the result does not match what you observe.</string>
+    <string name="manual_treatment_body">After a scan, open the Treatment tab in the condition details to review the recommendations. Read the condition information first so you understand which result the guidance relates to.\n\nYou can also explore a condition through the Disease Library on Home.\n\nRecommendations are general guidance. Confirm the plant problem with an agricultural professional before choosing a treatment, especially when the scan is uncertain.</string>
+    <string name="manual_prevention_body">Open the Prevention tab in the condition details after a scan or through the Disease Library.\n\nUse this section to learn about reducing the risk of future problems. Revisit the guidance when checking your plants and watch for changes in leaf appearance.\n\nFor advice suited to your farm and local conditions, consult an agricultural professional.</string>
+    <string name="manual_photo_body">• Use bright, even light. Avoid harsh shadows and glare.\n\n• Hold the camera steady and make sure the leaf is in focus.\n\n• Frame one banana leaf against a simple background. Keep the affected area clearly visible.\n\n• Avoid covering the leaf with fingers or other leaves.\n\n• Use an original, clear photo without filters. Retake the photo if it is blurry, too dark, or too far away.</string>
+</resources>

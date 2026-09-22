@@ -51,10 +51,26 @@
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+<<<<<<< Updated upstream
         <activity
             android:name=".UserAgreement"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+=======
+
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UserManualActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ManualTopicActivity"
+            android:exported="false" />
+
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
