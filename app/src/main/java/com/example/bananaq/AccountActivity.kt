@@ -2,9 +2,16 @@ package com.example.bananaq
 
 import android.content.Context
 import android.content.Intent
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -13,8 +20,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class AccountActivity : AppCompatActivity() {
 
@@ -81,7 +86,8 @@ class AccountActivity : AppCompatActivity() {
 
     private fun showAvatarPicker() {
         val density = resources.displayMetrics.density
-        val dialog = BottomSheetDialog(this)
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val sheet = layoutInflater.inflate(R.layout.dialog_avatar_picker, null)
         val grid = sheet.findViewById<GridLayout>(R.id.avatarPickerGrid)
         sheet.findViewById<View>(R.id.closeAvatarPicker).setOnClickListener { dialog.dismiss() }
@@ -91,10 +97,8 @@ class AccountActivity : AppCompatActivity() {
             val optionView = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER
-                setPadding((10 * density).toInt(), (10 * density).toInt(),
-                    (10 * density).toInt(), (8 * density).toInt())
-                setBackgroundResource(if (selected) R.drawable.bg_avatar_item_selected
-                    else R.drawable.bg_avatar_item_normal)
+                setPadding((4 * density).toInt(), (5 * density).toInt(),
+                    (4 * density).toInt(), (5 * density).toInt())
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
                 else "Choose ${getString(option.nameResId)}"
@@ -109,11 +113,24 @@ class AccountActivity : AppCompatActivity() {
                     dialog.dismiss()
                 }
             }
-            optionView.addView(ImageView(this).apply {
-                setImageResource(option.resId)
-                scaleType = ImageView.ScaleType.FIT_CENTER
-                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-            }, LinearLayout.LayoutParams((68 * density).toInt(), (68 * density).toInt()))
+
+            val avatarSize = (78 * density).toInt()
+            optionView.addView(FrameLayout(this).apply {
+                background = ContextCompat.getDrawable(this@AccountActivity,
+                    if (selected) R.drawable.bg_avatar_item_selected else R.drawable.bg_avatar_item_normal)
+                clipToOutline = true
+                addView(ImageView(this@AccountActivity).apply {
+                    setImageResource(option.resId)
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                    setPadding((9 * density).toInt(), (9 * density).toInt(),
+                        (9 * density).toInt(), (9 * density).toInt())
+                    importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+                }, FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+                ))
+            }, LinearLayout.LayoutParams(avatarSize, avatarSize))
+
             optionView.addView(TextView(this).apply {
                 text = if (selected) "✓ ${getString(option.nameResId)}" else getString(option.nameResId)
                 gravity = Gravity.CENTER
@@ -129,7 +146,7 @@ class AccountActivity : AppCompatActivity() {
                 GridLayout.spec(index / 2), GridLayout.spec(index % 2, 1, 1f)
             ).apply {
                 width = 0
-                height = (116 * density).toInt()
+                height = (112 * density).toInt()
                 val margin = (6 * density).toInt()
                 setMargins(margin, margin, margin, margin)
                 setGravity(Gravity.FILL_HORIZONTAL)
@@ -137,14 +154,17 @@ class AccountActivity : AppCompatActivity() {
         }
 
         dialog.setContentView(sheet)
-        dialog.setOnShowListener {
-            dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.apply {
-                setBackgroundColor(android.graphics.Color.TRANSPARENT)
-            }
-            dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            dialog.behavior.skipCollapsed = true
+        dialog.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            attributes = attributes.apply { dimAmount = 0.55f }
+            setGravity(Gravity.CENTER)
         }
         dialog.show()
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.90f).toInt(),
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
     }
 
     companion object {

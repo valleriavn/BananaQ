@@ -55,8 +55,8 @@
                 <!-- Current Avatar Frame (Bigger size: 112dp x 112dp) -->
                 <FrameLayout
                     android:id="@+id/profileAvatarFrame"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_gravity="center_horizontal"
                     android:clickable="true"
                     android:focusable="true"
@@ -66,7 +66,9 @@
                         android:id="@+id/profileAvatar"
                         android:layout_width="112dp"
                         android:layout_height="112dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/bg_avatar_item_selected"
+                        android:clipToOutline="true"
                         android:contentDescription="@string/profile_label"
                         android:padding="10dp"
                         android:scaleType="fitCenter"
