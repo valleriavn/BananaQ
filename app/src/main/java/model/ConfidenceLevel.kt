@@ -8,7 +8,7 @@ enum class ConfidenceLevel {
     HIGH;
 
     val isReliable: Boolean
-        get() = this == MODERATE || this == HIGH
+        get() = this == HIGH
 
     companion object {
 

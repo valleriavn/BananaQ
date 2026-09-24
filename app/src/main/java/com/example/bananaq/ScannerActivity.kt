@@ -217,6 +217,7 @@ class ScannerActivity : AppCompatActivity() {
         intent.removeExtra("LIBRARY")
         intent.removeExtra("DISEASE_NAME")
         intent.removeExtra("CONFIDENCE")
+        intent.removeExtra("RESULT_VALID")
         classificationResult = null
         fullResultCard.visibility = View.GONE
         isProcessing = true
@@ -267,7 +268,8 @@ class ScannerActivity : AppCompatActivity() {
         val confidence = (intent.getIntExtra("CONFIDENCE", 0) / 100f).coerceIn(0f, 1f)
         val level = ConfidenceLevel.fromConfidence(confidence)
         classificationResult = ClassificationResult(diseaseName, confidence, level,
-            intent.getBooleanExtra("LIBRARY", false) || level.isReliable)
+            intent.getBooleanExtra("LIBRARY", false) ||
+                (intent.getBooleanExtra("RESULT_VALID", false) && level.isReliable))
         displayResult(classificationResult!!)
     }
 
@@ -328,6 +330,12 @@ class ScannerActivity : AppCompatActivity() {
             BottomSheetBehavior.STATE_COLLAPSED
         resultDiseaseName.text =
             result.diseaseName
+        resultScientificName.visibility = View.VISIBLE
+        findViewById<View>(R.id.accuracyLayout).visibility = View.VISIBLE
+        findViewById<View>(R.id.extraDetailsLayout).apply {
+            visibility = View.INVISIBLE
+            alpha = 0f
+        }
         val diseaseInfo =
             diseaseRepository.getDiseaseInfo(
                 result.diseaseName
@@ -365,40 +373,19 @@ class ScannerActivity : AppCompatActivity() {
             BottomSheetBehavior.STATE_COLLAPSED
         resultDiseaseName.text =
             "Unable to confidently identify"
-        resultScientificName.text =
-            "Please capture another image with better lighting and focus."
-        val confidenceInt =
-            (
-                    result.confidence * 100
-                    )
-                .coerceIn(
-                    0f,
-                    100f
-                )
-                .toInt()
-        resultAccuracyValue.text =
-            "$confidenceInt%"
-        resultAccuracyProgress.progress =
-            confidenceInt
-        resultSectionTitle.text =
-            "Try another scan"
+        resultScientificName.text = ""
+        resultScientificName.visibility = View.GONE
+        resultAccuracyValue.text = ""
+        findViewById<View>(R.id.accuracyLayout).visibility = View.GONE
+        resultAccuracyProgress.visibility = View.GONE
+        resultAccuracyProgress.progress = 0
+        resultSectionTitle.text = ""
+        findViewById<View>(R.id.extraDetailsLayout).apply {
+            visibility = View.GONE
+            alpha = 0f
+        }
         resultContentContainer
             .removeAllViews()
-        addContentItem(
-            1,
-            "Use good lighting",
-            "Make sure the banana leaf is clearly visible and well illuminated."
-        )
-        addContentItem(
-            2,
-            "Keep the leaf in focus",
-            "Avoid blurry images and try to keep the affected area clearly visible."
-        )
-        addContentItem(
-            3,
-            "Show the leaf clearly",
-            "Avoid excessive background objects, shadows, or obstructions."
-        )
         updateTabStyle(
             tabSymptoms,
             false,
@@ -436,6 +423,14 @@ class ScannerActivity : AppCompatActivity() {
                     bottomSheet: View,
                     newState: Int
                 ) {
+                    if (classificationResult?.isValid != true) {
+                        extraDetails.visibility = View.GONE
+                        extraDetails.alpha = 0f
+                        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                            fullResultCard.visibility = View.GONE
+                        }
+                        return
+                    }
                     when (newState) {
                         BottomSheetBehavior.STATE_EXPANDED -> {
                             extraDetails.visibility =
@@ -458,6 +453,11 @@ class ScannerActivity : AppCompatActivity() {
                     bottomSheet: View,
                     slideOffset: Float
                 ) {
+                    if (classificationResult?.isValid != true) {
+                        extraDetails.visibility = View.GONE
+                        extraDetails.alpha = 0f
+                        return
+                    }
                     if (slideOffset > 0f) {
                         extraDetails.visibility =
                             View.VISIBLE

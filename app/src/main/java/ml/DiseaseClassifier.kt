@@ -46,7 +46,8 @@ class DiseaseClassifier(private val model: TFLiteModel) {
             val index = PredictionScores.winner(probabilities)
             val confidence = probabilities[index]
             val level = ConfidenceLevel.fromConfidence(confidence)
-            return ClassificationResult(labels[index], confidence, level, level.isReliable)
+            return ClassificationResult(labels[index], confidence, level,
+                PredictionScores.isAccepted(probabilities))
         } finally {
             if (resized !== bitmap) resized.recycle()
         }
