@@ -36,7 +36,7 @@ class ScanHistoryStore(context: Context) {
             val disease = record.getString("disease")
             ScanHistoryAdapter.HistoryItem(false, diseaseName = disease,
                 dateTime = format.format(Date(record.getLong("time"))),
-                accuracy = (record.getDouble("confidence") * 100).toInt().toString(),
+                accuracy = String.format(Locale.US, "%.1f", record.getDouble("confidence") * 100),
                 isHealthy = disease == "Healthy", isValid = record.optBoolean("valid", false),
                 scanId = record.getString("source"), imageUri = record.optString("imageUri").takeIf { it.isNotBlank() })
         }

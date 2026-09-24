@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:pathData="M 48,4 C 72.3,4 92,23.7 92,48 C 92,72.3 72.3,92 48,92 C 23.7,92 4,72.3 4,48 C 4,23.7 23.7,4 48,4 Z"
+        android:fillColor="#FFFDE7" />
+    <path
+        android:pathData="M 48,8 C 70.1,8 88,25.9 88,48 C 88,70.1 70.1,88 48,88 C 25.9,88 8,70.1 8,48 C 8,25.9 25.9,8 48,8 Z"
+        android:fillColor="#FFF59D"
+        android:fillAlpha="0.35" />
+
+    <!-- Top Crown / Stalk -->
+    <path
+        android:pathData="M 40,16 C 40,16 48,14 56,16 C 58,22 56,26 48,26 C 40,26 38,22 40,16 Z"
+        android:fillColor="#33691E" />
+
+    <!-- Left Banana -->
+    <path
+        android:pathData="M 44,24 C 36,28 26,38 24,52 C 22,64 28,74 34,72 C 38,70 34,60 32,52 C 30,42 38,32 44,24 Z"
+        android:fillColor="#FBC02D" />
+
+    <!-- Right Banana -->
+    <path
+        android:pathData="M 52,24 C 60,28 70,38 72,52 C 74,64 68,74 62,72 C 58,70 62,60 64,52 C 66,42 58,32 52,24 Z"
+        android:fillColor="#FBC02D" />
+
+    <!-- Center Banana -->
+    <path
+        android:pathData="M 48,22 C 40,30 38,44 40,60 C 42,72 54,72 56,60 C 58,44 56,30 48,22 Z"
+        android:fillColor="#FFEB3B" />
+
+    <!-- Center Banana Shadow/Ridge -->
+    <path
+        android:pathData="M 48,22 C 44,32 43,46 45,62 C 48,70 54,70 52,60 C 50,46 51,32 48,22 Z"
+        android:fillColor="#FDD835" />
+
+    <!-- Banana Tips -->
+    <path
+        android:pathData="M 34,72 C 33,74 31,73 32,71 Z"
+        android:fillColor="#5D4037" />
+    <path
+        android:pathData="M 62,72 C 63,74 65,73 64,71 Z"
+        android:fillColor="#5D4037" />
+    <path
+        android:pathData="M 48,68 C 47,70 49,70 48,68 Z"
+        android:fillColor="#5D4037" />
+</vector>

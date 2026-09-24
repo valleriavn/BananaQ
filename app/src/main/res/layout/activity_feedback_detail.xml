@@ -1,301 +1,366 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/banana_cream">
 
-    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/banana_surface"
-        android:paddingLeft="16dp" android:paddingRight="16dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageView
+            android:id="@+id/headerLogo"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_logo"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="BananaQ"
+            android:textColor="@color/banana_green"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/headerLogo"
+            app:layout_constraintTop_toTopOf="@id/headerLogo"
+            app:layout_constraintBottom_toBottomOf="@id/headerLogo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/rounded_button_bg"
+            android:backgroundTint="@color/banana_surface"
+            android:text="English"
+            android:textColor="@color/banana_green"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/banana_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/titleRow"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_revert"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/back_label"
+            android:src="@drawable/ic_manual_back"
             app:tint="@color/banana_green" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:text="Feedback"
-            android:textColor="@color/banana_green"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnBack"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_bg"
-            android:backgroundTint="#F2EBDC"
-            android:paddingLeft="16dp" android:paddingRight="16dp"
-            android:paddingTop="6dp" android:paddingBottom="6dp"
-            android:text="English"
             android:textColor="@color/banana_text_dark"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/formScroll"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/titleRow"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/header">
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
 
-            <!-- Selected Scan Card -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/banana_surface"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/banana_surface"
-                android:padding="2dp">
-
+                app:strokeColor="@color/banana_yellow"
+                app:strokeWidth="1dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@drawable/date_time_bg">
-
+                    android:padding="16dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
-
                         <ImageView
                             android:id="@+id/ivScanDetail"
-                            android:layout_width="120dp"
-                            android:layout_height="80dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_logo"
+                            android:layout_width="142dp"
+                            android:layout_height="88dp"
                             android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="#F5F5F5" />
-
+                            android:contentDescription="Scanned banana leaf"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_logo" />
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvDiseaseName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Black Sigatoka"
-                                android:textColor="@color/banana_body"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
                             <TextView
                                 android:id="@+id/tvDateTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textColor="@color/banana_muted"
+                                android:textSize="9sp"
+                                tools:text="Today at 04:15 PM" />
+                            <TextView
+                                android:id="@+id/tvDiseaseName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:textColor="@color/banana_body"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                tools:text="Black Sigatoka" />
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Today at 2:15 PM"
+                                android:text="Confidence Score:"
                                 android:textColor="@color/banana_muted"
-                                android:textSize="12sp" />
-
+                                android:textSize="9sp" />
                             <TextView
                                 android:id="@+id/tvAccuracy"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="95.8%"
-                                android:textColor="#E57373"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textColor="#F25C5C"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                tools:text="91.1%" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
-                        android:background="#EEEEEE" />
-
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@color/banana_yellow" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="How accurate was this result?"
                         android:textColor="@color/banana_body"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tap an option to rate the diagnosis."
                         android:textColor="@color/banana_muted"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
 
-                    <!-- Rating Emojis -->
                     <GridLayout
+                        android:id="@+id/ratingGrid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="16dp"
+                        android:alignmentMode="alignBounds"
                         android:columnCount="6"
+                        android:rowCount="2"
                         android:useDefaultMargins="true">
-
-                        <LinearLayout
-                            android:id="@+id/rateVeryAccurate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@android:drawable/btn_star_big_on" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Very Accurate"
-                                android:gravity="center"
-                                android:textSize="10sp" />
+                        <LinearLayout android:id="@+id/rateVeryAccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_accurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="Very&#10;Accurate" />
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/rateAccurate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@android:drawable/btn_star_big_on" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Accurate"
-                                android:gravity="center"
-                                android:textSize="10sp" />
+                        <LinearLayout android:id="@+id/rateAccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_accurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="Accurate" />
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/rateNotSure"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@android:drawable/btn_star_big_on" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Not Sure"
-                                android:gravity="center"
-                                android:textSize="10sp" />
+                        <LinearLayout android:id="@+id/rateNotSure" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_not_sure" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="Not Sure" />
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/rateInaccurate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@android:drawable/btn_star_big_on" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Inaccurate"
-                                android:gravity="center"
-                                android:textSize="10sp" />
+                        <LinearLayout android:id="@+id/rateInaccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_inaccurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="Inaccurate" />
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/rateVeryInaccurate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@android:drawable/btn_star_big_on" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Very Inaccurate"
-                                android:gravity="center"
-                                android:textSize="10sp" />
+                        <LinearLayout android:id="@+id/rateVeryInaccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_inaccurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="Very&#10;Inaccurate" />
                         </LinearLayout>
                     </GridLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="16dp"
                         android:text="Additional comments (optional)"
                         android:textColor="@color/banana_muted"
-                        android:textSize="12sp" />
-
+                        android:textSize="10sp" />
                     <EditText
                         android:id="@+id/etComments"
                         android:layout_width="match_parent"
-                        android:layout_height="72dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/date_time_bg"
-                        android:gravity="top"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/feedback_comment_bg"
+                        android:gravity="top|start"
+                        android:hint="Describe what you observed in this field"
+                        android:padding="10dp"
                         android:textColor="@color/banana_body"
                         android:textColorHint="@color/banana_muted"
-                        android:hint="Type here what you observed in the field."
-                        android:padding="12dp"
                         android:textSize="12sp" />
-
-
-
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnSubmitFeedback"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:minWidth="180dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="24dp"
-                        android:background="@drawable/btn_language_green"
-                        android:text="Submit Feedback"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+            </com.google.android.material.card.MaterialCardView>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmitFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="22dp"
+                android:minWidth="170dp"
+                android:background="@drawable/btn_language_green"
+                android:text="Submit Feedback"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/successScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/titleRow"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/banana_surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/banana_green"
+                app:strokeWidth="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    <TextView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/feedback_success_circle"
+                        android:gravity="center"
+                        android:text="✓"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Thank you for your feedback!"
+                        android:textColor="@color/banana_body"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Your input helps improve BananaQ's accuracy for future scans."
+                        android:textColor="@color/banana_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/banana_surface"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/banana_yellow"
+                app:strokeWidth="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="▣  Your response summary"
+                        android:textColor="@color/banana_text_dark"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                    <TextView android:id="@+id/summaryScan" style="@style/FeedbackSummaryRow" />
+                    <TextView android:id="@+id/summaryRating" style="@style/FeedbackSummaryRow" />
+                    <TextView android:id="@+id/summaryConfidence" style="@style/FeedbackSummaryRow" />
+                    <TextView android:id="@+id/summarySubmitted" style="@style/FeedbackSummaryRow" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/summaryComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/feedback_comment_bg"
+                android:padding="12dp"
+                android:textColor="@color/banana_muted"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnReturn"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="28dp"
+                android:minWidth="130dp"
+                android:background="@drawable/btn_language_green"
+                android:text="Return"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 
@@ -303,11 +368,13 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/banana_surface"
-        app:itemIconTint="@color/banana_green"
-        app:itemTextColor="@color/banana_text_dark"
+        android:background="@drawable/nav_top_border"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextAppearanceActive="@style/NavTextSmall"
+        app:itemTextAppearanceInactive="@style/NavTextSmall"
+        app:itemTextColor="@color/nav_item_color"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
-
+        app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

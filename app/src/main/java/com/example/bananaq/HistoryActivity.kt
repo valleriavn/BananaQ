@@ -42,7 +42,7 @@ class HistoryActivity : AppCompatActivity() {
             rvHistory.adapter = ScanHistoryAdapter(historyItems) { item ->
                 startActivity(Intent(this, ScannerActivity::class.java).apply {
                     putExtra("DISEASE_NAME", item.diseaseName)
-                    putExtra("CONFIDENCE", item.accuracy?.toIntOrNull() ?: 0)
+                    putExtra("CONFIDENCE", item.accuracy?.toFloatOrNull()?.toInt() ?: 0)
                     putExtra("RESULT_VALID", item.isValid)
                     putExtra("IMAGE_URI", item.imageUri)
                 })

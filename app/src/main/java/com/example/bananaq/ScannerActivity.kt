@@ -74,6 +74,29 @@ class ScannerActivity : AppCompatActivity() {
         imageCapture = null
         camera = null
         findViewById<View>(R.id.scannedPhoto).visibility = View.VISIBLE
+        findViewById<View>(R.id.cameraScrim).apply {
+            visibility = View.VISIBLE
+            alpha = 0.2f
+        }
+        findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
+        findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
+    }
+
+    private fun showCompactResultMode() {
+        showPhotoMode()
+        findViewById<View>(R.id.cameraScrim).alpha = 0.3f
+        for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
+            findViewById<View>(id).visibility = View.VISIBLE
+        }
+        findViewById<View>(R.id.controlsLayout).alpha = 0.55f
+        findViewById<View>(R.id.captureCircle).isEnabled = false
+        findViewById<View>(R.id.btnGallery).isEnabled = false
+        findViewById<View>(R.id.btnFlash).isEnabled = false
+    }
+
+    private fun showDetailsMode() {
+        showPhotoMode()
+        findViewById<View>(R.id.cameraScrim).alpha = 0.18f
         findViewById<View>(R.id.scanResultTitle).visibility = View.VISIBLE
         for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
             findViewById<View>(id).visibility = View.GONE
@@ -82,8 +105,10 @@ class ScannerActivity : AppCompatActivity() {
 
     private fun showPhoto(bitmap: Bitmap) {
         // The displayed bitmap is independent of the inference bitmap recycled by the worker.
+        val previous = photoBitmap
         photoBitmap = bitmap
         findViewById<android.widget.ImageView>(R.id.scannedPhoto).setImageBitmap(bitmap)
+        if (previous !== bitmap && previous?.isRecycled == false) previous.recycle()
     }
 
     private fun restorePhoto() {
@@ -230,14 +255,17 @@ class ScannerActivity : AppCompatActivity() {
             return
         }
         capturePending = true
+        findViewById<View>(R.id.captureCircle).isEnabled = false
         capture.takePicture(androidx.camera.core.ImageCapture.OutputFileOptions.Builder(file).build(),
             ContextCompat.getMainExecutor(this), object : androidx.camera.core.ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: androidx.camera.core.ImageCapture.OutputFileResults) {
                     capturePending = false
+                    findViewById<View>(R.id.captureCircle).isEnabled = true
                     if (!isDestroyed && !isFinishing) loadSelectedImage(Uri.fromFile(file))
                 }
                 override fun onError(error: androidx.camera.core.ImageCaptureException) {
                     capturePending = false
+                    findViewById<View>(R.id.captureCircle).isEnabled = true
                     file.delete()
                     if (!isDestroyed) Toast.makeText(this@ScannerActivity, "Unable to capture photo. Try again.", Toast.LENGTH_LONG).show()
                 }
@@ -266,8 +294,10 @@ class ScannerActivity : AppCompatActivity() {
         fullResultCard.visibility = View.GONE
         findViewById<View>(R.id.predictionSummary).visibility = View.GONE
         isProcessing = true
-        showPhotoMode()
-        findViewById<TextView>(R.id.scanResultTitle).text = "Processing photo…"
+        findViewById<View>(R.id.controlsLayout).alpha = 0.55f
+        findViewById<View>(R.id.captureCircle).isEnabled = false
+        findViewById<View>(R.id.btnGallery).isEnabled = false
+        findViewById<View>(R.id.btnFlash).isEnabled = false
         findViewById<TextView>(R.id.tvInstruction).text = "Processing photo..."
         worker.execute {
             var bitmap: Bitmap? = null
@@ -276,7 +306,10 @@ class ScannerActivity : AppCompatActivity() {
                 bitmap = decoded
                 val preview = requireNotNull(decoded.copy(Bitmap.Config.ARGB_8888, false))
                 runOnUiThread {
-                    if (!isDestroyed && !isFinishing) showPhoto(preview) else preview.recycle()
+                    if (!isDestroyed && !isFinishing) {
+                        showPhoto(preview)
+                        showPhotoMode()
+                    } else preview.recycle()
                 }
                 if (!::liteModel.isInitialized) liteModel = TFLiteModel(applicationContext)
                 if (!::classifier.isInitialized) classifier = DiseaseClassifier(liteModel)
@@ -324,22 +357,39 @@ class ScannerActivity : AppCompatActivity() {
     }
 
     private fun displayResult(result: ClassificationResult) {
-        showPhotoMode()
         findViewById<TextView>(R.id.scanResultTitle).text = "Scan Result"
-        if (result.isValid) showFullResult() else showUncertainResult(result)
-        findViewById<View>(R.id.predictionSummary).visibility = if (result.isValid && !detailsExpanded) View.VISIBLE else View.GONE
-        if (!result.isValid) {
+        if (result.isValid && detailsExpanded) {
+            findViewById<View>(R.id.predictionSummary).visibility = View.GONE
+            showFullResult()
+        } else if (!result.isValid) {
+            showUncertainResult(result)
             fullResultCard.visibility = View.GONE
+            showCompactResultMode()
             findViewById<TextView>(R.id.predictionSummary).apply {
                 text = "Unable to confidently identify"
                 visibility = View.VISIBLE
                 setOnClickListener(null)
                 isClickable = false
             }
-        } else if (!detailsExpanded) {
+        } else {
             fullResultCard.visibility = View.GONE
+            showCompactResultMode()
             findViewById<TextView>(R.id.predictionSummary).apply {
-                text = "Prediction: ${result.diseaseName} (${(result.confidence * 100).toInt()}%)\nTap to see details"
+                val heading = "Prediction: ${result.diseaseName} (${(result.confidence * 100).toInt()}%)"
+                text = android.text.SpannableString("$heading\nTap to see details").apply {
+                    setSpan(android.text.style.StyleSpan(Typeface.BOLD), 0, heading.length,
+                        android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(android.text.style.ForegroundColorSpan(
+                        ContextCompat.getColor(this@ScannerActivity, R.color.banana_text_dark)),
+                        0, heading.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(android.text.style.RelativeSizeSpan(0.8f), heading.length + 1, length,
+                        android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(android.text.style.ForegroundColorSpan(
+                        ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)),
+                        heading.length + 1, length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                visibility = View.VISIBLE
+                isClickable = true
                 setOnClickListener {
                     detailsExpanded = true
                     visibility = View.GONE
@@ -414,6 +464,7 @@ class ScannerActivity : AppCompatActivity() {
             showUncertainResult(result)
             return
         }
+        showDetailsMode()
         fullResultCard.visibility =
             View.VISIBLE
         bottomSheetBehavior.state =
@@ -699,7 +750,7 @@ class ScannerActivity : AppCompatActivity() {
                     0,
                     0,
                     0,
-                    (16 * density).toInt()
+                    (18 * density).toInt()
                 )
             }
         val numberCircle =
@@ -721,11 +772,11 @@ class ScannerActivity : AppCompatActivity() {
                 textSize = 12f
                 layoutParams =
                     LinearLayout.LayoutParams(
-                        (28 * density).toInt(),
-                        (28 * density).toInt()
+                        (26 * density).toInt(),
+                        (26 * density).toInt()
                     ).apply {
                         marginEnd =
-                            (16 * density).toInt()
+                            (14 * density).toInt()
                     }
             }
         val textLayout =
@@ -772,6 +823,16 @@ class ScannerActivity : AppCompatActivity() {
         resultContentContainer.addView(
             itemLayout
         )
+        resultContentContainer.addView(View(this).apply {
+            setBackgroundColor(ContextCompat.getColor(this@ScannerActivity, R.color.banana_divider))
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                density.toInt().coerceAtLeast(1)
+            ).apply {
+                marginStart = (40 * density).toInt()
+                bottomMargin = (12 * density).toInt()
+            }
+        })
     }
     private fun hideResult() {
         findViewById<View>(R.id.predictionSummary).visibility = View.GONE
@@ -781,12 +842,18 @@ class ScannerActivity : AppCompatActivity() {
             setImageDrawable(null)
             visibility = View.GONE
         }
+        photoBitmap?.takeIf { !it.isRecycled }?.recycle()
         photoBitmap = null
         findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
+        findViewById<View>(R.id.cameraScrim).visibility = View.GONE
+        findViewById<View>(R.id.btnBack).visibility = View.GONE
         viewFinder.visibility = View.VISIBLE
         for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
             findViewById<View>(id).visibility = View.VISIBLE
         }
+        findViewById<View>(R.id.controlsLayout).alpha = 1f
+        findViewById<View>(R.id.captureCircle).isEnabled = true
+        findViewById<View>(R.id.btnGallery).isEnabled = true
         openCamera()
         fullResultCard.visibility =
             View.GONE

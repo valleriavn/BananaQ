@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circle Background -->
+    <path
+        android:pathData="M 48,4 C 72.3,4 92,23.7 92,48 C 92,72.3 72.3,92 48,92 C 23.7,92 4,72.3 4,48 C 4,23.7 23.7,4 48,4 Z"
+        android:fillColor="#E8F5E9" />
+    <path
+        android:pathData="M 48,8 C 70.1,8 88,25.9 88,48 C 88,70.1 70.1,88 48,88 C 25.9,88 8,70.1 8,48 C 8,25.9 25.9,8 48,8 Z"
+        android:fillColor="#A5D6A7"
+        android:fillAlpha="0.3" />
+
+    <!-- Main Banana Leaf Shape -->
+    <path
+        android:pathData="M 22,78 C 18,60 22,38 35,26 C 48,14 68,16 76,18 C 78,34 76,56 62,68 C 48,80 28,82 22,78 Z"
+        android:fillColor="#4CAF50" />
+
+    <!-- Darker Leaf Half / Shading -->
+    <path
+        android:pathData="M 22,78 C 28,82 48,80 62,68 C 76,56 78,34 76,18 C 65,30 50,50 22,78 Z"
+        android:fillColor="#388E3C" />
+
+    <!-- Central Vein / Midrib Stem -->
+    <path
+        android:pathData="M 16,84 C 28,72 48,50 76,18"
+        android:strokeWidth="3.5"
+        android:strokeColor="#C8E6C9"
+        android:strokeLineCap="round" />
+
+    <!-- Leaf Vein Slits / Details -->
+    <path
+        android:pathData="M 32,60 L 42,66 M 40,48 L 52,56 M 48,38 L 62,46 M 58,26 L 68,34"
+        android:strokeWidth="1.5"
+        android:strokeColor="#81C784"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M 28,68 L 24,58 M 38,54 L 30,44 M 46,42 L 38,32 M 56,28 L 50,20"
+        android:strokeWidth="1.5"
+        android:strokeColor="#2E7D32"
+        android:strokeLineCap="round" />
+</vector>

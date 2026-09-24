@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/onboarding_cream"
-    android:padding="24dp">
+    android:background="@color/onboarding_cream">
 
     <ImageView
         android:id="@+id/logoSmall"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="54dp"
         android:src="@drawable/ic_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +31,7 @@
         android:id="@+id/subTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="26dp"
         android:text="Have an agriculture-filled day!"
         android:textColor="@color/banana_text_dark"
         android:textSize="18sp"
@@ -52,29 +51,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subTitleText" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <FrameLayout
         android:id="@+id/btnEnglish"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="220dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="54dp"
         android:background="@drawable/btn_language_green"
-        android:text="English"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/instructionText" />
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructionText">
 
-    <androidx.appcompat.widget.AppCompatButton
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="6dp"
+            android:contentDescription="@null"
+            android:src="@drawable/flag_us_circle" />
+
+        <TextView
+            android:id="@+id/labelEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="English"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/btnTagalog"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="220dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/btn_language_yellow"
-        android:text="Tagalog"
-        android:textAllCaps="false"
-        android:textColor="@color/banana_text_dark"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/btnEnglish" />
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEnglish">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="6dp"
+            android:contentDescription="@null"
+            android:src="@drawable/flag_ph_circle" />
+
+        <TextView
+            android:id="@+id/labelTagalog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Tagalog"
+            android:textColor="@color/banana_text_dark"
+            android:textSize="18sp" />
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinue"
@@ -85,8 +120,23 @@
         android:text="Continue"
         android:textAllCaps="false"
         android:textColor="@color/banana_text_dark"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/beigeTransitionOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#F4E4B2"
+        android:clickable="true"
+        android:elevation="24dp"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

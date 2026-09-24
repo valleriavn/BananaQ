@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34" />
+        app:layout_constraintGuide_percent="0.38" />
 
     <ImageView
         android:id="@+id/scannedPhoto"
@@ -31,6 +31,17 @@
         android:scaleType="centerCrop"
         android:background="@color/banana_cream"
         android:contentDescription="Scanned photo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/cameraScrim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +100,8 @@
         android:contentDescription="@string/back_label"
         android:layout_margin="20dp"
         android:background="@android:color/transparent"
-        android:src="@android:drawable/ic_menu_revert"
+        android:src="@drawable/ic_scanner_back"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
@@ -102,15 +114,14 @@
         android:layout_marginBottom="24dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
+        app:layout_constraintBottom_toTopOf="@id/predictionSummary">
 
         <ImageButton
             android:id="@+id/btnGallery"
             android:contentDescription="Choose a photo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/rounded_button_bg"
-            android:backgroundTint="#80000000"
+            android:background="@android:color/transparent"
             android:padding="15dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_scan_gallery"
@@ -132,8 +143,7 @@
             android:contentDescription="Turn flash on"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/rounded_button_bg"
-            android:backgroundTint="#80000000"
+            android:background="@android:color/transparent"
             android:padding="15dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_scan_flash"
@@ -147,13 +157,13 @@
         app:layout_constraintTop_toTopOf="@id/resultPanelTop">
 
         <!-- Full Result Card (Bottom Sheet) -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/fullResultCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="40dp"
             app:cardBackgroundColor="@color/banana_surface"
             app:cardElevation="0dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.BananaQ.ScanResult"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:behavior_peekHeight="180dp"
             app:behavior_hideable="true">
@@ -168,10 +178,9 @@
                 <View
                     android:layout_width="50dp"
                     android:layout_height="4dp"
-                    android:visibility="gone"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
-                    android:background="#E0E0E0" />
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/result_drag_handle" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -182,7 +191,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/banana_text_dark"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/accuracyLayout"
                         app:layout_constraintStart_toStartOf="parent"
@@ -193,8 +202,8 @@
                         android:id="@+id/resultScientificName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#888888"
-                        android:textSize="12sp"
+                        android:textColor="@color/banana_muted"
+                        android:textSize="11sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/resultDiseaseName"
                         tools:text="Fusarium oxysporum f. sp. cubense" />
@@ -222,7 +231,7 @@
                             android:layout_height="wrap_content"
                             android:text="Confidence"
                             android:textColor="#BDBDBD"
-                            android:textSize="10sp" />
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -231,8 +240,8 @@
                     android:id="@+id/resultAccuracyProgress"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="10dp"
                     android:progressTint="#71C35E"
                     tools:progress="92" />
 
@@ -249,7 +258,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -260,8 +269,9 @@
                             android:background="@drawable/rounded_button_bg"
                             android:backgroundTint="@color/banana_yellow"
                             android:gravity="center"
-                            android:paddingTop="10dp" android:paddingBottom="10dp"
+                            android:paddingTop="8dp" android:paddingBottom="8dp"
                             android:text="Symptoms"
+                            android:textSize="13sp"
                             android:textColor="@color/banana_text_dark"
                             android:textStyle="bold" />
 
@@ -274,8 +284,9 @@
                             android:background="@drawable/rounded_button_bg"
                             android:backgroundTint="#F2EBDC"
                             android:gravity="center"
-                            android:paddingTop="10dp" android:paddingBottom="10dp"
+                            android:paddingTop="8dp" android:paddingBottom="8dp"
                             android:text="Treatment"
+                            android:textSize="13sp"
                             android:textColor="@color/banana_text_dark" />
 
                         <TextView
@@ -286,8 +297,9 @@
                             android:background="@drawable/rounded_button_bg"
                             android:backgroundTint="#F2EBDC"
                             android:gravity="center"
-                            android:paddingTop="10dp" android:paddingBottom="10dp"
+                            android:paddingTop="8dp" android:paddingBottom="8dp"
                             android:text="Prevention"
+                            android:textSize="13sp"
                             android:textColor="@color/banana_text_dark" />
 
                     </LinearLayout>
@@ -296,7 +308,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="24dp">
+                        android:fillViewport="true"
+                        android:layout_marginTop="14dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -308,7 +321,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                         android:textColor="@color/banana_body"
-                                android:textSize="16sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold"
                                 tools:text="Visual Characteristics" />
 
@@ -316,7 +329,8 @@
                                 android:id="@+id/resultContentContainer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginTop="14dp"
+                                android:paddingBottom="20dp"
                                 android:orientation="vertical">
                                 <!-- Dynamic content items -->
                             </LinearLayout>
@@ -325,7 +339,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <TextView
@@ -337,7 +351,7 @@
         android:background="@drawable/result_summary_bg"
         android:textColor="@color/banana_text_dark"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:gravity="center_vertical"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

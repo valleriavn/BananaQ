@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="banana_cream">#171C17</color>
     <color name="banana_surface">#242C23</color>
     <color name="banana_text_dark">#B7DA9C</color>
     <color name="banana_body">#EEF0E8</color>
     <color name="banana_muted">#B9C1B3</color>
+    <color name="banana_divider">#3E493C</color>
     <color name="banana_border">#626347</color>
     <color name="banana_green">#89BE62</color>
 </resources>

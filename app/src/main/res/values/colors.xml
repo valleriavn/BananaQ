@@ -3,6 +3,7 @@
     <color name="rating_negative">#DD704A</color>
     <color name="banana_body">#252A22</color>
     <color name="banana_muted">#687060</color>
+    <color name="banana_divider">#DDE4D7</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 

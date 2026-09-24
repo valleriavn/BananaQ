@@ -31,4 +31,38 @@
     <style name="ManualTopicRow" parent="ManualRow">
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:background">@android:color/transparent</item>
-    </style></resources>
+    </style>
+    <style name="FeedbackRatingOption">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">76dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingHorizontal">6dp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+    <style name="FeedbackRatingIcon">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+    </style>
+    <style name="FeedbackRatingLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:textColor">@color/banana_body</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="FeedbackSummaryRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/banana_body</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:background">@drawable/feedback_summary_divider</item>
+    </style>
+</resources>
