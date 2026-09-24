@@ -48,6 +48,9 @@
             android:name=".ScannerActivity"
             android:exported="false" />
         <activity
+            android:name=".DiseaseDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
@@ -67,10 +70,6 @@
         <activity
             android:name=".ManualTopicActivity"
             android:exported="false" />
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     </application>
 
 </manifest>

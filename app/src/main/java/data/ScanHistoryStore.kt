@@ -12,12 +12,13 @@ import java.util.Locale
 class ScanHistoryStore(context: Context) {
     private val prefs = context.getSharedPreferences("scan_history", Context.MODE_PRIVATE)
 
-    fun add(result: ClassificationResult, source: String) = synchronized(lock) {
+    fun add(result: ClassificationResult, source: String, imageUri: String? = null) = synchronized(lock) {
         val previous = records()
         // Recreating the scanner may finish the same image again; do not duplicate it.
         if ((0 until previous.length()).any { previous.getJSONObject(it).optString("source") == source }) return@synchronized
         val next = JSONArray().put(JSONObject().apply {
             put("source", source)
+            put("imageUri", imageUri)
             put("disease", result.diseaseName)
             put("confidence", result.confidence.toDouble())
             put("valid", result.isValid)
@@ -37,7 +38,7 @@ class ScanHistoryStore(context: Context) {
                 dateTime = format.format(Date(record.getLong("time"))),
                 accuracy = (record.getDouble("confidence") * 100).toInt().toString(),
                 isHealthy = disease == "Healthy", isValid = record.optBoolean("valid", false),
-                scanId = record.getString("source"))
+                scanId = record.getString("source"), imageUri = record.optString("imageUri").takeIf { it.isNotBlank() })
         }
     }
 

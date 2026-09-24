@@ -7,7 +7,7 @@
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/white">
+    app:cardBackgroundColor="@color/banana_surface">
 
     <!-- Wrapper for the border look -->
     <LinearLayout
@@ -42,7 +42,7 @@
                 android:id="@+id/tvDiseaseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/banana_body"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="Black Sigatoka" />
@@ -51,7 +51,7 @@
                 android:id="@+id/tvDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#888888"
+                android:textColor="@color/banana_muted"
                 android:textSize="11sp"
                 tools:text="May 20, 2026 at 04:15 PM" />
 
@@ -63,14 +63,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Accuracy: "
-                    android:textColor="#888888"
+                    android:textColor="@color/banana_muted"
                     android:textSize="11sp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/tvAccuracy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#888888"
+                    android:textColor="@color/banana_muted"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     tools:text="91.1%" />

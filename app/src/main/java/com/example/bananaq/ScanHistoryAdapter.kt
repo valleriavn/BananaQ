@@ -38,6 +38,8 @@ class ScanHistoryAdapter(
         if (holder is HeaderViewHolder) {
             holder.tvHeader.text = item.headerTitle
         } else if (holder is ItemViewHolder) {
+            holder.ivScan.setImageDrawable(null)
+            item.imageUri?.let { holder.ivScan.setImageURI(android.net.Uri.parse(it)) }
             holder.tvDiseaseName.text = item.diseaseName
             holder.tvDateTime.text = item.dateTime
             holder.tvAccuracy.text = item.accuracy?.let { if (it.endsWith("%")) it else "$it%" } ?: "—"
@@ -83,6 +85,7 @@ class ScanHistoryAdapter(
         val accuracy: String? = null,
         val isHealthy: Boolean = false,
         val isValid: Boolean = true,
-        val scanId: String? = null
+        val scanId: String? = null,
+        val imageUri: String? = null
     )
 }

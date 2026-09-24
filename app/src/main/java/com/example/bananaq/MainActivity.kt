@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,9 +17,6 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var selectButton: LinearLayout
-    private lateinit var cameraButton: LinearLayout
-    private lateinit var detectButton: LinearLayout
     private lateinit var timeText: TextView
     private lateinit var dateText: TextView
     private lateinit var dayMonthText: TextView
@@ -39,29 +37,19 @@ class MainActivity : AppCompatActivity() {
 
         applySystemInsets()
 
-        selectButton = findViewById(R.id.selectButton)
-        cameraButton = findViewById(R.id.cameraButton)
-        detectButton = findViewById(R.id.detectButton)
         timeText = findViewById(R.id.timeText)
         dateText = findViewById(R.id.dateText)
         dayMonthText = findViewById(R.id.dayMonthText)
 
-        // Disease Library Card Listeners
-        findViewById<View>(R.id.cardBlackSigatoka).setOnClickListener {
-            showDiseaseDetails("Black Sigatoka")
-        }
-        findViewById<View>(R.id.cardPanama).setOnClickListener {
-            showDiseaseDetails("Panama Disease")
-        }
-        findViewById<View>(R.id.cardCordana).setOnClickListener {
-            showDiseaseDetails("Cordana Leaf Spot")
-        }
-
-        selectButton.setOnClickListener { openScanner("gallery") }
-        cameraButton.setOnClickListener { openScanner("camera") }
-
-        detectButton.setOnClickListener {
-            startActivity(Intent(this, ScannerActivity::class.java))
+        findViewById<RecyclerView>(R.id.diseaseCarousel).apply {
+            val carouselAdapter = DiseaseLibraryAdapter(::showDiseaseDetails)
+            val manager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
+            layoutManager = manager
+            adapter = carouselAdapter
+            LinearSnapHelper().attachToRecyclerView(this)
+            if (savedInstanceState == null) {
+                manager.scrollToPositionWithOffset(carouselAdapter.initialPosition, 0)
+            }
         }
 
         setupLanguageToggle()
@@ -162,14 +150,9 @@ class MainActivity : AppCompatActivity() {
         dayMonthText.text = monthFormat.format(calendar.time)
     }
 
-    private fun openScanner(source: String) {
-        startActivity(Intent(this, ScannerActivity::class.java).putExtra("SOURCE", source))
-    }
-
     private fun showDiseaseDetails(diseaseName: String) {
-        val intent = Intent(this, ScannerActivity::class.java).apply {
+        val intent = Intent(this, DiseaseDetailsActivity::class.java).apply {
             putExtra("DISEASE_NAME", diseaseName)
-            putExtra("LIBRARY", true)
         }
         startActivity(intent)
     }

@@ -5,7 +5,41 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.BananaQ" parent="Base.Theme.BananaQ" />
+    <style name="Theme.BananaQ" parent="Base.Theme.BananaQ">
+        <item name="colorPrimary">@color/banana_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/banana_green</item>
+        <item name="colorSurface">@color/banana_surface</item>
+        <item name="colorOnSurface">@color/banana_text_dark</item>
+        <item name="android:colorBackground">@color/banana_cream</item>
+        <item name="android:textColorPrimary">@color/banana_body</item>
+        <item name="android:textColorSecondary">@color/banana_muted</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowBackground">@color/banana_cream</item>
+        <item name="android:windowAnimationStyle">@style/BananaQWindowAnimation</item>
+    </style>
+
+    <style name="BananaQWindowAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/page_fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/page_fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/page_fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/page_fade_out</item>
+    </style>
+
+    <style name="DiseaseLibraryCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/banana_surface</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/banana_border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="LibraryImageShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
 
     <style name="NavTextSmall" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">12sp</item>

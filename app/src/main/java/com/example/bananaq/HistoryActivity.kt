@@ -44,6 +44,7 @@ class HistoryActivity : AppCompatActivity() {
                     putExtra("DISEASE_NAME", item.diseaseName)
                     putExtra("CONFIDENCE", item.accuracy?.toIntOrNull() ?: 0)
                     putExtra("RESULT_VALID", item.isValid)
+                    putExtra("IMAGE_URI", item.imageUri)
                 })
             }
         }

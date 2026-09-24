@@ -65,6 +65,41 @@ class ScannerActivity : AppCompatActivity() {
     private var selectedImage: String? = null
     private var scanId = java.util.UUID.randomUUID().toString()
     private var capturePending = false
+    private var photoBitmap: Bitmap? = null
+    private var detailsExpanded = false
+
+    private fun showPhotoMode() {
+        viewFinder.visibility = View.INVISIBLE
+        cameraProvider?.unbindAll()
+        imageCapture = null
+        camera = null
+        findViewById<View>(R.id.scannedPhoto).visibility = View.VISIBLE
+        findViewById<View>(R.id.scanResultTitle).visibility = View.VISIBLE
+        for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
+            findViewById<View>(id).visibility = View.GONE
+        }
+    }
+
+    private fun showPhoto(bitmap: Bitmap) {
+        // The displayed bitmap is independent of the inference bitmap recycled by the worker.
+        photoBitmap = bitmap
+        findViewById<android.widget.ImageView>(R.id.scannedPhoto).setImageBitmap(bitmap)
+    }
+
+    private fun restorePhoto() {
+        val uri = selectedImage ?: return
+        worker.execute {
+            try {
+                val bitmap = ml.ScanImageLoader.load(applicationContext, Uri.parse(uri))
+                runOnUiThread {
+                    if (!isDestroyed && !isFinishing && selectedImage == uri) showPhoto(bitmap)
+                    else bitmap.recycle()
+                }
+            } catch (error: Exception) {
+                Log.w("ScannerActivity", "Saved photo unavailable", error)
+            }
+        }
+    }
 
     private val requestCameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -81,6 +116,8 @@ class ScannerActivity : AppCompatActivity() {
                     // Some providers only issue a temporary grant.
                 }
                 loadSelectedImage(uri)
+            } else if (selectedImage == null && classificationResult == null) {
+                openCamera()
             }
         }
 
@@ -94,11 +131,11 @@ class ScannerActivity : AppCompatActivity() {
         setupBottomNavigation()
         setupBottomSheet()
         findViewById<View>(R.id.btnBack).setOnClickListener {
-            if (fullResultCard.visibility == View.VISIBLE) hideResult() else finish()
+            if (classificationResult != null) hideResult() else finish()
         }
         onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (fullResultCard.visibility == View.VISIBLE) hideResult() else finish()
+                if (classificationResult != null) hideResult() else finish()
             }
         })
         findViewById<View>(R.id.captureCircle).setOnClickListener { capturePhoto() }
@@ -111,18 +148,20 @@ class ScannerActivity : AppCompatActivity() {
         selectedImage = savedInstanceState?.getString("selectedImage")
         scanId = savedInstanceState?.getString("scanId") ?: scanId
         val savedDisease = savedInstanceState?.getString("resultDisease")
+        detailsExpanded = savedInstanceState?.getBoolean("detailsExpanded") ?: false
         if (savedDisease != null) {
             val confidence = savedInstanceState.getFloat("resultConfidence")
             classificationResult = ClassificationResult(savedDisease, confidence,
                 ConfidenceLevel.fromConfidence(confidence), savedInstanceState.getBoolean("resultValid"))
             displayResult(classificationResult!!)
+            restorePhoto()
         } else if (selectedImage != null) {
             loadSelectedImage(Uri.parse(selectedImage), restoring = true)
         } else if (savedInstanceState == null) {
             handleIncomingData()
         }
         if (savedInstanceState == null && intent.getStringExtra("SOURCE") == "gallery") openGallery()
-        else if (intent.getStringExtra("DISEASE_NAME") == null) openCamera()
+        else if (classificationResult == null && selectedImage == null) openCamera()
     }
 
     private fun openCamera() {
@@ -136,7 +175,7 @@ class ScannerActivity : AppCompatActivity() {
     private fun startCamera() {
         val future = androidx.camera.lifecycle.ProcessCameraProvider.getInstance(this)
         future.addListener({
-            if (isDestroyed || isFinishing) return@addListener
+            if (isDestroyed || isFinishing || selectedImage != null || classificationResult != null) return@addListener
             try {
                 val provider = future.get()
                 cameraProvider = provider
@@ -154,7 +193,10 @@ class ScannerActivity : AppCompatActivity() {
                 val capture = androidx.camera.core.ImageCapture.Builder()
                     .setCaptureMode(androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY).build()
                 provider.unbindAll()
-                camera = provider.bindToLifecycle(this, selector, preview, capture)
+                val group = androidx.camera.core.UseCaseGroup.Builder()
+                    .addUseCase(preview).addUseCase(capture)
+                previewView.viewPort?.let { group.setViewPort(it) }
+                camera = provider.bindToLifecycle(this, selector, group.build())
                 imageCapture = capture
                 findViewById<View>(R.id.btnFlash).apply {
                     isEnabled = camera?.cameraInfo?.hasFlashUnit() == true
@@ -163,6 +205,7 @@ class ScannerActivity : AppCompatActivity() {
                         val activeCamera = camera ?: return@setOnClickListener
                         val enabled = activeCamera.cameraInfo.torchState.value != androidx.camera.core.TorchState.ON
                         activeCamera.cameraControl.enableTorch(enabled)
+                        contentDescription = if (enabled) "Turn flash off" else "Turn flash on"
                     }
                 }
             } catch (error: Exception) {
@@ -219,19 +262,39 @@ class ScannerActivity : AppCompatActivity() {
         intent.removeExtra("CONFIDENCE")
         intent.removeExtra("RESULT_VALID")
         classificationResult = null
+        detailsExpanded = false
         fullResultCard.visibility = View.GONE
+        findViewById<View>(R.id.predictionSummary).visibility = View.GONE
         isProcessing = true
+        showPhotoMode()
+        findViewById<TextView>(R.id.scanResultTitle).text = "Processing photo…"
         findViewById<TextView>(R.id.tvInstruction).text = "Processing photo..."
         worker.execute {
             var bitmap: Bitmap? = null
             try {
+                val decoded = ml.ScanImageLoader.load(applicationContext, uri)
+                bitmap = decoded
+                val preview = requireNotNull(decoded.copy(Bitmap.Config.ARGB_8888, false))
+                runOnUiThread {
+                    if (!isDestroyed && !isFinishing) showPhoto(preview) else preview.recycle()
+                }
                 if (!::liteModel.isInitialized) liteModel = TFLiteModel(applicationContext)
                 if (!::classifier.isInitialized) classifier = DiseaseClassifier(liteModel)
-                bitmap = ml.ScanImageLoader.load(applicationContext, uri)
-                val result = classifier.classify(bitmap)
-                data.ScanHistoryStore(applicationContext).add(result, currentScanId)
+                val result = classifier.classify(decoded)
+                var savedPhoto: String? = null
+                try {
+                    val directory = java.io.File(filesDir, "scan_photos")
+                    check(directory.isDirectory || directory.mkdirs())
+                    val photo = java.io.File.createTempFile("scan_", ".jpg", directory)
+                    photo.outputStream().use { check(decoded.compress(Bitmap.CompressFormat.JPEG, 90, it)) }
+                    savedPhoto = Uri.fromFile(photo).toString()
+                    data.ScanHistoryStore(applicationContext).add(result, currentScanId, savedPhoto)
+                } catch (error: Exception) {
+                    Log.w("ScannerActivity", "Unable to save scan history", error)
+                }
                 runOnUiThread {
                     if (!isDestroyed && !isFinishing) {
+                        selectedImage = savedPhoto ?: selectedImage
                         classificationResult = result
                         displayResult(result)
                     }
@@ -253,13 +316,37 @@ class ScannerActivity : AppCompatActivity() {
     private fun reportScanError(error: Throwable) {
         Log.e("ScannerActivity", "Scan failed", error)
         runOnUiThread {
-            if (!isDestroyed && !isFinishing) Toast.makeText(this,
-                "Unable to scan this photo. Try another image or restart the app.", Toast.LENGTH_LONG).show()
+            if (!isDestroyed && !isFinishing) {
+                hideResult()
+                Toast.makeText(this, "Unable to scan this photo. Try another image or restart the app.", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     private fun displayResult(result: ClassificationResult) {
+        showPhotoMode()
+        findViewById<TextView>(R.id.scanResultTitle).text = "Scan Result"
         if (result.isValid) showFullResult() else showUncertainResult(result)
+        findViewById<View>(R.id.predictionSummary).visibility = if (result.isValid && !detailsExpanded) View.VISIBLE else View.GONE
+        if (!result.isValid) {
+            fullResultCard.visibility = View.GONE
+            findViewById<TextView>(R.id.predictionSummary).apply {
+                text = "Unable to confidently identify"
+                visibility = View.VISIBLE
+                setOnClickListener(null)
+                isClickable = false
+            }
+        } else if (!detailsExpanded) {
+            fullResultCard.visibility = View.GONE
+            findViewById<TextView>(R.id.predictionSummary).apply {
+                text = "Prediction: ${result.diseaseName} (${(result.confidence * 100).toInt()}%)\nTap to see details"
+                setOnClickListener {
+                    detailsExpanded = true
+                    visibility = View.GONE
+                    showFullResult()
+                }
+            }
+        }
     }
 
     private fun handleIncomingData() {
@@ -271,9 +358,12 @@ class ScannerActivity : AppCompatActivity() {
             intent.getBooleanExtra("LIBRARY", false) ||
                 (intent.getBooleanExtra("RESULT_VALID", false) && level.isReliable))
         displayResult(classificationResult!!)
+        selectedImage = intent.getStringExtra("IMAGE_URI")
+        restorePhoto()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("detailsExpanded", detailsExpanded)
         outState.putString("selectedImage", selectedImage)
         outState.putString("scanId", scanId)
         classificationResult?.let {
@@ -327,14 +417,14 @@ class ScannerActivity : AppCompatActivity() {
         fullResultCard.visibility =
             View.VISIBLE
         bottomSheetBehavior.state =
-            BottomSheetBehavior.STATE_COLLAPSED
+            BottomSheetBehavior.STATE_EXPANDED
         resultDiseaseName.text =
             result.diseaseName
         resultScientificName.visibility = View.VISIBLE
         findViewById<View>(R.id.accuracyLayout).visibility = View.VISIBLE
         findViewById<View>(R.id.extraDetailsLayout).apply {
-            visibility = View.INVISIBLE
-            alpha = 0f
+            visibility = View.VISIBLE
+            alpha = 1f
         }
         val diseaseInfo =
             diseaseRepository.getDiseaseInfo(
@@ -370,7 +460,7 @@ class ScannerActivity : AppCompatActivity() {
         fullResultCard.visibility =
             View.VISIBLE
         bottomSheetBehavior.state =
-            BottomSheetBehavior.STATE_COLLAPSED
+            BottomSheetBehavior.STATE_EXPANDED
         resultDiseaseName.text =
             "Unable to confidently identify"
         resultScientificName.text = ""
@@ -416,6 +506,7 @@ class ScannerActivity : AppCompatActivity() {
             )
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.isDraggable = false
         bottomSheetBehavior.addBottomSheetCallback(
             object :
                 BottomSheetBehavior.BottomSheetCallback() {
@@ -541,10 +632,11 @@ class ScannerActivity : AppCompatActivity() {
         textView.backgroundTintList =
             ColorStateList.valueOf(
                 if (isSelected)
-                    selectedColor
+                    ContextCompat.getColor(this, R.color.banana_green)
                 else
                     unselectedColor
             )
+        textView.setTextColor(if (isSelected) Color.WHITE else Color.parseColor("#3F6E28"))
         textView.setTypeface(
             null,
             if (isSelected)
@@ -651,7 +743,7 @@ class ScannerActivity : AppCompatActivity() {
             TextView(this).apply {
                 text = title
                 textSize = 14f
-                setTextColor(Color.BLACK)
+                setTextColor(ContextCompat.getColor(this@ScannerActivity, R.color.banana_body))
                 setTypeface(
                     null,
                     Typeface.BOLD
@@ -662,7 +754,7 @@ class ScannerActivity : AppCompatActivity() {
                 text = description
                 textSize = 12f
                 setTextColor(
-                    Color.parseColor("#666666")
+                    ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)
                 )
             }
         textLayout.addView(
@@ -682,8 +774,20 @@ class ScannerActivity : AppCompatActivity() {
         )
     }
     private fun hideResult() {
+        findViewById<View>(R.id.predictionSummary).visibility = View.GONE
         classificationResult = null
         selectedImage = null
+        findViewById<android.widget.ImageView>(R.id.scannedPhoto).apply {
+            setImageDrawable(null)
+            visibility = View.GONE
+        }
+        photoBitmap = null
+        findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
+        viewFinder.visibility = View.VISIBLE
+        for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
+            findViewById<View>(id).visibility = View.VISIBLE
+        }
+        openCamera()
         fullResultCard.visibility =
             View.GONE
         if (

@@ -27,6 +27,11 @@ class FeedbackDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvDiseaseName).text = diseaseName
         findViewById<TextView>(R.id.tvDateTime).text = dateTime
         findViewById<TextView>(R.id.tvAccuracy).text = "$accuracy%"
+        findViewById<TextView>(R.id.tvAccuracy).visibility =
+            if (intent.getBooleanExtra("RESULT_VALID", true)) View.VISIBLE else View.GONE
+        intent.getStringExtra("IMAGE_URI")?.let {
+            findViewById<android.widget.ImageView>(R.id.ivScanDetail).setImageURI(android.net.Uri.parse(it))
+        }
 
         findViewById<View>(R.id.btnBack).setOnClickListener { finish() }
 
@@ -66,18 +71,49 @@ class FeedbackDetailActivity : AppCompatActivity() {
             R.id.rateVeryInaccurate to "Very Inaccurate"
         )
 
-        ratings.forEach { (viewId, ratingName) ->
+        val faces = listOf("☺", "☺", "😐", "☹", "☹")
+        fun renderRatings() {
+            ratings.entries.forEachIndexed { index, (id, name) ->
+                val option = findViewById<android.widget.LinearLayout>(id)
+                val selected = selectedRating == name
+                val color = androidx.core.content.ContextCompat.getColor(this,
+                    if (!selected) R.color.banana_yellow else when(index) {
+                        0, 1 -> R.color.banana_green
+                        2 -> R.color.banana_muted
+                        else -> R.color.rating_negative
+                    })
+                option.background = android.graphics.drawable.GradientDrawable().apply {
+                    cornerRadius = 12 * resources.displayMetrics.density
+                    setColor(androidx.core.content.ContextCompat.getColor(this@FeedbackDetailActivity, R.color.banana_surface))
+                    setStroke((resources.displayMetrics.density * if (selected) 2 else 1).toInt(), color)
+                }
+                (option.getChildAt(0) as TextView).setTextColor(color)
+                (option.getChildAt(1) as TextView).setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.banana_body))
+            }
+        }
+        ratings.entries.forEachIndexed { index, (viewId, ratingName) ->
+            val option = findViewById<android.widget.LinearLayout>(viewId)
+            val oldIcon = option.getChildAt(0)
+            option.removeView(oldIcon)
+            option.addView(TextView(this).apply {
+                text = faces[index]
+                textSize = 30f
+                gravity = android.view.Gravity.CENTER
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+            }, 0, oldIcon.layoutParams)
+            option.contentDescription = ratingName
+            val params = option.layoutParams as android.widget.GridLayout.LayoutParams
+            params.columnSpec = android.widget.GridLayout.spec(
+                if (index < 2) index * 3 else (index - 2) * 2,
+                if (index < 2) 3 else 2, 1f)
+            params.rowSpec = android.widget.GridLayout.spec(if (index < 2) 0 else 1)
+            option.layoutParams = params
             findViewById<View>(viewId).setOnClickListener {
                 selectedRating = ratingName
-                // Reset all backgrounds
-                ratings.keys.forEach { id ->
-                    findViewById<View>(id).setBackgroundResource(0)
-                }
-                // Highlight selected
-                findViewById<View>(viewId).setBackgroundResource(R.drawable.rounded_button_bg)
+                renderRatings()
             }
-            if (selectedRating == ratingName) findViewById<View>(viewId).setBackgroundResource(R.drawable.rounded_button_bg)
         }
+        renderRatings()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

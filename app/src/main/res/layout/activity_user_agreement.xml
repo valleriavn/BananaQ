@@ -89,8 +89,10 @@
             <!-- Back Button (Scrollable) -->
             <ImageView
                 android:id="@+id/btnBack"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="8dp"
+                android:contentDescription="@string/back_label"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:clickable="true"
@@ -644,8 +646,8 @@
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cbConfirmation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:button="@drawable/checkbox_selector"
                     app:buttonTint="@null"
                     android:buttonTint="@null" />
@@ -674,7 +676,8 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnDecline"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/btn_language_yellow"
@@ -687,7 +690,8 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnAccept"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/btn_language_yellow"

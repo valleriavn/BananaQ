@@ -10,8 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class UserAgreement : AppCompatActivity() {
     override fun onResume() {
@@ -28,12 +26,7 @@ class UserAgreement : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_user_agreement)
         
-        val mainView = findViewById<android.view.View>(R.id.main)
-        ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        applySystemInsets()
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         btnBack.setOnClickListener {
@@ -73,6 +66,10 @@ class UserAgreement : AppCompatActivity() {
         }
 
         val cbConfirmation = findViewById<CheckBox>(R.id.cbConfirmation)
+        cbConfirmation.contentDescription = findViewById<TextView>(R.id.tvConfirmationText).text
+        findViewById<View>(R.id.tvConfirmationText).setOnClickListener {
+            cbConfirmation.toggle()
+        }
         val btnDecline = findViewById<Button>(R.id.btnDecline)
         val btnSubmit = findViewById<Button>(R.id.btnAccept) // id is btnAccept in XML, text is Submit
 

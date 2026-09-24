@@ -2,4 +2,13 @@
     <string name="app_name">BananaQ</string>
     <string name="language_english">English</string>
     <string name="language_tagalog">Tagalog</string>
+    <string name="disease_library_title">Disease Library</string>
+    <string name="disease_details_unavailable">Disease description is unavailable.</string>
+    <string name="disease_symptoms">Symptoms</string>
+    <string name="disease_treatment">Recommended actions</string>
+    <string name="disease_prevention">Prevention</string>
+    <string name="disease_description_heading">Disease Description:</string>
+    <string name="description_black_sigatoka">Black Sigatoka, also known as black leaf streak disease, is one of the most serious fungal diseases affecting banana plants.\n\nIt is caused by the fungus Mycosphaerella fijiensis.\n\nThis disease attacks the leaves of the banana plant, reducing its ability to perform photosynthesis properly.\n\nAs the infection becomes severe, banana production decreases, fruits become smaller, and the overall quality of the harvest is affected.\n\nBlack Sigatoka spreads quickly in warm and humid environments, especially during long periods of rainfall.</string>
+    <string name="description_panama">Panama Disease, also known as Fusarium wilt, is a highly destructive fungal disease caused by Fusarium oxysporum f. sp. cubense.\n\nThe fungus attacks the vascular system of the banana plant, blocking the movement of water and nutrients from the roots to the leaves.\n\nThis disease is considered one of the most dangerous threats to banana production worldwide because the fungus can survive in the soil for many years.\n\nOnce a plantation becomes infected, the disease is very difficult to eliminate completely.</string>
+    <string name="description_cordana">Cordana Leaf Spot is a fungal disease of banana plants caused by Cordana musae.\n\nAlthough it is generally less destructive than Black Sigatoka, it can still weaken banana plants when left unmanaged.\n\nThe disease mainly affects older leaves and is more common in areas with high humidity and poor air circulation.\n\nContinuous infection may reduce photosynthetic activity and affect plant growth and fruit production.</string>
 </resources>

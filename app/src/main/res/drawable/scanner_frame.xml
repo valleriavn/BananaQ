@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke android:width="3dp" android:color="@color/white" />
-    <corners android:radius="24dp" />
-    <solid android:color="@android:color/transparent" />
-</shape>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="280dp" android:height="280dp" android:viewportWidth="280" android:viewportHeight="280">
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="2" android:strokeLineCap="round" android:fillColor="@android:color/transparent" android:pathData="M2,66 L2,38 Q2,2 38,2 L66,2 M214,2 L242,2 Q278,2 278,38 L278,66 M278,214 L278,242 Q278,278 242,278 L214,278 M66,278 L38,278 Q2,278 2,242 L2,214" />
+</vector>

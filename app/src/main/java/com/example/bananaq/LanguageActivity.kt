@@ -7,8 +7,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.bananaq.R
 
 class LanguageActivity : AppCompatActivity() {
@@ -22,11 +20,7 @@ class LanguageActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_language)
         
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        applySystemInsets()
 
         btnEnglish = findViewById(R.id.btnEnglish)
         btnTagalog = findViewById(R.id.btnTagalog)

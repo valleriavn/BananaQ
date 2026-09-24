@@ -46,6 +46,8 @@ class FeedbackActivity : AppCompatActivity() {
                     putExtra("DISEASE_NAME", item.diseaseName)
                     putExtra("DATE_TIME", item.dateTime)
                     putExtra("ACCURACY", item.accuracy)
+                    putExtra("IMAGE_URI", item.imageUri)
+                    putExtra("RESULT_VALID", item.isValid)
                 }
                 startActivity(intent)
             }
