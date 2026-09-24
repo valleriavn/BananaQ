@@ -19,8 +19,7 @@
             <TextView android:id="@+id/termsRow" style="@style/ManualRow" android:text="@string/terms_of_use" android:drawableEnd="@drawable/ic_manual_chevron" android:drawablePadding="12dp" />
             <TextView android:id="@+id/privacyRow" style="@style/ManualRow" android:text="@string/privacy_policy" android:drawableEnd="@drawable/ic_manual_chevron" android:drawablePadding="12dp" />
             <TextView android:id="@+id/agreementRow" style="@style/ManualRow" android:text="@string/user_agreement" android:drawableEnd="@drawable/ic_manual_chevron" android:drawablePadding="12dp" />
-            <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/logout_label" android:enabled="false" />
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/account_unavailable" android:textSize="14sp" android:textColor="#626B5D" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
