@@ -1,0 +1,18 @@
+{
+  "diseaseName": "Healthy",
+  "scientificName": "Walang natukoy na sakit",
+  "symptoms": [
+    {"title": "Malusog na dahon", "description": "Walang malinaw na sintomas ng sakit na natukoy ng modelo."},
+    {"title": "Normal na anyo", "description": "Walang nakitang mga karaniwang pattern na kaugnay ng mga sakit na kayang tukuyin ng app."},
+    {"title": "Maayos na kondisyon", "description": "Karaniwang berde ang dahon at walang kapansin-pansing sugat o pagbabago ng kulay na dulot ng sakit."}
+  ],
+  "treatment": [
+    {"title": "Ipagpatuloy ang wastong pag-aalaga", "description": "Panatilihin ang wastong pagdidilig, nutrisyon, kalinisan, at angkop na kondisyon ng pagtatanim."},
+    {"title": "Regular na subaybayan", "description": "Patuloy na suriin ang mga dahon para sa pagbabago o bagong sintomas."}
+  ],
+  "prevention": [
+    {"title": "Regular na inspeksiyon", "description": "Suriin palagi ang mga dahon upang mabilis na makita ang mga unang sintomas."},
+    {"title": "Panatilihin ang kalinisan", "description": "Linisin ang mga kagamitan at paligid upang mabawasan ang posibilidad ng pagkalat ng sakit."},
+    {"title": "Panatilihing malusog ang halaman", "description": "Magbigay ng sapat na tubig at sustansiya at iwasan ang mga kondisyong nagpapahina sa halaman."}
+  ]
+}

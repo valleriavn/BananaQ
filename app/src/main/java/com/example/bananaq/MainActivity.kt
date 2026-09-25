@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : LocaleAwareActivity() {
 
     private lateinit var timeText: TextView
     private lateinit var dateText: TextView
@@ -96,18 +96,16 @@ class MainActivity : AppCompatActivity() {
         tvLangEN.setOnClickListener {
             if (currentLang != "en") {
                 currentLang = "en"
-                sharedPrefs.edit().putString("language", "en").apply()
-                updateToggleUI("en")
-                // Here you would typically trigger activity recreation or string updates
+                LocaleHelper.saveLanguage(this, "en")
+                recreate()
             }
         }
 
         tvLangTL.setOnClickListener {
             if (currentLang != "tl") {
                 currentLang = "tl"
-                sharedPrefs.edit().putString("language", "tl").apply()
-                updateToggleUI("tl")
-                // Here you would typically trigger activity recreation or string updates
+                LocaleHelper.saveLanguage(this, "tl")
+                recreate()
             }
         }
     }

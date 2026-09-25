@@ -11,19 +11,22 @@ class DiseaseRepository(
     private val gson = Gson()
 
     private val diseaseFiles = mapOf(
-        "Healthy" to "diseases/healthy.json",
-        "Black Sigatoka" to "diseases/black_sigatoka.json",
-        "Panama Disease" to "diseases/panama.json",
-        "Cordana Leaf Spot" to "diseases/cordana.json"
+        "Healthy" to "healthy.json",
+        "Black Sigatoka" to "black_sigatoka.json",
+        "Panama Disease" to "panama.json",
+        "Cordana Leaf Spot" to "cordana.json"
     )
 
     fun getDiseaseInfo(
         diseaseName: String
     ): DiseaseInfo? {
 
-        val fileName =
+        val baseName =
             diseaseFiles[diseaseName]
                 ?: return null
+        val folder = if (com.example.bananaq.LocaleHelper.selectedLanguage(context) == "tl")
+            "diseases_tl" else "diseases"
+        val fileName = "$folder/$baseName"
 
         return try {
 

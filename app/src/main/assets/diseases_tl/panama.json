@@ -1,0 +1,22 @@
+{
+  "diseaseName": "Panama Disease",
+  "scientificName": "Fusarium oxysporum f. sp. cubense",
+  "symptoms": [
+    {"title": "Paninilaw ng mga dahon", "description": "Karaniwang nagsisimula ang paninilaw sa matatanda o ibabang dahon at unti-unting lumalawak."},
+    {"title": "Kayumangging pagbabago ng kulay", "description": "Kapag hiniwa ang pseudostem, maaaring makita ang kayumanggi o mapulang-kayumangging vascular discoloration sa loob."},
+    {"title": "Pagkalanta at pagbagsak ng dahon", "description": "Maaaring malanta, bumagsak, at kalauna'y lumaylay sa paligid ng halaman ang mga apektadong dahon."},
+    {"title": "Unti-unting paghina ng halaman", "description": "Maaaring magdulot ang sakit ng tuloy-tuloy na paghina ng halamang saging."}
+  ],
+  "treatment": [
+    {"title": "Ihiwalay ang apektadong halaman", "description": "Ihiwalay ito kung maaari at huwag ilipat ang kontaminadong lupa o materyal sa malulusog na lugar."},
+    {"title": "Alisin ang malubhang apektadong halaman", "description": "Kung inirerekomenda ng lokal na awtoridad sa agrikultura, alisin at wastong itapon ang malubhang nahawaang halaman."},
+    {"title": "Pagbutihin ang kalinisan", "description": "Linisin at i-disinfect ang mga kagamitan matapos gamitin sa posibleng nahawaang halaman."},
+    {"title": "Iwasan ang paglilipat ng lupa", "description": "Huwag maglipat ng lupa mula sa apektadong lugar patungo sa malusog na taniman."}
+  ],
+  "prevention": [
+    {"title": "I-sanitize ang mga kagamitan", "description": "Linisin at i-disinfect ang mga kagamitan matapos gamitin sa posibleng nahawaang halaman o lupa."},
+    {"title": "Huwag ilipat ang kontaminadong lupa", "description": "Iwasang maglipat ng lupa mula sa mga apektadong lugar dahil nakatutulong ito sa pagkalat."},
+    {"title": "Gumamit ng malusog na pananim", "description": "Kumuha ng planting material mula sa mapagkakatiwalaang pinagmulan at iwasan ang may palatandaan ng sakit."},
+    {"title": "Limitahan ang paglipat sa pagitan ng taniman", "description": "Bawasan ang paglilipat ng lupa, debris, kagamitan, at makina sa pagitan ng apektado at malusog na lugar."}
+  ]
+}

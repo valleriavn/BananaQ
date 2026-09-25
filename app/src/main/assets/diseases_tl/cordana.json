@@ -1,0 +1,21 @@
+{
+  "diseaseName": "Cordana Leaf Spot",
+  "scientificName": "Cordana musae",
+  "symptoms": [
+    {"title": "Hugis-itlog na mga batik", "description": "Maaaring magkaroon ng malalaki at pahabang batik na may kayumanggi o tan na gitna."},
+    {"title": "Madilaw na palibot", "description": "Maaaring mapalibutan ng madilaw na bahagi ang sugat na naiiba sa malusog na berdeng tissue."},
+    {"title": "Paikot na mga pattern", "description": "Maaaring magkaroon ng magkakapatong na paikot na pattern ang ilang sugat habang lumalaki."},
+    {"title": "Impeksiyon sa gilid", "description": "Maaaring lumitaw ang sugat malapit sa gilid ng dahon at lumawak sa mas malaking apektadong bahagi."}
+  ],
+  "treatment": [
+    {"title": "Alisin ang apektadong dahon", "description": "Alisin at wastong itapon ang malubhang apektadong bahagi upang mabawasan ang pinagmumulan ng impeksiyon."},
+    {"title": "Pagbutihin ang kalinisan", "description": "Panatilihing malinis ang taniman at alisin ang nahawaang mga labi ng halaman."},
+    {"title": "Bawasan ang pagkabasa ng dahon", "description": "Pagbutihin ang daloy ng hangin at iwasan ang matagal na pagkabasa ng mga dahon."}
+  ],
+  "prevention": [
+    {"title": "Panatilihin ang kalinisan", "description": "Alisin ang nahawaang bahagi at panatilihing malinis ang paligid ng mga halaman."},
+    {"title": "Iwasan ang matagal na pagkabasa", "description": "Makakatulong ang maayos na daloy ng hangin at wastong pamamahala ng tubig upang mabawasan ang sakit."},
+    {"title": "Regular na subaybayan", "description": "Madalas na suriin ang mga dahon upang makita ang bagong sugat bago ito lumawak."},
+    {"title": "Alisin ang nahawaang debris", "description": "Wastong itapon ang malubhang nahawaang nalaglag na dahon at materyal ng halaman."}
+  ]
+}

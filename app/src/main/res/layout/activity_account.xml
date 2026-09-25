@@ -29,6 +29,16 @@
             android:textColor="@color/banana_text_dark"
             android:textSize="22sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/library_language_pill"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="@string/language_current"
+            android:textColor="@color/banana_green"
+            android:textSize="11sp" />
     </LinearLayout>
 
     <ScrollView

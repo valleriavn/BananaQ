@@ -30,7 +30,7 @@
         android:visibility="gone"
         android:scaleType="centerCrop"
         android:background="@color/banana_cream"
-        android:contentDescription="Scanned photo"
+        android:contentDescription="@string/scanned_photo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
         android:padding="8dp"
         android:shadowColor="#99000000"
         android:shadowRadius="4"
-        android:text="Scan Result"
+        android:text="@string/scan_result"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
@@ -83,7 +83,7 @@
         android:layout_marginLeft="60dp" android:layout_marginRight="60dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Align the banana leaf within the frame to scan"
+        android:text="@string/scan_instruction"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -118,7 +118,7 @@
 
         <ImageButton
             android:id="@+id/btnGallery"
-            android:contentDescription="Choose a photo"
+            android:contentDescription="@string/choose_photo"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@android:color/transparent"
@@ -130,7 +130,7 @@
         <!-- Capture Button (The big white circle) -->
         <View
             android:id="@+id/captureCircle"
-            android:contentDescription="Capture leaf photo"
+            android:contentDescription="@string/capture_photo"
             android:importantForAccessibility="yes"
             android:focusable="true"
             android:layout_width="85dp"
@@ -140,7 +140,7 @@
 
         <ImageButton
             android:id="@+id/btnFlash"
-            android:contentDescription="Turn flash on"
+            android:contentDescription="@string/flash_on"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@android:color/transparent"
@@ -229,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Confidence"
+                            android:text="@string/confidence_label"
                             android:textColor="#BDBDBD"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -270,7 +270,7 @@
                             android:backgroundTint="@color/banana_yellow"
                             android:gravity="center"
                             android:paddingTop="8dp" android:paddingBottom="8dp"
-                            android:text="Symptoms"
+                            android:text="@string/disease_symptoms"
                             android:textSize="13sp"
                             android:textColor="@color/banana_text_dark"
                             android:textStyle="bold" />
@@ -285,7 +285,7 @@
                             android:backgroundTint="#F2EBDC"
                             android:gravity="center"
                             android:paddingTop="8dp" android:paddingBottom="8dp"
-                            android:text="Treatment"
+                            android:text="@string/treatment_label"
                             android:textSize="13sp"
                             android:textColor="@color/banana_text_dark" />
 
@@ -298,7 +298,7 @@
                             android:backgroundTint="#F2EBDC"
                             android:gravity="center"
                             android:paddingTop="8dp" android:paddingBottom="8dp"
-                            android:text="Prevention"
+                            android:text="@string/disease_prevention"
                             android:textSize="13sp"
                             android:textColor="@color/banana_text_dark" />
 

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class DiseaseDetailsActivity : AppCompatActivity() {
+class DiseaseDetailsActivity : LocaleAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -16,17 +16,14 @@ class DiseaseDetailsActivity : AppCompatActivity() {
         findViewById<View>(R.id.backButton).setOnClickListener { finish() }
 
         val name = intent.getStringExtra("DISEASE_NAME")
-        val disease = libraryDiseases.firstOrNull { it.name == name }
+        val disease = libraryDiseases.firstOrNull { it.key == name }
         if (disease == null) {
             Toast.makeText(this, R.string.disease_details_unavailable, Toast.LENGTH_SHORT).show()
             finish()
             return
         }
-        findViewById<TextView>(R.id.detailDiseaseName).text = disease.name
+        findViewById<TextView>(R.id.detailDiseaseName).setText(disease.name)
         findViewById<TextView>(R.id.detailDescription).setText(disease.description)
-        val language = getSharedPreferences("settings", MODE_PRIVATE).getString("language", "en")
-        findViewById<TextView>(R.id.detailLanguage).setText(
-            if (language == "tl") R.string.language_tagalog else R.string.language_english
-        )
+        findViewById<TextView>(R.id.detailLanguage).setText(R.string.language_current)
     }
 }

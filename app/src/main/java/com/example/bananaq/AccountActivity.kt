@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 
-class AccountActivity : AppCompatActivity() {
+class AccountActivity : LocaleAwareActivity() {
 
     private data class AvatarOption(
         val id: String,
@@ -101,7 +101,7 @@ class AccountActivity : AppCompatActivity() {
                     (4 * density).toInt(), (5 * density).toInt())
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
-                else "Choose ${getString(option.nameResId)}"
+                else getString(R.string.choose_named_avatar, getString(option.nameResId))
                 isClickable = true
                 isFocusable = true
                 setOnClickListener {

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import com.example.bananaq.R
 
-class GetStartedActivity : AppCompatActivity() {
+class GetStartedActivity : LocaleAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

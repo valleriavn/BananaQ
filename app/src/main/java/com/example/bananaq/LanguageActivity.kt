@@ -13,7 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
 import com.example.bananaq.R
 
-class LanguageActivity : AppCompatActivity() {
+class LanguageActivity : LocaleAwareActivity() {
 
     private lateinit var btnEnglish: View
     private lateinit var btnTagalog: View
@@ -33,6 +33,7 @@ class LanguageActivity : AppCompatActivity() {
         btnTagalog = findViewById(R.id.btnTagalog)
         labelEnglish = findViewById(R.id.labelEnglish)
         labelTagalog = findViewById(R.id.labelTagalog)
+        selectedLanguage = LocaleHelper.selectedLanguage(this)
         val btnContinue = findViewById<Button>(R.id.btnContinue)
 
         btnEnglish.setOnClickListener {
@@ -46,7 +47,7 @@ class LanguageActivity : AppCompatActivity() {
         btnContinue.setOnClickListener {
             if (isTransitioning) return@setOnClickListener
             isTransitioning = true
-            getSharedPreferences("settings", MODE_PRIVATE).edit().putString("language", selectedLanguage).apply()
+            LocaleHelper.saveLanguage(this, selectedLanguage)
             btnEnglish.isEnabled = false
             btnTagalog.isEnabled = false
             btnContinue.isEnabled = false

@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class FeedbackDetailActivity : AppCompatActivity() {
+class FeedbackDetailActivity : LocaleAwareActivity() {
 
     private var selectedRating = ""
     private var submitted = false
@@ -46,9 +46,9 @@ class FeedbackDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feedback_detail)
         applySystemInsets()
 
-        diseaseName = intent.getStringExtra("DISEASE_NAME") ?: "Unknown"
+        diseaseName = intent.getStringExtra("DISEASE_NAME") ?: getString(R.string.unknown_label)
         accuracy = intent.getStringExtra("ACCURACY") ?: ""
-        findViewById<TextView>(R.id.tvDiseaseName).text = diseaseName
+        findViewById<TextView>(R.id.tvDiseaseName).text = localizedDiseaseName(this, diseaseName)
         findViewById<TextView>(R.id.tvDateTime).text = intent.getStringExtra("DATE_TIME") ?: ""
         findViewById<TextView>(R.id.tvAccuracy).apply {
             text = if (accuracy.endsWith("%")) accuracy else "$accuracy%"
@@ -68,9 +68,9 @@ class FeedbackDetailActivity : AppCompatActivity() {
         findViewById<View>(R.id.btnSubmitFeedback).setOnClickListener {
             when {
                 selectedRating.isEmpty() ->
-                    Toast.makeText(this, "Please select a rating", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.feedback_select_rating, Toast.LENGTH_SHORT).show()
                 intent.getStringExtra("SCAN_ID").isNullOrEmpty() ->
-                    Toast.makeText(this, "Select a scan from your history first.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, R.string.feedback_select_scan, Toast.LENGTH_LONG).show()
                 else -> confirmSubmission()
             }
         }
@@ -142,7 +142,7 @@ class FeedbackDetailActivity : AppCompatActivity() {
 <<<<<<< Updated upstream
         ratings.forEach { (id, rating) ->
             val option = findViewById<LinearLayout>(id)
-            option.contentDescription = rating
+            option.contentDescription = (option.getChildAt(1) as TextView).text
             option.setOnClickListener {
                 selectedRating = rating
 =======
@@ -202,19 +202,19 @@ class FeedbackDetailActivity : AppCompatActivity() {
     private fun showSubmittedState(comments: String) {
         findViewById<View>(R.id.formScroll).visibility = View.GONE
         findViewById<View>(R.id.successScroll).visibility = View.VISIBLE
-        setSummary(R.id.summaryScan, "Scan", diseaseName, R.color.banana_green)
-        setSummary(R.id.summaryRating, "Accuracy", selectedRating, ratingColor())
-        setSummary(R.id.summaryConfidence, "Confidence Score",
+        setSummary(R.id.summaryScan, getString(R.string.summary_scan), localizedDiseaseName(this, diseaseName), R.color.banana_green)
+        setSummary(R.id.summaryRating, getString(R.string.summary_accuracy), localizedRating(), ratingColor())
+        setSummary(R.id.summaryConfidence, getString(R.string.summary_confidence),
             if (accuracy.endsWith("%")) accuracy else "$accuracy%", R.color.rating_negative)
         val time = if (submittedAt > 0L)
-            "Today at " + SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date(submittedAt))
-        else "Saved"
-        setSummary(R.id.summarySubmitted, "Submitted", time)
+            getString(R.string.today_at, SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date(submittedAt)))
+        else getString(R.string.summary_saved)
+        setSummary(R.id.summarySubmitted, getString(R.string.summary_submitted), time)
         findViewById<TextView>(R.id.summaryComments).apply {
             if (comments.isBlank()) {
                 visibility = View.GONE
             } else {
-                text = "Additional comments:\n$comments"
+                text = getString(R.string.summary_additional_comments, comments)
                 visibility = View.VISIBLE
             }
         }
@@ -225,6 +225,14 @@ class FeedbackDetailActivity : AppCompatActivity() {
         "Not Sure" -> R.color.banana_muted
         else -> R.color.rating_negative
     }
+
+    private fun localizedRating(): String = getString(when (selectedRating) {
+        "Very Accurate" -> R.string.rating_very_accurate_single_line
+        "Accurate" -> R.string.rating_accurate
+        "Not Sure" -> R.string.rating_not_sure
+        "Inaccurate" -> R.string.rating_inaccurate
+        else -> R.string.rating_very_inaccurate_single_line
+    })
 
     private fun setSummary(viewId: Int, label: String, value: String, valueColor: Int? = null) {
         val text = android.text.SpannableString("$label\t$value")

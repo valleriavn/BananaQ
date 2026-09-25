@@ -32,7 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.core.graphics.toColorInt
 
-class ScannerActivity : AppCompatActivity() {
+class ScannerActivity : LocaleAwareActivity() {
 
     private lateinit var viewFinder: View
     private lateinit var fullResultCard: View
@@ -129,7 +129,7 @@ class ScannerActivity : AppCompatActivity() {
     private val requestCameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) startCamera()
-            else Toast.makeText(this, "Camera permission denied. You can still select a photo.", Toast.LENGTH_LONG).show()
+            else Toast.makeText(this, R.string.camera_permission_denied, Toast.LENGTH_LONG).show()
         }
 
     private val imagePicker =
@@ -230,11 +230,11 @@ class ScannerActivity : AppCompatActivity() {
                         val activeCamera = camera ?: return@setOnClickListener
                         val enabled = activeCamera.cameraInfo.torchState.value != androidx.camera.core.TorchState.ON
                         activeCamera.cameraControl.enableTorch(enabled)
-                        contentDescription = if (enabled) "Turn flash off" else "Turn flash on"
+                        contentDescription = getString(if (enabled) R.string.flash_off else R.string.flash_on)
                     }
                 }
             } catch (error: Exception) {
-                Toast.makeText(this, "Camera unavailable. Select a photo instead.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.camera_unavailable, Toast.LENGTH_LONG).show()
                 Log.e("ScannerActivity", "Camera initialization failed", error)
             }
         }, ContextCompat.getMainExecutor(this))
@@ -251,7 +251,7 @@ class ScannerActivity : AppCompatActivity() {
         val file = try {
             java.io.File.createTempFile("scan_", ".jpg", cacheDir)
         } catch (_: java.io.IOException) {
-            Toast.makeText(this, "Unable to save photo. Check available storage.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.photo_save_failed, Toast.LENGTH_LONG).show()
             return
         }
         capturePending = true
@@ -267,7 +267,7 @@ class ScannerActivity : AppCompatActivity() {
                     capturePending = false
                     findViewById<View>(R.id.captureCircle).isEnabled = true
                     file.delete()
-                    if (!isDestroyed) Toast.makeText(this@ScannerActivity, "Unable to capture photo. Try again.", Toast.LENGTH_LONG).show()
+                    if (!isDestroyed) Toast.makeText(this@ScannerActivity, R.string.photo_capture_failed, Toast.LENGTH_LONG).show()
                 }
             })
     }
@@ -276,7 +276,7 @@ class ScannerActivity : AppCompatActivity() {
         try {
             imagePicker.launch(arrayOf("image/*"))
         } catch (_: android.content.ActivityNotFoundException) {
-            Toast.makeText(this, "No photo picker is installed.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.photo_picker_missing, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -298,7 +298,7 @@ class ScannerActivity : AppCompatActivity() {
         findViewById<View>(R.id.captureCircle).isEnabled = false
         findViewById<View>(R.id.btnGallery).isEnabled = false
         findViewById<View>(R.id.btnFlash).isEnabled = false
-        findViewById<TextView>(R.id.tvInstruction).text = "Processing photo..."
+        findViewById<TextView>(R.id.tvInstruction).setText(R.string.processing_photo)
         worker.execute {
             var bitmap: Bitmap? = null
             try {
@@ -340,7 +340,7 @@ class ScannerActivity : AppCompatActivity() {
                 bitmap?.recycle()
                 runOnUiThread {
                     isProcessing = false
-                    if (!isDestroyed) findViewById<TextView>(R.id.tvInstruction).text = "Align the banana leaf within the frame to scan"
+                    if (!isDestroyed) findViewById<TextView>(R.id.tvInstruction).setText(R.string.scan_instruction)
                 }
             }
         }
@@ -351,13 +351,13 @@ class ScannerActivity : AppCompatActivity() {
         runOnUiThread {
             if (!isDestroyed && !isFinishing) {
                 hideResult()
-                Toast.makeText(this, "Unable to scan this photo. Try another image or restart the app.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.scan_failed, Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun displayResult(result: ClassificationResult) {
-        findViewById<TextView>(R.id.scanResultTitle).text = "Scan Result"
+        findViewById<TextView>(R.id.scanResultTitle).setText(R.string.scan_result)
         if (result.isValid && detailsExpanded) {
             findViewById<View>(R.id.predictionSummary).visibility = View.GONE
             showFullResult()
@@ -366,7 +366,7 @@ class ScannerActivity : AppCompatActivity() {
             fullResultCard.visibility = View.GONE
             showCompactResultMode()
             findViewById<TextView>(R.id.predictionSummary).apply {
-                text = "Unable to confidently identify"
+                setText(R.string.unable_identify)
                 visibility = View.VISIBLE
                 setOnClickListener(null)
                 isClickable = false
@@ -375,8 +375,11 @@ class ScannerActivity : AppCompatActivity() {
             fullResultCard.visibility = View.GONE
             showCompactResultMode()
             findViewById<TextView>(R.id.predictionSummary).apply {
-                val heading = "Prediction: ${result.diseaseName} (${(result.confidence * 100).toInt()}%)"
-                text = android.text.SpannableString("$heading\nTap to see details").apply {
+                val heading = getString(R.string.prediction_heading,
+                    localizedDiseaseName(this@ScannerActivity, result.diseaseName),
+                    (result.confidence * 100).toInt())
+                val detail = getString(R.string.tap_for_details)
+                text = android.text.SpannableString("$heading\n$detail").apply {
                     setSpan(android.text.style.StyleSpan(Typeface.BOLD), 0, heading.length,
                         android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     setSpan(android.text.style.ForegroundColorSpan(
@@ -470,7 +473,7 @@ class ScannerActivity : AppCompatActivity() {
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_EXPANDED
         resultDiseaseName.text =
-            result.diseaseName
+            localizedDiseaseName(this, result.diseaseName)
         resultScientificName.visibility = View.VISIBLE
         findViewById<View>(R.id.accuracyLayout).visibility = View.VISIBLE
         findViewById<View>(R.id.extraDetailsLayout).apply {
@@ -483,7 +486,7 @@ class ScannerActivity : AppCompatActivity() {
             )
         resultScientificName.text =
             diseaseInfo?.scientificName
-                ?: "Unknown"
+                ?: getString(R.string.unknown_label)
         val confidenceInt =
             (
                     result.confidence * 100
@@ -498,7 +501,7 @@ class ScannerActivity : AppCompatActivity() {
         resultAccuracyProgress.progress =
             confidenceInt
         if (intent.getBooleanExtra("LIBRARY", false)) {
-            resultAccuracyValue.text = "Library"
+            resultAccuracyValue.setText(R.string.library_label)
             resultAccuracyProgress.visibility = View.GONE
         } else {
             resultAccuracyProgress.visibility = View.VISIBLE
@@ -513,7 +516,7 @@ class ScannerActivity : AppCompatActivity() {
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_EXPANDED
         resultDiseaseName.text =
-            "Unable to confidently identify"
+            getString(R.string.unable_identify)
         resultScientificName.text = ""
         resultScientificName.visibility = View.GONE
         resultAccuracyValue.text = ""
@@ -656,20 +659,20 @@ class ScannerActivity : AppCompatActivity() {
                         result.diseaseName ==
                         "Healthy"
                     ) {
-                        "Leaf Condition"
+                        getString(R.string.leaf_condition)
                     } else {
-                        "Visual Characteristics"
+                        getString(R.string.visual_characteristics)
                     }
                 showSymptoms(info)
             }
             2 -> {
                 resultSectionTitle.text =
-                    "Recommended actions"
+                    getString(R.string.recommended_actions)
                 showTreatment(info)
             }
             3 -> {
                 resultSectionTitle.text =
-                    "Best practices to avoid spread"
+                    getString(R.string.prevention_best_practices)
                 showPrevention(info)
             }
         }

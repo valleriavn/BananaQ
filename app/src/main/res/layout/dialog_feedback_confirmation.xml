@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Submit your feedback?"
+        android:text="@string/confirm_feedback_title"
         android:textColor="@color/banana_text_dark"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:gravity="center"
-        android:text="Your rating and comments will be submitted to help improve BananaQ's accuracy."
+        android:text="@string/confirm_feedback_message"
         android:textColor="@color/banana_muted"
         android:textSize="12sp" />
 
@@ -53,7 +53,7 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="Go Back"
+            android:text="@string/go_back"
             android:textColor="@color/banana_green"
             android:textSize="13sp"
             android:textStyle="bold" />
@@ -71,7 +71,7 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="Confirm"
+            android:text="@string/confirm_label"
             android:textColor="@color/white"
             android:textSize="13sp"
             android:textStyle="bold" />

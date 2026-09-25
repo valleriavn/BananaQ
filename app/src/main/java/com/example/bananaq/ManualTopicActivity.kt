@@ -15,7 +15,7 @@ internal enum class ManualTopic(val title: Int, val body: Int) {
     PHOTO(R.string.manual_photo, R.string.manual_photo_body)
 }
 
-class ManualTopicActivity : AppCompatActivity() {
+class ManualTopicActivity : LocaleAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val topic = ManualTopic.entries.firstOrNull { it.name == intent.getStringExtra(EXTRA_TOPIC) }

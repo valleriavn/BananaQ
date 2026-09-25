@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class UserAgreement : AppCompatActivity() {
+class UserAgreement : LocaleAwareActivity() {
     override fun onResume() {
         super.onResume()
         val language = getSharedPreferences("settings", Context.MODE_PRIVATE)
@@ -25,6 +25,9 @@ class UserAgreement : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_user_agreement)
+        if (LocaleHelper.selectedLanguage(this) == "tl") {
+            localizeAgreementToTagalog(findViewById(android.R.id.content))
+        }
         
         applySystemInsets()
 

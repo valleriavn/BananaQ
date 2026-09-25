@@ -42,45 +42,20 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvLanguageDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_button_bg"
-            android:backgroundTint="#F2EBDC"
-            android:orientation="horizontal"
-            android:padding="4dp"
+            android:background="@drawable/library_language_pill"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:text="@string/language_current"
+            android:textColor="@color/banana_green"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tvLangEN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button_bg"
-                android:backgroundTint="@color/banana_green"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="4dp"
-                android:text="EN"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:focusable="true" />
-
-            <TextView
-                android:id="@+id/tvLangTL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="4dp"
-                android:text="TL"
-                android:textColor="@color/banana_yellow"
-                android:textSize="14sp"
-                android:clickable="true"
-                android:focusable="true" />
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:layout_width="match_parent"
@@ -95,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
-        android:text="Feedback"
+        android:text="@string/feedback_title"
         android:textColor="@color/banana_text_dark"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -124,7 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No scans yet. Use smart scanner."
+                android:text="@string/no_scans_yet"
                 android:textColor="@color/banana_text_dark"
                 android:textSize="18sp" />
         </LinearLayout>

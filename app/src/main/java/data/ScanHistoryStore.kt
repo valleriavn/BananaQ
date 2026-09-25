@@ -10,7 +10,8 @@ import java.util.Date
 import java.util.Locale
 
 class ScanHistoryStore(context: Context) {
-    private val prefs = context.getSharedPreferences("scan_history", Context.MODE_PRIVATE)
+    private val appContext = context.applicationContext
+    private val prefs = appContext.getSharedPreferences("scan_history", Context.MODE_PRIVATE)
 
     fun add(result: ClassificationResult, source: String, imageUri: String? = null) = synchronized(lock) {
         val previous = records()
@@ -30,7 +31,9 @@ class ScanHistoryStore(context: Context) {
 
     fun items(): List<ScanHistoryAdapter.HistoryItem> = synchronized(lock) {
         val records = records()
-        val format = SimpleDateFormat("MMM dd, yyyy 'at' h:mm a", Locale.getDefault())
+        val pattern = if (com.example.bananaq.LocaleHelper.selectedLanguage(appContext) == "tl")
+            "MMM dd, yyyy 'nang' h:mm a" else "MMM dd, yyyy 'at' h:mm a"
+        val format = SimpleDateFormat(pattern, Locale.getDefault())
         (0 until records.length()).map { index ->
             val record = records.getJSONObject(index)
             val disease = record.getString("disease")

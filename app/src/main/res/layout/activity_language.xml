@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
-        android:text="Have an agriculture-filled day!"
+        android:text="@string/language_welcome"
         android:textColor="@color/banana_text_dark"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -44,7 +44,7 @@
         android:id="@+id/instructionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose your preferred language"
+        android:text="@string/language_instruction"
         android:textColor="@color/banana_text_dark"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="English"
+            android:text="@string/language_english"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Tagalog"
+            android:text="@string/language_tagalog"
             android:textColor="@color/banana_text_dark"
             android:textSize="18sp" />
     </FrameLayout>
@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="@drawable/btn_language_yellow"
-        android:text="Continue"
+        android:text="@string/continue_label"
         android:textAllCaps="false"
         android:textColor="@color/banana_text_dark"
         android:textSize="15sp"

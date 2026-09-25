@@ -10,12 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-data class LibraryDisease(val name: String, val image: Int, val description: Int)
+data class LibraryDisease(val key: String, val name: Int, val image: Int, val description: Int)
 
 val libraryDiseases = listOf(
-    LibraryDisease("Black Sigatoka", R.drawable.black_sigatoka, R.string.description_black_sigatoka),
-    LibraryDisease("Panama Disease", R.drawable.panama_disease, R.string.description_panama),
-    LibraryDisease("Cordana Leaf Spot", R.drawable.cordana_leaf_spot, R.string.description_cordana),
+    LibraryDisease("Black Sigatoka", R.string.disease_black_sigatoka, R.drawable.black_sigatoka, R.string.description_black_sigatoka),
+    LibraryDisease("Panama Disease", R.string.disease_panama, R.drawable.panama_disease, R.string.description_panama),
+    LibraryDisease("Cordana Leaf Spot", R.string.disease_cordana, R.drawable.cordana_leaf_spot, R.string.description_cordana),
 )
 
 /** Repeating positions allow swiping in either direction without an end card. */
@@ -37,12 +37,12 @@ class DiseaseLibraryAdapter(private val onClick: (String) -> Unit) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val disease = libraryDiseases[position % libraryDiseases.size]
-        holder.name.text = disease.name
+        holder.name.setText(disease.name)
         holder.image.setImageBitmap(images.getOrPut(disease.image) {
             thumbnail(holder.itemView.resources, disease.image)
         })
-        holder.itemView.contentDescription = disease.name
-        holder.itemView.setOnClickListener { onClick(disease.name) }
+        holder.itemView.contentDescription = holder.itemView.context.getString(disease.name)
+        holder.itemView.setOnClickListener { onClick(disease.key) }
     }
 
     private fun thumbnail(resources: Resources, id: Int): Bitmap? {

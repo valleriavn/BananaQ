@@ -40,10 +40,13 @@ class ScanHistoryAdapter(
         } else if (holder is ItemViewHolder) {
             holder.ivScan.setImageDrawable(null)
             item.imageUri?.let { holder.ivScan.setImageURI(android.net.Uri.parse(it)) }
-            holder.tvDiseaseName.text = item.diseaseName
+            holder.tvDiseaseName.text = item.diseaseName?.let {
+                localizedDiseaseName(holder.itemView.context, it)
+            }
             holder.tvDateTime.text = item.dateTime
             holder.tvAccuracy.text = item.accuracy?.let { if (it.endsWith("%")) it else "$it%" } ?: "—"
-            holder.tvStatus.text = if (!item.isValid) "Uncertain" else if (item.isHealthy) "Healthy" else "Diseased"
+            holder.tvStatus.setText(if (!item.isValid) R.string.status_uncertain
+                else if (item.isHealthy) R.string.status_healthy else R.string.status_diseased)
             holder.tvStatus.setBackgroundResource(R.drawable.status_badge_bg)
             
             if (!item.isValid) {

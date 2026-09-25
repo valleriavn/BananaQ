@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp" android:text="Good day, User!"
+            android:layout_marginHorizontal="24dp" android:text="@string/home_greeting"
             android:textSize="24sp" android:textStyle="bold" android:textColor="@color/banana_text_dark" />
         <ImageView android:id="@+id/ivSoil" android:layout_width="match_parent"
             android:layout_height="0dp" android:layout_weight="1" android:layout_marginHorizontal="24dp"

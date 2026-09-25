@@ -1,0 +1,21 @@
+{
+  "diseaseName": "Black Sigatoka",
+  "scientificName": "Mycosphaerella fijiensis",
+  "symptoms": [
+    {"title": "Maliit na maiitim na batik", "description": "Maaaring lumitaw ang maliliit na dark-brown o mapulang batik sa dahon."},
+    {"title": "Pagbuo ng mga guhit", "description": "Maaaring lumaki ang mga batik at maging mahahabang maitim na guhit na kaayon ng ugat ng dahon."},
+    {"title": "Pagkamatay ng bahagi ng dahon", "description": "Maaaring maging kayumanggi at matuyo ang malalaking bahagi ng dahon habang lumalala ang sakit."},
+    {"title": "Maagang pagkatuyo", "description": "Maaaring mawalan ng berdeng kulay at matuyo nang maaga ang mga malubhang apektadong dahon."}
+  ],
+  "treatment": [
+    {"title": "Alisin ang malubhang apektadong dahon", "description": "Alisin ang mga dahong malubha ang impeksiyon upang mabawasan ang nahawaang materyal."},
+    {"title": "Pagbutihin ang kalinisan sa taniman", "description": "Alisin ang nalaglag o malubhang nahawaang dahon at panatilihing malinis ang paligid."},
+    {"title": "Pangasiwaan ang sakit", "description": "Sundin ang lokal na rekomendasyon sa fungicide at pamamahala ng sakit kung naaangkop."}
+  ],
+  "prevention": [
+    {"title": "Alisin ang nahawaang dahon", "description": "Alisin at wastong itapon ang mga malubhang nahawaang dahon."},
+    {"title": "Pagbutihin ang daloy ng hangin", "description": "Panatilihin ang sapat na pagitan ng mga halaman upang mabawasan ang kondisyong pabor sa sakit."},
+    {"title": "Panatilihin ang kalinisan", "description": "Linisin ang taniman at alisin ang malubhang nahawaang mga labi ng halaman."},
+    {"title": "Regular na subaybayan", "description": "Suriin ang mga dahon upang maagang makita at mapangasiwaan ang bagong sintomas."}
+  ]
+}

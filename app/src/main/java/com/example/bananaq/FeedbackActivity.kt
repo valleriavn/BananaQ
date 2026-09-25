@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class FeedbackActivity : AppCompatActivity() {
+class FeedbackActivity : LocaleAwareActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,6 @@ class FeedbackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feedback)
         applySystemInsets()
 
-        setupLanguageToggle()
         setupBottomNavigation()
     }
 
