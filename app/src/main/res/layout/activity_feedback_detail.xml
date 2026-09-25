@@ -201,12 +201,12 @@
                             android:orientation="horizontal">
 
                             <LinearLayout android:id="@+id/rateVeryAccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rate_very_accurate" android:contentDescription="@null" />
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_accurate" android:contentDescription="@null" />
                                 <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_very_accurate" />
                             </LinearLayout>
 
                             <LinearLayout android:id="@+id/rateAccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rate_accurate" android:contentDescription="@null" />
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_accurate" android:contentDescription="@null" />
                                 <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_accurate" />
                             </LinearLayout>
                         </LinearLayout>
@@ -218,17 +218,17 @@
                             android:orientation="horizontal">
 
                             <LinearLayout android:id="@+id/rateNotSure" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rate_not_sure" android:contentDescription="@null" />
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_not_sure" android:contentDescription="@null" />
                                 <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_not_sure" />
                             </LinearLayout>
 
                             <LinearLayout android:id="@+id/rateInaccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rate_inaccurate" android:contentDescription="@null" />
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_inaccurate" android:contentDescription="@null" />
                                 <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_inaccurate" />
                             </LinearLayout>
 
                             <LinearLayout android:id="@+id/rateVeryInaccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rate_very_inaccurate" android:contentDescription="@null" />
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_inaccurate" android:contentDescription="@null" />
                                 <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_very_inaccurate" />
                             </LinearLayout>
                         </LinearLayout>
