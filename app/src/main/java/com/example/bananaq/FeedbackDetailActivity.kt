@@ -2,9 +2,16 @@ package com.example.bananaq
 
 import android.app.Dialog
 import android.content.Intent
+<<<<<<< Updated upstream
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+=======
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+>>>>>>> Stashed changes
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -14,7 +21,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -73,43 +79,82 @@ class FeedbackDetailActivity : AppCompatActivity() {
         setupBottomNavigation()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Tagalog.applyToActivity(this)
+    }
+
     private fun setupRatingOptions() {
-        val ratings = linkedMapOf(
-            R.id.rateVeryAccurate to "Very Accurate",
-            R.id.rateAccurate to "Accurate",
-            R.id.rateNotSure to "Not Sure",
-            R.id.rateInaccurate to "Inaccurate",
-            R.id.rateVeryInaccurate to "Very Inaccurate"
+        data class RatingOptionInfo(
+            val id: Int,
+            val name: String,
+            val selectedColor: Int,
+            val selectedBgColor: Int
         )
+
+        // Color palette according to user request:
+        // Very Accurate -> Green (#2E7D32)
+        // Accurate -> Light Green (#689F38)
+        // Not Sure -> Black (#212121)
+        // Inaccurate -> Orange close to Red (#FF3D00)
+        // Very Inaccurate -> Red (#D32F2F)
+        val options = listOf(
+            RatingOptionInfo(R.id.rateVeryAccurate, "Very Accurate", Color.parseColor("#2E7D32"), Color.parseColor("#E8F5E9")),
+            RatingOptionInfo(R.id.rateAccurate, "Accurate", Color.parseColor("#689F38"), Color.parseColor("#F1F8E9")),
+            RatingOptionInfo(R.id.rateNotSure, "Not Sure", Color.parseColor("#212121"), Color.parseColor("#E0E0E0")),
+            RatingOptionInfo(R.id.rateInaccurate, "Inaccurate", Color.parseColor("#FF3D00"), Color.parseColor("#FBE9E7")),
+            RatingOptionInfo(R.id.rateVeryInaccurate, "Very Inaccurate", Color.parseColor("#D32F2F"), Color.parseColor("#FFEBEE"))
+        )
+
+        val defaultBorderColor = Color.parseColor("#EFE3C3")
+        val defaultBgColor = Color.parseColor("#FFFDF5")
+        val defaultIconColor = Color.parseColor("#F0B429")
+        val defaultTextColor = ContextCompat.getColor(this, R.color.banana_body)
+        val density = resources.displayMetrics.density
+
         fun renderRatings() {
-            ratings.entries.forEachIndexed { index, (id, name) ->
-                val option = findViewById<LinearLayout>(id)
-                val isSelected = selectedRating == name
-                val color = ContextCompat.getColor(this,
-                    if (!isSelected) R.color.banana_yellow else when (index) {
-                        0, 1 -> R.color.banana_green
-                        2 -> R.color.banana_muted
-                        else -> R.color.rating_negative
-                    })
-                option.background = android.graphics.drawable.GradientDrawable().apply {
-                    cornerRadius = 10 * resources.displayMetrics.density
-                    setColor(ContextCompat.getColor(this@FeedbackDetailActivity, R.color.banana_surface))
-                    setStroke((resources.displayMetrics.density * if (isSelected) 2 else 1).toInt(), color)
+            options.forEach { opt ->
+                val cardView = findViewById<android.widget.LinearLayout>(opt.id) ?: return@forEach
+                val isSelected = selectedRating == opt.name
+
+                val strokeColor = if (isSelected) opt.selectedColor else defaultBorderColor
+                val bgColor = if (isSelected) opt.selectedBgColor else defaultBgColor
+                val strokeWidth = ((if (isSelected) 2.5f else 1.5f) * density).toInt()
+
+                cardView.background = GradientDrawable().apply {
+                    cornerRadius = 16f * density
+                    setColor(bgColor)
+                    setStroke(strokeWidth, strokeColor)
                 }
-                (option.getChildAt(0) as ImageView).setColorFilter(color)
-                (option.getChildAt(1) as TextView).setTextColor(
-                    ContextCompat.getColor(this, R.color.banana_body))
+
+                val imageView = cardView.getChildAt(0) as? ImageView
+                imageView?.imageTintList = ColorStateList.valueOf(
+                    if (isSelected) opt.selectedColor else defaultIconColor
+                )
+
+                val textView = cardView.getChildAt(1) as? TextView
+                textView?.setTextColor(
+                    if (isSelected) opt.selectedColor else defaultTextColor
+                )
             }
         }
 
+<<<<<<< Updated upstream
         ratings.forEach { (id, rating) ->
             val option = findViewById<LinearLayout>(id)
             option.contentDescription = rating
             option.setOnClickListener {
                 selectedRating = rating
+=======
+        options.forEach { opt ->
+            val cardView = findViewById<android.widget.LinearLayout>(opt.id) ?: return@forEach
+            cardView.setOnClickListener {
+                selectedRating = opt.name
+>>>>>>> Stashed changes
                 renderRatings()
             }
         }
+
         renderRatings()
     }
 
