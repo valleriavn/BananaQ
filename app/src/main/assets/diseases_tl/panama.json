@@ -2,21 +2,21 @@
   "diseaseName": "Panama Disease",
   "scientificName": "Fusarium oxysporum f. sp. cubense",
   "symptoms": [
-    {"title": "Paninilaw ng mga dahon", "description": "Karaniwang nagsisimula ang paninilaw sa matatanda o ibabang dahon at unti-unting lumalawak."},
-    {"title": "Kayumangging pagbabago ng kulay", "description": "Kapag hiniwa ang pseudostem, maaaring makita ang kayumanggi o mapulang-kayumangging vascular discoloration sa loob."},
-    {"title": "Pagkalanta at pagbagsak ng dahon", "description": "Maaaring malanta, bumagsak, at kalauna'y lumaylay sa paligid ng halaman ang mga apektadong dahon."},
-    {"title": "Unti-unting paghina ng halaman", "description": "Maaaring magdulot ang sakit ng tuloy-tuloy na paghina ng halamang saging."}
+    {"title": "Paninilaw mula sa matatandang dahon", "description": "Karaniwang nagsisimula ang paninilaw sa gilid ng matatanda at ibabang dahon, saka umuusad patungo sa gitnang ugat at mas batang dahon."},
+    {"title": "Pagkalanta at pagbagsak ng dahon", "description": "Maaaring matiklop ang tangkay ng dahon at lumaylay sa paligid ng pseudostem ang matatandang dahon habang nananatiling tuwid ang ilang batang dahon."},
+    {"title": "Pagbabago ng kulay sa loob", "description": "Kapag hiniwa ang pseudostem o corm, maaaring makita ang dilaw, mapulang-kayumanggi, o maitim na kayumangging kulay sa water-conducting tissue."},
+    {"title": "Pagbitak at paghina ng halaman", "description": "Maaaring magkaroon ng pahabang bitak malapit sa paanan ng pseudostem, kasunod ang tuloy-tuloy na pagkalanta, paghina, at pagkamatay."}
   ],
   "treatment": [
-    {"title": "Ihiwalay ang apektadong halaman", "description": "Ihiwalay ito kung maaari at huwag ilipat ang kontaminadong lupa o materyal sa malulusog na lugar."},
-    {"title": "Alisin ang malubhang apektadong halaman", "description": "Kung inirerekomenda ng lokal na awtoridad sa agrikultura, alisin at wastong itapon ang malubhang nahawaang halaman."},
-    {"title": "Pagbutihin ang kalinisan", "description": "Linisin at i-disinfect ang mga kagamitan matapos gamitin sa posibleng nahawaang halaman."},
-    {"title": "Iwasan ang paglilipat ng lupa", "description": "Huwag maglipat ng lupa mula sa apektadong lugar patungo sa malusog na taniman."}
+    {"title": "Huwag ilipat ang halaman o lupa", "description": "Iwan sa kinaroroonan ang pinaghihinalaang halaman at nakapaligid na lupa. Pigilan ang tao, kagamitan, sapatos, tubig, at sasakyan sa pagdadala ng lupa sa ibang lugar."},
+    {"title": "I-report at ipakumpirma", "description": "Makipag-ugnayan sa lokal na agriculture o plant-protection office para sa laboratory confirmation at containment instructions; may ibang pagkalanta na kahawig nito."},
+    {"title": "Walang curative treatment", "description": "Hindi napagagaling ng fungicide ang Panama Disease. Ang pagpatay o paghihiwalay sa kumpirmadong halaman ay dapat gawin lamang ayon sa tagubilin ng biosecurity authority."},
+    {"title": "I-contain ang apektadong lugar", "description": "Limitahan ang pagpasok at alisin muna ang lupa sa kagamitan, sapatos, at makina bago gumamit ng aprubadong disinfectant ayon sa lokal na protocol."}
   ],
   "prevention": [
-    {"title": "I-sanitize ang mga kagamitan", "description": "Linisin at i-disinfect ang mga kagamitan matapos gamitin sa posibleng nahawaang halaman o lupa."},
-    {"title": "Huwag ilipat ang kontaminadong lupa", "description": "Iwasang maglipat ng lupa mula sa mga apektadong lugar dahil nakatutulong ito sa pagkalat."},
-    {"title": "Gumamit ng malusog na pananim", "description": "Kumuha ng planting material mula sa mapagkakatiwalaang pinagmulan at iwasan ang may palatandaan ng sakit."},
-    {"title": "Limitahan ang paglipat sa pagitan ng taniman", "description": "Bawasan ang paglilipat ng lupa, debris, kagamitan, at makina sa pagitan ng apektado at malusog na lugar."}
+    {"title": "Gumamit ng sertipikadong malinis na materyal", "description": "Gumamit ng sertipikadong disease-free tissue-culture plants o ibang planting material mula sa mapagkakatiwalaang pinagmulan."},
+    {"title": "Huwag papasukin ang kontaminadong lupa", "description": "Kontrolin ang pagpasok sa taniman at alisin ang lupa sa sapatos, kagamitan, makina, at sasakyan bago pumasok o lumabas."},
+    {"title": "Pangasiwaan ang daloy ng tubig", "description": "Pigilan ang runoff, baha, o irrigation water sa pagdadala ng lupa mula sa pinaghihinalaan o infected na lugar patungo sa malinis na taniman."},
+    {"title": "Gumamit ng angkop na resistant cultivar", "description": "Kung mayroon at inirerekomenda sa inyong lugar, pumili ng cultivar na resistant sa Fusarium race na naroon sa lugar."}
   ]
 }

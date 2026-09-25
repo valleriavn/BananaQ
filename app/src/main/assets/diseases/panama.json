@@ -2,57 +2,21 @@
   "diseaseName": "Panama Disease",
   "scientificName": "Fusarium oxysporum f. sp. cubense",
   "symptoms": [
-    {
-      "title": "Yellowing leaves",
-      "description": "Yellowing commonly begins with older or lower leaves and may gradually become more extensive."
-    },
-    {
-      "title": "Brown discoloration",
-      "description": "When the pseudostem is cut, brown or reddish-brown vascular discoloration may be visible inside."
-    },
-    {
-      "title": "Wilting and leaf collapse",
-      "description": "Affected leaves may wilt, collapse, and eventually hang downward around the plant."
-    },
-    {
-      "title": "Progressive plant decline",
-      "description": "The disease can cause gradual weakening and decline of the banana plant."
-    }
+    {"title": "Yellowing from older leaves", "description": "Yellowing usually starts along the margins of older lower leaves, then progresses toward the midrib and younger leaves."},
+    {"title": "Wilting and leaf collapse", "description": "Leaf stalks may buckle, and collapsed older leaves can form a skirt around the pseudostem while a few young leaves remain upright."},
+    {"title": "Internal vascular discoloration", "description": "A cut pseudostem or corm may show yellow, reddish-brown, or dark-brown discoloration in the water-conducting tissue."},
+    {"title": "Splitting and plant decline", "description": "Some plants develop lengthwise splitting near the pseudostem base, followed by progressive wilt, decline, and death."}
   ],
   "treatment": [
-    {
-      "title": "Isolate affected plants",
-      "description": "Separate affected plants where practical and avoid moving contaminated soil or plant material to healthy areas."
-    },
-    {
-      "title": "Remove severely affected plants",
-      "description": "Where recommended by local agricultural authorities, remove and properly dispose of severely infected plants."
-    },
-    {
-      "title": "Improve sanitation",
-      "description": "Clean and disinfect tools and equipment after working with potentially infected plants."
-    },
-    {
-      "title": "Avoid unnecessary soil movement",
-      "description": "Avoid transferring soil from affected areas to healthy banana-growing areas."
-    }
+    {"title": "Do not move the plant or soil", "description": "Leave suspected plants and surrounding soil in place. Keep people, tools, footwear, water, and vehicles from carrying contaminated soil to another area."},
+    {"title": "Report and confirm", "description": "Contact the local agriculture or plant-protection office for laboratory confirmation and containment instructions; similar wilts can look alike."},
+    {"title": "No curative treatment", "description": "Fungicides do not cure Panama Disease. Destruction or isolation of confirmed plants must follow local biosecurity authority guidance."},
+    {"title": "Contain the affected area", "description": "Restrict access and clean soil from tools, footwear, and equipment before applying an approved disinfectant according to local protocol."}
   ],
   "prevention": [
-    {
-      "title": "Sanitize tools",
-      "description": "Clean and disinfect tools after working with potentially infected plants or soil."
-    },
-    {
-      "title": "Avoid moving contaminated soil",
-      "description": "Contaminated soil can contribute to disease spread, so avoid moving soil from affected areas."
-    },
-    {
-      "title": "Use healthy planting material",
-      "description": "Obtain planting material from reliable sources and avoid using material showing signs of disease."
-    },
-    {
-      "title": "Limit movement between fields",
-      "description": "Reduce unnecessary movement of soil, plant debris, tools, and equipment between affected and healthy areas."
-    }
+    {"title": "Use certified clean material", "description": "Plant certified disease-free tissue-culture plants or other planting material from a reliable source."},
+    {"title": "Keep contaminated soil out", "description": "Control entry to the growing area and clean soil from footwear, tools, equipment, and vehicles before they enter or leave."},
+    {"title": "Manage water movement", "description": "Prevent runoff, floodwater, or irrigation water from carrying soil from suspected or infested areas into clean fields."},
+    {"title": "Use suitable resistant cultivars", "description": "Where locally available and recommended, choose cultivars resistant to the Fusarium race present in the area."}
   ]
 }

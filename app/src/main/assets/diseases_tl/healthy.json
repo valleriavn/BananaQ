@@ -1,18 +1,19 @@
 {
   "diseaseName": "Healthy",
-  "scientificName": "Walang natukoy na sakit",
+  "scientificName": "Walang natukoy na pattern ng suportadong sakit",
   "symptoms": [
-    {"title": "Malusog na dahon", "description": "Walang malinaw na sintomas ng sakit na natukoy ng modelo."},
-    {"title": "Normal na anyo", "description": "Walang nakitang mga karaniwang pattern na kaugnay ng mga sakit na kayang tukuyin ng app."},
-    {"title": "Maayos na kondisyon", "description": "Karaniwang berde ang dahon at walang kapansin-pansing sugat o pagbabago ng kulay na dulot ng sakit."}
+    {"title": "Walang natukoy na suportadong pattern", "description": "Walang malinaw na pattern ng Black Sigatoka, Panama Disease, o Cordana Leaf Spot sa larawan. Hindi nito pinatutunayang disease-free ang buong halaman."},
+    {"title": "Suriin ang buong halaman", "description": "Tingnan ang magkabilang panig ng dahon, matatanda at batang dahon, pseudostem, at paanan para sa paninilaw, batik, pagkalanta, pagbitak, o pagbabago ng kulay sa loob."},
+    {"title": "Bantayan ang mga pagbabago", "description": "Maaaring wala o mahina pa ang sintomas sa maagang impeksiyon. Ihambing ang halaman sa paglipas ng panahon at i-scan ang malinaw at maliwanag na larawan ng bagong sintomas."}
   ],
   "treatment": [
-    {"title": "Ipagpatuloy ang wastong pag-aalaga", "description": "Panatilihin ang wastong pagdidilig, nutrisyon, kalinisan, at angkop na kondisyon ng pagtatanim."},
-    {"title": "Regular na subaybayan", "description": "Patuloy na suriin ang mga dahon para sa pagbabago o bagong sintomas."}
+    {"title": "Huwag gamutin dahil lamang sa resultang ito", "description": "Huwag maglagay ng pesticide sa mukhang malusog na halaman dahil lamang sa app result. Kailangan muna ng kumpirmadong diagnosis bago gamutin."},
+    {"title": "Ipagpatuloy ang wastong pag-aalaga", "description": "Panatilihin ang angkop na pagdidilig, drainage, nutrisyon, pagitan, at sanitation para sa uri ng saging at lokal na kondisyon."},
+    {"title": "Kumonsulta kung may pag-aalala", "description": "Kung may pagkalanta, kumakalat na sugat, o pagbabago ng kulay sa loob kahit ganito ang result, kumonsulta sa lokal na agriculture o plant-health specialist."}
   ],
   "prevention": [
-    {"title": "Regular na inspeksiyon", "description": "Suriin palagi ang mga dahon upang mabilis na makita ang mga unang sintomas."},
-    {"title": "Panatilihin ang kalinisan", "description": "Linisin ang mga kagamitan at paligid upang mabawasan ang posibilidad ng pagkalat ng sakit."},
-    {"title": "Panatilihing malusog ang halaman", "description": "Magbigay ng sapat na tubig at sustansiya at iwasan ang mga kondisyong nagpapahina sa halaman."}
+    {"title": "Regular na suriin ang halaman", "description": "Suriin palagi ang mga dahon at pseudostem upang maagang mapansin ang bago o nagbabagong sintomas."},
+    {"title": "Panatilihin ang malinis na biosecurity", "description": "Gumamit ng malinis na kagamitan at sapatos, huwag maglipat ng lupa mula sa may sakit na lugar, at gumamit ng malusog na planting material."},
+    {"title": "Bawasan ang stress ng halaman", "description": "Magbigay ng balanseng nutrisyon at angkop na tubig habang iniiwasan ang waterlogging, tagtuyot, siksikan, at hindi kailangang pinsala sa dahon."}
   ]
 }

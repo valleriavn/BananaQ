@@ -1,21 +1,22 @@
 {
   "diseaseName": "Cordana Leaf Spot",
-  "scientificName": "Cordana musae",
+  "scientificName": "Neocordana musae",
   "symptoms": [
-    {"title": "Hugis-itlog na mga batik", "description": "Maaaring magkaroon ng malalaki at pahabang batik na may kayumanggi o tan na gitna."},
-    {"title": "Madilaw na palibot", "description": "Maaaring mapalibutan ng madilaw na bahagi ang sugat na naiiba sa malusog na berdeng tissue."},
-    {"title": "Paikot na mga pattern", "description": "Maaaring magkaroon ng magkakapatong na paikot na pattern ang ilang sugat habang lumalaki."},
-    {"title": "Impeksiyon sa gilid", "description": "Maaaring lumitaw ang sugat malapit sa gilid ng dahon at lumawak sa mas malaking apektadong bahagi."}
+    {"title": "Malaking hugis-itlog o diyamanteng batik", "description": "Lumalaki ang sugat bilang maputla hanggang katamtamang kayumangging oval, pahaba, o hugis-diyamanteng bahagi, madalas malapit sa gilid o pinsala ng dahon."},
+    {"title": "Maliwanag na dilaw na palibot", "description": "Karaniwang may malinaw at matingkad na dilaw na banda sa paligid ng kayumangging sugat na naghihiwalay rito sa berdeng tissue."},
+    {"title": "Maputlang gitna at paikot na pattern", "description": "Habang tumatanda ang sugat, maaaring maging mapusyaw na kayumanggi o maputi ang gitna at magkaroon ng magkakapatong na zone o mas maitim na gilid."},
+    {"title": "Pagsasanib ng sugat kapag malubha", "description": "Maaaring magsanib ang magkakalapit na batik at maging malawak na patay na bahagi, lalo na sa basa, napinsala, o mahinang dahon."}
   ],
   "treatment": [
-    {"title": "Alisin ang apektadong dahon", "description": "Alisin at wastong itapon ang malubhang apektadong bahagi upang mabawasan ang pinagmumulan ng impeksiyon."},
-    {"title": "Pagbutihin ang kalinisan", "description": "Panatilihing malinis ang taniman at alisin ang nahawaang mga labi ng halaman."},
-    {"title": "Bawasan ang pagkabasa ng dahon", "description": "Pagbutihin ang daloy ng hangin at iwasan ang matagal na pagkabasa ng mga dahon."}
+    {"title": "Kumpirmahin ang leaf spot", "description": "Maaaring sumabay o magmukhang Sigatoka lesion ang Cordana. Kumonsulta sa lokal na plant-health specialist kung malawak ang batik o hindi tiyak ang pattern."},
+    {"title": "Alisin ang malubhang apektadong bahagi", "description": "Putulin gamit ang malinis na kagamitan ang malubhang apektadong bahagi habang nagtitira ng malusog na dahon, at itapon ito ayon sa lokal na patnubay."},
+    {"title": "Itama ang stress ng halaman", "description": "Ayusin ang drainage at irrigation, bawasan ang matagal na pagkabasa ng dahon, iwasan ang pinsala, at panatilihin ang balanseng nutrisyon at airflow."},
+    {"title": "Gumamit lamang ng produktong inirekomenda", "description": "Gumamit lamang ng fungicide kung kumpirmado ang diagnosis at rehistrado at inirerekomenda ito sa inyong lugar; laging sundin ang label."}
   ],
   "prevention": [
-    {"title": "Panatilihin ang kalinisan", "description": "Alisin ang nahawaang bahagi at panatilihing malinis ang paligid ng mga halaman."},
-    {"title": "Iwasan ang matagal na pagkabasa", "description": "Makakatulong ang maayos na daloy ng hangin at wastong pamamahala ng tubig upang mabawasan ang sakit."},
-    {"title": "Regular na subaybayan", "description": "Madalas na suriin ang mga dahon upang makita ang bagong sugat bago ito lumawak."},
-    {"title": "Alisin ang nahawaang debris", "description": "Wastong itapon ang malubhang nahawaang nalaglag na dahon at materyal ng halaman."}
+    {"title": "Iwasan ang matagal na pagkabasa ng dahon", "description": "Diligan malapit sa lupa kung maaari, panatilihin ang maayos na airflow, at iwasan ang irrigation na matagal magbasa sa dahon."},
+    {"title": "Iwasan ang pinsala at stress", "description": "Protektahan ang dahon sa pinsalang maiiwasan at panatilihin ang wastong drainage, irrigation, at nutrisyon dahil mas madaling maapektuhan ang stressed tissue."},
+    {"title": "Panatilihing malinis ang kagamitan at taniman", "description": "Linisin ang pruning tools sa pagitan ng mga halaman at alisin ang malubhang may sakit na dahon bilang regular na sanitation."},
+    {"title": "Suriin kapag basa ang panahon", "description": "Suriin ang matatanda at napinsalang dahon pagkatapos ng mahalumigmig o maulang panahon para sa lumalaking kayumangging batik na may matingkad na dilaw na palibot."}
   ]
 }

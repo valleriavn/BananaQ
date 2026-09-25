@@ -1,54 +1,22 @@
 {
   "diseaseName": "Cordana Leaf Spot",
-  "scientificName": "Cordana musae",
+  "scientificName": "Neocordana musae",
   "symptoms": [
-    {
-      "title": "Oval leaf spots",
-      "description": "Large oval or elongated spots may develop on banana leaves, often with brown or tan centers."
-    },
-    {
-      "title": "Yellowish halos",
-      "description": "Lesions may be surrounded by yellowish areas that contrast with the healthy green tissue."
-    },
-    {
-      "title": "Zonate patterns",
-      "description": "Some lesions may develop concentric or zonate patterns as they enlarge."
-    },
-    {
-      "title": "Edge infection",
-      "description": "Lesions may occur near leaf margins and can expand into larger damaged areas."
-    }
+    {"title": "Large oval or diamond-shaped spots", "description": "Lesions expand into pale- to medium-brown oval, elongated, or diamond-shaped patches, often near leaf margins or injured tissue."},
+    {"title": "Bright yellow halo", "description": "A clear bright-yellow band commonly surrounds the brown lesion and separates it from green leaf tissue."},
+    {"title": "Pale center and zoned pattern", "description": "As a lesion ages, its center may become light brown to whitish and may show concentric zones or a darker border."},
+    {"title": "Lesions merge in severe cases", "description": "Nearby spots can join into broad dead areas, especially on wet, damaged, or weakened leaves."}
   ],
   "treatment": [
-    {
-      "title": "Remove affected leaves",
-      "description": "Remove severely affected plant material and dispose of it properly to reduce sources of infection."
-    },
-    {
-      "title": "Improve sanitation",
-      "description": "Keep the growing area clean and remove infected plant debris."
-    },
-    {
-      "title": "Reduce leaf wetness",
-      "description": "Improve airflow and avoid unnecessary prolonged wetness of banana leaves."
-    }
+    {"title": "Confirm the leaf spot", "description": "Cordana can occur beside or resemble Sigatoka lesions. Seek local plant-health advice when spots are extensive or the pattern is uncertain."},
+    {"title": "Remove badly affected tissue", "description": "Prune severely affected leaf portions with clean tools, retaining healthy leaf area, and dispose of removed material according to local guidance."},
+    {"title": "Correct plant stress", "description": "Improve drainage and irrigation, reduce prolonged leaf wetness, avoid leaf injury, and maintain balanced nutrition and airflow."},
+    {"title": "Use products only when advised", "description": "Apply a fungicide only if the diagnosis is confirmed and the product is locally registered and recommended; always follow the label."}
   ],
   "prevention": [
-    {
-      "title": "Maintain sanitation",
-      "description": "Remove infected plant material and keep the area around banana plants clean."
-    },
-    {
-      "title": "Avoid prolonged leaf wetness",
-      "description": "Good airflow and appropriate water management can help reduce conditions favorable to leaf diseases."
-    },
-    {
-      "title": "Monitor leaves regularly",
-      "description": "Inspect leaves frequently so new lesions can be identified before they become extensive."
-    },
-    {
-      "title": "Remove infected debris",
-      "description": "Dispose of heavily infected fallen leaves and plant material appropriately to reduce potential sources of infection."
-    }
+    {"title": "Avoid prolonged leaf wetness", "description": "Water near the soil when practical, provide good airflow, and avoid irrigation that keeps foliage wet for long periods."},
+    {"title": "Prevent injury and stress", "description": "Protect leaves from avoidable damage and maintain suitable drainage, irrigation, and nutrition because stressed tissue is more vulnerable."},
+    {"title": "Keep tools and fields clean", "description": "Clean pruning tools between plants and remove severely diseased leaf material as part of routine sanitation."},
+    {"title": "Inspect during wet weather", "description": "Check older and injured leaves after humid or rainy periods for expanding brown spots with bright yellow halos."}
   ]
 }

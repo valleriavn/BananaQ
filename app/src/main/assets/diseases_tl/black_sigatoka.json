@@ -1,21 +1,21 @@
 {
   "diseaseName": "Black Sigatoka",
-  "scientificName": "Mycosphaerella fijiensis",
+  "scientificName": "Pseudocercospora fijiensis",
   "symptoms": [
-    {"title": "Maliit na maiitim na batik", "description": "Maaaring lumitaw ang maliliit na dark-brown o mapulang batik sa dahon."},
-    {"title": "Pagbuo ng mga guhit", "description": "Maaaring lumaki ang mga batik at maging mahahabang maitim na guhit na kaayon ng ugat ng dahon."},
-    {"title": "Pagkamatay ng bahagi ng dahon", "description": "Maaaring maging kayumanggi at matuyo ang malalaking bahagi ng dahon habang lumalala ang sakit."},
-    {"title": "Maagang pagkatuyo", "description": "Maaaring mawalan ng berdeng kulay at matuyo nang maaga ang mga malubhang apektadong dahon."}
+    {"title": "Maagang tuldok at guhit", "description": "Karaniwang nagsisimula sa ilalim ng dahon ang napakaliit na maputlang dilaw o mapulang-kayumangging tuldok, saka humahaba bilang mga guhit na kaayon ng ugat ng dahon."},
+    {"title": "Pag-itim ng mga sugat", "description": "Lumalaki at umiitim mula kayumanggi hanggang halos itim ang mga guhit, at nagiging makitid na hugis-itlog o pahabang batik."},
+    {"title": "Abuhing gitna at dilaw na palibot", "description": "Ang lumang batik ay maaaring magkaroon ng tuyong mapusyaw na abuhing gitna, maitim na gilid, at maliwanag na dilaw na palibot."},
+    {"title": "Pagsasanib at pagkamatay ng dahon", "description": "Maaaring magsanib ang maraming batik at bumuo ng malaking patay na bahagi, kaya nababawasan ang berdeng bahagi at maagang natutuyo ang dahon."}
   ],
   "treatment": [
-    {"title": "Alisin ang malubhang apektadong dahon", "description": "Alisin ang mga dahong malubha ang impeksiyon upang mabawasan ang nahawaang materyal."},
-    {"title": "Pagbutihin ang kalinisan sa taniman", "description": "Alisin ang nalaglag o malubhang nahawaang dahon at panatilihing malinis ang paligid."},
-    {"title": "Pangasiwaan ang sakit", "description": "Sundin ang lokal na rekomendasyon sa fungicide at pamamahala ng sakit kung naaangkop."}
+    {"title": "Kumpirmahin ang diagnosis", "description": "Maaaring magmukhang ibang leaf spot ang Black Sigatoka. Magpakumpirma sa lokal na crop o plant-health specialist kung malubha o kumakalat ang sintomas."},
+    {"title": "Maingat na putulin ang apektadong bahagi", "description": "Alisin ang bahaging maraming batik o ang malubhang apektadong dahon upang mabawasan ang spores, ngunit magtira ng sapat na malusog na bahagi para sa paglaki."},
+    {"title": "Gumamit ng pinagsamang pamamahala", "description": "Ayusin ang drainage, pagitan ng halaman, nutrisyon, at sanitation. Gumamit lamang ng fungicide na rehistrado at inirerekomenda sa inyong lugar, ayon sa label at resistance-management guidance."}
   ],
   "prevention": [
-    {"title": "Alisin ang nahawaang dahon", "description": "Alisin at wastong itapon ang mga malubhang nahawaang dahon."},
-    {"title": "Pagbutihin ang daloy ng hangin", "description": "Panatilihin ang sapat na pagitan ng mga halaman upang mabawasan ang kondisyong pabor sa sakit."},
-    {"title": "Panatilihin ang kalinisan", "description": "Linisin ang taniman at alisin ang malubhang nahawaang mga labi ng halaman."},
-    {"title": "Regular na subaybayan", "description": "Suriin ang mga dahon upang maagang makita at mapangasiwaan ang bagong sintomas."}
+    {"title": "Regular na suriin ang bagong dahon", "description": "Tingnan ang magkabilang panig ng dahon para sa maagang tuldok at guhit na kaayon ng ugat bago magsanib ang mga batik."},
+    {"title": "Ayusin ang daloy ng hangin at drainage", "description": "Panatilihin ang wastong pagitan ng halaman, kontrolin ang sobrang suhi, at iwasan ang waterlogging upang mabawasan ang mahalumigmig na kondisyon."},
+    {"title": "Gumamit ng malinis na planting material", "description": "Magtanim ng malusog na materyal mula sa mapagkakatiwalaang pinagmulan at huwag magdala ng nahawaang dahon o debris sa malinis na lugar."},
+    {"title": "Panatilihin ang balanseng pag-aalaga", "description": "Magbigay ng angkop na tubig at nutrisyon, at regular na alisin ang malubhang apektadong bahagi bilang bahagi ng field sanitation."}
   ]
 }

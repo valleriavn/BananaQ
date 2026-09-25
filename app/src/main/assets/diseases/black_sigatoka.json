@@ -1,54 +1,21 @@
 {
   "diseaseName": "Black Sigatoka",
-  "scientificName": "Mycosphaerella fijiensis",
+  "scientificName": "Pseudocercospora fijiensis",
   "symptoms": [
-    {
-      "title": "Small dark spots",
-      "description": "Small dark-brown or reddish spots may appear on the leaf."
-    },
-    {
-      "title": "Streak development",
-      "description": "Spots can expand into longer dark streaks parallel to the leaf veins."
-    },
-    {
-      "title": "Leaf necrosis",
-      "description": "Large areas of the leaf may turn brown and dry out as the disease progresses."
-    },
-    {
-      "title": "Premature leaf drying",
-      "description": "Severely affected leaves may lose their green color and dry prematurely."
-    }
+    {"title": "Early specks and streaks", "description": "Tiny pale-yellow or reddish-brown specks usually begin on the underside of a leaf and lengthen into streaks parallel to the leaf veins."},
+    {"title": "Darkening lesions", "description": "The streaks enlarge and darken from brown to nearly black, becoming narrow oval or elongated spots."},
+    {"title": "Gray centers and yellow halos", "description": "Older lesions may develop dry light-gray centers, dark borders, and bright yellow halos."},
+    {"title": "Coalescing and leaf death", "description": "Numerous lesions can merge into large dead areas, reducing green leaf area and causing premature drying."}
   ],
   "treatment": [
-    {
-      "title": "Remove severely affected leaves",
-      "description": "Remove severely infected leaves to reduce the amount of infected plant material."
-    },
-    {
-      "title": "Improve field sanitation",
-      "description": "Remove fallen or heavily infected leaves and keep the area around banana plants clean."
-    },
-    {
-      "title": "Disease management",
-      "description": "Follow locally recommended fungicide and disease-management practices when appropriate."
-    }
+    {"title": "Confirm the diagnosis", "description": "Black Sigatoka can resemble other leaf spots. Ask a local crop or plant-health specialist to confirm severe or spreading cases."},
+    {"title": "Prune infected tissue carefully", "description": "Remove heavily spotted leaf portions or leaves to lower spores, but retain enough healthy leaf area for plant growth."},
+    {"title": "Use integrated management", "description": "Improve drainage, spacing, nutrition, and sanitation. Use a fungicide only when locally registered and recommended, and follow its label and resistance-management guidance."}
   ],
   "prevention": [
-    {
-      "title": "Remove infected leaves",
-      "description": "Remove severely infected leaves and dispose of them properly to reduce sources of infection."
-    },
-    {
-      "title": "Improve airflow",
-      "description": "Maintain adequate spacing and airflow around plants to help reduce conditions favorable to disease development."
-    },
-    {
-      "title": "Maintain sanitation",
-      "description": "Keep the plantation clean and remove heavily infected plant debris."
-    },
-    {
-      "title": "Monitor leaves regularly",
-      "description": "Inspect banana leaves regularly so new symptoms can be detected and managed early."
-    }
+    {"title": "Inspect new leaves regularly", "description": "Check both leaf surfaces for early specks and vein-parallel streaks so infected tissue can be managed before lesions merge."},
+    {"title": "Improve airflow and drainage", "description": "Use suitable plant spacing, control excess suckers, and prevent waterlogging to reduce humid conditions around leaves."},
+    {"title": "Use clean planting material", "description": "Plant healthy material from a reliable source and avoid carrying infected leaves or debris into clean areas."},
+    {"title": "Maintain balanced plant care", "description": "Provide suitable water and nutrition, and remove highly infected leaf tissue as part of a regular field sanitation program."}
   ]
 }

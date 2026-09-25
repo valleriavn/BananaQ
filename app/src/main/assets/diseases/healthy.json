@@ -1,42 +1,19 @@
 {
   "diseaseName": "Healthy",
-  "scientificName": "No disease detected",
+  "scientificName": "No supported disease pattern detected",
   "symptoms": [
-    {
-      "title": "Healthy leaf",
-      "description": "No obvious disease symptoms were detected by the model."
-    },
-    {
-      "title": "Normal appearance",
-      "description": "The scanned leaf does not show the characteristic patterns associated with the disease classes."
-    },
-    {
-      "title": "Good leaf condition",
-      "description": "The leaf appears generally green and does not show prominent disease-related lesions or discoloration."
-    }
+    {"title": "No supported disease pattern", "description": "The image did not show a strong pattern for Black Sigatoka, Panama Disease, or Cordana Leaf Spot. This is not proof that the whole plant is disease-free."},
+    {"title": "Inspect the whole plant", "description": "Check both leaf surfaces, older and younger leaves, the pseudostem, and the plant base for yellowing, spots, wilting, splitting, or internal discoloration."},
+    {"title": "Watch for changes", "description": "Symptoms can be absent or subtle in an early infection. Compare the plant over time and scan a clear, well-lit image of any new symptom."}
   ],
   "treatment": [
-    {
-      "title": "Continue proper care",
-      "description": "Maintain appropriate watering, nutrition, sanitation, and growing conditions."
-    },
-    {
-      "title": "Monitor regularly",
-      "description": "Continue checking leaves regularly for changes or new disease symptoms."
-    }
+    {"title": "Do not treat from this result alone", "description": "Do not apply a pesticide to a plant that appears healthy solely because of an app result. Use a confirmed diagnosis before treatment."},
+    {"title": "Continue appropriate care", "description": "Maintain suitable watering, drainage, nutrition, spacing, and sanitation for the banana variety and local conditions."},
+    {"title": "Ask an expert if concerned", "description": "If wilting, spreading lesions, or internal discoloration is present despite this result, contact a local agriculture or plant-health specialist."}
   ],
   "prevention": [
-    {
-      "title": "Inspect regularly",
-      "description": "Check banana leaves regularly so early symptoms can be identified quickly."
-    },
-    {
-      "title": "Maintain sanitation",
-      "description": "Keep tools and the growing area clean to reduce the possibility of disease spread."
-    },
-    {
-      "title": "Maintain plant health",
-      "description": "Provide appropriate water and nutrients and avoid conditions that can weaken the plant."
-    }
+    {"title": "Inspect plants regularly", "description": "Check leaves and pseudostems routinely so a new or changing symptom is noticed early."},
+    {"title": "Practice clean biosecurity", "description": "Use clean tools and footwear, avoid moving soil from diseased areas, and use healthy planting material from a reliable source."},
+    {"title": "Reduce plant stress", "description": "Provide balanced nutrition and appropriate water while preventing waterlogging, drought stress, crowding, and unnecessary leaf injury."}
   ]
 }
