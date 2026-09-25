@@ -33,9 +33,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
     <style name="FeedbackRatingOption">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">76dp</item>
-        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_width">82dp</item>
+        <item name="android:layout_height">82dp</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+        <item name="android:layout_marginVertical">4dp</item>
         <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>
         <item name="android:paddingHorizontal">6dp</item>

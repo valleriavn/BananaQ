@@ -178,7 +178,7 @@
                         android:text="How accurate was this result?"
                         android:textColor="@color/banana_body"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold|italic" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -186,36 +186,53 @@
                         android:textColor="@color/banana_muted"
                         android:textSize="10sp" />
 
-                    <GridLayout
+                    <LinearLayout
                         android:id="@+id/ratingGrid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:alignmentMode="alignBounds"
-                        android:columnCount="6"
-                        android:rowCount="2"
-                        android:useDefaultMargins="true">
-                        <LinearLayout android:id="@+id/rateVeryAccurate" style="@style/FeedbackRatingOption">
-                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_accurate" android:contentDescription="@null" />
-                            <TextView style="@style/FeedbackRatingLabel" android:text="Very&#10;Accurate" />
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout android:id="@+id/rateVeryAccurate" style="@style/FeedbackRatingOption">
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_accurate" android:contentDescription="@null" />
+                                <TextView style="@style/FeedbackRatingLabel" android:text="Very&#10;Accurate" />
+                            </LinearLayout>
+
+                            <LinearLayout android:id="@+id/rateAccurate" style="@style/FeedbackRatingOption">
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_accurate" android:contentDescription="@null" />
+                                <TextView style="@style/FeedbackRatingLabel" android:text="Accurate" />
+                            </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout android:id="@+id/rateAccurate" style="@style/FeedbackRatingOption">
-                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_accurate" android:contentDescription="@null" />
-                            <TextView style="@style/FeedbackRatingLabel" android:text="Accurate" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout android:id="@+id/rateNotSure" style="@style/FeedbackRatingOption">
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_not_sure" android:contentDescription="@null" />
+                                <TextView style="@style/FeedbackRatingLabel" android:text="Not Sure" />
+                            </LinearLayout>
+
+                            <LinearLayout android:id="@+id/rateInaccurate" style="@style/FeedbackRatingOption">
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_inaccurate" android:contentDescription="@null" />
+                                <TextView style="@style/FeedbackRatingLabel" android:text="Inaccurate" />
+                            </LinearLayout>
+
+                            <LinearLayout android:id="@+id/rateVeryInaccurate" style="@style/FeedbackRatingOption">
+                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_inaccurate" android:contentDescription="@null" />
+                                <TextView style="@style/FeedbackRatingLabel" android:text="Very&#10;Inaccurate" />
+                            </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout android:id="@+id/rateNotSure" style="@style/FeedbackRatingOption">
-                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_not_sure" android:contentDescription="@null" />
-                            <TextView style="@style/FeedbackRatingLabel" android:text="Not Sure" />
-                        </LinearLayout>
-                        <LinearLayout android:id="@+id/rateInaccurate" style="@style/FeedbackRatingOption">
-                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_inaccurate" android:contentDescription="@null" />
-                            <TextView style="@style/FeedbackRatingLabel" android:text="Inaccurate" />
-                        </LinearLayout>
-                        <LinearLayout android:id="@+id/rateVeryInaccurate" style="@style/FeedbackRatingOption">
-                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_inaccurate" android:contentDescription="@null" />
-                            <TextView style="@style/FeedbackRatingLabel" android:text="Very&#10;Inaccurate" />
-                        </LinearLayout>
-                    </GridLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -1,12 +1,18 @@
 package com.example.bananaq
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
-import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -15,7 +21,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -97,16 +102,9 @@ class FeedbackDetailActivity : AppCompatActivity() {
             }
         }
 
-        ratings.entries.forEachIndexed { index, (id, rating) ->
+        ratings.forEach { (id, rating) ->
             val option = findViewById<LinearLayout>(id)
             option.contentDescription = rating
-            val params = option.layoutParams as GridLayout.LayoutParams
-            params.rowSpec = GridLayout.spec(if (index < 2) 0 else 1)
-            params.columnSpec = if (index < 2)
-                GridLayout.spec(index * 3, 3, 1f)
-            else
-                GridLayout.spec((index - 2) * 2, 2, 1f)
-            option.layoutParams = params
             option.setOnClickListener {
                 selectedRating = rating
                 renderRatings()
@@ -116,12 +114,28 @@ class FeedbackDetailActivity : AppCompatActivity() {
     }
 
     private fun confirmSubmission() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Submit your feedback?")
-            .setMessage("Your rating and comments will be saved on this device to help improve BananaQ's accuracy.")
-            .setNegativeButton("Go Back", null)
-            .setPositiveButton("Confirm") { _, _ -> saveFeedback() }
-            .show()
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_feedback_confirmation)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.findViewById<View>(R.id.btnCancelFeedback).setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.findViewById<View>(R.id.btnConfirmFeedback).setOnClickListener {
+            dialog.dismiss()
+            saveFeedback()
+        }
+        dialog.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            attributes = attributes.apply { dimAmount = 0.58f }
+            setGravity(Gravity.CENTER)
+        }
+        dialog.show()
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.88f).toInt(),
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
     }
 
     private fun saveFeedback() {
@@ -143,10 +157,10 @@ class FeedbackDetailActivity : AppCompatActivity() {
     private fun showSubmittedState(comments: String) {
         findViewById<View>(R.id.formScroll).visibility = View.GONE
         findViewById<View>(R.id.successScroll).visibility = View.VISIBLE
-        setSummary(R.id.summaryScan, "Scan", diseaseName)
-        setSummary(R.id.summaryRating, "Accuracy", selectedRating)
+        setSummary(R.id.summaryScan, "Scan", diseaseName, R.color.banana_green)
+        setSummary(R.id.summaryRating, "Accuracy", selectedRating, ratingColor())
         setSummary(R.id.summaryConfidence, "Confidence Score",
-            if (accuracy.endsWith("%")) accuracy else "$accuracy%")
+            if (accuracy.endsWith("%")) accuracy else "$accuracy%", R.color.rating_negative)
         val time = if (submittedAt > 0L)
             "Today at " + SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date(submittedAt))
         else "Saved"
@@ -161,13 +175,23 @@ class FeedbackDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setSummary(viewId: Int, label: String, value: String) {
+    private fun ratingColor(): Int = when (selectedRating) {
+        "Very Accurate", "Accurate" -> R.color.banana_green
+        "Not Sure" -> R.color.banana_muted
+        else -> R.color.rating_negative
+    }
+
+    private fun setSummary(viewId: Int, label: String, value: String, valueColor: Int? = null) {
         val text = android.text.SpannableString("$label\t$value")
         text.setSpan(android.text.style.ForegroundColorSpan(
             ContextCompat.getColor(this, R.color.banana_muted)),
             0, label.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         text.setSpan(android.text.style.StyleSpan(Typeface.BOLD),
             label.length + 1, text.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        valueColor?.let {
+            text.setSpan(android.text.style.ForegroundColorSpan(ContextCompat.getColor(this, it)),
+                label.length + 1, text.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
         text.setSpan(android.text.style.TabStopSpan.Standard(
             (135 * resources.displayMetrics.density).toInt()),
             0, text.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
