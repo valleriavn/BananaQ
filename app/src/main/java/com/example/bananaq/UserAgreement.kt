@@ -78,7 +78,6 @@ class UserAgreement : LocaleAwareActivity() {
 
         cbConfirmation.setOnCheckedChangeListener { _, isChecked ->
             btnSubmit.isEnabled = isChecked
-            btnSubmit.alpha = if (isChecked) 1.0f else 0.5f
         }
 
         btnDecline.setOnClickListener {

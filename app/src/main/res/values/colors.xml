@@ -10,11 +10,15 @@
     <!-- BananaQ Colors -->
     <color name="onboarding_cream">#F8F5E9</color>
     <color name="splash_green">#71C35E</color>
-    <color name="banana_green">#5D9E2F</color>
+    <color name="banana_green">#5E9B33</color>
     <color name="banana_cream">#F4F3ED</color>
     <color name="banana_surface">#FFFDF5</color>
     <color name="banana_border">#EFDFB0</color>
-    <color name="banana_yellow">#F2D597</color>
+    <color name="banana_yellow">#F1D686</color>
+    <color name="banana_yellow_light">#F9E8B5</color>
+    <color name="agreement_button_default">#F1D686</color>
+    <color name="agreement_button_active">#5E9B33</color>
+    <color name="button_text_black">#000000</color>
     <color name="banana_text_dark">#3F6E28</color>
 
     <!-- Old Colors (keeping for compatibility) -->

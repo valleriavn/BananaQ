@@ -66,26 +66,20 @@ class MainActivity : LocaleAwareActivity() {
 
         fun updateToggleUI(lang: String) {
             if (lang == "en") {
-                tvLangEN.setBackgroundResource(R.drawable.rounded_button_bg)
-                tvLangEN.backgroundTintList = android.content.res.ColorStateList.valueOf(
-                    androidx.core.content.ContextCompat.getColor(this, R.color.banana_green)
-                )
+                tvLangEN.setBackgroundResource(R.drawable.btn_language_green)
                 tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
-                tvLangEN.setTypeface(null, android.graphics.Typeface.BOLD)
+                tvLangEN.setTypeface(null, android.graphics.Typeface.NORMAL)
 
                 tvLangTL.background = null
-                tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.banana_yellow))
+                tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.button_text_black))
                 tvLangTL.setTypeface(null, android.graphics.Typeface.NORMAL)
             } else {
-                tvLangTL.setBackgroundResource(R.drawable.rounded_button_bg)
-                tvLangTL.backgroundTintList = android.content.res.ColorStateList.valueOf(
-                    androidx.core.content.ContextCompat.getColor(this, R.color.banana_green)
-                )
+                tvLangTL.setBackgroundResource(R.drawable.btn_language_green)
                 tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
-                tvLangTL.setTypeface(null, android.graphics.Typeface.BOLD)
+                tvLangTL.setTypeface(null, android.graphics.Typeface.NORMAL)
 
                 tvLangEN.background = null
-                tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.banana_yellow))
+                tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.button_text_black))
                 tvLangEN.setTypeface(null, android.graphics.Typeface.NORMAL)
             }
         }

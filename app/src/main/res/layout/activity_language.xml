@@ -107,20 +107,25 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/language_tagalog"
-            android:textColor="@color/banana_text_dark"
+            android:textColor="@color/button_text_black"
             android:textSize="18sp" />
     </FrameLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnContinue"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/btn_language_yellow"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="@string/continue_label"
         android:textAllCaps="false"
-        android:textColor="@color/banana_text_dark"
+        android:textColor="@color/agreement_button_text_selector"
         android:textSize="15sp"
+        android:textStyle="normal"
+        app:backgroundTint="@color/agreement_button_default_selector"
+        app:cornerRadius="25dp"
+        app:strokeWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

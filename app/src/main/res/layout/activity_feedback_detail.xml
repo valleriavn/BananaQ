@@ -256,18 +256,23 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSubmitFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="22dp"
                 android:minWidth="170dp"
-                android:background="@drawable/btn_language_green"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@string/submit_feedback"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textColor="@color/agreement_button_text_selector"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:backgroundTint="@color/agreement_button_default_selector"
+                app:cornerRadius="24dp"
+                app:strokeWidth="0dp" />
         </LinearLayout>
     </ScrollView>
 
@@ -367,17 +372,22 @@
                 android:textSize="11sp"
                 android:visibility="gone" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReturn"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="28dp"
                 android:minWidth="130dp"
-                android:background="@drawable/btn_language_green"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@string/return_label"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/agreement_button_text_selector"
+                android:textStyle="normal"
+                app:backgroundTint="@color/agreement_button_default_selector"
+                app:cornerRadius="23dp"
+                app:strokeWidth="0dp" />
         </LinearLayout>
     </ScrollView>
 

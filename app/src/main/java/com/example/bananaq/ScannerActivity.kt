@@ -30,7 +30,6 @@ import model.ClassificationResult
 import model.ConfidenceLevel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.core.graphics.toColorInt
 
 class ScannerActivity : LocaleAwareActivity() {
 
@@ -451,7 +450,7 @@ class ScannerActivity : LocaleAwareActivity() {
             findViewById(R.id.resultAccuracyProgress)
         fullResultCard.visibility = View.GONE
         val defaultColor =
-            "#F2EBDC".toColorInt()
+            ContextCompat.getColor(this, R.color.banana_yellow)
         tabSymptoms.backgroundTintList =
             ColorStateList.valueOf(defaultColor)
         tabTreatment.backgroundTintList =
@@ -533,20 +532,20 @@ class ScannerActivity : LocaleAwareActivity() {
         updateTabStyle(
             tabSymptoms,
             false,
-            Color.parseColor("#F2D597"),
-            Color.parseColor("#F2EBDC")
+            ContextCompat.getColor(this, R.color.banana_green),
+            ContextCompat.getColor(this, R.color.banana_yellow)
         )
         updateTabStyle(
             tabTreatment,
             false,
-            Color.parseColor("#F2D597"),
-            Color.parseColor("#F2EBDC")
+            ContextCompat.getColor(this, R.color.banana_green),
+            ContextCompat.getColor(this, R.color.banana_yellow)
         )
         updateTabStyle(
             tabPrevention,
             false,
-            Color.parseColor("#F2D597"),
-            Color.parseColor("#F2EBDC")
+            ContextCompat.getColor(this, R.color.banana_green),
+            ContextCompat.getColor(this, R.color.banana_yellow)
         )
     }
     private fun setupBottomSheet() {
@@ -629,9 +628,9 @@ class ScannerActivity : LocaleAwareActivity() {
             )
                 ?: return
         val selectedColor =
-            Color.parseColor("#F2D597")
+            ContextCompat.getColor(this, R.color.banana_green)
         val unselectedColor =
-            Color.parseColor("#F2EBDC")
+            ContextCompat.getColor(this, R.color.banana_yellow)
         updateTabStyle(
             tabSymptoms,
             index == 1,
@@ -685,19 +684,13 @@ class ScannerActivity : LocaleAwareActivity() {
     ) {
         textView.backgroundTintList =
             ColorStateList.valueOf(
-                if (isSelected)
-                    ContextCompat.getColor(this, R.color.banana_green)
-                else
-                    unselectedColor
+                if (isSelected) selectedColor else unselectedColor
             )
-        textView.setTextColor(if (isSelected) Color.WHITE else Color.parseColor("#3F6E28"))
-        textView.setTypeface(
-            null,
-            if (isSelected)
-                Typeface.BOLD
-            else
-                Typeface.NORMAL
+        textView.setTextColor(
+            if (isSelected) Color.WHITE
+            else ContextCompat.getColor(this, R.color.button_text_black)
         )
+        textView.setTypeface(null, Typeface.NORMAL)
     }
     private fun showSymptoms(
         info: model.DiseaseInfo
@@ -763,15 +756,11 @@ class ScannerActivity : LocaleAwareActivity() {
                 gravity =
                     Gravity.CENTER
                 setTextColor(
-                    Color.parseColor("#4A773C")
+                    ContextCompat.getColor(this@ScannerActivity, R.color.button_text_black)
                 )
                 setBackgroundResource(
-                    R.drawable.rounded_button_bg
+                    R.drawable.result_number_circle
                 )
-                backgroundTintList =
-                    ColorStateList.valueOf(
-                        Color.parseColor("#F2D597")
-                    )
                 textSize = 12f
                 layoutParams =
                     LinearLayout.LayoutParams(
@@ -827,7 +816,7 @@ class ScannerActivity : LocaleAwareActivity() {
             itemLayout
         )
         resultContentContainer.addView(View(this).apply {
-            setBackgroundColor(ContextCompat.getColor(this@ScannerActivity, R.color.banana_divider))
+            setBackgroundColor(ContextCompat.getColor(this@ScannerActivity, R.color.banana_yellow_light))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 density.toInt().coerceAtLeast(1)

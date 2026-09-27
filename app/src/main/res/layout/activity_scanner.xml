@@ -266,14 +266,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="@color/banana_yellow"
+                            android:background="@drawable/btn_language_yellow"
                             android:gravity="center"
                             android:paddingTop="8dp" android:paddingBottom="8dp"
                             android:text="@string/disease_symptoms"
                             android:textSize="13sp"
-                            android:textColor="@color/banana_text_dark"
-                            android:textStyle="bold" />
+                            android:textColor="@color/button_text_black"
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/tabTreatment"
@@ -281,26 +280,24 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="#F2EBDC"
+                            android:background="@drawable/btn_language_yellow"
                             android:gravity="center"
                             android:paddingTop="8dp" android:paddingBottom="8dp"
                             android:text="@string/treatment_label"
                             android:textSize="13sp"
-                            android:textColor="@color/banana_text_dark" />
+                            android:textColor="@color/button_text_black" />
 
                         <TextView
                             android:id="@+id/tabPrevention"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/rounded_button_bg"
-                            android:backgroundTint="#F2EBDC"
+                            android:background="@drawable/btn_language_yellow"
                             android:gravity="center"
                             android:paddingTop="8dp" android:paddingBottom="8dp"
                             android:text="@string/disease_prevention"
                             android:textSize="13sp"
-                            android:textColor="@color/banana_text_dark" />
+                            android:textColor="@color/button_text_black" />
 
                     </LinearLayout>
 

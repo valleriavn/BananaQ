@@ -115,7 +115,7 @@ class LanguageActivity : LocaleAwareActivity() {
 
             // Tagalog Inactive
             btnTagalog.setBackgroundResource(R.drawable.btn_language_yellow)
-            labelTagalog.setTextColor(ContextCompat.getColor(this, R.color.banana_text_dark))
+            labelTagalog.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
         } else {
             // Tagalog Active
             btnTagalog.setBackgroundResource(R.drawable.btn_language_green)
@@ -123,7 +123,7 @@ class LanguageActivity : LocaleAwareActivity() {
 
             // English Inactive
             btnEnglish.setBackgroundResource(R.drawable.btn_language_yellow)
-            labelEnglish.setTextColor(ContextCompat.getColor(this, R.color.banana_text_dark))
+            labelEnglish.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
         }
     }
 }
