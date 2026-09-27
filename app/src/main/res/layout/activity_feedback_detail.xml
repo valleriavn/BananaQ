@@ -396,7 +396,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/nav_top_border"
-        app:itemIconSize="32dp"
+        app:itemIconSize="36dp"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextAppearanceActive="@style/NavTextSmall"
         app:itemTextAppearanceInactive="@style/NavTextSmall"

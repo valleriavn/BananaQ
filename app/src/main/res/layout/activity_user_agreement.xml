@@ -368,7 +368,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="BananaQ may use third-party frameworks, libraries, or machine learning models. Such technologies remain subject to their respective licenses."
+                        android:text="BananaQ may use third-party frameworks, libraries, or machine learning models. Such technologies remain subject to their respective licenses.\n\nNavigation icons are Flaticon UIcons from www.flaticon.com/uicons and are used with attribution under the Flaticon License."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
 

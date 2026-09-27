@@ -5,6 +5,6 @@
         android:color="@color/banana_green"
         android:alpha="1.0" />
     <item
-        android:color="@color/banana_yellow_light"
+        android:color="@color/nav_yellow"
         android:alpha="1.0" />
 </selector>

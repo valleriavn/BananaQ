@@ -31,7 +31,7 @@ private val agreementTagalog = listOf(
     "4. Intellectual Property" to "4. Intellectual Property",
     "All rights, including" to "Ang lahat ng karapatan, kabilang ang:\n•  Software,\n•  Source code,\n•  User interface,\n•  AI models,\n•  Graphics,\n•  Dokumentasyon,\n•  Mga logo, at\n•  Iba pang content,\nay nananatiling intellectual property ng BananaQ research and development team maliban kung iba ang nakasaad.\n\nHindi maaaring kopyahin o muling ipamahagi ang mga ito nang walang nakasulat na pahintulot.",
     "5. Third-Party Technologies" to "5. Mga Teknolohiya ng Third Party",
-    "BananaQ may use third-party" to "Maaaring gumamit ang BananaQ ng third-party frameworks, libraries, o machine learning models. Ang mga ito ay napapailalim sa kani-kanilang lisensiya.",
+    "BananaQ may use third-party" to "Maaaring gumamit ang BananaQ ng third-party frameworks, libraries, o machine learning models. Ang mga ito ay napapailalim sa kani-kanilang lisensiya.\n\nAng mga navigation icon ay Flaticon UIcons mula sa www.flaticon.com/uicons at ginagamit nang may attribution sa ilalim ng Flaticon License.",
     "6. Disclaimer" to "6. Disclaimer",
     "The application is provided" to "Ibinibigay ang application sa kalagayang \"as is\" at \"as available\".\n\nWalang garantiya ang mga developer tungkol sa:\n•  Tuloy-tuloy na availability,\n•  Ganap na katumpakan,\n•  Operasyong walang error,\n•  Pagiging angkop sa lahat ng kondisyon ng pagsasaka.",
     "7. Limitation of Liability" to "7. Limitasyon ng Pananagutan",

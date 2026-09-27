@@ -126,7 +126,7 @@
         android:background="@drawable/nav_top_border"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
-        app:itemIconSize="32dp"
+        app:itemIconSize="36dp"
         app:itemBackground="@android:color/transparent"
         app:itemRippleColor="@android:color/transparent"
         app:itemTextAppearanceActive="@style/NavTextSmall"
