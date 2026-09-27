@@ -2,13 +2,20 @@
     <item>
         <shape>
             <solid android:color="@color/banana_surface" />
-            <corners android:topLeftRadius="32dp" android:topRightRadius="32dp" />
+            <stroke android:width="1dp" android:color="@color/banana_border" />
+            <corners android:topLeftRadius="@dimen/container_corner_radius" android:topRightRadius="@dimen/container_corner_radius" />
         </shape>
     </item>
     <item android:width="48dp" android:height="4dp" android:top="12dp" android:gravity="top|center_horizontal">
         <shape>
             <solid android:color="@color/banana_muted" />
             <corners android:radius="2dp" />
+        </shape>
+    </item>
+    <!-- Mask the lower stroke so the result panel joins the navbar cleanly. -->
+    <item android:height="2dp" android:gravity="bottom">
+        <shape>
+            <solid android:color="@color/banana_surface" />
         </shape>
     </item>
 </layer-list>

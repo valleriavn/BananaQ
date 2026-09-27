@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FeedbackActivity : LocaleAwareActivity() {
 
@@ -57,10 +56,10 @@ class FeedbackActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.selectedItemId = R.id.nav_feedback
-        bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
+        bottomNavigation.setOnItemSelectedListener { itemId ->
+            when (itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
                     finish()

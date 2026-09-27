@@ -28,7 +28,6 @@ import ml.DiseaseClassifier
 import ml.TFLiteModel
 import model.ClassificationResult
 import model.ConfidenceLevel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ScannerActivity : LocaleAwareActivity() {
@@ -366,9 +365,9 @@ class ScannerActivity : LocaleAwareActivity() {
             showCompactResultMode()
             findViewById<TextView>(R.id.predictionSummary).apply {
                 setText(R.string.unable_identify)
-                visibility = View.VISIBLE
                 setOnClickListener(null)
                 isClickable = false
+                revealResultView(this)
             }
         } else {
             fullResultCard.visibility = View.GONE
@@ -390,15 +389,27 @@ class ScannerActivity : LocaleAwareActivity() {
                         ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)),
                         heading.length + 1, length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
-                visibility = View.VISIBLE
                 isClickable = true
                 setOnClickListener {
                     detailsExpanded = true
                     visibility = View.GONE
                     showFullResult()
                 }
+                revealResultView(this)
             }
         }
+    }
+
+    private fun revealResultView(view: View) {
+        view.animate().cancel()
+        view.visibility = View.VISIBLE
+        view.alpha = 0f
+        view.translationY = 12f * resources.displayMetrics.density
+        view.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(220L)
+            .start()
     }
 
     private fun handleIncomingData() {
@@ -467,10 +478,12 @@ class ScannerActivity : LocaleAwareActivity() {
             return
         }
         showDetailsMode()
-        fullResultCard.visibility =
-            View.VISIBLE
+        fullResultCard.animate().cancel()
+        fullResultCard.alpha = 0f
+        fullResultCard.visibility = View.VISIBLE
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_EXPANDED
+        fullResultCard.animate().alpha(1f).setDuration(220L).start()
         resultDiseaseName.text =
             localizedDiseaseName(this, result.diseaseName)
         resultScientificName.visibility = View.VISIBLE
@@ -527,8 +540,11 @@ class ScannerActivity : LocaleAwareActivity() {
             visibility = View.GONE
             alpha = 0f
         }
-        resultContentContainer
-            .removeAllViews()
+        resultContentContainer.animate().cancel()
+        resultSectionTitle.animate().cancel()
+        resultContentContainer.alpha = 0f
+        resultSectionTitle.alpha = 0f
+        resultContentContainer.removeAllViews()
         updateTabStyle(
             tabSymptoms,
             false,
@@ -649,8 +665,11 @@ class ScannerActivity : LocaleAwareActivity() {
             selectedColor,
             unselectedColor
         )
-        resultContentContainer
-            .removeAllViews()
+        resultContentContainer.animate().cancel()
+        resultSectionTitle.animate().cancel()
+        resultContentContainer.alpha = 0f
+        resultSectionTitle.alpha = 0f
+        resultContentContainer.removeAllViews()
         when (index) {
             1 -> {
                 resultSectionTitle.text =
@@ -675,6 +694,8 @@ class ScannerActivity : LocaleAwareActivity() {
                 showPrevention(info)
             }
         }
+        resultSectionTitle.animate().alpha(1f).setDuration(160L).start()
+        resultContentContainer.animate().alpha(1f).setDuration(180L).start()
     }
     private fun updateTabStyle(
         textView: TextView,
@@ -858,14 +879,14 @@ class ScannerActivity : LocaleAwareActivity() {
     }
     private fun setupBottomNavigation() {
         val bottomNavigation =
-            findViewById<BottomNavigationView>(
+            findViewById<RaisedBottomNavigationView>(
                 R.id.bottomNavigation
             )
         bottomNavigation.selectedItemId =
             R.id.nav_scan
         bottomNavigation.setOnItemSelectedListener {
-                item ->
-            when (item.itemId) {
+                itemId ->
+            when (itemId) {
                 R.id.nav_home -> {
                     startActivity(
                         Intent(

@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:background="@color/banana_cream">
 
     <!-- Header -->
@@ -84,7 +86,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
         android:visibility="gone"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="@dimen/container_corner_radius"
         app:cardElevation="0dp"
         app:layout_constraintTop_toBottomOf="@id/titleFeedback">
 
@@ -117,20 +119,12 @@
         app:layout_constraintTop_toBottomOf="@id/titleFeedback"
         tools:listitem="@layout/item_history_scan" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.example.bananaq.RaisedBottomNavigationView
         android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/nav_top_border"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:itemIconSize="36dp"
-        app:itemBackground="@android:color/transparent"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemTextAppearanceActive="@style/NavTextSmall"
-        app:itemTextAppearanceInactive="@style/NavTextSmall"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

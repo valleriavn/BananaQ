@@ -8,4 +8,5 @@
     <color name="banana_divider">#3E493C</color>
     <color name="banana_border">#626347</color>
     <color name="banana_green">#89BE62</color>
+    <color name="nav_active_tint">#2489BE62</color>
 </resources>

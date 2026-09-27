@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -105,10 +104,10 @@ class MainActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.selectedItemId = R.id.nav_home
-        bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
+        bottomNavigation.setOnItemSelectedListener { itemId ->
+            when (itemId) {
                 R.id.nav_home -> true
                 R.id.nav_history -> {
                     startActivity(Intent(this, HistoryActivity::class.java))
@@ -151,7 +150,7 @@ class MainActivity : LocaleAwareActivity() {
 
     override fun onStart() {
         super.onStart()
-        findViewById<BottomNavigationView>(R.id.bottomNavigation).selectedItemId = R.id.nav_home
+        findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation).selectedItemId = R.id.nav_home
         
         // Refresh language toggle in case it was changed elsewhere
         setupLanguageToggle()

@@ -685,7 +685,7 @@
                     android:textSize="16sp"
                     android:textStyle="normal"
                     app:backgroundTint="@color/agreement_button_default_selector"
-                    app:cornerRadius="27dp"
+                    app:cornerRadius="@dimen/pill_corner_radius"
                     app:strokeWidth="0dp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -703,7 +703,7 @@
                     android:textStyle="normal"
                     android:enabled="false"
                     app:backgroundTint="@color/agreement_submit_button_selector"
-                    app:cornerRadius="27dp"
+                    app:cornerRadius="@dimen/pill_corner_radius"
                     app:strokeWidth="0dp" />
             </LinearLayout>
         </LinearLayout>

@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:background="@color/banana_cream">
 
     <!-- Shared BananaQ header -->
@@ -194,20 +196,12 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.example.bananaq.RaisedBottomNavigationView
         android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/nav_top_border"
-        app:itemBackground="@android:color/transparent"
-        app:itemIconSize="36dp"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemTextAppearanceActive="@style/NavTextSmall"
-        app:itemTextAppearanceInactive="@style/NavTextSmall"
-        app:itemTextColor="@color/nav_item_color"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

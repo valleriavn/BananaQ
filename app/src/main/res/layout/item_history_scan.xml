@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="@dimen/container_corner_radius"
     app:cardElevation="0dp"
     app:cardBackgroundColor="@color/banana_surface">
 
@@ -21,7 +21,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="80dp"
             android:layout_height="60dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="@dimen/container_corner_radius"
             app:cardElevation="0dp">
             <ImageView
                 android:id="@+id/ivScan"

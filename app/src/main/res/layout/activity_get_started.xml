@@ -71,7 +71,7 @@
         android:textSize="16sp"
         android:textStyle="normal"
         app:backgroundTint="@color/agreement_button_default_selector"
-        app:cornerRadius="25dp"
+        app:cornerRadius="@dimen/pill_corner_radius"
         app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

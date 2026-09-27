@@ -20,7 +20,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AccountActivity : LocaleAwareActivity() {
 
@@ -79,10 +78,10 @@ class AccountActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.selectedItemId = R.id.nav_account
-        bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
+        bottomNavigation.setOnItemSelectedListener { itemId ->
+            when (itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, MainActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))

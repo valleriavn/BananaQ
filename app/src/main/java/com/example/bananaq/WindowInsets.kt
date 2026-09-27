@@ -6,23 +6,28 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 fun AppCompatActivity.applySystemInsets() {
-    findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)?.apply {
-        isItemActiveIndicatorEnabled = false
-        itemIconTintList = androidx.core.content.ContextCompat.getColorStateList(this@applySystemInsets, R.color.nav_item_color)
-        itemTextColor = itemIconTintList
-        itemBackground = android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
-        itemRippleColor = android.content.res.ColorStateList.valueOf(android.graphics.Color.TRANSPARENT)
-    }
     val root = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
+    val navigation: RaisedBottomNavigationView? = root.findViewById(R.id.bottomNavigation)
     val left = root.paddingLeft
     val top = root.paddingTop
     val right = root.paddingRight
     val bottom = root.paddingBottom
+    val navigationHeight = navigation?.layoutParams?.height ?: 0
     ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
         val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
         val keyboard = insets.getInsets(WindowInsetsCompat.Type.ime())
-        view.setPadding(left + bars.left, top + bars.top, right + bars.right,
-            bottom + maxOf(bars.bottom, keyboard.bottom))
+        if (navigation != null) {
+            val keyboardOffset = maxOf(0, keyboard.bottom - bars.bottom)
+            view.setPadding(left + bars.left, top + bars.top, right + bars.right,
+                bottom + keyboardOffset)
+            navigation.layoutParams = navigation.layoutParams.apply {
+                height = navigationHeight + bars.bottom
+            }
+            navigation.setSystemBottomInset(bars.bottom)
+        } else {
+            view.setPadding(left + bars.left, top + bars.top, right + bars.right,
+                bottom + maxOf(bars.bottom, keyboard.bottom))
+        }
         // The root handles these insets; navigation widgets must not add them again.
         WindowInsetsCompat.CONSUMED
     }

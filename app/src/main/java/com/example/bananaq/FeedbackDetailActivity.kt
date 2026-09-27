@@ -19,7 +19,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -86,7 +85,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
                 val option = findViewById<LinearLayout>(id)
                 val isSelected = selectedRating == name
                 val color = ContextCompat.getColor(this,
-                    if (!isSelected) R.color.banana_yellow else when (index) {
+                    if (!isSelected) R.color.banana_border else when (index) {
                         0, 1 -> R.color.banana_green
                         2 -> R.color.banana_muted
                         else -> R.color.rating_negative
@@ -230,10 +229,10 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.selectedItemId = R.id.nav_feedback
-        bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
+        bottomNavigation.setOnItemSelectedListener { itemId ->
+            when (itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, MainActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))

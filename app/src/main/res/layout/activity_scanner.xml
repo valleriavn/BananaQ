@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:background="@color/black">
 
     <androidx.camera.view.PreviewView
@@ -161,8 +163,10 @@
             android:id="@+id/fullResultCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:foreground="@drawable/result_outline_no_bottom"
             app:cardBackgroundColor="@color/banana_surface"
             app:cardElevation="0dp"
+            app:strokeWidth="0dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.BananaQ.ScanResult"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:behavior_peekHeight="180dp"
@@ -354,20 +358,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.example.bananaq.RaisedBottomNavigationView
         android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/nav_top_border"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:itemIconSize="36dp"
-        app:itemBackground="@android:color/transparent"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemTextAppearanceActive="@style/NavTextSmall"
-        app:itemTextAppearanceInactive="@style/NavTextSmall"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
