@@ -60,10 +60,25 @@
     <style name="FeedbackSummaryRow">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">32dp</item>
+        <item name="android:minHeight">38dp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/banana_body</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:orientation">horizontal</item>
         <item name="android:background">@drawable/feedback_summary_divider</item>
+    </style>
+    <style name="FeedbackSummaryLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/banana_muted</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="FeedbackSummaryValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">end</item>
+        <item name="android:maxWidth">180dp</item>
+        <item name="android:textColor">@color/banana_body</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -290,37 +290,41 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
+            android:paddingTop="4dp"
             android:paddingBottom="24dp">
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/banana_surface"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="22dp"
                 app:cardElevation="0dp"
                 app:strokeColor="@color/banana_green"
-                app:strokeWidth="1dp">
+                app:strokeWidth="2dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="22dp">
                     <TextView
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:background="@drawable/feedback_success_circle"
                         android:gravity="center"
                         android:text="✓"
                         android:textColor="@color/white"
-                        android:textSize="30sp"
+                        android:textSize="38sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center"
                         android:text="@string/feedback_thank_you"
                         android:textColor="@color/banana_body"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -328,48 +332,66 @@
                         android:gravity="center"
                         android:text="@string/feedback_thank_you_message"
                         android:textColor="@color/banana_muted"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 app:cardBackgroundColor="@color/banana_surface"
-                app:cardCornerRadius="14dp"
+                app:cardCornerRadius="22dp"
                 app:cardElevation="0dp"
                 app:strokeColor="@color/banana_yellow"
-                app:strokeWidth="1dp">
+                app:strokeWidth="2dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp">
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="16dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:text="@string/response_summary"
                         android:textColor="@color/banana_text_dark"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
-                    <TextView android:id="@+id/summaryScan" style="@style/FeedbackSummaryRow" />
-                    <TextView android:id="@+id/summaryRating" style="@style/FeedbackSummaryRow" />
-                    <TextView android:id="@+id/summaryConfidence" style="@style/FeedbackSummaryRow" />
-                    <TextView android:id="@+id/summarySubmitted" style="@style/FeedbackSummaryRow" />
+
+                    <LinearLayout style="@style/FeedbackSummaryRow">
+                        <TextView style="@style/FeedbackSummaryLabel" android:text="@string/summary_scan" />
+                        <TextView android:id="@+id/summaryScan" style="@style/FeedbackSummaryValue" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/FeedbackSummaryRow">
+                        <TextView style="@style/FeedbackSummaryLabel" android:text="@string/summary_accuracy" />
+                        <TextView android:id="@+id/summaryRating" style="@style/FeedbackSummaryValue" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/FeedbackSummaryRow">
+                        <TextView style="@style/FeedbackSummaryLabel" android:text="@string/summary_confidence" />
+                        <TextView android:id="@+id/summaryConfidence" style="@style/FeedbackSummaryValue" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/FeedbackSummaryRow">
+                        <TextView style="@style/FeedbackSummaryLabel" android:text="@string/summary_submitted" />
+                        <TextView android:id="@+id/summarySubmitted" style="@style/FeedbackSummaryValue" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/summaryComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/feedback_comment_bg"
+                        android:minHeight="58dp"
+                        android:gravity="top|start"
+                        android:padding="12dp"
+                        android:textColor="@color/banana_muted"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/summaryComments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/feedback_comment_bg"
-                android:padding="12dp"
-                android:textColor="@color/banana_muted"
-                android:textSize="11sp"
-                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReturn"

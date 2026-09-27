@@ -30,6 +30,7 @@ class FeedbackActivity : LocaleAwareActivity() {
         val emptyState = findViewById<View>(R.id.emptyState)
 
         val feedbackItems = data.ScanHistoryStore(this).items()
+        val submittedScanIds = getSharedPreferences("scan_feedback", MODE_PRIVATE).all.keys
 
         if (feedbackItems.isEmpty()) {
             emptyState.visibility = View.VISIBLE
@@ -39,7 +40,7 @@ class FeedbackActivity : LocaleAwareActivity() {
             rvFeedback.visibility = View.VISIBLE
             rvFeedback.layoutManager = LinearLayoutManager(this)
             
-            val adapter = ScanHistoryAdapter(feedbackItems) { item ->
+            val adapter = ScanHistoryAdapter(feedbackItems, submittedScanIds) { item ->
                 val intent = Intent(this, FeedbackDetailActivity::class.java).apply {
                     putExtra("SCAN_ID", item.scanId)
                     putExtra("DISEASE_NAME", item.diseaseName)

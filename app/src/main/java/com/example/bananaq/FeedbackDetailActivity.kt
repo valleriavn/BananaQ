@@ -3,7 +3,6 @@ package com.example.bananaq
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -57,6 +56,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         submitted = savedInstanceState?.getBoolean("submitted") ?: false
         submittedAt = savedInstanceState?.getLong("submittedAt") ?: 0L
         submittedComments = savedInstanceState?.getString("submittedComments") ?: ""
+        if (savedInstanceState == null) restoreSubmittedFeedback()
         setupRatingOptions()
 
         findViewById<View>(R.id.btnSubmitFeedback).setOnClickListener {
@@ -140,6 +140,12 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
 
     private fun saveFeedback() {
         val scanId = intent.getStringExtra("SCAN_ID") ?: return
+        val preferences = getSharedPreferences("scan_feedback", MODE_PRIVATE)
+        if (preferences.contains(scanId)) {
+            restoreSubmittedFeedback()
+            showSubmittedState(submittedComments)
+            return
+        }
         val comments = findViewById<EditText>(R.id.etComments).text.toString().trim()
         submittedComments = comments
         submittedAt = System.currentTimeMillis()
@@ -148,10 +154,25 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
             put("comments", comments)
             put("time", submittedAt)
         }
-        getSharedPreferences("scan_feedback", MODE_PRIVATE).edit()
+        preferences.edit()
             .putString(scanId, feedback.toString()).apply()
         submitted = true
         showSubmittedState(comments)
+    }
+
+    private fun restoreSubmittedFeedback() {
+        val scanId = intent.getStringExtra("SCAN_ID") ?: return
+        val saved = getSharedPreferences("scan_feedback", MODE_PRIVATE)
+            .getString(scanId, null) ?: return
+        try {
+            val feedback = org.json.JSONObject(saved)
+            selectedRating = feedback.optString("rating")
+            submittedComments = feedback.optString("comments")
+            submittedAt = feedback.optLong("time")
+            submitted = true
+        } catch (_: org.json.JSONException) {
+            // Ignore a damaged entry and allow the user to submit fresh feedback.
+        }
     }
 
     private fun showSubmittedState(comments: String) {
@@ -169,7 +190,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
             if (comments.isBlank()) {
                 visibility = View.GONE
             } else {
-                text = getString(R.string.summary_additional_comments, comments)
+                text = comments
                 visibility = View.VISIBLE
             }
         }
@@ -190,20 +211,14 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     })
 
     private fun setSummary(viewId: Int, label: String, value: String, valueColor: Int? = null) {
-        val text = android.text.SpannableString("$label\t$value")
-        text.setSpan(android.text.style.ForegroundColorSpan(
-            ContextCompat.getColor(this, R.color.banana_muted)),
-            0, label.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        text.setSpan(android.text.style.StyleSpan(Typeface.BOLD),
-            label.length + 1, text.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        valueColor?.let {
-            text.setSpan(android.text.style.ForegroundColorSpan(ContextCompat.getColor(this, it)),
-                label.length + 1, text.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        findViewById<TextView>(viewId).apply {
+            text = value
+            contentDescription = "$label: $value"
+            setTextColor(ContextCompat.getColor(
+                this@FeedbackDetailActivity,
+                valueColor ?: R.color.banana_body
+            ))
         }
-        text.setSpan(android.text.style.TabStopSpan.Standard(
-            (135 * resources.displayMetrics.density).toInt()),
-            0, text.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        findViewById<TextView>(viewId).text = text
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

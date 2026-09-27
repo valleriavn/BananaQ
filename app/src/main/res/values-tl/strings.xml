@@ -51,7 +51,7 @@
     <string name="submit_feedback">Isumite ang Feedback</string>
     <string name="feedback_thank_you">Salamat sa iyong feedback!</string>
     <string name="feedback_thank_you_message">Tumutulong ang iyong sagot upang mapahusay ang katumpakan ng BananaQ sa mga susunod na scan.</string>
-    <string name="response_summary">▣  Buod ng iyong tugon</string>
+    <string name="response_summary">Buod ng iyong tugon</string>
     <string name="return_label">Bumalik</string>
     <string name="confirm_feedback_title">Isumite ang iyong feedback?</string>
     <string name="confirm_feedback_message">Isusumite ang iyong rating at komento upang makatulong na mapahusay ang katumpakan ng BananaQ.</string>
@@ -77,6 +77,8 @@
     <string name="library_label">Aklatan</string>
     <string name="feedback_select_rating">Mangyaring pumili ng rating</string>
     <string name="feedback_select_scan">Pumili muna ng scan mula sa kasaysayan.</string>
+    <string name="feedback_submitted_badge">Naipadala na</string>
+    <string name="feedback_item_already_submitted">%1$s. Naipadala na ang feedback.</string>
     <string name="summary_scan">Scan</string>
     <string name="summary_accuracy">Katumpakan</string>
     <string name="summary_confidence">Antas ng Kumpiyansa</string>

@@ -70,6 +70,7 @@
                     android:id="@+id/tvAccuracy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:textColor="@color/banana_muted"
                     android:textSize="11sp"
                     android:textStyle="bold"
@@ -77,18 +78,41 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvStatus"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/status_badge_bg"
-            android:paddingLeft="12dp" android:paddingRight="12dp"
-            android:paddingTop="6dp" android:paddingBottom="6dp"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            tools:text="Diseased"
-            tools:backgroundTint="#F25C5C" />
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_badge_bg"
+                android:paddingLeft="12dp" android:paddingRight="12dp"
+                android:paddingTop="6dp" android:paddingBottom="6dp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="Diseased"
+                tools:backgroundTint="#F25C5C" />
+
+            <TextView
+                android:id="@+id/tvFeedbackStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/status_badge_bg"
+                android:backgroundTint="@color/banana_green"
+                android:paddingHorizontal="9dp"
+                android:paddingVertical="5dp"
+                android:text="@string/feedback_submitted_badge"
+                android:textColor="@color/white"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

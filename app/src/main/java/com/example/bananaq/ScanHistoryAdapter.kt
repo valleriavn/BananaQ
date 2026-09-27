@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ScanHistoryAdapter(
     private val items: List<HistoryItem>,
+    private val feedbackScanIds: Set<String> = emptySet(),
     private val onItemClick: ((HistoryItem) -> Unit)? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -48,6 +49,8 @@ class ScanHistoryAdapter(
             holder.tvStatus.setText(if (!item.isValid) R.string.status_uncertain
                 else if (item.isHealthy) R.string.status_healthy else R.string.status_diseased)
             holder.tvStatus.setBackgroundResource(R.drawable.status_badge_bg)
+            val feedbackSubmitted = item.scanId?.let(feedbackScanIds::contains) == true
+            holder.tvFeedbackStatus.visibility = if (feedbackSubmitted) View.VISIBLE else View.GONE
             
             if (!item.isValid) {
                 holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.GRAY)
@@ -60,9 +63,17 @@ class ScanHistoryAdapter(
                 holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
             }
 
-            holder.itemView.setOnClickListener {
+            holder.itemView.isEnabled = !feedbackSubmitted
+            holder.itemView.isClickable = !feedbackSubmitted
+            holder.itemView.contentDescription = if (feedbackSubmitted) {
+                holder.itemView.context.getString(
+                    R.string.feedback_item_already_submitted,
+                    holder.tvDiseaseName.text
+                )
+            } else null
+            holder.itemView.setOnClickListener(if (feedbackSubmitted) null else View.OnClickListener {
                 onItemClick?.invoke(item)
-            }
+            })
         }
     }
 
@@ -78,6 +89,7 @@ class ScanHistoryAdapter(
         val tvDateTime: TextView = view.findViewById(R.id.tvDateTime)
         val tvAccuracy: TextView = view.findViewById(R.id.tvAccuracy)
         val tvStatus: TextView = view.findViewById(R.id.tvStatus)
+        val tvFeedbackStatus: TextView = view.findViewById(R.id.tvFeedbackStatus)
     }
 
     data class HistoryItem(

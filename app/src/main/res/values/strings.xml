@@ -41,7 +41,7 @@
     <string name="submit_feedback">Submit Feedback</string>
     <string name="feedback_thank_you">Thank you for your feedback!</string>
     <string name="feedback_thank_you_message">Your input helps improve BananaQ\'s accuracy for future scans.</string>
-    <string name="response_summary">▣  Your response summary</string>
+    <string name="response_summary">Your response summary</string>
     <string name="return_label">Return</string>
     <string name="confirm_feedback_title">Submit your feedback?</string>
     <string name="confirm_feedback_message">Your rating and comments will be submitted to help improve BananaQ\'s accuracy.</string>
@@ -70,6 +70,8 @@
     <string name="library_label">Library</string>
     <string name="feedback_select_rating">Please select a rating</string>
     <string name="feedback_select_scan">Select a scan from your history first.</string>
+    <string name="feedback_submitted_badge">Feedback sent</string>
+    <string name="feedback_item_already_submitted">%1$s. Feedback already submitted.</string>
     <string name="summary_scan">Scan</string>
     <string name="summary_accuracy">Accuracy</string>
     <string name="summary_confidence">Confidence Score</string>
