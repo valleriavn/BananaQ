@@ -43,10 +43,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="32dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_language_light_yellow"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,11 +56,11 @@
 
             <TextView
                 android:id="@+id/tvLangEN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@drawable/btn_language_green"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="4dp"
+                android:gravity="center"
                 android:text="EN"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -69,10 +70,10 @@
 
             <TextView
                 android:id="@+id/tvLangTL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="4dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="TL"
                 android:textColor="@color/button_text_black"
                 android:textSize="14sp"

@@ -44,15 +44,14 @@
 
         <TextView
             android:id="@+id/tvLanguageDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="32dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/library_language_pill"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"
+            android:gravity="center"
             android:text="@string/language_current"
             android:textColor="@color/banana_green"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
