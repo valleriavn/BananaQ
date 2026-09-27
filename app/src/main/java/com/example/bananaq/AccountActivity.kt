@@ -20,6 +20,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AccountActivity : LocaleAwareActivity() {
 
@@ -50,6 +51,7 @@ class AccountActivity : LocaleAwareActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_account)
         applySystemInsets()
+        setupBottomNavigation()
 
         profileAvatar = findViewById(R.id.profileAvatar)
         selectedAvatarId = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -60,7 +62,6 @@ class AccountActivity : LocaleAwareActivity() {
         findViewById<View>(R.id.profileAvatarFrame).setOnClickListener(openAvatarPicker)
         findViewById<View>(R.id.editAvatarButton).setOnClickListener(openAvatarPicker)
 
-        findViewById<View>(R.id.backButton).setOnClickListener { finish() }
         findViewById<View>(R.id.manualRow).setOnClickListener {
             startActivity(Intent(this, UserManualActivity::class.java))
         }
@@ -73,6 +74,38 @@ class AccountActivity : LocaleAwareActivity() {
             findViewById<View>(id).setOnClickListener {
                 startActivity(Intent(this, UserAgreement::class.java)
                     .putExtra(UserAgreement.EXTRA_SECTION, section))
+            }
+        }
+    }
+
+    private fun setupBottomNavigation() {
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        bottomNavigation.selectedItemId = R.id.nav_account
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, MainActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                    finish()
+                    true
+                }
+                R.id.nav_history -> {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_scan -> {
+                    startActivity(Intent(this, ScannerActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_feedback -> {
+                    startActivity(Intent(this, FeedbackActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_account -> true
+                else -> false
             }
         }
     }
