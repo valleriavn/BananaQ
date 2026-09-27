@@ -8,7 +8,7 @@
     <string name="continue_label">Continue</string>
     <string name="get_started_message">It is our hope to assist you with concerns about your banana leaves, so you can keep your crops healthy and your harvest plentiful.</string>
     <string name="get_started_button">Get Started</string>
-    <string name="home_greeting">Good day, User!</string>
+    <string name="home_greeting">Good day!</string>
     <string name="nav_home">Home</string>
     <string name="nav_history">History</string>
     <string name="nav_scan">Scan</string>

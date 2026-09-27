@@ -9,7 +9,7 @@
     <string name="continue_label">Magpatuloy</string>
     <string name="get_started_message">Layunin naming tulungan ka sa mga alalahanin tungkol sa mga dahon ng saging upang mapanatiling malusog ang iyong pananim at masagana ang ani.</string>
     <string name="get_started_button">Magsimula</string>
-    <string name="home_greeting">Magandang araw, User!</string>
+    <string name="home_greeting">Magandang araw!</string>
     <string name="nav_home">Home</string>
     <string name="nav_history">Kasaysayan</string>
     <string name="nav_scan">I-scan</string>
