@@ -3,10 +3,13 @@ package com.example.bananaq
 import android.content.Intent
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewAnimationUtils
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +22,7 @@ class LanguageActivity : LocaleAwareActivity() {
     private lateinit var btnTagalog: View
     private lateinit var labelEnglish: TextView
     private lateinit var labelTagalog: TextView
+    private lateinit var transitionOverlay: View
     private var selectedLanguage: String = "en"
     private var isTransitioning = false
 
@@ -28,6 +32,23 @@ class LanguageActivity : LocaleAwareActivity() {
         setContentView(R.layout.activity_language)
         
         applySystemInsets()
+
+        // Add the transition above the inset-aware page so its reveal covers
+        // the complete display, including the status and navigation areas.
+        transitionOverlay = View(this).apply {
+            setBackgroundColor(Color.parseColor("#F4E4B2"))
+            isClickable = true
+            isFocusable = true
+            elevation = 24f * resources.displayMetrics.density
+            visibility = View.INVISIBLE
+        }
+        findViewById<ViewGroup>(android.R.id.content).addView(
+            transitionOverlay,
+            FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
 
         btnEnglish = findViewById(R.id.btnEnglish)
         btnTagalog = findViewById(R.id.btnTagalog)
@@ -52,7 +73,7 @@ class LanguageActivity : LocaleAwareActivity() {
             btnTagalog.isEnabled = false
             btnContinue.isEnabled = false
 
-            val overlay = findViewById<View>(R.id.beigeTransitionOverlay)
+            val overlay = transitionOverlay
             overlay.visibility = View.VISIBLE
             val overlayPosition = IntArray(2)
             val buttonPosition = IntArray(2)

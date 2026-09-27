@@ -13,7 +13,6 @@ class GetStartedActivity : LocaleAwareActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_get_started)
-        applySystemInsets()
 
         val pageBackground = findViewById<View>(R.id.pageBackground)
         val content = listOf<View>(
