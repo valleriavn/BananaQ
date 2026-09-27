@@ -55,8 +55,8 @@
 
     <style name="ShapeAppearanceOverlay.BananaQ.ScanResult" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/container_corner_radius</item>
-        <item name="cornerSizeTopRight">@dimen/container_corner_radius</item>
+        <item name="cornerSizeTopLeft">@dimen/scan_result_corner_radius</item>
+        <item name="cornerSizeTopRight">@dimen/scan_result_corner_radius</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
     </style>

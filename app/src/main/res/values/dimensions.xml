@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="container_corner_radius">20dp</dimen>
+    <dimen name="scan_result_corner_radius">36dp</dimen>
     <dimen name="pill_corner_radius">999dp</dimen>
 </resources>

@@ -41,14 +41,18 @@ class ScanHistoryAdapter(
         } else if (holder is ItemViewHolder) {
             holder.ivScan.setImageDrawable(null)
             item.imageUri?.let { holder.ivScan.setImageURI(android.net.Uri.parse(it)) }
-            holder.tvDiseaseName.text = item.diseaseName?.let {
+            holder.tvDiseaseName.text = if (!item.isValid) {
+                holder.itemView.context.getString(R.string.not_banana_leaf)
+            } else item.diseaseName?.let {
                 localizedDiseaseName(holder.itemView.context, it)
             }
             holder.tvDateTime.text = item.dateTime
             holder.tvAccuracy.text = item.accuracy?.let { if (it.endsWith("%")) it else "$it%" } ?: "—"
+            holder.accuracyRow.visibility = if (item.isValid) View.VISIBLE else View.GONE
             holder.tvStatus.setText(if (!item.isValid) R.string.status_uncertain
                 else if (item.isHealthy) R.string.status_healthy else R.string.status_diseased)
             holder.tvStatus.setBackgroundResource(R.drawable.status_badge_bg)
+            holder.tvStatus.visibility = if (item.isValid) View.VISIBLE else View.GONE
             val feedbackSubmitted = item.scanId?.let(feedbackScanIds::contains) == true
             holder.tvFeedbackStatus.visibility = if (feedbackSubmitted) View.VISIBLE else View.GONE
             
@@ -87,6 +91,7 @@ class ScanHistoryAdapter(
         val ivScan: ImageView = view.findViewById(R.id.ivScan)
         val tvDiseaseName: TextView = view.findViewById(R.id.tvDiseaseName)
         val tvDateTime: TextView = view.findViewById(R.id.tvDateTime)
+        val accuracyRow: View = view.findViewById(R.id.accuracyRow)
         val tvAccuracy: TextView = view.findViewById(R.id.tvAccuracy)
         val tvStatus: TextView = view.findViewById(R.id.tvStatus)
         val tvFeedbackStatus: TextView = view.findViewById(R.id.tvFeedbackStatus)

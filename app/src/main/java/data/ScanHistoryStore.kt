@@ -37,10 +37,13 @@ class ScanHistoryStore(context: Context) {
         (0 until records.length()).map { index ->
             val record = records.getJSONObject(index)
             val disease = record.getString("disease")
+            val isValid = record.optBoolean("valid", false)
             ScanHistoryAdapter.HistoryItem(false, diseaseName = disease,
                 dateTime = format.format(Date(record.getLong("time"))),
-                accuracy = String.format(Locale.US, "%.1f", record.getDouble("confidence") * 100),
-                isHealthy = disease == "Healthy", isValid = record.optBoolean("valid", false),
+                accuracy = if (isValid) String.format(
+                    Locale.US, "%.1f", record.getDouble("confidence") * 100
+                ) else null,
+                isHealthy = isValid && disease == "Healthy", isValid = isValid,
                 scanId = record.getString("source"), imageUri = record.optString("imageUri").takeIf { it.isNotBlank() })
         }
     }

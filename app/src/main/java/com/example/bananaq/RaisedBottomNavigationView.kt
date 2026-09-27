@@ -91,7 +91,7 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
                 clipToOutline = false
                 elevation = 0f
             }
-            tabRoot.addView(iconHolder, FrameLayout.LayoutParams(dp(60), dp(60), Gravity.CENTER))
+            tabRoot.addView(iconHolder, FrameLayout.LayoutParams(dp(52), dp(52), Gravity.CENTER))
 
             val iconView = ImageView(context).apply {
                 setImageResource(icon)

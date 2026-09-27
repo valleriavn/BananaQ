@@ -89,6 +89,8 @@
     <string name="prediction_summary">Prediksiyon: %1$s (%2$d%%)\nPindutin para sa detalye</string>
     <string name="prediction_heading">Prediksiyon: %1$s (%2$d%%)</string>
     <string name="tap_for_details">Pindutin para sa detalye</string>
+    <string name="expand_scan_result">Palawakin ang resulta ng scan</string>
+    <string name="collapse_scan_result">Paliitin ang resulta ng scan</string>
     <string name="unknown_label">Hindi Kilala</string>
     <string name="leaf_condition">Kondisyon ng Dahon</string>
     <string name="visual_characteristics">Mga Nakikitang Katangian</string>

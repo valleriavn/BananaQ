@@ -576,6 +576,22 @@ class ScannerActivity : LocaleAwareActivity() {
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.isDraggable = false
+        val dragHandle = findViewById<View>(R.id.resultDragHandle)
+        dragHandle.setOnClickListener {
+            val result = classificationResult ?: return@setOnClickListener
+            detailsExpanded = false
+            fullResultCard.animate().cancel()
+            fullResultCard.animate()
+                .alpha(0f)
+                .setDuration(140L)
+                .withEndAction {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    fullResultCard.alpha = 1f
+                    fullResultCard.visibility = View.GONE
+                    displayResult(result)
+                }
+                .start()
+        }
         bottomSheetBehavior.addBottomSheetCallback(
             object :
                 BottomSheetBehavior.BottomSheetCallback() {
@@ -593,11 +609,15 @@ class ScannerActivity : LocaleAwareActivity() {
                     }
                     when (newState) {
                         BottomSheetBehavior.STATE_EXPANDED -> {
+                            detailsExpanded = true
+                            dragHandle.contentDescription = getString(R.string.collapse_scan_result)
                             extraDetails.visibility =
                                 View.VISIBLE
                             extraDetails.alpha = 1f
                         }
                         BottomSheetBehavior.STATE_COLLAPSED -> {
+                            detailsExpanded = false
+                            dragHandle.contentDescription = getString(R.string.expand_scan_result)
                             extraDetails.visibility =
                                 View.INVISIBLE
                             extraDetails.alpha = 0f

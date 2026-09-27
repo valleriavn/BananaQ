@@ -31,6 +31,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     private var submittedComments = ""
     private lateinit var diseaseName: String
     private lateinit var accuracy: String
+    private var resultValid = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +39,40 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         setContentView(R.layout.activity_feedback_detail)
         applySystemInsets()
 
-        diseaseName = intent.getStringExtra("DISEASE_NAME") ?: getString(R.string.unknown_label)
-        accuracy = intent.getStringExtra("ACCURACY") ?: ""
-        findViewById<TextView>(R.id.tvDiseaseName).text = localizedDiseaseName(this, diseaseName)
-        findViewById<TextView>(R.id.tvDateTime).text = intent.getStringExtra("DATE_TIME") ?: ""
+        resultValid = intent.getBooleanExtra("RESULT_VALID", true)
+        diseaseName = if (resultValid) {
+            intent.getStringExtra("DISEASE_NAME") ?: getString(R.string.unknown_label)
+        } else {
+            getString(R.string.not_banana_leaf)
+        }
+        accuracy = if (resultValid) intent.getStringExtra("ACCURACY") ?: "" else ""
+        val diseaseNameView = findViewById<TextView>(R.id.tvDiseaseName)
+        val dateTimeView = findViewById<TextView>(R.id.tvDateTime)
+        diseaseNameView.apply {
+            text = if (resultValid) localizedDiseaseName(this@FeedbackDetailActivity, diseaseName)
+                else diseaseName
+            if (!resultValid) {
+                textSize = 15f
+                gravity = Gravity.CENTER_VERTICAL
+                setTextColor(ContextCompat.getColor(this@FeedbackDetailActivity, R.color.button_text_black))
+            }
+        }
+        dateTimeView.apply {
+            text = intent.getStringExtra("DATE_TIME") ?: ""
+            visibility = View.VISIBLE
+            if (!resultValid) gravity = Gravity.START
+        }
+        if (!resultValid) {
+            findViewById<LinearLayout>(R.id.resultMetaLayout).apply {
+                removeView(dateTimeView)
+                addView(dateTimeView, 1)
+            }
+        }
+        findViewById<TextView>(R.id.tvConfidenceLabel).visibility =
+            if (resultValid) View.VISIBLE else View.GONE
         findViewById<TextView>(R.id.tvAccuracy).apply {
             text = if (accuracy.endsWith("%")) accuracy else "$accuracy%"
-            visibility = if (intent.getBooleanExtra("RESULT_VALID", true)) View.VISIBLE else View.GONE
+            visibility = if (resultValid) View.VISIBLE else View.GONE
         }
         intent.getStringExtra("IMAGE_URI")?.let {
             findViewById<ImageView>(R.id.ivScanDetail).setImageURI(Uri.parse(it))
@@ -177,10 +205,19 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     private fun showSubmittedState(comments: String) {
         findViewById<View>(R.id.formScroll).visibility = View.GONE
         findViewById<View>(R.id.successScroll).visibility = View.VISIBLE
-        setSummary(R.id.summaryScan, getString(R.string.summary_scan), localizedDiseaseName(this, diseaseName), R.color.banana_green)
+        setSummary(
+            R.id.summaryScan,
+            getString(R.string.summary_scan),
+            if (resultValid) localizedDiseaseName(this, diseaseName) else diseaseName,
+            R.color.banana_green
+        )
         setSummary(R.id.summaryRating, getString(R.string.summary_accuracy), localizedRating(), ratingColor())
-        setSummary(R.id.summaryConfidence, getString(R.string.summary_confidence),
-            if (accuracy.endsWith("%")) accuracy else "$accuracy%", R.color.rating_negative)
+        findViewById<View>(R.id.summaryConfidenceRow).visibility =
+            if (resultValid) View.VISIBLE else View.GONE
+        if (resultValid) {
+            setSummary(R.id.summaryConfidence, getString(R.string.summary_confidence),
+                if (accuracy.endsWith("%")) accuracy else "$accuracy%", R.color.rating_negative)
+        }
         val time = if (submittedAt > 0L)
             getString(R.string.today_at, SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date(submittedAt)))
         else getString(R.string.summary_saved)

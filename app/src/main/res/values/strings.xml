@@ -81,6 +81,8 @@
     <string name="prediction_summary">Prediction: %1$s (%2$d%%)\nTap to see details</string>
     <string name="prediction_heading">Prediction: %1$s (%2$d%%)</string>
     <string name="tap_for_details">Tap to see details</string>
+    <string name="expand_scan_result">Expand scan result</string>
+    <string name="collapse_scan_result">Collapse scan result</string>
     <string name="unknown_label">Unknown</string>
     <string name="leaf_condition">Leaf Condition</string>
     <string name="visual_characteristics">Visual Characteristics</string>
