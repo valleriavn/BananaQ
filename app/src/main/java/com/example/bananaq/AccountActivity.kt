@@ -130,8 +130,10 @@ class AccountActivity : LocaleAwareActivity() {
             val optionView = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER
-                setPadding((4 * density).toInt(), (5 * density).toInt(),
-                    (4 * density).toInt(), (5 * density).toInt())
+                background = ContextCompat.getDrawable(this@AccountActivity,
+                    if (selected) R.drawable.bg_avatar_option_selected else R.drawable.bg_avatar_option)
+                setPadding((8 * density).toInt(), (8 * density).toInt(),
+                    (8 * density).toInt(), (8 * density).toInt())
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
                 else getString(R.string.choose_named_avatar, getString(option.nameResId))
@@ -147,7 +149,7 @@ class AccountActivity : LocaleAwareActivity() {
                 }
             }
 
-            val avatarSize = (78 * density).toInt()
+            val avatarSize = (76 * density).toInt()
             optionView.addView(FrameLayout(this).apply {
                 background = ContextCompat.getDrawable(this@AccountActivity,
                     if (selected) R.drawable.bg_avatar_item_selected else R.drawable.bg_avatar_item_normal)
@@ -162,13 +164,28 @@ class AccountActivity : LocaleAwareActivity() {
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
                 ))
+                if (selected) {
+                    addView(TextView(this@AccountActivity).apply {
+                        text = "✓"
+                        gravity = Gravity.CENTER
+                        textSize = 13f
+                        setTextColor(Color.WHITE)
+                        background = ContextCompat.getDrawable(
+                            this@AccountActivity, R.drawable.feedback_success_circle)
+                        importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+                    }, FrameLayout.LayoutParams(
+                        (24 * density).toInt(),
+                        (24 * density).toInt(),
+                        Gravity.END or Gravity.BOTTOM
+                    ))
+                }
             }, LinearLayout.LayoutParams(avatarSize, avatarSize))
 
             optionView.addView(TextView(this).apply {
-                text = if (selected) "✓ ${getString(option.nameResId)}" else getString(option.nameResId)
+                text = getString(option.nameResId)
                 gravity = Gravity.CENTER
-                maxLines = 1
-                textSize = 12f
+                maxLines = 2
+                textSize = 11.5f
                 setTypeface(null, if (selected) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
                 setTextColor(ContextCompat.getColor(this@AccountActivity,
                     if (selected) R.color.banana_green else R.color.banana_body))
@@ -179,7 +196,7 @@ class AccountActivity : LocaleAwareActivity() {
                 GridLayout.spec(index / 2), GridLayout.spec(index % 2, 1, 1f)
             ).apply {
                 width = 0
-                height = (112 * density).toInt()
+                height = (124 * density).toInt()
                 val margin = (6 * density).toInt()
                 setMargins(margin, margin, margin, margin)
                 setGravity(Gravity.FILL_HORIZONTAL)

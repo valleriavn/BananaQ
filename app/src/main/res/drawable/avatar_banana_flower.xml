@@ -1,7 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="96dp" android:height="96dp" android:viewportWidth="96" android:viewportHeight="96">
-    <path android:fillColor="#FFF8E1" android:pathData="M48,4A44,44 0,1 0,48 92A44,44 0,1 0,48 4" />
-    <path android:strokeColor="#558B2F" android:strokeWidth="4" android:fillColor="@android:color/transparent" android:pathData="M48,75L48,42" />
-    <path android:fillColor="#7B1F5A" android:pathData="M48,18Q64,29 57,48Q50,59 48,70Q46,59 39,48Q32,29 48,18" />
-    <path android:fillColor="#A83273" android:pathData="M48,25Q55,37 48,58Q41,37 48,25" />
-    <path android:fillColor="#71C35E" android:pathData="M45,52Q25,50 27,35Q43,36 45,52M51,47Q54,30 71,32Q67,47 51,47" />
+    <path android:fillColor="#F6E8D8" android:pathData="M48,4A44,44 0,1 0,48 92A44,44 0,1 0,48 4" />
+    <path android:fillColor="#75A943" android:pathData="M8,53Q16,25 37,14Q35,42 12,61ZM88,53Q80,25 59,14Q61,42 84,61Z" />
+    <path android:fillColor="#C28660" android:pathData="M41,58L55,58L57,69L39,69Z" />
+    <path android:fillColor="#D69B72" android:pathData="M48,21C61,21 68,31 67,45C66,58 58,65 48,65C38,65 30,58 29,45C28,31 35,21 48,21Z" />
+    <path android:fillColor="#4A3028" android:pathData="M28,43Q26,18 48,17Q70,18 68,43Q62,30 48,29Q34,30 28,43Z" />
+    <path android:fillColor="#EFE1C2" android:pathData="M27,27Q48,9 69,27L66,35Q48,27 30,35Z" />
+    <path android:fillColor="#8D3E70" android:pathData="M28,28Q48,21 68,28L66,33Q48,27 30,33Z" />
+    <path android:fillColor="#372620" android:pathData="M37,43A2,2 0,1 0,37 47A2,2 0,1 0,37 43M55,43A2,2 0,1 0,55 47A2,2 0,1 0,55 43" />
+    <path android:strokeColor="#8D4B3B" android:strokeWidth="2" android:strokeLineCap="round" android:fillColor="@android:color/transparent" android:pathData="M41,54Q48,58 55,54" />
+    <path android:fillColor="#6B3560" android:pathData="M16,89Q20,71 35,65L48,77L61,65Q76,71 80,89Z" />
+    <path android:fillColor="#FFFDF5" android:pathData="M35,65L48,76L61,65L57,73L48,80L39,73Z" />
 </vector>
