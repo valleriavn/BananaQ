@@ -129,10 +129,8 @@ class AccountActivity : LocaleAwareActivity() {
             val optionView = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER
-                background = ContextCompat.getDrawable(this@AccountActivity,
-                    if (selected) R.drawable.bg_avatar_option_selected else R.drawable.bg_avatar_option)
-                setPadding((8 * density).toInt(), (8 * density).toInt(),
-                    (8 * density).toInt(), (8 * density).toInt())
+                background = null
+                setPadding(0, 0, 0, 0)
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
                 else getString(R.string.choose_named_avatar, getString(option.nameResId))
@@ -148,7 +146,7 @@ class AccountActivity : LocaleAwareActivity() {
                 }
             }
 
-            val avatarSize = (76 * density).toInt()
+            val avatarSize = (82 * density).toInt()
             optionView.addView(FrameLayout(this).apply {
                 background = ContextCompat.getDrawable(this@AccountActivity,
                     if (selected) R.drawable.bg_avatar_item_selected else R.drawable.bg_avatar_item_normal)
@@ -180,23 +178,12 @@ class AccountActivity : LocaleAwareActivity() {
                 }
             }, LinearLayout.LayoutParams(avatarSize, avatarSize))
 
-            optionView.addView(TextView(this).apply {
-                text = getString(option.nameResId)
-                gravity = Gravity.CENTER
-                maxLines = 2
-                textSize = 11.5f
-                setTypeface(null, if (selected) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
-                setTextColor(ContextCompat.getColor(this@AccountActivity,
-                    if (selected) R.color.banana_green else R.color.banana_body))
-            }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT).apply { topMargin = (4 * density).toInt() })
-
             grid.addView(optionView, GridLayout.LayoutParams(
                 GridLayout.spec(index / 2), GridLayout.spec(index % 2, 1, 1f)
             ).apply {
                 width = 0
-                height = (124 * density).toInt()
-                val margin = (6 * density).toInt()
+                height = (92 * density).toInt()
+                val margin = (4 * density).toInt()
                 setMargins(margin, margin, margin, margin)
                 setGravity(Gravity.FILL_HORIZONTAL)
             })

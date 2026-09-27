@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:background="@drawable/avatar_picker_sheet_bg"
     android:orientation="vertical"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    android:paddingTop="22dp"
-    android:paddingBottom="20dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="18dp"
+    android:paddingBottom="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,17 +26,6 @@
             app:layout_constraintEnd_toStartOf="@id/closeAvatarPicker"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/avatar_picker_subtitle"
-            android:textColor="@color/banana_muted"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/closeAvatarPicker"
-            app:layout_constraintTop_toBottomOf="@id/avatarPickerTitle" />
-
         <ImageButton
             android:id="@+id/closeAvatarPicker"
             android:layout_width="40dp"
@@ -53,16 +42,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/banana_divider" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="400dp"
         android:clipToPadding="false"
         android:overScrollMode="ifContentScrolls"
-        android:paddingBottom="8dp">
+        android:paddingBottom="0dp">
 
         <GridLayout
             android:id="@+id/avatarPickerGrid"

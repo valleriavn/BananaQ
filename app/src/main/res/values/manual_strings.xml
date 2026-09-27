@@ -24,7 +24,7 @@
     <string name="guest_name">Guest</string>
     <string name="guest_description">Using BananaQ on this device</string>
     <string name="avatar_section">AVATAR OPTIONS</string>
-    <string name="choose_avatar">Choose Farmer Avatar</string>
+    <string name="choose_avatar">Choose your avatar</string>
     <string name="avatar_hint">Tap an avatar below to pick and set your profile picture</string>
     <string name="avatar_updated">Avatar set successfully</string>
     <string name="avatar_cartoon_banana">Maria · Banana Farmer</string>

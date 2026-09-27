@@ -119,7 +119,7 @@
     <string name="guest_name">Bisita</string>
     <string name="guest_description">Ginagamit ang BananaQ sa device na ito</string>
     <string name="avatar_section">MGA AVATAR</string>
-    <string name="choose_avatar">Pumili ng Farmer Avatar</string>
+    <string name="choose_avatar">Piliin ang iyong avatar</string>
     <string name="avatar_hint">Pumili ng avatar para sa iyong profile picture</string>
     <string name="avatar_updated">Matagumpay na napalitan ang avatar</string>
     <string name="avatar_cartoon_banana">Maria · Magsasaka ng Saging</string>
@@ -137,7 +137,6 @@
     <string name="settings_label">Mga Setting</string>
     <string name="logout_label">Mag-log Out</string>
     <string name="account_unavailable">Hindi available ang profile, settings, at pag-sign in sa bersiyong ito.</string>
-    <string name="avatar_picker_subtitle">Pumili ng magiliw na farmer profile na nababagay sa iyo.</string>
     <string name="close_avatar_picker">Isara ang pagpili ng avatar</string>
     <string name="choose_named_avatar">Piliin ang %1$s</string>
 

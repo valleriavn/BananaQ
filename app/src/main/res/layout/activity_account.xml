@@ -92,7 +92,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Profile / Guest Header Card -->
+            <!-- Avatar card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,22 +134,6 @@
                         android:src="@drawable/ic_edit_avatar" />
                 </FrameLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="@string/guest_name"
-                    android:textColor="@color/banana_text_dark"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/guest_description"
-                    android:textColor="@color/banana_muted"
-                    android:textSize="14sp" />
             </LinearLayout>
 
 

@@ -47,7 +47,6 @@
     <string name="confirm_feedback_message">Your rating and comments will be submitted to help improve BananaQ\'s accuracy.</string>
     <string name="go_back">Go Back</string>
     <string name="confirm_label">Confirm</string>
-    <string name="avatar_picker_subtitle">Choose a friendly farmer profile that feels like you.</string>
     <string name="close_avatar_picker">Close avatar picker</string>
     <string name="choose_named_avatar">Choose %1$s</string>
     <string name="accuracy_label">Accuracy: </string>
