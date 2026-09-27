@@ -19,6 +19,18 @@
         <item name="android:windowAnimationStyle">@style/BananaQWindowAnimation</item>
     </style>
 
+    <!-- Kept visually identical to activity_splash so startup looks like one
+         continuous green screen rather than two separate splash screens. -->
+    <style name="Theme.BananaQ.Splash" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_window_background</item>
+        <item name="android:statusBarColor">@color/splash_green</item>
+        <item name="android:navigationBarColor">@color/splash_green</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
     <style name="BananaQWindowAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/page_fade_in</item>
         <item name="android:activityOpenExitAnimation">@anim/page_fade_out</item>

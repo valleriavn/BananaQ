@@ -23,7 +23,8 @@
         android:theme="@style/Theme.BananaQ">
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.BananaQ.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
