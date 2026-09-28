@@ -67,15 +67,15 @@ class ScanHistoryAdapter(
                 holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
             }
 
-            holder.itemView.isEnabled = !feedbackSubmitted
-            holder.itemView.isClickable = !feedbackSubmitted
+            holder.itemView.isEnabled = true
+            holder.itemView.isClickable = onItemClick != null
             holder.itemView.contentDescription = if (feedbackSubmitted) {
                 holder.itemView.context.getString(
                     R.string.feedback_item_already_submitted,
                     holder.tvDiseaseName.text
                 )
             } else null
-            holder.itemView.setOnClickListener(if (feedbackSubmitted) null else View.OnClickListener {
+            holder.itemView.setOnClickListener(if (onItemClick == null) null else View.OnClickListener {
                 onItemClick?.invoke(item)
             })
         }

@@ -77,8 +77,8 @@
     <string name="library_label">Aklatan</string>
     <string name="feedback_select_rating">Mangyaring pumili ng rating</string>
     <string name="feedback_select_scan">Pumili muna ng scan mula sa kasaysayan.</string>
-    <string name="feedback_submitted_badge">Naipadala na</string>
-    <string name="feedback_item_already_submitted">%1$s. Naipadala na ang feedback.</string>
+    <string name="feedback_submitted_badge">Tingnan ang Feedback</string>
+    <string name="feedback_item_already_submitted">%1$s. Tingnan ang naisumiteng feedback.</string>
     <string name="summary_scan">Scan</string>
     <string name="summary_accuracy">Katumpakan</string>
     <string name="summary_confidence">Antas ng Kumpiyansa</string>

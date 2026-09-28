@@ -69,8 +69,8 @@
     <string name="library_label">Library</string>
     <string name="feedback_select_rating">Please select a rating</string>
     <string name="feedback_select_scan">Select a scan from your history first.</string>
-    <string name="feedback_submitted_badge">Feedback sent</string>
-    <string name="feedback_item_already_submitted">%1$s. Feedback already submitted.</string>
+    <string name="feedback_submitted_badge">View Feedback</string>
+    <string name="feedback_item_already_submitted">%1$s. View submitted feedback.</string>
     <string name="summary_scan">Scan</string>
     <string name="summary_accuracy">Accuracy</string>
     <string name="summary_confidence">Confidence Score</string>
