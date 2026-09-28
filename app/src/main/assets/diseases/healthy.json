@@ -7,13 +7,14 @@
     {"title": "Watch for changes", "description": "Symptoms can be absent or subtle in an early infection. Compare the plant over time and scan a clear, well-lit image of any new symptom."}
   ],
   "treatment": [
-    {"title": "Do not treat from this result alone", "description": "Do not apply a pesticide to a plant that appears healthy solely because of an app result. Use a confirmed diagnosis before treatment."},
-    {"title": "Continue appropriate care", "description": "Maintain suitable watering, drainage, nutrition, spacing, and sanitation for the banana variety and local conditions."},
-    {"title": "Ask an expert if concerned", "description": "If wilting, spreading lesions, or internal discoloration is present despite this result, contact a local agriculture or plant-health specialist."}
+    {"title": "Do not apply a pesticide", "description": "A Healthy result does not require chemical treatment. Use a confirmed diagnosis before applying any pesticide."},
+    {"title": "Continue care suited to Sto. Tomas", "description": "Maintain balanced nutrition, good spacing, and drainage. Adjust watering after rainfall so the roots are not left waterlogged and the leaves do not remain wet unnecessarily."},
+    {"title": "Ask for help if symptoms continue", "description": "For continuing wilt, spreading spots, or internal discoloration, contact the Sto. Tomas City Agriculture Office at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph."}
   ],
   "prevention": [
-    {"title": "Inspect plants regularly", "description": "Check leaves and pseudostems routinely so a new or changing symptom is noticed early."},
-    {"title": "Practice clean biosecurity", "description": "Use clean tools and footwear, avoid moving soil from diseased areas, and use healthy planting material from a reliable source."},
-    {"title": "Reduce plant stress", "description": "Provide balanced nutrition and appropriate water while preventing waterlogging, drought stress, crowding, and unnecessary leaf injury."}
+    {"title": "Inspect every week", "description": "Check both sides of older and younger leaves, the pseudostem, and the plant base, especially after several rainy or humid days."},
+    {"title": "Keep biosecurity clean", "description": "Use clean tools and footwear, avoid moving soil between plots, and obtain healthy planting material from a reliable source."},
+    {"title": "Prepare drainage before heavy rain", "description": "Keep canals and runoff paths clear, avoid waterlogging, and maintain airflow and suitable spacing around each mat."},
+    {"title": "Record changes", "description": "Photograph and rescan new symptoms in good light. Seek advice from the City Agriculture Office when symptoms persist or spread."}
   ]
 }

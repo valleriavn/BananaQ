@@ -150,7 +150,9 @@ class ScannerActivity : LocaleAwareActivity() {
         setContentView(R.layout.activity_scanner)
         applySystemInsets()
         initializeViews()
-        diseaseRepository = DiseaseRepository(applicationContext)
+        // Use the wrapped Activity context so recommendation JSON follows the
+        // language currently selected in BananaQ.
+        diseaseRepository = DiseaseRepository(this)
         setupBottomNavigation()
         setupBottomSheet()
         findViewById<View>(R.id.btnBack).setOnClickListener {

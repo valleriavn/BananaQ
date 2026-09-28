@@ -8,15 +8,15 @@
     {"title": "Pagsasanib ng sugat kapag malubha", "description": "Maaaring magsanib ang magkakalapit na batik at maging malawak na patay na bahagi, lalo na sa basa, napinsala, o mahinang dahon."}
   ],
   "treatment": [
-    {"title": "Kumpirmahin ang leaf spot", "description": "Maaaring sumabay o magmukhang Sigatoka lesion ang Cordana. Kumonsulta sa lokal na plant-health specialist kung malawak ang batik o hindi tiyak ang pattern."},
-    {"title": "Alisin ang malubhang apektadong bahagi", "description": "Putulin gamit ang malinis na kagamitan ang malubhang apektadong bahagi habang nagtitira ng malusog na dahon, at itapon ito ayon sa lokal na patnubay."},
-    {"title": "Itama ang stress ng halaman", "description": "Ayusin ang drainage at irrigation, bawasan ang matagal na pagkabasa ng dahon, iwasan ang pinsala, at panatilihin ang balanseng nutrisyon at airflow."},
-    {"title": "Gumamit lamang ng produktong inirekomenda", "description": "Gumamit lamang ng fungicide kung kumpirmado ang diagnosis at rehistrado at inirerekomenda ito sa inyong lugar; laging sundin ang label."}
+    {"title": "Kumpirmahin ang leaf spot", "description": "Maaaring sumabay o magmukhang Sigatoka lesion ang Cordana. Kung malawak o hindi tiyak ang batik, kontakin ang Sto. Tomas City Agriculture Office sa (043) 784-8022 local 307 o agri@cityofstotomas.gov.ph."},
+    {"title": "Alisin ang malubhang apektadong bahagi", "description": "Putulin ang malubhang apektadong bahagi gamit ang disinfected na kagamitan habang nagtitira ng malusog na dahon. Ilayo ang tinanggal na bahagi sa malinis na halamang saging."},
+    {"title": "Ayusin ang moisture at stress ng halaman", "description": "Pagkatapos ng basang panahon, linisin ang drainage, pagandahin ang airflow, iwasang masugatan ang dahon, at ayusin ang kakulangan o sobra sa tubig at nutrisyon."},
+    {"title": "Gumamit lamang ng produktong may lokal na payo", "description": "Gumamit lamang ng fungicide kapag kumpirmado at kasalukuyang rehistrado ng Philippine FPA para sa crop at target disease. Sundin nang eksakto ang label."}
   ],
   "prevention": [
-    {"title": "Iwasan ang matagal na pagkabasa ng dahon", "description": "Diligan malapit sa lupa kung maaari, panatilihin ang maayos na airflow, at iwasan ang irrigation na matagal magbasa sa dahon."},
-    {"title": "Iwasan ang pinsala at stress", "description": "Protektahan ang dahon sa pinsalang maiiwasan at panatilihin ang wastong drainage, irrigation, at nutrisyon dahil mas madaling maapektuhan ang stressed tissue."},
-    {"title": "Panatilihing malinis ang kagamitan at taniman", "description": "Linisin ang pruning tools sa pagitan ng mga halaman at alisin ang malubhang may sakit na dahon bilang regular na sanitation."},
-    {"title": "Suriin kapag basa ang panahon", "description": "Suriin ang matatanda at napinsalang dahon pagkatapos ng mahalumigmig o maulang panahon para sa lumalaking kayumangging batik na may matingkad na dilaw na palibot."}
+    {"title": "Bawasan ang matagal na pagkabasa ng dahon", "description": "Diligan malapit sa lupa kung maaari, panatilihing malinis ang drainage, at ayusin ang spacing at airflow upang mas mabilis matuyo ang dahon pagkatapos ng ulan."},
+    {"title": "Iwasan ang pinsala at stress", "description": "Protektahan ang dahon sa maiiwasang pinsala at panatilihin ang angkop na irrigation at balanseng nutrisyon dahil mas madaling maapektuhan ang mahinang tissue."},
+    {"title": "Panatilihing malinis ang kagamitan at taniman", "description": "I-disinfect ang pruning tools sa pagitan ng mga halaman at alisin ang malubhang apektadong bahagi nang hindi ito dinadala sa malinis na taniman."},
+    {"title": "Suriin pagkatapos ng mahalumigmig o maulang panahon", "description": "Tingnang mabuti ang matanda at nasugatang dahon para sa lumalaking kayumangging batik na may matingkad na dilaw na palibot at agapan bago magsanib ang mga lesion."}
   ]
 }

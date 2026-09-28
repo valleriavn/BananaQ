@@ -24,7 +24,8 @@ class DiseaseRepository(
         val baseName =
             diseaseFiles[diseaseName]
                 ?: return null
-        val folder = if (com.example.bananaq.LocaleHelper.selectedLanguage(context) == "tl")
+        val activeLanguage = context.resources.configuration.locales[0].language
+        val folder = if (activeLanguage == "tl" || activeLanguage == "fil")
             "diseases_tl" else "diseases"
         val fileName = "$folder/$baseName"
 

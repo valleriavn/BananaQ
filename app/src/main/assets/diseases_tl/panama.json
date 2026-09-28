@@ -8,15 +8,15 @@
     {"title": "Pagbitak at paghina ng halaman", "description": "Maaaring magkaroon ng pahabang bitak malapit sa paanan ng pseudostem, kasunod ang tuloy-tuloy na pagkalanta, paghina, at pagkamatay."}
   ],
   "treatment": [
-    {"title": "Huwag ilipat ang halaman o lupa", "description": "Iwan sa kinaroroonan ang pinaghihinalaang halaman at nakapaligid na lupa. Pigilan ang tao, kagamitan, sapatos, tubig, at sasakyan sa pagdadala ng lupa sa ibang lugar."},
-    {"title": "I-report at ipakumpirma", "description": "Makipag-ugnayan sa lokal na agriculture o plant-protection office para sa laboratory confirmation at containment instructions; may ibang pagkalanta na kahawig nito."},
-    {"title": "Walang curative treatment", "description": "Hindi napagagaling ng fungicide ang Panama Disease. Ang pagpatay o paghihiwalay sa kumpirmadong halaman ay dapat gawin lamang ayon sa tagubilin ng biosecurity authority."},
-    {"title": "I-contain ang apektadong lugar", "description": "Limitahan ang pagpasok at alisin muna ang lupa sa kagamitan, sapatos, at makina bago gumamit ng aprubadong disinfectant ayon sa lokal na protocol."}
+    {"title": "Huwag galawin ang hinihinalang halaman", "description": "Huwag bunutin, hiwain, o ilipat ang halaman, suhi, o nakapaligid na lupa. Pigilan ang tao, kagamitan, sapatos, tubig, at sasakyan sa pagdadala ng lupa sa ibang bahagi ng bukid."},
+    {"title": "Ihiwalay ang lugar", "description": "Markahan ang lokasyon, limitahan ang pagpasok, at pigilan ang ulan o irrigation runoff sa paglabas mula sa hinihinalang lugar. Alisin ang nakikitang lupa sa sapatos at kagamitan nang hindi ito ikinakalat."},
+    {"title": "Kontakin ang Sto. Tomas City Agriculture Office", "description": "Humingi ng kumpirmasyon at containment instructions sa (043) 784-8022 local 307 o agri@cityofstotomas.gov.ph. Matatagpuan ang opisina sa Basement Floor, City Hall Main Building, Gov. Malvar Street, Poblacion I."},
+    {"title": "Walang curative fungicide", "description": "Hindi napagagaling ng fungicide ang Panama Disease. Huwag sirain o gamitan ng kemikal ang hinihinalang halaman hangga’t walang tagubilin mula sa agriculture o plant-health authority."}
   ],
   "prevention": [
-    {"title": "Gumamit ng sertipikadong malinis na materyal", "description": "Gumamit ng sertipikadong disease-free tissue-culture plants o ibang planting material mula sa mapagkakatiwalaang pinagmulan."},
-    {"title": "Huwag papasukin ang kontaminadong lupa", "description": "Kontrolin ang pagpasok sa taniman at alisin ang lupa sa sapatos, kagamitan, makina, at sasakyan bago pumasok o lumabas."},
-    {"title": "Pangasiwaan ang daloy ng tubig", "description": "Pigilan ang runoff, baha, o irrigation water sa pagdadala ng lupa mula sa pinaghihinalaan o infected na lugar patungo sa malinis na taniman."},
-    {"title": "Gumamit ng angkop na resistant cultivar", "description": "Kung mayroon at inirerekomenda sa inyong lugar, pumili ng cultivar na resistant sa Fusarium race na naroon sa lugar."}
+    {"title": "Gumamit ng sertipikadong malinis na halaman", "description": "Gumamit ng disease-free tissue-culture plants o pantanim mula sa mapagkakatiwalaan at natutukoy na pinagmulan. Huwag kumuha ng suhi sa bukid na may hindi maipaliwanag na pagkalanta."},
+    {"title": "Pigilan ang paglipat ng lupa", "description": "Limitahan ang pagpasok sa bukid at alisin ang lupa sa bota, tools, gulong, at kagamitan bago lumipat ng plot. Maglaan ng hiwalay na tools para sa hinihinalang lugar."},
+    {"title": "Kontrolin ang daloy ng tubig", "description": "Panatilihin ang drainage at pigilan ang runoff o baha sa pagdadala ng lupa mula sa hinihinalang lugar patungo sa malinis na taniman, lalo na sa malakas na ulan sa Batangas."},
+    {"title": "Magplano kasama ang City Agriculture Office", "description": "Tanungin ang Sto. Tomas City Agriculture Office tungkol sa angkop na resistant o tolerant cultivar at containment practice bago muling magtanim."}
   ]
 }

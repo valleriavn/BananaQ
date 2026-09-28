@@ -7,13 +7,14 @@
     {"title": "Bantayan ang mga pagbabago", "description": "Maaaring wala o mahina pa ang sintomas sa maagang impeksiyon. Ihambing ang halaman sa paglipas ng panahon at i-scan ang malinaw at maliwanag na larawan ng bagong sintomas."}
   ],
   "treatment": [
-    {"title": "Huwag gamutin dahil lamang sa resultang ito", "description": "Huwag maglagay ng pesticide sa mukhang malusog na halaman dahil lamang sa app result. Kailangan muna ng kumpirmadong diagnosis bago gamutin."},
-    {"title": "Ipagpatuloy ang wastong pag-aalaga", "description": "Panatilihin ang angkop na pagdidilig, drainage, nutrisyon, pagitan, at sanitation para sa uri ng saging at lokal na kondisyon."},
-    {"title": "Kumonsulta kung may pag-aalala", "description": "Kung may pagkalanta, kumakalat na sugat, o pagbabago ng kulay sa loob kahit ganito ang result, kumonsulta sa lokal na agriculture o plant-health specialist."}
+    {"title": "Huwag maglagay ng pesticide", "description": "Hindi kailangan ng chemical treatment ang Healthy na resulta. Kailangan muna ng kumpirmadong diagnosis bago gumamit ng anumang pesticide."},
+    {"title": "Ipagpatuloy ang pag-aalagang angkop sa Sto. Tomas", "description": "Panatilihin ang balanseng nutrisyon, tamang pagitan, at drainage. Iayon ang pagdidilig pagkatapos ng ulan upang hindi ma-waterlog ang ugat at hindi manatiling basa ang dahon."},
+    {"title": "Humingi ng tulong kung nagpapatuloy ang sintomas", "description": "Para sa tuloy-tuloy na pagkalanta, kumakalat na batik, o pagbabago ng kulay sa loob, kontakin ang Sto. Tomas City Agriculture Office sa (043) 784-8022 local 307 o agri@cityofstotomas.gov.ph."}
   ],
   "prevention": [
-    {"title": "Regular na suriin ang halaman", "description": "Suriin palagi ang mga dahon at pseudostem upang maagang mapansin ang bago o nagbabagong sintomas."},
-    {"title": "Panatilihin ang malinis na biosecurity", "description": "Gumamit ng malinis na kagamitan at sapatos, huwag maglipat ng lupa mula sa may sakit na lugar, at gumamit ng malusog na planting material."},
-    {"title": "Bawasan ang stress ng halaman", "description": "Magbigay ng balanseng nutrisyon at angkop na tubig habang iniiwasan ang waterlogging, tagtuyot, siksikan, at hindi kailangang pinsala sa dahon."}
+    {"title": "Suriin bawat linggo", "description": "Tingnan ang magkabilang panig ng matanda at batang dahon, pseudostem, at paanan ng halaman, lalo na pagkatapos ng ilang maulan o mahalumigmig na araw."},
+    {"title": "Panatilihing malinis ang biosecurity", "description": "Gumamit ng malinis na tools at sapatos, huwag maglipat ng lupa sa pagitan ng mga plot, at kumuha ng malusog na pantanim sa mapagkakatiwalaang pinagmulan."},
+    {"title": "Ihanda ang drainage bago ang malakas na ulan", "description": "Panatilihing malinis ang kanal at daluyan ng runoff, iwasan ang waterlogging, at panatilihin ang airflow at tamang pagitan ng bawat mat."},
+    {"title": "Itala ang pagbabago", "description": "Kuhanan at i-scan muli sa maliwanag na lugar ang bagong sintomas. Humingi ng payo sa City Agriculture Office kapag nagpapatuloy o kumakalat ang sintomas."}
   ]
 }

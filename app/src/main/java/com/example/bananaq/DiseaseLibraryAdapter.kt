@@ -10,12 +10,32 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-data class LibraryDisease(val key: String, val name: Int, val image: Int, val description: Int)
+data class LibraryDisease(
+    val key: String,
+    val name: Int,
+    val image: Int,
+    val scientificName: Int,
+    val description: Int,
+    val symptoms: Int,
+    val spread: Int
+)
 
 val libraryDiseases = listOf(
-    LibraryDisease("Black Sigatoka", R.string.disease_black_sigatoka, R.drawable.black_sigatoka, R.string.description_black_sigatoka),
-    LibraryDisease("Panama Disease", R.string.disease_panama, R.drawable.panama_disease, R.string.description_panama),
-    LibraryDisease("Cordana Leaf Spot", R.string.disease_cordana, R.drawable.cordana_leaf_spot, R.string.description_cordana),
+    LibraryDisease(
+        "Black Sigatoka", R.string.disease_black_sigatoka, R.drawable.black_sigatoka,
+        R.string.scientific_black_sigatoka, R.string.description_black_sigatoka,
+        R.string.symptoms_black_sigatoka, R.string.spread_black_sigatoka
+    ),
+    LibraryDisease(
+        "Panama Disease", R.string.disease_panama, R.drawable.panama_disease,
+        R.string.scientific_panama, R.string.description_panama,
+        R.string.symptoms_panama, R.string.spread_panama
+    ),
+    LibraryDisease(
+        "Cordana Leaf Spot", R.string.disease_cordana, R.drawable.cordana_leaf_spot,
+        R.string.scientific_cordana, R.string.description_cordana,
+        R.string.symptoms_cordana, R.string.spread_cordana
+    ),
 )
 
 /** Repeating positions allow swiping in either direction without an end card. */

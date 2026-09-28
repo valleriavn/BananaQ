@@ -8,14 +8,15 @@
     {"title": "Pagsasanib at pagkamatay ng dahon", "description": "Maaaring magsanib ang maraming batik at bumuo ng malaking patay na bahagi, kaya nababawasan ang berdeng bahagi at maagang natutuyo ang dahon."}
   ],
   "treatment": [
-    {"title": "Kumpirmahin ang diagnosis", "description": "Maaaring magmukhang ibang leaf spot ang Black Sigatoka. Magpakumpirma sa lokal na crop o plant-health specialist kung malubha o kumakalat ang sintomas."},
-    {"title": "Maingat na putulin ang apektadong bahagi", "description": "Alisin ang bahaging maraming batik o ang malubhang apektadong dahon upang mabawasan ang spores, ngunit magtira ng sapat na malusog na bahagi para sa paglaki."},
-    {"title": "Gumamit ng pinagsamang pamamahala", "description": "Ayusin ang drainage, pagitan ng halaman, nutrisyon, at sanitation. Gumamit lamang ng fungicide na rehistrado at inirerekomenda sa inyong lugar, ayon sa label at resistance-management guidance."}
+    {"title": "Suriin pagkatapos ng maulang panahon", "description": "Pabor sa Black Sigatoka ang mainit, mahalumigmig, at matagal na basang dahon. Sa Lungsod ng Sto. Tomas, tingnan ang magkabilang panig ng mas batang dahon pagkatapos ng sunod-sunod na ulan at markahan ang may kumakalat na guhit."},
+    {"title": "Maingat na alisin ang apektadong bahagi", "description": "Putulin lamang ang bahaging maraming batik o patay na gamit ang disinfected na kagamitan. Magtira ng sapat na malusog na dahon at huwag dalhin ang nahawaang dahon sa ibang taniman."},
+    {"title": "Ayusin ang kondisyon ng taniman", "description": "Alisin ang damo, kontrolin ang sobrang suhi, pagandahin ang airflow at drainage, at panatilihin ang balanseng nutrisyon upang mabawasan ang pagkabasa ng dahon at stress ng halaman."},
+    {"title": "Kumonsulta sa City Agriculture Office", "description": "Para sa malubha o kumakalat na kaso, tawagan ang Sto. Tomas City Agriculture Office sa (043) 784-8022 local 307 o mag-email sa agri@cityofstotomas.gov.ph. Gumamit lamang ng produktong rehistrado ng Philippine FPA para sa saging at Black Sigatoka at sundin nang eksakto ang label."}
   ],
   "prevention": [
-    {"title": "Regular na suriin ang bagong dahon", "description": "Tingnan ang magkabilang panig ng dahon para sa maagang tuldok at guhit na kaayon ng ugat bago magsanib ang mga batik."},
-    {"title": "Ayusin ang daloy ng hangin at drainage", "description": "Panatilihin ang wastong pagitan ng halaman, kontrolin ang sobrang suhi, at iwasan ang waterlogging upang mabawasan ang mahalumigmig na kondisyon."},
-    {"title": "Gumamit ng malinis na planting material", "description": "Magtanim ng malusog na materyal mula sa mapagkakatiwalaang pinagmulan at huwag magdala ng nahawaang dahon o debris sa malinis na lugar."},
-    {"title": "Panatilihin ang balanseng pag-aalaga", "description": "Magbigay ng angkop na tubig at nutrisyon, at regular na alisin ang malubhang apektadong bahagi bilang bahagi ng field sanitation."}
+    {"title": "Maghanda bago ang maulang panahon", "description": "Panatilihing malinis ang kanal at daluyan ng tubig bago ang malakas na ulan, at iwasan ang irrigation na matagal magbasa sa dahon."},
+    {"title": "Panatilihin ang airflow", "description": "Maglaan ng tamang pagitan, kontrolin ang sobrang suhi at damo, at alisin lamang ang malubhang apektadong bahagi upang mas mabilis matuyo ang dahon."},
+    {"title": "Gumamit ng malinis na pantanim at kagamitan", "description": "Kumuha ng malusog na pantanim sa mapagkakatiwalaang pinagmulan at i-disinfect ang pamutol sa pagitan ng mga halaman at taniman."},
+    {"title": "Regular na mag-monitor", "description": "Suriin bawat linggo ang mas batang dahon kapag mahalumigmig o maulan upang maagapan ang bagong guhit bago magsanib ang mga lesion."}
   ]
 }

@@ -8,14 +8,15 @@
     {"title": "Coalescing and leaf death", "description": "Numerous lesions can merge into large dead areas, reducing green leaf area and causing premature drying."}
   ],
   "treatment": [
-    {"title": "Confirm the diagnosis", "description": "Black Sigatoka can resemble other leaf spots. Ask a local crop or plant-health specialist to confirm severe or spreading cases."},
-    {"title": "Prune infected tissue carefully", "description": "Remove heavily spotted leaf portions or leaves to lower spores, but retain enough healthy leaf area for plant growth."},
-    {"title": "Use integrated management", "description": "Improve drainage, spacing, nutrition, and sanitation. Use a fungicide only when locally registered and recommended, and follow its label and resistance-management guidance."}
+    {"title": "Inspect after rainy periods", "description": "Warm, humid weather and prolonged leaf wetness favor Black Sigatoka. In Sto. Tomas City, check both sides of younger leaves after repeated rain and mark plants with spreading streaks."},
+    {"title": "Remove infected tissue carefully", "description": "Cut only heavily spotted or dead leaf portions using disinfected tools. Keep enough healthy leaf area for the plant, and do not carry infected leaves into another growing area."},
+    {"title": "Improve field conditions", "description": "Clear weeds, manage excess suckers, improve airflow and drainage, and maintain balanced nutrition to reduce leaf wetness and plant stress."},
+    {"title": "Ask the Sto. Tomas City Agriculture Office", "description": "For severe or spreading cases, contact the City Agriculture Office at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph. Use only a Philippine FPA-registered product labeled for banana and Black Sigatoka, exactly as directed."}
   ],
   "prevention": [
-    {"title": "Inspect new leaves regularly", "description": "Check both leaf surfaces for early specks and vein-parallel streaks so infected tissue can be managed before lesions merge."},
-    {"title": "Improve airflow and drainage", "description": "Use suitable plant spacing, control excess suckers, and prevent waterlogging to reduce humid conditions around leaves."},
-    {"title": "Use clean planting material", "description": "Plant healthy material from a reliable source and avoid carrying infected leaves or debris into clean areas."},
-    {"title": "Maintain balanced plant care", "description": "Provide suitable water and nutrition, and remove highly infected leaf tissue as part of a regular field sanitation program."}
+    {"title": "Prepare for wet weather", "description": "Keep canals and drainage paths clear before periods of heavy rain, and avoid irrigation that leaves foliage wet for long periods."},
+    {"title": "Maintain airflow", "description": "Use suitable spacing, control excess suckers and weeds, and remove only severely infected tissue so leaves dry faster."},
+    {"title": "Use clean planting material and tools", "description": "Obtain healthy planting material from a reliable source and disinfect cutting tools between plants and growing areas."},
+    {"title": "Monitor consistently", "description": "Inspect younger leaves every week during humid or rainy conditions so new streaks are managed before lesions merge."}
   ]
 }

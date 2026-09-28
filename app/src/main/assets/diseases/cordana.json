@@ -8,15 +8,15 @@
     {"title": "Lesions merge in severe cases", "description": "Nearby spots can join into broad dead areas, especially on wet, damaged, or weakened leaves."}
   ],
   "treatment": [
-    {"title": "Confirm the leaf spot", "description": "Cordana can occur beside or resemble Sigatoka lesions. Seek local plant-health advice when spots are extensive or the pattern is uncertain."},
-    {"title": "Remove badly affected tissue", "description": "Prune severely affected leaf portions with clean tools, retaining healthy leaf area, and dispose of removed material according to local guidance."},
-    {"title": "Correct plant stress", "description": "Improve drainage and irrigation, reduce prolonged leaf wetness, avoid leaf injury, and maintain balanced nutrition and airflow."},
-    {"title": "Use products only when advised", "description": "Apply a fungicide only if the diagnosis is confirmed and the product is locally registered and recommended; always follow the label."}
+    {"title": "Confirm the leaf spot", "description": "Cordana can occur beside or resemble Sigatoka lesions. If spots are extensive or uncertain, contact the Sto. Tomas City Agriculture Office at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph."},
+    {"title": "Remove badly affected tissue", "description": "Prune severely affected portions with disinfected tools while retaining healthy leaf area. Keep removed material away from clean banana plants."},
+    {"title": "Correct moisture and plant stress", "description": "After wet weather, clear drainage, improve airflow, avoid injuring leaves, and correct water or nutrient stress that can favor Cordana infection."},
+    {"title": "Use products only with local advice", "description": "Apply a fungicide only after confirmation and only when the product is currently registered by the Philippine FPA for the crop and target disease. Follow the label exactly."}
   ],
   "prevention": [
-    {"title": "Avoid prolonged leaf wetness", "description": "Water near the soil when practical, provide good airflow, and avoid irrigation that keeps foliage wet for long periods."},
-    {"title": "Prevent injury and stress", "description": "Protect leaves from avoidable damage and maintain suitable drainage, irrigation, and nutrition because stressed tissue is more vulnerable."},
-    {"title": "Keep tools and fields clean", "description": "Clean pruning tools between plants and remove severely diseased leaf material as part of routine sanitation."},
-    {"title": "Inspect during wet weather", "description": "Check older and injured leaves after humid or rainy periods for expanding brown spots with bright yellow halos."}
+    {"title": "Reduce prolonged leaf wetness", "description": "Water near the soil when practical, keep drainage clear, and maintain spacing and airflow so foliage dries faster after rain."},
+    {"title": "Prevent injury and stress", "description": "Protect leaves from avoidable damage and maintain suitable irrigation and balanced nutrition because weakened tissue is more vulnerable."},
+    {"title": "Keep tools and plots clean", "description": "Disinfect pruning tools between plants and remove severely diseased tissue without carrying it into clean growing areas."},
+    {"title": "Inspect after humid or rainy weather", "description": "Pay close attention to older and injured leaves for enlarging brown spots with bright yellow halos, and act before lesions merge."}
   ]
 }

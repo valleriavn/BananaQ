@@ -8,15 +8,15 @@
     {"title": "Splitting and plant decline", "description": "Some plants develop lengthwise splitting near the pseudostem base, followed by progressive wilt, decline, and death."}
   ],
   "treatment": [
-    {"title": "Do not move the plant or soil", "description": "Leave suspected plants and surrounding soil in place. Keep people, tools, footwear, water, and vehicles from carrying contaminated soil to another area."},
-    {"title": "Report and confirm", "description": "Contact the local agriculture or plant-protection office for laboratory confirmation and containment instructions; similar wilts can look alike."},
-    {"title": "No curative treatment", "description": "Fungicides do not cure Panama Disease. Destruction or isolation of confirmed plants must follow local biosecurity authority guidance."},
-    {"title": "Contain the affected area", "description": "Restrict access and clean soil from tools, footwear, and equipment before applying an approved disinfectant according to local protocol."}
+    {"title": "Do not disturb the suspected plant", "description": "Do not uproot, cut, or move the plant, suckers, or surrounding soil. Stop people, tools, footwear, water, and vehicles from carrying soil to another part of the farm."},
+    {"title": "Isolate the area", "description": "Mark the location, restrict entry, and prevent rainwater or irrigation runoff from leaving the suspected area. Clean visible soil from footwear and equipment without spreading it."},
+    {"title": "Contact the Sto. Tomas City Agriculture Office", "description": "Request confirmation and containment instructions at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph. The office is at the Basement Floor, City Hall Main Building, Gov. Malvar Street, Poblacion I."},
+    {"title": "There is no curative fungicide", "description": "Fungicides do not cure Panama Disease. Do not destroy or chemically treat a suspected plant until the agriculture or plant-health authority provides instructions."}
   ],
   "prevention": [
-    {"title": "Use certified clean material", "description": "Plant certified disease-free tissue-culture plants or other planting material from a reliable source."},
-    {"title": "Keep contaminated soil out", "description": "Control entry to the growing area and clean soil from footwear, tools, equipment, and vehicles before they enter or leave."},
-    {"title": "Manage water movement", "description": "Prevent runoff, floodwater, or irrigation water from carrying soil from suspected or infested areas into clean fields."},
-    {"title": "Use suitable resistant cultivars", "description": "Where locally available and recommended, choose cultivars resistant to the Fusarium race present in the area."}
+    {"title": "Use certified clean plants", "description": "Plant disease-free tissue-culture plants or other material from a trusted, traceable source. Never obtain suckers from a field with unexplained wilting."},
+    {"title": "Keep soil from moving", "description": "Limit farm entry and remove soil from boots, tools, tires, and equipment before moving between plots. Keep dedicated tools for suspect areas."},
+    {"title": "Control water movement", "description": "Maintain drainage and prevent runoff or floodwater from carrying soil from a suspect area into clean plantings, especially during heavy Batangas rains."},
+    {"title": "Plan with the City Agriculture Office", "description": "Ask the Sto. Tomas City Agriculture Office which resistant or tolerant cultivars and containment practices are appropriate before replanting."}
   ]
 }
