@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class DiseaseDetailsActivity : LocaleAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,33 @@ class DiseaseDetailsActivity : LocaleAwareActivity() {
         findViewById<TextView>(R.id.detailDescription).setText(disease.description)
         findViewById<TextView>(R.id.detailSymptoms).setText(disease.symptoms)
         findViewById<TextView>(R.id.detailSpread).setText(disease.spread)
-        findViewById<TextView>(R.id.detailLanguage).setText(R.string.language_current)
+        setupLanguageToggle()
+    }
+
+    private fun setupLanguageToggle() {
+        val english = findViewById<TextView>(R.id.detailLangEN)
+        val tagalog = findViewById<TextView>(R.id.detailLangTL)
+        val currentLanguage = LocaleHelper.selectedLanguage(this)
+
+        fun renderSelection(selectedLanguage: String) {
+            val activeColor = ContextCompat.getColor(this, R.color.white)
+            val inactiveColor = ContextCompat.getColor(this, R.color.button_text_black)
+
+            english.setBackgroundResource(
+                if (selectedLanguage == "en") R.drawable.btn_language_green
+                else android.R.color.transparent
+            )
+            english.setTextColor(if (selectedLanguage == "en") activeColor else inactiveColor)
+
+            tagalog.setBackgroundResource(
+                if (selectedLanguage == "tl") R.drawable.btn_language_green
+                else android.R.color.transparent
+            )
+            tagalog.setTextColor(if (selectedLanguage == "tl") activeColor else inactiveColor)
+        }
+
+        renderSelection(currentLanguage)
+        english.setOnClickListener { changeAppLanguage("en") }
+        tagalog.setOnClickListener { changeAppLanguage("tl") }
     }
 }
