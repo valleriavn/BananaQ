@@ -103,8 +103,10 @@ class LanguageActivity : LocaleAwareActivity() {
     }
 
     private fun selectLanguage(lang: String) {
+        if (selectedLanguage == lang) return
         selectedLanguage = lang
-        updateButtonStates()
+        LocaleHelper.saveLanguage(this, lang)
+        recreate()
     }
 
     private fun updateButtonStates() {
