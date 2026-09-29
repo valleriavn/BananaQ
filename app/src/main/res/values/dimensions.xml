@@ -3,4 +3,18 @@
     <dimen name="container_corner_radius">20dp</dimen>
     <dimen name="scan_result_corner_radius">36dp</dimen>
     <dimen name="pill_corner_radius">999dp</dimen>
+
+    <!-- Compact-phone defaults. Wider configurations override these values. -->
+    <dimen name="page_horizontal_padding">16dp</dimen>
+    <dimen name="header_horizontal_padding">16dp</dimen>
+    <dimen name="bottom_navigation_height">64dp</dimen>
+    <dimen name="bottom_navigation_fab_size">56dp</dimen>
+    <dimen name="bottom_navigation_icon_size">30dp</dimen>
+    <dimen name="bottom_navigation_scan_icon_size">34dp</dimen>
+    <dimen name="bottom_navigation_item_width">52dp</dimen>
+    <dimen name="bottom_navigation_item_height">42dp</dimen>
+    <dimen name="language_choice_width">220dp</dimen>
+    <dimen name="disease_header_image_height">190dp</dimen>
+    <dimen name="home_disease_carousel_height">140dp</dimen>
+    <dimen name="onboarding_logo_top_margin">48dp</dimen>
 </resources>

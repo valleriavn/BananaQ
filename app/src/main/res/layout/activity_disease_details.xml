@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingHorizontal="25dp"
+        android:paddingHorizontal="@dimen/header_horizontal_padding"
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
         <ImageView
@@ -44,7 +44,7 @@
                 android:contentDescription="@string/language_english"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="EN"
+                android:text="@string/language_code_english"
                 android:textColor="@color/button_text_black"
                 android:textSize="14sp" />
 
@@ -57,7 +57,7 @@
                 android:contentDescription="@string/language_tagalog"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="TL"
+                android:text="@string/language_code_tagalog"
                 android:textColor="@color/button_text_black"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -66,7 +66,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginHorizontal="24dp"
+        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
         android:background="@color/banana_border" />
 
     <androidx.core.widget.NestedScrollView
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="32dp"
-            android:paddingHorizontal="20dp">
+            android:paddingHorizontal="@dimen/page_horizontal_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,7 +108,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="@dimen/disease_header_image_height"
                 android:layout_marginTop="4dp"
                 app:cardCornerRadius="@dimen/container_corner_radius"
                 app:cardElevation="0dp"

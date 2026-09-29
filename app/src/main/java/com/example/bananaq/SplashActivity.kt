@@ -19,6 +19,6 @@ class SplashActivity : LocaleAwareActivity() {
             )
         )
         finish()
-        overridePendingTransition(0, 0)
+        overridePendingTransition(R.anim.page_forward_enter, R.anim.page_forward_exit)
     }
 }

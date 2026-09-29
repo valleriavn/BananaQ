@@ -17,7 +17,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 
@@ -30,20 +29,16 @@ class AccountActivity : LocaleAwareActivity() {
     )
 
     private val avatarOptions = listOf(
-        AvatarOption("cartoon_banana", R.drawable.avatar_cartoon_banana, R.string.avatar_cartoon_banana),
-        AvatarOption("cool_banana", R.drawable.avatar_cool_banana, R.string.avatar_cool_banana),
-        AvatarOption("banana_leaf", R.drawable.avatar_banana_leaf, R.string.avatar_banana_leaf),
-        AvatarOption("banana_bunch", R.drawable.avatar_banana_bunch, R.string.avatar_banana_bunch),
-        AvatarOption("banana_tree", R.drawable.avatar_banana_tree, R.string.avatar_banana_tree),
-        AvatarOption("banana_smoothie", R.drawable.avatar_banana_smoothie, R.string.avatar_banana_smoothie),
-        AvatarOption("young_plant", R.drawable.avatar_young_plant, R.string.avatar_young_plant),
-        AvatarOption("farmer_hat", R.drawable.avatar_farmer_hat, R.string.avatar_farmer_hat),
-        AvatarOption("banana_flower", R.drawable.avatar_banana_flower, R.string.avatar_banana_flower),
-        AvatarOption("leaf_scan", R.drawable.avatar_leaf_scan, R.string.avatar_leaf_scan)
+        AvatarOption("farmer_1", R.drawable.avatar_farmer_1, R.string.avatar_farmer_1),
+        AvatarOption("farmer_2", R.drawable.avatar_farmer_2, R.string.avatar_farmer_2),
+        AvatarOption("farmer_3", R.drawable.avatar_farmer_3, R.string.avatar_farmer_3),
+        AvatarOption("farmer_4", R.drawable.avatar_farmer_4, R.string.avatar_farmer_4),
+        AvatarOption("farmer_5", R.drawable.avatar_farmer_5, R.string.avatar_farmer_5),
+        AvatarOption("farmer_6", R.drawable.avatar_farmer_6, R.string.avatar_farmer_6)
     )
 
     private lateinit var profileAvatar: ImageView
-    private var selectedAvatarId = "cartoon_banana"
+    private var selectedAvatarId = DEFAULT_AVATAR_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,85 +47,82 @@ class AccountActivity : LocaleAwareActivity() {
         applySystemInsets()
         setupBottomNavigation()
 
+        UserActionLogger.log("screen_view", mapOf("screen" to "AccountActivity"))
+
         profileAvatar = findViewById(R.id.profileAvatar)
         selectedAvatarId = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-            .getString(KEY_SELECTED_AVATAR, "cartoon_banana") ?: "cartoon_banana"
+            .getString(KEY_SELECTED_AVATAR, DEFAULT_AVATAR_ID) ?: DEFAULT_AVATAR_ID
         updateProfileAvatar()
 
         val openAvatarPicker = View.OnClickListener { showAvatarPicker() }
         findViewById<View>(R.id.profileAvatarFrame).setOnClickListener(openAvatarPicker)
-        findViewById<View>(R.id.editAvatarButton).setOnClickListener(openAvatarPicker)
 
         findViewById<View>(R.id.manualRow).setOnClickListener {
+            UserActionLogger.log("button_click", mapOf("target" to "UserManual"))
             startActivity(Intent(this, UserManualActivity::class.java))
         }
 
         mapOf(
-            R.id.termsRow to UserAgreement.SECTION_TERMS,
-            R.id.privacyRow to UserAgreement.SECTION_PRIVACY,
-            R.id.agreementRow to UserAgreement.SECTION_AGREEMENT
+            R.id.termsRow to UserAgreementActivity.SECTION_TERMS,
+            R.id.privacyRow to UserAgreementActivity.SECTION_PRIVACY,
+            R.id.agreementRow to UserAgreementActivity.SECTION_AGREEMENT
         ).forEach { (id, section) ->
             findViewById<View>(id).setOnClickListener {
-                startActivity(Intent(this, UserAgreement::class.java)
-                    .putExtra(UserAgreement.EXTRA_SECTION, section))
+                UserActionLogger.log("button_click", mapOf("target" to "LegalSection", "section" to section))
+                startActivity(Intent(this, UserAgreementActivity::class.java)
+                    .putExtra(UserAgreementActivity.EXTRA_SECTION, section))
             }
         }
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_account
-        bottomNavigation.setOnItemSelectedListener { itemId ->
-            when (itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
-                    finish()
-                    true
-                }
-                R.id.nav_history -> {
-                    startActivity(Intent(this, HistoryActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_scan -> {
-                    startActivity(Intent(this, ScannerActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_feedback -> {
-                    startActivity(Intent(this, FeedbackActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_account -> true
-                else -> false
-            }
-        }
+        configureBottomNavigation(R.id.nav_account)
     }
 
     private fun updateProfileAvatar() {
         val selected = avatarOptions.find { it.id == selectedAvatarId } ?: avatarOptions.first()
+        if (selected.id != selectedAvatarId) {
+            getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit {
+                putString(KEY_SELECTED_AVATAR, selected.id)
+            }
+        }
         selectedAvatarId = selected.id
         profileAvatar.setImageResource(selected.resId)
         profileAvatar.contentDescription = getString(selected.nameResId)
     }
 
     private fun showAvatarPicker() {
+        UserActionLogger.log("dialog_opened", mapOf("dialog" to "AvatarPicker"))
         val density = resources.displayMetrics.density
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val sheet = layoutInflater.inflate(R.layout.dialog_avatar_picker, null)
         val grid = sheet.findViewById<GridLayout>(R.id.avatarPickerGrid)
         sheet.findViewById<View>(R.id.closeAvatarPicker).setOnClickListener { dialog.dismiss() }
+        val maximumWidth = (440 * density).toInt()
+        val dialogWidth = minOf(
+            (resources.displayMetrics.widthPixels * 0.90f).toInt(),
+            maximumWidth
+        )
+        val columnCount = if (dialogWidth >= (300 * density).toInt()) 3 else 2
+        grid.columnCount = columnCount
 
         avatarOptions.forEachIndexed { index, option ->
             val selected = option.id == selectedAvatarId
             val optionView = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER
-                background = null
-                setPadding(0, 0, 0, 0)
+                background = ContextCompat.getDrawable(
+                    this@AccountActivity,
+                    if (selected) R.drawable.avatar_tile_selected
+                    else R.drawable.avatar_tile_default
+                )
+                foreground = ContextCompat.getDrawable(
+                    this@AccountActivity, R.drawable.nav_item_ripple
+                )
+                clipToOutline = true
+                val padding = (6 * density).toInt()
+                setPadding(padding, padding, padding, padding)
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
                 else getString(R.string.choose_named_avatar, getString(option.nameResId))
@@ -141,21 +133,17 @@ class AccountActivity : LocaleAwareActivity() {
                     getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit {
                         putString(KEY_SELECTED_AVATAR, selectedAvatarId)
                     }
+                    UserActionLogger.log("avatar_changed", mapOf("avatarId" to option.id))
                     updateProfileAvatar()
                     dialog.dismiss()
                 }
             }
 
-            val avatarSize = (82 * density).toInt()
+            val avatarSize = ((if (columnCount == 3) 76 else 86) * density).toInt()
             optionView.addView(FrameLayout(this).apply {
-                background = ContextCompat.getDrawable(this@AccountActivity,
-                    if (selected) R.drawable.bg_avatar_item_selected else R.drawable.bg_avatar_item_normal)
-                clipToOutline = true
                 addView(ImageView(this@AccountActivity).apply {
                     setImageResource(option.resId)
                     scaleType = ImageView.ScaleType.FIT_CENTER
-                    setPadding((9 * density).toInt(), (9 * density).toInt(),
-                        (9 * density).toInt(), (9 * density).toInt())
                     importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                 }, FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
@@ -179,10 +167,11 @@ class AccountActivity : LocaleAwareActivity() {
             }, LinearLayout.LayoutParams(avatarSize, avatarSize))
 
             grid.addView(optionView, GridLayout.LayoutParams(
-                GridLayout.spec(index / 2), GridLayout.spec(index % 2, 1, 1f)
+                GridLayout.spec(index / columnCount),
+                GridLayout.spec(index % columnCount, 1, 1f)
             ).apply {
                 width = 0
-                height = (92 * density).toInt()
+                height = avatarSize + (16 * density).toInt()
                 val margin = (4 * density).toInt()
                 setMargins(margin, margin, margin, margin)
                 setGravity(Gravity.FILL_HORIZONTAL)
@@ -198,7 +187,7 @@ class AccountActivity : LocaleAwareActivity() {
         }
         dialog.show()
         dialog.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.90f).toInt(),
+            dialogWidth,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
@@ -206,21 +195,18 @@ class AccountActivity : LocaleAwareActivity() {
     companion object {
         const val PREFS_NAME = "settings"
         const val KEY_SELECTED_AVATAR = "selected_avatar"
+        private const val DEFAULT_AVATAR_ID = "farmer_1"
 
         fun getSelectedAvatarResId(context: Context): Int {
             val avatarId = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                .getString(KEY_SELECTED_AVATAR, "cartoon_banana") ?: "cartoon_banana"
+                .getString(KEY_SELECTED_AVATAR, DEFAULT_AVATAR_ID) ?: DEFAULT_AVATAR_ID
             return when (avatarId) {
-                "cool_banana" -> R.drawable.avatar_cool_banana
-                "banana_leaf" -> R.drawable.avatar_banana_leaf
-                "banana_bunch" -> R.drawable.avatar_banana_bunch
-                "banana_tree" -> R.drawable.avatar_banana_tree
-                "banana_smoothie" -> R.drawable.avatar_banana_smoothie
-                "young_plant" -> R.drawable.avatar_young_plant
-                "farmer_hat" -> R.drawable.avatar_farmer_hat
-                "banana_flower" -> R.drawable.avatar_banana_flower
-                "leaf_scan" -> R.drawable.avatar_leaf_scan
-                else -> R.drawable.avatar_cartoon_banana
+                "farmer_2" -> R.drawable.avatar_farmer_2
+                "farmer_3" -> R.drawable.avatar_farmer_3
+                "farmer_4" -> R.drawable.avatar_farmer_4
+                "farmer_5" -> R.drawable.avatar_farmer_5
+                "farmer_6" -> R.drawable.avatar_farmer_6
+                else -> R.drawable.avatar_farmer_1
             }
         }
     }

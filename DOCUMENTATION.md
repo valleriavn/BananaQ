@@ -1,48 +1,85 @@
-# BananaQ: Technical & Operational Manual
+# BananaQ Technical and Operational Guide
 
-## 1. Project Overview
-**BananaQ** is an AI-powered Android application designed to identify different types of soil (Black, Red, and Yellow) using machine learning. The app provides detailed agricultural information, including descriptions, primary uses, and advantages/disadvantages for each identified soil type.
+## Product overview
 
-## 2. Technical Stack
-*   **Language:** Kotlin
-*   **UI Framework:** Android XML (Material Design)
-*   **AI Engine:** TensorFlow Lite (TFLite)
-*   **Model:** Custom-trained CNN (`BananaQ_model.tflite`)
-*   **Minimum SDK:** API 24 (Android 7.0)
-*   **Target SDK:** API 35 (Android 15)
+BananaQ is an offline-first Android application that classifies banana-leaf images as Black Sigatoka, Cordana Leaf Spot, Healthy, or Panama Disease. It runs its TensorFlow Lite model on the device, stores scan history locally, and synchronizes consented research records and private scan images to Supabase when a connection is available.
 
-## 3. Core Features
-*   **Real-time AI Classification:** High-speed soil identification.
-*   **Dual Image Source:** Supports live camera capture and gallery uploads.
-*   **Dynamic UI Theming:** The results page automatically changes its color palette to match the identified soil.
-*   **Information Tabs:** Categorized data into Description, Uses, and Pros/Cons.
-*   **Dynamic Data Display:** Real-time clock and date updates on the main dashboard.
+The confidence score describes the model's strength of preference among its supported classes. It is not a guarantee of diagnostic correctness. Low-confidence or ambiguous images are shown as unable to identify; the current model does not contain a dedicated non-banana class.
 
-## 4. Operational Procedure (User Guide)
+## Technology
 
-### Step 1: Image Acquisition
-*   **Capture:** Tap the **Capture** button to launch the camera and take a photo of the soil.
-*   **Upload:** Tap the **Upload** button to select an existing soil image from your gallery.
+- Kotlin and Android XML views
+- Minimum Android 7.0 (API 24), target API 35
+- CameraX for camera capture
+- LiteRT/TensorFlow Lite for on-device inference
+- SQLite for the offline source of truth
+- WorkManager for durable network retries
+- Supabase Auth, Postgres, and private Storage for remote synchronization
 
-### Step 2: Identification
-*   Once an image is selected, tap the large **SCAN** button.
-*   The AI will process the image and calculate the most likely soil type.
+## Main user flow
 
-### Step 3: Reviewing Results
-*   View the **Accuracy Percentage** and prediction.
-*   Switch between **Description**, **Uses**, and **Pros** tabs to read detailed data.
-*   Tap **Back to Home** to perform another scan.
+1. Select English or Tagalog and accept the user agreement.
+2. Open Scan and capture a leaf or choose an image.
+3. BananaQ processes the image locally and presents a prediction when confidence and margin thresholds are met.
+4. Open the result for symptoms, treatment guidance, and prevention information.
+5. Review previous scans in History and optionally submit one feedback response per scan.
 
-## 5. Technical Workflow
+## Data flow
 
-### I. Image Processing
-1.  **Resizing:** Bitmap is scaled to **224x224 pixels**.
-2.  **Normalization:** Pixel values are converted to (0.0 - 1.0).
-3.  **Inference:** The TFLite Interpreter runs the model against the input buffer.
+1. Every app foreground session creates or updates a local `user_sessions` record.
+2. A scan is compressed into `files/scan_photos` and its metadata is written to SQLite.
+3. Session, scan, and feedback mutations add an entry to `sync_outbox`.
+4. WorkManager waits for network connectivity, signs the installation into Supabase anonymously, uploads pending images to the private `bananaq-scans` bucket, and invokes the owner-scoped sync function.
+5. Successfully synchronized outbox entries are removed. Failed work is retried with exponential backoff.
+6. Only the latest 200 scans are retained locally. Managed image files belonging to pruned records are removed.
 
-### II. UI Management
-1.  **Edge-to-Edge:** Uses `WindowInsetsCompat` to avoid overlapping with system bars.
-2.  **Dynamic Content:** Content is injected into a `LinearLayout` container based on the active tab.
+No email, phone number, selected avatar, or selected language is stored in the research database. The selected language and avatar are device-only preferences.
 
----
-*Generated for BananaQ Project Documentation.*
+## Project structure
+
+- `com.example.bananaq`: activities, localization, shared bottom navigation, and reusable UI utilities
+- `com.example.bananaq.data`: SQLite records, session lifecycle, disease content, and scan history
+- `com.example.bananaq.data.sync`: anonymous authentication, incremental WorkManager sync, Storage uploads
+- `com.example.bananaq.ml`: model loading, preprocessing, output validation, and classification
+- `com.example.bananaq.model`: domain models
+- `assets/diseases` and `assets/diseases_tl`: model and localized disease content
+- `supabase/schema.sql`: database function, RLS ownership policies, and private Storage setup
+
+## Build configuration
+
+Copy the values from `supabase.properties.example` into the untracked `local.properties` file:
+
+```properties
+SUPABASE_URL=https://YOUR_PROJECT_REFERENCE.supabase.co
+SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY
+```
+
+Never place a Supabase secret or service-role key in the Android project. See `supabase/README.md` for dashboard setup.
+
+## Quality checks
+
+Run before producing an APK:
+
+```powershell
+.\gradlew.bat testDebugUnitTest
+.\gradlew.bat connectedDebugAndroidTest
+.\gradlew.bat lintDebug
+.\gradlew.bat assembleRelease
+```
+
+Manual checks should include a 320dp phone, a typical phone, tablet, landscape, 200% font size, TalkBack, offline scanning, reconnect-and-sync, camera denial, process recreation, and English/Tagalog switching.
+
+## Release checklist
+
+- Run the current `supabase/schema.sql` and enable Anonymous Sign-Ins.
+- Configure CAPTCHA/Turnstile and review Supabase Auth rate limits before public distribution.
+- Review user agreement and privacy wording with the research adviser.
+- Verify that private images and SQLite data are excluded from Android backup.
+- Validate the model on a held-out field dataset and record per-class precision, recall, F1, and confusion matrix.
+- Update `versionCode` and `versionName` for every distributed build.
+- Configure a protected release signing key outside the repository.
+- Run unit, instrumentation, lint, and release builds.
+
+## Known model limitation
+
+The bundled classifier has four banana-condition classes and no explicit non-banana class. Confidence rejection reduces uncertain outputs but cannot guarantee rejection of unrelated high-confidence images. Resolving that limitation requires model and dataset work rather than UI-only logic.

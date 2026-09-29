@@ -1,0 +1,4 @@
+# Copy these two values into local.properties (do not commit local.properties).
+# Find them in Supabase Dashboard > Project Settings > API.
+SUPABASE_URL=https://YOUR_PROJECT_REFERENCE.supabase.co
+SUPABASE_PUBLISHABLE_KEY=YOUR_SB_PUBLISHABLE_KEY

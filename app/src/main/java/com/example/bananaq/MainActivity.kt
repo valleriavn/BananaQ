@@ -1,6 +1,7 @@
 package com.example.bananaq
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -19,7 +20,6 @@ class MainActivity : LocaleAwareActivity() {
     private lateinit var timeText: TextView
     private lateinit var dateText: TextView
     private lateinit var dayMonthText: TextView
-    
 
     private val handler = Handler(Looper.getMainLooper())
     private val timeUpdater = object : Runnable {
@@ -35,6 +35,7 @@ class MainActivity : LocaleAwareActivity() {
         setContentView(R.layout.activity_main)
 
         applySystemInsets()
+        UserActionLogger.log("screen_view", mapOf("screen" to "MainActivity"))
 
         timeText = findViewById(R.id.timeText)
         dateText = findViewById(R.id.dateText)
@@ -59,36 +60,35 @@ class MainActivity : LocaleAwareActivity() {
         val tvLangEN = findViewById<TextView>(R.id.tvLangEN)
         val tvLangTL = findViewById<TextView>(R.id.tvLangTL)
 
-        // Read current language from preferences
         val sharedPrefs = getSharedPreferences("settings", MODE_PRIVATE)
         var currentLang = sharedPrefs.getString("language", "en") ?: "en"
 
         fun updateToggleUI(lang: String) {
             if (lang == "en") {
                 tvLangEN.setBackgroundResource(R.drawable.btn_language_green)
-                tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
-                tvLangEN.setTypeface(null, android.graphics.Typeface.NORMAL)
+                tvLangEN.setTextColor(ContextCompat.getColor(this, R.color.white))
+                tvLangEN.setTypeface(null, Typeface.NORMAL)
 
                 tvLangTL.background = null
-                tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.button_text_black))
-                tvLangTL.setTypeface(null, android.graphics.Typeface.NORMAL)
+                tvLangTL.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
+                tvLangTL.setTypeface(null, Typeface.NORMAL)
             } else {
                 tvLangTL.setBackgroundResource(R.drawable.btn_language_green)
-                tvLangTL.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
-                tvLangTL.setTypeface(null, android.graphics.Typeface.NORMAL)
+                tvLangTL.setTextColor(ContextCompat.getColor(this, R.color.white))
+                tvLangTL.setTypeface(null, Typeface.NORMAL)
 
                 tvLangEN.background = null
-                tvLangEN.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.button_text_black))
-                tvLangEN.setTypeface(null, android.graphics.Typeface.NORMAL)
+                tvLangEN.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
+                tvLangEN.setTypeface(null, Typeface.NORMAL)
             }
         }
 
-        // Initialize UI based on saved preference
         updateToggleUI(currentLang)
 
         tvLangEN.setOnClickListener {
             if (currentLang != "en") {
                 currentLang = "en"
+                UserActionLogger.log("language_changed", mapOf("language" to "en"))
                 LocaleHelper.saveLanguage(this, "en")
                 recreate()
             }
@@ -97,6 +97,7 @@ class MainActivity : LocaleAwareActivity() {
         tvLangTL.setOnClickListener {
             if (currentLang != "tl") {
                 currentLang = "tl"
+                UserActionLogger.log("language_changed", mapOf("language" to "tl"))
                 LocaleHelper.saveLanguage(this, "tl")
                 recreate()
             }
@@ -104,30 +105,7 @@ class MainActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_home
-        bottomNavigation.setOnItemSelectedListener { itemId ->
-            when (itemId) {
-                R.id.nav_home -> true
-                R.id.nav_history -> {
-                    startActivity(Intent(this, HistoryActivity::class.java))
-                    true
-                }
-                R.id.nav_scan -> {
-                    startActivity(Intent(this, ScannerActivity::class.java))
-                    true
-                }
-                R.id.nav_feedback -> {
-                    startActivity(Intent(this, FeedbackActivity::class.java))
-                    true
-                }
-                R.id.nav_account -> {
-                    startActivity(Intent(this, AccountActivity::class.java))
-                    false
-                }
-                else -> false
-            }
-        }
+        configureBottomNavigation(R.id.nav_home)
     }
 
     private fun updateDateTime() {
@@ -142,6 +120,7 @@ class MainActivity : LocaleAwareActivity() {
     }
 
     private fun showDiseaseDetails(diseaseName: String) {
+        UserActionLogger.log("disease_card_clicked", mapOf("diseaseName" to diseaseName))
         val intent = Intent(this, DiseaseDetailsActivity::class.java).apply {
             putExtra("DISEASE_NAME", diseaseName)
         }
@@ -152,7 +131,6 @@ class MainActivity : LocaleAwareActivity() {
         super.onStart()
         findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation).selectedItemId = R.id.nav_home
         
-        // Refresh language toggle in case it was changed elsewhere
         setupLanguageToggle()
         
         handler.post(timeUpdater)

@@ -11,10 +11,8 @@ import android.view.ViewAnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
-import com.example.bananaq.R
 
 class LanguageActivity : LocaleAwareActivity() {
 
@@ -90,7 +88,6 @@ class LanguageActivity : LocaleAwareActivity() {
                 addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         startActivity(Intent(this@LanguageActivity, GetStartedActivity::class.java))
-                        overridePendingTransition(0, 0)
                         finish()
                     }
                 })
@@ -98,7 +95,6 @@ class LanguageActivity : LocaleAwareActivity() {
             }
         }
 
-        // Initialize with default language
         updateButtonStates()
     }
 
@@ -111,19 +107,15 @@ class LanguageActivity : LocaleAwareActivity() {
 
     private fun updateButtonStates() {
         if (selectedLanguage == "en") {
-            // English Active
             btnEnglish.setBackgroundResource(R.drawable.btn_language_green)
             labelEnglish.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-            // Tagalog Inactive
             btnTagalog.setBackgroundResource(R.drawable.btn_language_yellow)
             labelTagalog.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
         } else {
-            // Tagalog Active
             btnTagalog.setBackgroundResource(R.drawable.btn_language_green)
             labelTagalog.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-            // English Inactive
             btnEnglish.setBackgroundResource(R.drawable.btn_language_yellow)
             labelEnglish.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
         }

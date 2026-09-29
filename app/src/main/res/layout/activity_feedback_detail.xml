@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="BananaQ"
+            android:text="@string/app_name"
             android:textColor="@color/banana_green"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -423,7 +423,7 @@
     <com.example.bananaq.RaisedBottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/bottom_navigation_height"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

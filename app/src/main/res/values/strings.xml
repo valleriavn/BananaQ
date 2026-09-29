@@ -2,6 +2,8 @@
     <string name="app_name">BananaQ</string>
     <string name="language_english">English</string>
     <string name="language_tagalog">Tagalog</string>
+    <string name="language_code_english" translatable="false">EN</string>
+    <string name="language_code_tagalog" translatable="false">TL</string>
     <string name="language_current">English</string>
     <string name="language_welcome">Have an agriculture-filled day!</string>
     <string name="language_instruction">Choose your preferred language</string>
@@ -19,6 +21,7 @@
     <string name="scanned_photo">Scanned photo</string>
     <string name="scan_result">Scan Result</string>
     <string name="scan_instruction">Align the banana leaf within the frame to scan</string>
+    <string name="scanner_header">Scan a banana leaf</string>
     <string name="choose_photo">Choose a photo</string>
     <string name="capture_photo">Capture leaf photo</string>
     <string name="flash_on">Turn flash on</string>
@@ -64,8 +67,9 @@
     <string name="photo_picker_missing">No photo picker is installed.</string>
     <string name="processing_photo">Processing photo…</string>
     <string name="scan_failed">Unable to scan this photo. Try another image or restart the app.</string>
-    <string name="not_banana_leaf">Not a Banana Leaf!</string>
-    <string name="unable_identify">Unable to confidently identify</string>
+    <string name="unable_identify">Unable to identify</string>
+    <string name="unable_identify_message">The image could not be confidently identified. Please scan a clear, well-lit banana leaf.</string>
+    <string name="try_again">Try Again</string>
     <string name="library_label">Library</string>
     <string name="feedback_select_rating">Please select a rating</string>
     <string name="feedback_select_scan">Select a scan from your history first.</string>

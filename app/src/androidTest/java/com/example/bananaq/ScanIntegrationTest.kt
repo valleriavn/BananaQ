@@ -4,9 +4,9 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import data.DiseaseRepository
-import ml.DiseaseClassifier
-import ml.TFLiteModel
+import com.example.bananaq.data.DiseaseRepository
+import com.example.bananaq.ml.DiseaseClassifier
+import com.example.bananaq.ml.TFLiteModel
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

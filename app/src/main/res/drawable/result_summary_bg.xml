@@ -3,13 +3,11 @@
         <shape>
             <solid android:color="@color/banana_surface" />
             <stroke android:width="1dp" android:color="@color/banana_border" />
-            <corners android:topLeftRadius="@dimen/scan_result_corner_radius" android:topRightRadius="@dimen/scan_result_corner_radius" />
-        </shape>
-    </item>
-    <item android:width="48dp" android:height="4dp" android:top="12dp" android:gravity="top|center_horizontal">
-        <shape>
-            <solid android:color="@color/banana_muted" />
-            <corners android:radius="2dp" />
+            <corners
+                android:topLeftRadius="@dimen/container_corner_radius"
+                android:topRightRadius="@dimen/container_corner_radius"
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="0dp" />
         </shape>
     </item>
     <!-- Mask the lower stroke so the result panel joins the navbar cleanly. -->

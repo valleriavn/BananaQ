@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme forced to Light theme. -->
+    <!-- Keep night-mode resources visually consistent with the light-only app. -->
     <style name="Base.Theme.BananaQ" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Force light theme colors -->
     </style>
 </resources>

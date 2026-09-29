@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Path
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -13,7 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 
-/** Full-width bottom navigation with a centered, raised Scan action. */
+/** Full-width bottom navigation with a centered Scan action and no empty top strip. */
 class RaisedBottomNavigationView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -29,6 +28,12 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
     )
 
     private val density = resources.displayMetrics.density
+    private val barHeight = resources.getDimensionPixelSize(R.dimen.bottom_navigation_height)
+    private val fabSize = resources.getDimensionPixelSize(R.dimen.bottom_navigation_fab_size)
+    private val standardIconSize = resources.getDimensionPixelSize(R.dimen.bottom_navigation_icon_size)
+    private val scanIconSize = resources.getDimensionPixelSize(R.dimen.bottom_navigation_scan_icon_size)
+    private val itemIndicatorWidth = resources.getDimensionPixelSize(R.dimen.bottom_navigation_item_width)
+    private val itemIndicatorHeight = resources.getDimensionPixelSize(R.dimen.bottom_navigation_item_height)
     private val tabs = mutableListOf<Tab>()
     private val barBackground: View
     private val navigationRow: LinearLayout
@@ -47,10 +52,10 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
         background = null
 
-        barBackground = NotchedBarView(context)
+        barBackground = NavigationBarBackgroundView(context)
         addView(
             barBackground,
-            LayoutParams(LayoutParams.MATCH_PARENT, dp(BAR_HEIGHT_DP), Gravity.BOTTOM)
+            LayoutParams(LayoutParams.MATCH_PARENT, barHeight, Gravity.BOTTOM)
         )
 
         navigationRow = LinearLayout(context).apply {
@@ -61,7 +66,7 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
         }
         addView(
             navigationRow,
-            LayoutParams(LayoutParams.MATCH_PARENT, dp(BAR_HEIGHT_DP), Gravity.BOTTOM)
+            LayoutParams(LayoutParams.MATCH_PARENT, barHeight, Gravity.BOTTOM)
         )
 
         addStandardTab(R.id.nav_home, R.drawable.ic_nav_home_rounded, R.string.nav_home)
@@ -91,7 +96,7 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
         val iconHolder = FrameLayout(context)
         root.addView(
             iconHolder,
-            FrameLayout.LayoutParams(dp(44), dp(44), Gravity.CENTER)
+            FrameLayout.LayoutParams(itemIndicatorWidth, itemIndicatorHeight, Gravity.CENTER)
         )
 
         val iconView = ImageView(context).apply {
@@ -101,7 +106,7 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
         }
         iconHolder.addView(
             iconView,
-            FrameLayout.LayoutParams(dp(30), dp(30), Gravity.CENTER)
+            FrameLayout.LayoutParams(standardIconSize, standardIconSize, Gravity.CENTER)
         )
 
         navigationRow.addView(
@@ -117,6 +122,7 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
             isFocusable = true
             contentDescription = context.getString(R.string.nav_scan)
             elevation = dp(8).toFloat()
+            stateListAnimator = null
             setOnClickListener { select(R.id.nav_scan) }
         }
 
@@ -133,14 +139,13 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
         }
         iconHolder.addView(
             iconView,
-            FrameLayout.LayoutParams(dp(36), dp(36), Gravity.CENTER)
+            FrameLayout.LayoutParams(scanIconSize, scanIconSize, Gravity.CENTER)
         )
 
         addView(
-            root,
-            LayoutParams(dp(FAB_SIZE_DP), dp(FAB_SIZE_DP), Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply {
-                topMargin = dp(1)
-            }
+            root, LayoutParams(
+                fabSize, fabSize, Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            ).apply { topMargin = (barHeight - fabSize) / 2 }
         )
         root.bringToFront()
         tabs += Tab(R.id.nav_scan, root, iconHolder, iconView, true)
@@ -157,10 +162,10 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
     fun setSystemBottomInset(bottomInset: Int) {
         systemBottomInset = bottomInset
         barBackground.layoutParams = barBackground.layoutParams.apply {
-            height = dp(BAR_HEIGHT_DP) + bottomInset
+            height = barHeight + bottomInset
         }
         navigationRow.layoutParams = navigationRow.layoutParams.apply {
-            height = dp(BAR_HEIGHT_DP) + bottomInset
+            height = barHeight + bottomInset
         }
         navigationRow.setPadding(0, 0, 0, bottomInset)
     }
@@ -192,26 +197,27 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
                 )
             }
 
-            val targetScale = if (selected) 1.06f else 1f
+            val targetScale = if (selected) {
+                if (tab.isScanFab) 1.04f else 1.08f
+            } else 1f
             if (animate) {
-                tab.root.animate()
+                tab.iconHolder.animate()
                     .scaleX(targetScale)
                     .scaleY(targetScale)
                     .setDuration(180L)
                     .start()
             } else {
-                tab.root.scaleX = targetScale
-                tab.root.scaleY = targetScale
+                tab.iconHolder.scaleX = targetScale
+                tab.iconHolder.scaleY = targetScale
             }
         }
     }
 
     private fun dp(value: Int): Int = (value * density + 0.5f).toInt()
 
-    /** Draws the soft center cradle shown in the selected reference design. */
-    private class NotchedBarView(context: Context) : View(context) {
+    /** Draws one continuous surface so page content cannot show through above the bar. */
+    private class NavigationBarBackgroundView(context: Context) : View(context) {
         private val density = resources.displayMetrics.density
-        private val path = Path()
         private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.FILL
             color = ContextCompat.getColor(context, R.color.banana_surface)
@@ -224,38 +230,9 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            val center = width / 2f
-            val notchHalfWidth = 46f * density
-            val notchShoulder = 34f * density
-            val notchDepth = 34f * density
             val top = borderPaint.strokeWidth / 2f
-            val bottom = height.toFloat() + borderPaint.strokeWidth
-
-            path.reset()
-            path.moveTo(0f, top)
-            path.lineTo(center - notchHalfWidth, top)
-            path.cubicTo(
-                center - notchShoulder, top,
-                center - notchShoulder, notchDepth,
-                center, notchDepth
-            )
-            path.cubicTo(
-                center + notchShoulder, notchDepth,
-                center + notchShoulder, top,
-                center + notchHalfWidth, top
-            )
-            path.lineTo(width.toFloat(), top)
-            path.lineTo(width.toFloat(), bottom)
-            path.lineTo(0f, bottom)
-            path.close()
-
-            canvas.drawPath(path, fillPaint)
-            canvas.drawPath(path, borderPaint)
+            canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), fillPaint)
+            canvas.drawLine(0f, top, width.toFloat(), top, borderPaint)
         }
-    }
-
-    companion object {
-        private const val BAR_HEIGHT_DP = 56
-        private const val FAB_SIZE_DP = 68
     }
 }

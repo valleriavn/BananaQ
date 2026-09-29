@@ -1,8 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Base application theme. -->
     <style name="Base.Theme.BananaQ" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.BananaQ" parent="Base.Theme.BananaQ">
@@ -32,10 +29,10 @@
     </style>
 
     <style name="BananaQWindowAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/page_fade_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/page_fade_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/page_fade_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/page_fade_out</item>
+        <item name="android:activityOpenEnterAnimation">@anim/page_forward_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/page_forward_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/page_back_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/page_back_exit</item>
     </style>
 
     <style name="DiseaseLibraryCard" parent="Widget.MaterialComponents.CardView">

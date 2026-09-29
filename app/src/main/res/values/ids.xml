@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- IDs used by the programmatic bottom navigation component. -->
+    <item name="nav_home" type="id" />
+    <item name="nav_history" type="id" />
+    <item name="nav_scan" type="id" />
+    <item name="nav_feedback" type="id" />
+    <item name="nav_account" type="id" />
+</resources>

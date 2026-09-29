@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -20,7 +21,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/bananaq_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BananaQ">
+        android:theme="@style/Theme.BananaQ"
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -57,7 +59,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".UserAgreement"
+            android:name=".UserAgreementActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 

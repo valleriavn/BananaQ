@@ -42,7 +42,7 @@ class ScanHistoryAdapter(
             holder.ivScan.setImageDrawable(null)
             item.imageUri?.let { holder.ivScan.setImageURI(android.net.Uri.parse(it)) }
             holder.tvDiseaseName.text = if (!item.isValid) {
-                holder.itemView.context.getString(R.string.not_banana_leaf)
+                holder.itemView.context.getString(R.string.unable_identify)
             } else item.diseaseName?.let {
                 localizedDiseaseName(holder.itemView.context, it)
             }

@@ -1,10 +1,12 @@
 package com.example.bananaq
 
+import com.example.bananaq.data.BananaQDatabase
+import com.example.bananaq.data.ScanHistoryStore
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,8 +30,8 @@ class FeedbackActivity : LocaleAwareActivity() {
         val rvFeedback = findViewById<RecyclerView>(R.id.rvFeedbackSelection)
         val emptyState = findViewById<View>(R.id.emptyState)
 
-        val feedbackItems = data.ScanHistoryStore(this).items()
-        val submittedScanIds = getSharedPreferences("scan_feedback", MODE_PRIVATE).all.keys
+        val feedbackItems = ScanHistoryStore(this).items()
+        val submittedScanIds = BananaQDatabase.get(this).feedbackScanIds()
 
         if (feedbackItems.isEmpty()) {
             emptyState.visibility = View.VISIBLE
@@ -56,32 +58,6 @@ class FeedbackActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_feedback
-        bottomNavigation.setOnItemSelectedListener { itemId ->
-            when (itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
-                    finish()
-                    true
-                }
-                R.id.nav_scan -> {
-                    startActivity(Intent(this, ScannerActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_history -> {
-                    startActivity(Intent(this, HistoryActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_feedback -> true
-                R.id.nav_account -> {
-                    startActivity(Intent(this, AccountActivity::class.java))
-                    false
-                }
-                else -> false
-            }
-        }
+        configureBottomNavigation(R.id.nav_feedback)
     }
 }

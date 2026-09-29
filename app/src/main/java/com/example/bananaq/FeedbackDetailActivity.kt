@@ -1,7 +1,10 @@
 package com.example.bananaq
 
+import com.example.bananaq.data.BananaQDatabase
+import com.example.bananaq.data.FeedbackRecord
+import com.example.bananaq.data.sync.SupabaseSyncManager
+
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -17,7 +20,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -43,7 +45,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         diseaseName = if (resultValid) {
             intent.getStringExtra("DISEASE_NAME") ?: getString(R.string.unknown_label)
         } else {
-            getString(R.string.not_banana_leaf)
+            getString(R.string.unable_identify)
         }
         accuracy = if (resultValid) intent.getStringExtra("ACCURACY") ?: "" else ""
         val diseaseNameView = findViewById<TextView>(R.id.tvDiseaseName)
@@ -167,8 +169,8 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
 
     private fun saveFeedback() {
         val scanId = intent.getStringExtra("SCAN_ID") ?: return
-        val preferences = getSharedPreferences("scan_feedback", MODE_PRIVATE)
-        if (preferences.contains(scanId)) {
+        val database = BananaQDatabase.get(this)
+        if (database.feedbackForScan(scanId) != null) {
             restoreSubmittedFeedback()
             showSubmittedState(submittedComments)
             return
@@ -176,30 +178,27 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         val comments = findViewById<EditText>(R.id.etComments).text.toString().trim()
         submittedComments = comments
         submittedAt = System.currentTimeMillis()
-        val feedback = org.json.JSONObject().apply {
-            put("rating", selectedRating)
-            put("comments", comments)
-            put("time", submittedAt)
-        }
-        preferences.edit()
-            .putString(scanId, feedback.toString()).apply()
-        submitted = true
-        showSubmittedState(comments)
+        submitted = database.insertFeedback(FeedbackRecord(
+            feedbackId = java.util.UUID.randomUUID().toString(),
+            scanId = scanId,
+            accuracyRating = selectedRating,
+            comments = comments,
+            submittedAt = submittedAt
+        ))
+        if (submitted) {
+            UserActionLogger.logFeedbackEvent(scanId, selectedRating, comments)
+            SupabaseSyncManager.request(applicationContext)
+            showSubmittedState(comments)
+        } else restoreSubmittedFeedback()
     }
 
     private fun restoreSubmittedFeedback() {
         val scanId = intent.getStringExtra("SCAN_ID") ?: return
-        val saved = getSharedPreferences("scan_feedback", MODE_PRIVATE)
-            .getString(scanId, null) ?: return
-        try {
-            val feedback = org.json.JSONObject(saved)
-            selectedRating = feedback.optString("rating")
-            submittedComments = feedback.optString("comments")
-            submittedAt = feedback.optLong("time")
-            submitted = true
-        } catch (_: org.json.JSONException) {
-            // Ignore a damaged entry and allow the user to submit fresh feedback.
-        }
+        val feedback = BananaQDatabase.get(this).feedbackForScan(scanId) ?: return
+        selectedRating = feedback.accuracyRating
+        submittedComments = feedback.comments
+        submittedAt = feedback.submittedAt
+        submitted = true
     }
 
     private fun showSubmittedState(comments: String) {
@@ -266,33 +265,6 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_feedback
-        bottomNavigation.setOnItemSelectedListener { itemId ->
-            when (itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
-                    finish()
-                    true
-                }
-                R.id.nav_scan -> {
-                    startActivity(Intent(this, ScannerActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_history -> {
-                    startActivity(Intent(this, HistoryActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_feedback -> true
-                R.id.nav_account -> {
-                    startActivity(Intent(this, AccountActivity::class.java))
-                    false
-                }
-                else -> false
-            }
-        }
+        configureBottomNavigation(R.id.nav_feedback)
     }
 }

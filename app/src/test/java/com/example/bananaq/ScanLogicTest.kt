@@ -1,9 +1,9 @@
 package com.example.bananaq
 
-import ml.ImagePreprocessor
-import ml.PredictionScores
-import ml.ScanImageLoader
-import model.ConfidenceLevel
+import com.example.bananaq.ml.ImagePreprocessor
+import com.example.bananaq.ml.PredictionScores
+import com.example.bananaq.ml.ScanImageLoader
+import com.example.bananaq.model.ConfidenceLevel
 import org.junit.Assert.*
 import org.junit.Test
 

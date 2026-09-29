@@ -9,7 +9,6 @@
     app:cardElevation="0dp"
     app:cardBackgroundColor="@color/banana_surface">
 
-    <!-- Wrapper for the border look -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

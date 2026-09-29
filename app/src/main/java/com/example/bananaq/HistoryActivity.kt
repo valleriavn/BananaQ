@@ -1,10 +1,11 @@
 package com.example.bananaq
 
+import com.example.bananaq.data.ScanHistoryStore
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,7 +29,7 @@ class HistoryActivity : LocaleAwareActivity() {
         val rvHistory = findViewById<RecyclerView>(R.id.rvHistory)
         val emptyState = findViewById<View>(R.id.emptyState)
 
-        val historyItems = data.ScanHistoryStore(this).items()
+        val historyItems = ScanHistoryStore(this).items()
 
         if (historyItems.isEmpty()) {
             emptyState.visibility = View.VISIBLE
@@ -50,32 +51,6 @@ class HistoryActivity : LocaleAwareActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigation = findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_history
-        bottomNavigation.setOnItemSelectedListener { itemId ->
-            when (itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
-                    finish()
-                    true
-                }
-                R.id.nav_scan -> {
-                    startActivity(Intent(this, ScannerActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_history -> true
-                R.id.nav_feedback -> {
-                    startActivity(Intent(this, FeedbackActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_account -> {
-                    startActivity(Intent(this, AccountActivity::class.java))
-                    false
-                }
-                else -> false
-            }
-        }
+        configureBottomNavigation(R.id.nav_history)
     }
 }

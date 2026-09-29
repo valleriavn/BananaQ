@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/banana_cream"
-    tools:context=".UserAgreement">
+    tools:context=".UserAgreementActivity">
 
-    <!-- Fixed Branding Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="25dp"
+        android:paddingHorizontal="@dimen/header_horizontal_padding"
         android:paddingTop="20dp"
         android:background="@color/banana_cream"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="BananaQ"
+                android:text="@string/app_name"
                 android:textColor="@color/banana_green"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -66,7 +65,6 @@
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/agreementScroll"
         android:layout_width="match_parent"
@@ -84,7 +82,6 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <!-- Back button and current agreement section title -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,13 +113,12 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- User Agreement Card -->
             <LinearLayout
                 android:id="@+id/userAgreementContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
@@ -163,7 +159,6 @@
                         android:textSize="14sp"
                         android:lineSpacingExtra="3dp" />
 
-                    <!-- Section 1 -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -263,25 +258,23 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 2. Terms of Use Title -->
             <TextView
                 android:id="@+id/titleTermsOfUse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/page_horizontal_padding"
                 android:layout_marginTop="32dp"
                 android:text="Terms of Use"
                 android:textColor="@color/banana_text_dark"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
-            <!-- Terms of Use Card -->
             <LinearLayout
                 android:id="@+id/termsOfUseContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
@@ -426,25 +419,23 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 3. Privacy Policy Title -->
             <TextView
                 android:id="@+id/titlePrivacyPolicy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/page_horizontal_padding"
                 android:layout_marginTop="32dp"
                 android:text="Privacy Policy"
                 android:textColor="@color/banana_text_dark"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
-            <!-- Privacy Policy Card -->
             <LinearLayout
                 android:id="@+id/privacyPolicyContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
@@ -487,7 +478,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="The application may collect the following information:\n\na. User Information\n•  Name\n•  Email address\n•  User feedback and survey responses\n\nb. Uploaded Images\n•  Banana leaf images submitted for disease analysis.\n\nc. Device Information\n•  Android version\n•  Device model\n•  Application version\n•  Diagnostic logs necessary for troubleshooting\n\nd. Usage Data\n•  Frequency of application use\n•  Disease detection history\n•  Feature usage statistics"
+                        android:text="The application may collect the following information when an internet connection is available:\n\na. Scan Images and Results\n•  Banana leaf images submitted for analysis\n•  Predicted condition, confidence score, and scan time\n\nb. Feedback and Session Data\n•  Accuracy rating and optional comments\n•  Anonymous session start and activity times\n•  A random Supabase installation identity used only to protect each device’s records\n\nThe selected avatar and language remain on the device and are not included in the research database."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
 
@@ -519,7 +510,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Reasonable technical and administrative safeguards are implemented to protect user information from unauthorized access, disclosure, or misuse.\n\nHowever, no electronic storage system or internet transmission is completely secure, and absolute security cannot be guaranteed."
+                        android:text="Scans are stored locally first. Pending records are synchronized over encrypted HTTPS when a connection is available. Remote records are protected by authenticated ownership rules, and scan images are stored in a private Supabase Storage bucket. Android cloud backup excludes the local scan database, scan images, and authentication credentials.\n\nHowever, no electronic storage system or internet transmission is completely secure, and absolute security cannot be guaranteed."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
 
@@ -631,19 +622,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="For privacy concerns, account concerns, or policy questions, users may contact the BananaQ development team through the official support channels inside the application.\n\nEmail: bananaq@gmail.com"
+                        android:text="For privacy concerns, account concerns, or policy questions, users may contact the BananaQ development team through the official support channels inside the application.\n\nEmail: bananaq020104@gmail.com\nPhone: 09917583912"
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
 
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Bottom Confirmation Section -->
             <LinearLayout
                 android:id="@+id/agreementConfirmation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:layout_marginTop="24dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -672,7 +662,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="30dp"
+                android:paddingHorizontal="@dimen/page_horizontal_padding"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
                 android:gravity="center">

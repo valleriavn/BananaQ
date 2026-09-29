@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 
 internal enum class ManualTopic(val title: Int, val body: Int) {
     HOW_TO(R.string.manual_how_to, R.string.manual_how_to_body),

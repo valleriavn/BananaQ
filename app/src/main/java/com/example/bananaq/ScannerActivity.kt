@@ -19,15 +19,15 @@ import android.content.res.ColorStateList
 
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 
-import data.DiseaseRepository
-import ml.DiseaseClassifier
-import ml.TFLiteModel
-import model.ClassificationResult
-import model.ConfidenceLevel
+import com.example.bananaq.data.DiseaseRepository
+import com.example.bananaq.data.ScanProcessor
+import com.example.bananaq.ml.ScanImageLoader
+import com.example.bananaq.model.ClassificationResult
+import com.example.bananaq.model.ConfidenceLevel
+import com.example.bananaq.model.DiseaseInfo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ScannerActivity : LocaleAwareActivity() {
@@ -48,8 +48,7 @@ class ScannerActivity : LocaleAwareActivity() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
-    private lateinit var liteModel: TFLiteModel
-    private lateinit var classifier: DiseaseClassifier
+    private lateinit var scanProcessor: ScanProcessor
     private lateinit var diseaseRepository: DiseaseRepository
 
     private var classificationResult: ClassificationResult? = null
@@ -77,6 +76,7 @@ class ScannerActivity : LocaleAwareActivity() {
             alpha = 0.2f
         }
         findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
+        findViewById<View>(R.id.scannerHeader).visibility = View.GONE
         findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
     }
 
@@ -113,7 +113,7 @@ class ScannerActivity : LocaleAwareActivity() {
         val uri = selectedImage ?: return
         worker.execute {
             try {
-                val bitmap = ml.ScanImageLoader.load(applicationContext, Uri.parse(uri))
+                val bitmap = ScanImageLoader.load(applicationContext, Uri.parse(uri))
                 runOnUiThread {
                     if (!isDestroyed && !isFinishing && selectedImage == uri) showPhoto(bitmap)
                     else bitmap.recycle()
@@ -153,7 +153,7 @@ class ScannerActivity : LocaleAwareActivity() {
         // Use the wrapped Activity context so recommendation JSON follows the
         // language currently selected in BananaQ.
         diseaseRepository = DiseaseRepository(this)
-        setupBottomNavigation()
+        scanProcessor = ScanProcessor(applicationContext)
         setupBottomSheet()
         findViewById<View>(R.id.btnBack).setOnClickListener {
             if (classificationResult != null) hideResult() else finish()
@@ -292,7 +292,7 @@ class ScannerActivity : LocaleAwareActivity() {
         classificationResult = null
         detailsExpanded = false
         fullResultCard.visibility = View.GONE
-        findViewById<View>(R.id.predictionSummary).visibility = View.GONE
+        findViewById<View>(R.id.compactResultPanel).visibility = View.GONE
         isProcessing = true
         findViewById<View>(R.id.controlsLayout).alpha = 0.55f
         findViewById<View>(R.id.captureCircle).isEnabled = false
@@ -302,7 +302,7 @@ class ScannerActivity : LocaleAwareActivity() {
         worker.execute {
             var bitmap: Bitmap? = null
             try {
-                val decoded = ml.ScanImageLoader.load(applicationContext, uri)
+                val decoded = scanProcessor.load(uri)
                 bitmap = decoded
                 val preview = requireNotNull(decoded.copy(Bitmap.Config.ARGB_8888, false))
                 runOnUiThread {
@@ -311,20 +311,9 @@ class ScannerActivity : LocaleAwareActivity() {
                         showPhotoMode()
                     } else preview.recycle()
                 }
-                if (!::liteModel.isInitialized) liteModel = TFLiteModel(applicationContext)
-                if (!::classifier.isInitialized) classifier = DiseaseClassifier(liteModel)
-                val result = classifier.classify(decoded)
-                var savedPhoto: String? = null
-                try {
-                    val directory = java.io.File(filesDir, "scan_photos")
-                    check(directory.isDirectory || directory.mkdirs())
-                    val photo = java.io.File.createTempFile("scan_", ".jpg", directory)
-                    photo.outputStream().use { check(decoded.compress(Bitmap.CompressFormat.JPEG, 90, it)) }
-                    savedPhoto = Uri.fromFile(photo).toString()
-                    data.ScanHistoryStore(applicationContext).add(result, currentScanId, savedPhoto)
-                } catch (error: Exception) {
-                    Log.w("ScannerActivity", "Unable to save scan history", error)
-                }
+                val processed = scanProcessor.classifyAndStore(decoded, currentScanId)
+                val result = processed.result
+                val savedPhoto = processed.savedImageUri
                 runOnUiThread {
                     if (!isDestroyed && !isFinishing) {
                         selectedImage = savedPhoto ?: selectedImage
@@ -358,22 +347,37 @@ class ScannerActivity : LocaleAwareActivity() {
 
     private fun displayResult(result: ClassificationResult) {
         findViewById<TextView>(R.id.scanResultTitle).setText(R.string.scan_result)
+        val compactPanel = findViewById<View>(R.id.compactResultPanel)
+        val compactHandle = findViewById<View>(R.id.compactResultDragHandle)
+        val tryAgain = findViewById<View>(R.id.btnTryAgain)
         if (result.isValid && detailsExpanded) {
-            findViewById<View>(R.id.predictionSummary).visibility = View.GONE
+            compactPanel.visibility = View.GONE
             showFullResult()
         } else if (!result.isValid) {
-            showUncertainResult(result)
             fullResultCard.visibility = View.GONE
             showCompactResultMode()
             findViewById<TextView>(R.id.predictionSummary).apply {
-                setText(R.string.unable_identify)
+                setText(R.string.unable_identify_message)
                 setOnClickListener(null)
                 isClickable = false
-                revealResultView(this)
             }
+            compactHandle.visibility = View.GONE
+            compactHandle.setOnClickListener(null)
+            tryAgain.visibility = View.VISIBLE
+            tryAgain.setOnClickListener { hideResult() }
+            revealResultView(compactPanel)
         } else {
             fullResultCard.visibility = View.GONE
             showCompactResultMode()
+            tryAgain.visibility = View.GONE
+            tryAgain.setOnClickListener(null)
+            val openDetails = View.OnClickListener {
+                detailsExpanded = true
+                compactPanel.visibility = View.GONE
+                showFullResult()
+            }
+            compactHandle.visibility = View.VISIBLE
+            compactHandle.setOnClickListener(openDetails)
             findViewById<TextView>(R.id.predictionSummary).apply {
                 val heading = getString(R.string.prediction_heading,
                     localizedDiseaseName(this@ScannerActivity, result.diseaseName),
@@ -385,20 +389,16 @@ class ScannerActivity : LocaleAwareActivity() {
                     setSpan(android.text.style.ForegroundColorSpan(
                         ContextCompat.getColor(this@ScannerActivity, R.color.banana_text_dark)),
                         0, heading.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(android.text.style.RelativeSizeSpan(0.8f), heading.length + 1, length,
+                    setSpan(android.text.style.RelativeSizeSpan(0.82f), heading.length + 1, length,
                         android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     setSpan(android.text.style.ForegroundColorSpan(
                         ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)),
                         heading.length + 1, length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
                 isClickable = true
-                setOnClickListener {
-                    detailsExpanded = true
-                    visibility = View.GONE
-                    showFullResult()
-                }
-                revealResultView(this)
+                setOnClickListener(openDetails)
             }
+            revealResultView(compactPanel)
         }
     }
 
@@ -736,7 +736,7 @@ class ScannerActivity : LocaleAwareActivity() {
         textView.setTypeface(null, Typeface.NORMAL)
     }
     private fun showSymptoms(
-        info: model.DiseaseInfo
+        info: DiseaseInfo
     ) {
         info.symptoms.forEachIndexed {
                 index,
@@ -749,7 +749,7 @@ class ScannerActivity : LocaleAwareActivity() {
         }
     }
     private fun showTreatment(
-        info: model.DiseaseInfo
+        info: DiseaseInfo
     ) {
         info.treatment.forEachIndexed {
                 index,
@@ -762,7 +762,7 @@ class ScannerActivity : LocaleAwareActivity() {
         }
     }
     private fun showPrevention(
-        info: model.DiseaseInfo
+        info: DiseaseInfo
     ) {
         info.prevention.forEachIndexed {
                 index,
@@ -870,7 +870,7 @@ class ScannerActivity : LocaleAwareActivity() {
         })
     }
     private fun hideResult() {
-        findViewById<View>(R.id.predictionSummary).visibility = View.GONE
+        findViewById<View>(R.id.compactResultPanel).visibility = View.GONE
         classificationResult = null
         selectedImage = null
         findViewById<android.widget.ImageView>(R.id.scannedPhoto).apply {
@@ -880,8 +880,9 @@ class ScannerActivity : LocaleAwareActivity() {
         photoBitmap?.takeIf { !it.isRecycled }?.recycle()
         photoBitmap = null
         findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
+        findViewById<View>(R.id.scannerHeader).visibility = View.VISIBLE
         findViewById<View>(R.id.cameraScrim).visibility = View.GONE
-        findViewById<View>(R.id.btnBack).visibility = View.GONE
+        findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
         viewFinder.visibility = View.VISIBLE
         for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
             findViewById<View>(id).visibility = View.VISIBLE
@@ -899,59 +900,10 @@ class ScannerActivity : LocaleAwareActivity() {
                 BottomSheetBehavior.STATE_HIDDEN
         }
     }
-    private fun setupBottomNavigation() {
-        val bottomNavigation =
-            findViewById<RaisedBottomNavigationView>(
-                R.id.bottomNavigation
-            )
-        bottomNavigation.selectedItemId =
-            R.id.nav_scan
-        bottomNavigation.setOnItemSelectedListener {
-                itemId ->
-            when (itemId) {
-                R.id.nav_home -> {
-                    startActivity(
-                        Intent(
-                            this,
-                            MainActivity::class.java
-                        ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    )
-                    finish()
-                    true
-                }
-                R.id.nav_scan -> true
-                R.id.nav_history -> {
-                    startActivity(
-                        Intent(
-                            this,
-                            HistoryActivity::class.java
-                        )
-                    )
-                    finish()
-                    true
-                }
-                R.id.nav_feedback -> {
-                    startActivity(
-                        Intent(
-                            this,
-                            FeedbackActivity::class.java
-                        )
-                    )
-                    finish()
-                    true
-                }
-                R.id.nav_account -> {
-                    startActivity(Intent(this, AccountActivity::class.java))
-                    false
-                }
-                else -> false
-            }
-        }
-    }
     override fun onDestroy() {
         cameraProvider?.unbindAll()
         // Close on the inference queue so the interpreter cannot close during a scan.
-        worker.execute { if (::liteModel.isInitialized) liteModel.close() }
+        worker.execute { if (::scanProcessor.isInitialized) scanProcessor.close() }
         worker.shutdown()
         super.onDestroy()
     }
