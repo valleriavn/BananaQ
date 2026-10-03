@@ -11,7 +11,7 @@ class GetStartedActivity : LocaleAwareActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_get_started)
-        applySystemInsets()
+        applySystemInsets(androidx.core.content.ContextCompat.getColor(this, R.color.onboarding_cream))
 
         val pageBackground = findViewById<View>(R.id.pageBackground)
         val content = listOf<View>(

@@ -147,7 +147,12 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         val dialog = Dialog(this)
         confirmationDialog = dialog
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_feedback_confirmation)
+        val content = layoutInflater.inflate(R.layout.dialog_feedback_confirmation, null)
+        if (resources.configuration.fontScale > 1f) {
+            val scroll = androidx.core.widget.NestedScrollView(this)
+            scroll.addView(content)
+            dialog.setContentView(scroll)
+        } else dialog.setContentView(content)
         dialog.setCanceledOnTouchOutside(true)
         dialog.findViewById<View>(R.id.btnCancelFeedback).setOnClickListener {
             dialog.dismiss()

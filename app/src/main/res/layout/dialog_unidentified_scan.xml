@@ -24,7 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/confirm_feedback_title"
+        android:gravity="center"
+        android:text="@string/unable_identify"
         android:textColor="@color/banana_text_dark"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:gravity="center"
-        android:text="@string/confirm_feedback_message"
+        android:text="@string/unidentified_scan_prompt"
         android:textColor="@color/banana_muted"
         android:textSize="12sp" />
 
@@ -45,17 +46,18 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/btnCancelFeedback"
+            android:id="@+id/btnCancelRescan"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" android:minHeight="44dp"
+            android:layout_height="wrap_content" android:minHeight="48dp"
             android:layout_weight="1"
             android:background="@drawable/btn_language_yellow"
             android:backgroundTint="@color/agreement_button_default_selector"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="@string/go_back"
+            android:text="@string/cancel_scan_again"
             android:textColor="@color/agreement_button_text_selector"
+            android:padding="8dp"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -64,16 +66,17 @@
             android:layout_height="1dp" />
 
         <TextView
-            android:id="@+id/btnConfirmFeedback"
+            android:id="@+id/btnConfirmRescan"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" android:minHeight="44dp"
+            android:layout_height="wrap_content" android:minHeight="48dp"
             android:layout_weight="1"
             android:background="@drawable/btn_language_green"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="@string/confirm_label"
+            android:text="@string/scan_again"
             android:textColor="@color/white"
+            android:padding="8dp"
             android:textSize="13sp"
             android:textStyle="bold" />
 </LinearLayout>

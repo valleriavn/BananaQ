@@ -126,4 +126,7 @@
     <string name="history_group_this_week">This week</string>
     <string name="history_group_last_week">Last week</string>
     <string name="history_group_older">Older</string>
+    <string name="unidentified_scan_prompt">This image could not be identified. Would you like to scan again? For a better result, use a clear, well-lit photo of a banana leaf.</string>
+    <string name="scan_again">Scan Again</string>
+    <string name="cancel_scan_again">Cancel</string>
 </resources>

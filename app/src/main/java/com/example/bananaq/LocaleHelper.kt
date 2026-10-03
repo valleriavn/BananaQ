@@ -31,6 +31,11 @@ object LocaleHelper {
 }
 
 open class LocaleAwareActivity : AppCompatActivity() {
+    override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
+        adaptToFontScale()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (android.os.Build.VERSION.SDK_INT >= 34) {

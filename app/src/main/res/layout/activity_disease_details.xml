@@ -29,7 +29,7 @@
             android:textStyle="bold" />
         <LinearLayout
             android:layout_width="88dp"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content" android:minHeight="32dp"
             android:background="@drawable/btn_language_light_yellow"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/detailLangEN"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content" android:minHeight="24dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:contentDescription="@string/language_english"
@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/detailLangTL"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content" android:minHeight="24dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:contentDescription="@string/language_tagalog"

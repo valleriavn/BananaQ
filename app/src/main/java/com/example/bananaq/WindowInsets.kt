@@ -5,9 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-fun AppCompatActivity.applySystemInsets() {
+fun AppCompatActivity.applySystemInsets(bottomInsetColor: Int? = null) {
     val root = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
     val navigation: RaisedBottomNavigationView? = root.findViewById(R.id.bottomNavigation)
+    val insetBackground = bottomInsetColor?.let { color ->
+        android.graphics.drawable.LayerDrawable(arrayOf(
+            root.background ?: android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT),
+            android.graphics.drawable.ColorDrawable(color)
+        )).apply {
+            setLayerGravity(1, android.view.Gravity.BOTTOM)
+            setLayerHeight(1, 0)
+            root.background = this
+        }
+    }
     val left = root.paddingLeft
     val top = root.paddingTop
     val right = root.paddingRight
@@ -16,6 +26,7 @@ fun AppCompatActivity.applySystemInsets() {
     ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
         val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
         val keyboard = insets.getInsets(WindowInsetsCompat.Type.ime())
+        insetBackground?.setLayerHeight(1, maxOf(bars.bottom, keyboard.bottom))
         if (navigation != null) {
             val keyboardOffset = maxOf(0, keyboard.bottom - bars.bottom)
             view.setPadding(left + bars.left, top + bars.top, right + bars.right,

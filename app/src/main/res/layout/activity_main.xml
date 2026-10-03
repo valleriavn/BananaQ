@@ -19,13 +19,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/headerLanguageToggle"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -35,7 +37,7 @@
                 android:src="@drawable/ic_logo" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp" android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/app_name"
@@ -45,8 +47,9 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/headerLanguageToggle"
             android:layout_width="88dp"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content" android:minHeight="32dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_language_light_yellow"
             android:gravity="center_vertical"
@@ -59,7 +62,7 @@
             <TextView
                 android:id="@+id/tvLangEN"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content" android:minHeight="24dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_language_green"
                 android:gravity="center"
@@ -73,7 +76,7 @@
             <TextView
                 android:id="@+id/tvLangTL"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content" android:minHeight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/language_code_tagalog"
@@ -91,6 +94,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/homeContent"
         android:layout_width="match_parent" android:layout_height="0dp"
         android:orientation="vertical" android:paddingTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/header"
@@ -109,7 +113,7 @@
             app:cardBackgroundColor="@color/banana_surface" app:cardCornerRadius="@dimen/container_corner_radius"
             app:cardElevation="2dp" app:strokeColor="@color/banana_border" app:strokeWidth="1dp">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                android:id="@+id/homeDateTimeRow" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:orientation="vertical">
                     <TextView android:id="@+id/dateText" android:layout_width="match_parent"

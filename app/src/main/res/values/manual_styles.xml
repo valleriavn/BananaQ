@@ -34,7 +34,8 @@
     </style>
     <style name="FeedbackRatingOption">
         <item name="android:layout_width">82dp</item>
-        <item name="android:layout_height">82dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">82dp</item>
         <item name="android:layout_marginHorizontal">4dp</item>
         <item name="android:layout_marginVertical">4dp</item>
         <item name="android:gravity">center</item>

@@ -181,4 +181,7 @@
     <string name="history_group_this_week">Ngayong linggo</string>
     <string name="history_group_last_week">Nakaraang linggo</string>
     <string name="history_group_older">Mas nauna</string>
+    <string name="unidentified_scan_prompt">Hindi matukoy ang larawang ito. Gusto mo bang mag-scan muli? Gumamit ng malinaw at maliwanag na larawan ng dahon ng saging para sa mas magandang resulta.</string>
+    <string name="scan_again">Mag-scan Muli</string>
+    <string name="cancel_scan_again">Kanselahin</string>
 </resources>

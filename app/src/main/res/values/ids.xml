@@ -7,4 +7,7 @@
     <item name="nav_feedback" type="id" />
     <item name="nav_account" type="id" />
     <item name="scan_image_request" type="id" />
+    <item name="largeTextHomeScroll" type="id" />
+    <item name="largeTextOnboardingScroll" type="id" />
+    <item name="largeTextResultScroll" type="id" />
 </resources>

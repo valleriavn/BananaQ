@@ -179,7 +179,11 @@ class AccountActivity : LocaleAwareActivity() {
             })
         }
 
-        dialog.setContentView(sheet)
+        if (resources.configuration.fontScale > 1f) {
+            val scroll = androidx.core.widget.NestedScrollView(this)
+            scroll.addView(sheet)
+            dialog.setContentView(scroll)
+        } else dialog.setContentView(sheet)
         dialog.window?.apply {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)

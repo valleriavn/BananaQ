@@ -69,7 +69,7 @@
     <TextView
         android:id="@+id/scannerHeader"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content" android:minHeight="44dp"
         android:layout_marginTop="18dp"
         android:background="@drawable/scanner_header_bg"
         android:gravity="center"
@@ -81,13 +81,13 @@
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="parent"  app:layout_constrainedWidth="true" android:layout_marginStart="8dp" android:layout_marginEnd="16dp"/>
 
     <TextView
         android:id="@+id/scanResultTitle"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content" android:minHeight="44dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/scan_result_title_bg"
         android:gravity="center"
@@ -100,8 +100,8 @@
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"  app:layout_constrainedWidth="true" android:layout_marginStart="8dp" android:layout_marginEnd="16dp"/>
 
     <FrameLayout
         android:id="@+id/scanFrame"
@@ -128,6 +128,8 @@
 
     <TextView
         android:id="@+id/tvInstruction"
+        app:layout_constrainedWidth="true"
+        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
@@ -263,6 +265,7 @@
 
                     <TextView
                         android:id="@+id/resultDiseaseName"
+                        android:layout_marginEnd="8dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/banana_text_dark"
@@ -273,14 +276,22 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Panama Disease" />
 
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/resultHeadingBottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="resultDiseaseName,accuracyLayout" />
+
                     <TextView
                         android:id="@+id/resultScientificName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/banana_muted"
                         android:textSize="11sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/resultDiseaseName"
+                        app:layout_constraintTop_toBottomOf="@id/resultHeadingBottom"
                         tools:text="Fusarium oxysporum f. sp. cubense" />
 
                     <LinearLayout
@@ -328,14 +339,20 @@
                     android:orientation="vertical"
                     android:visibility="invisible">
 
-                    <LinearLayout
+                    <com.example.bananaq.ResponsiveTabRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                        android:scrollbars="horizontal"
+                        android:overScrollMode="ifContentScrolls">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tabSymptoms"
+                            android:singleLine="true"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -349,6 +366,7 @@
 
                         <TextView
                             android:id="@+id/tabTreatment"
+                            android:singleLine="true"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
@@ -362,6 +380,7 @@
 
                         <TextView
                             android:id="@+id/tabPrevention"
+                            android:singleLine="true"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -372,7 +391,8 @@
                             android:textSize="13sp"
                             android:textColor="@color/button_text_black" />
 
-                    </LinearLayout>
+                        </LinearLayout>
+                    </com.example.bananaq.ResponsiveTabRow>
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
@@ -457,7 +477,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTryAgain"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content" android:minHeight="48dp"
             android:layout_marginTop="12dp"
             android:text="@string/try_again"
             android:textAllCaps="false"

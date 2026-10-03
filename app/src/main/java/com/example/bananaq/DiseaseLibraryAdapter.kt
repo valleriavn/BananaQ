@@ -51,9 +51,14 @@ class DiseaseLibraryAdapter(private val onClick: (String) -> Unit) :
 
     override fun getItemCount() = Int.MAX_VALUE
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_disease_library, parent, false)
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_disease_library, parent, false)
+        val scale = parent.resources.configuration.fontScale
+        if (scale > 1f) view.layoutParams = view.layoutParams.apply {
+            width = (width * scale).toInt()
+        }
+        return Holder(view)
+    }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val disease = libraryDiseases[position % libraryDiseases.size]

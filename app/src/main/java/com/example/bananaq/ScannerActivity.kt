@@ -350,6 +350,16 @@ class ScannerActivity : LocaleAwareActivity() {
         val compactPanel = findViewById<View>(R.id.compactResultPanel)
         val compactHandle = findViewById<View>(R.id.compactResultDragHandle)
         val tryAgain = findViewById<View>(R.id.btnTryAgain)
+        if (intent.getBooleanExtra("FROM_HISTORY", false)) {
+            compactPanel.visibility = View.GONE
+            showDetailsMode()
+            showFullResult()
+            findViewById<View>(R.id.resultDragHandle).apply {
+                isClickable = false
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+            }
+            return
+        }
         if (result.isValid && detailsExpanded) {
             compactPanel.visibility = View.GONE
             showFullResult()
@@ -416,14 +426,19 @@ class ScannerActivity : LocaleAwareActivity() {
 
     private fun handleIncomingData() {
         val diseaseName = intent.getStringExtra("DISEASE_NAME") ?: return
-        if (diseaseRepository.getDiseaseInfo(diseaseName) == null) return
+        val fromHistory = intent.getBooleanExtra("FROM_HISTORY", false)
+        if (!fromHistory && diseaseRepository.getDiseaseInfo(diseaseName) == null) return
+        if (fromHistory) {
+            scanId = intent.getStringExtra("SCAN_ID") ?: scanId
+            detailsExpanded = true
+        }
         val confidence = (intent.getIntExtra("CONFIDENCE", 0) / 100f).coerceIn(0f, 1f)
         val level = ConfidenceLevel.fromConfidence(confidence)
         classificationResult = ClassificationResult(diseaseName, confidence, level,
             intent.getBooleanExtra("LIBRARY", false) ||
-                (intent.getBooleanExtra("RESULT_VALID", false) && level.isReliable))
-        displayResult(classificationResult!!)
+                (intent.getBooleanExtra("RESULT_VALID", false) && (fromHistory || level.isReliable)))
         selectedImage = intent.getStringExtra("IMAGE_URI")
+        displayResult(classificationResult!!)
         restorePhoto()
     }
 
@@ -734,6 +749,11 @@ class ScannerActivity : LocaleAwareActivity() {
             else ContextCompat.getColor(this, R.color.button_text_black)
         )
         textView.setTypeface(null, Typeface.NORMAL)
+        if (isSelected) textView.post {
+            val row = textView.parent as? LinearLayout
+            val scroller = row?.parent as? ResponsiveTabRow
+            scroller?.smoothScrollTo(textView.left - (scroller.width - textView.width) / 2, 0)
+        }
     }
     private fun showSymptoms(
         info: DiseaseInfo
@@ -814,6 +834,15 @@ class ScannerActivity : LocaleAwareActivity() {
                             (14 * density).toInt()
                     }
             }
+        // The number badge must grow with the actual font metrics, including Samsung font scaling.
+        val badgePadding = (8 * density).toInt()
+        val badgeSize = maxOf((26 * density).toInt(),
+            kotlin.math.ceil(numberCircle.paint.fontMetrics.bottom - numberCircle.paint.fontMetrics.top).toInt() + badgePadding,
+            kotlin.math.ceil(numberCircle.paint.measureText(numberCircle.text.toString())).toInt() + badgePadding)
+        numberCircle.layoutParams = numberCircle.layoutParams.apply {
+            width = badgeSize
+            height = badgeSize
+        }
         val textLayout =
             LinearLayout(this).apply {
                 orientation =
@@ -870,6 +899,10 @@ class ScannerActivity : LocaleAwareActivity() {
         })
     }
     private fun hideResult() {
+        if (intent.getBooleanExtra("FROM_HISTORY", false)) {
+            finish()
+            return
+        }
         findViewById<View>(R.id.compactResultPanel).visibility = View.GONE
         classificationResult = null
         selectedImage = null

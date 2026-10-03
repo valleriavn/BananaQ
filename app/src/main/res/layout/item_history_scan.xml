@@ -9,7 +9,7 @@
     app:cardElevation="0dp"
     app:cardBackgroundColor="@color/banana_surface">
 
-    <LinearLayout
+    <com.example.bananaq.ResponsiveScanRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_history_border"
@@ -86,6 +86,7 @@
 
             <TextView
                 android:id="@+id/tvStatus"
+                android:maxWidth="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/status_badge_bg"
@@ -99,6 +100,7 @@
 
             <TextView
                 android:id="@+id/tvFeedbackStatus"
+                android:maxWidth="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -114,5 +116,5 @@
                 tools:visibility="visible" />
         </LinearLayout>
 
-    </LinearLayout>
+    </com.example.bananaq.ResponsiveScanRow>
 </androidx.cardview.widget.CardView>
