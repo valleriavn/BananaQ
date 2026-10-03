@@ -52,6 +52,8 @@ class MainActivity : LocaleAwareActivity() {
             }
         }
 
+        animatePlantIllustration(findViewById(R.id.ivSoil))
+
         setupLanguageToggle()
         setupBottomNavigation()
     }
@@ -132,7 +134,7 @@ class MainActivity : LocaleAwareActivity() {
     override fun onStart() {
         super.onStart()
         findViewById<RaisedBottomNavigationView>(R.id.bottomNavigation).selectedItemId = R.id.nav_home
-        
+
         setupLanguageToggle()
         
         handler.post(timeUpdater)
