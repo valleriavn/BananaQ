@@ -19,7 +19,7 @@
             android:id="@+id/avatarPickerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/choose_avatar"
+            android:text="@string/avatar_picker_heading"
             android:textColor="@color/banana_text_dark"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -30,8 +30,8 @@
 
         <ImageButton
             android:id="@+id/closeAvatarPicker"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/avatar_close_button_bg"
             android:contentDescription="@string/close_avatar_picker"
             android:padding="11dp"
@@ -41,6 +41,21 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/avatarPreviewPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="18dp">
+        <ImageView
+            android:id="@+id/avatarPickerPreview"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:padding="8dp"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
     <GridLayout
         android:id="@+id/avatarPickerGrid"
         android:layout_width="match_parent"
@@ -49,4 +64,37 @@
         android:alignmentMode="alignBounds"
         android:columnCount="3"
         android:useDefaultMargins="false" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelAvatarSelection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:text="@string/cancel_scan_again"
+            android:textAllCaps="false"
+            android:textColor="@color/banana_green"
+            app:backgroundTint="@color/banana_yellow"
+            app:strokeColor="@color/banana_green"
+            app:strokeWidth="0dp"
+            app:cornerRadius="@dimen/pill_corner_radius" />
+        <Space android:layout_width="12dp" android:layout_height="1dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveAvatarSelection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:text="@string/save_avatar"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/banana_green"
+            app:cornerRadius="@dimen/pill_corner_radius" />
+    </LinearLayout>
 </LinearLayout>

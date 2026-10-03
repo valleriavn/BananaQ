@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Center the circular lens optically, allowing the handle to extend to the right.
+<!-- Center the complete visible logo, including the magnifying-glass handle.
      Preserve its aspect ratio and keep the complete mark inside the adaptive mask. -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="22.4%"
-    android:insetTop="25.8%"
-    android:insetRight="23.6%"
-    android:insetBottom="22.9%">
+    android:insetLeft="20.367%"
+    android:insetTop="25.822%"
+    android:insetRight="25.633%"
+    android:insetBottom="22.878%">
     <bitmap android:src="@drawable/ic_logo" android:gravity="fill" android:filter="true" />
 </inset>

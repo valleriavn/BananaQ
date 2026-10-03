@@ -129,4 +129,11 @@
     <string name="unidentified_scan_prompt">This image could not be identified. Would you like to scan again? For a better result, use a clear, well-lit photo of a banana leaf.</string>
     <string name="scan_again">Scan Again</string>
     <string name="cancel_scan_again">Cancel</string>
+    <string name="avatar_preview_title">Your avatar</string>
+    <string name="close_avatar_preview">Close avatar preview</string>
+    <string name="edit_avatar">Edit Avatar</string>
+    <string name="view_avatar">View your avatar</string>
+    <string name="save_avatar">Save</string>
+    <string name="avatar_picker_heading">Choose your avatar</string>
+    <string name="avatar_picker_hint">Choose an avatar below, then save your selection.</string>
 </resources>

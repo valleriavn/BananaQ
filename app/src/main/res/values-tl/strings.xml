@@ -184,4 +184,11 @@
     <string name="unidentified_scan_prompt">Hindi matukoy ang larawang ito. Gusto mo bang mag-scan muli? Gumamit ng malinaw at maliwanag na larawan ng dahon ng saging para sa mas magandang resulta.</string>
     <string name="scan_again">Mag-scan Muli</string>
     <string name="cancel_scan_again">Kanselahin</string>
+    <string name="avatar_preview_title">Iyong avatar</string>
+    <string name="close_avatar_preview">Isara ang avatar</string>
+    <string name="edit_avatar">Palitan ang Avatar</string>
+    <string name="view_avatar">Tingnan ang iyong avatar</string>
+    <string name="save_avatar">I-save</string>
+    <string name="avatar_picker_heading">Piliin ang iyong avatar</string>
+    <string name="avatar_picker_hint">Pumili ng avatar sa ibaba, pagkatapos ay i-save.</string>
 </resources>
