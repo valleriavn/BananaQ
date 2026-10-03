@@ -126,6 +126,7 @@ class AccountActivity : LocaleAwareActivity() {
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
                 else getString(R.string.choose_named_avatar, getString(option.nameResId))
+                isSelected = selected
                 isClickable = true
                 isFocusable = true
                 setOnClickListener {

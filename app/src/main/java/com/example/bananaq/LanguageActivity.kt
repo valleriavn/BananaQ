@@ -106,6 +106,8 @@ class LanguageActivity : LocaleAwareActivity() {
     }
 
     private fun updateButtonStates() {
+        btnEnglish.isSelected = selectedLanguage == "en"
+        btnTagalog.isSelected = selectedLanguage == "tl"
         if (selectedLanguage == "en") {
             btnEnglish.setBackgroundResource(R.drawable.btn_language_green)
             labelEnglish.setTextColor(ContextCompat.getColor(this, R.color.white))

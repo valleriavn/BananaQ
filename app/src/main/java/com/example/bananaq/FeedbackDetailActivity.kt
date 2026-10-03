@@ -27,6 +27,7 @@ import java.util.Locale
 
 class FeedbackDetailActivity : LocaleAwareActivity() {
 
+    private var confirmationDialog: Dialog? = null
     private var selectedRating = ""
     private var submitted = false
     private var submittedAt = 0L
@@ -76,9 +77,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
             text = if (accuracy.endsWith("%")) accuracy else "$accuracy%"
             visibility = if (resultValid) View.VISIBLE else View.GONE
         }
-        intent.getStringExtra("IMAGE_URI")?.let {
-            findViewById<ImageView>(R.id.ivScanDetail).setImageURI(Uri.parse(it))
-        }
+        ScanThumbnailLoader.load(findViewById(R.id.ivScanDetail), intent.getStringExtra("IMAGE_URI"))
 
         findViewById<View>(R.id.btnBack).setOnClickListener { finish() }
         selectedRating = savedInstanceState?.getString("rating") ?: ""
@@ -114,6 +113,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
             ratings.entries.forEachIndexed { index, (id, name) ->
                 val option = findViewById<LinearLayout>(id)
                 val isSelected = selectedRating == name
+                option.isSelected = isSelected
                 val color = ContextCompat.getColor(this,
                     if (!isSelected) R.color.banana_border else when (index) {
                         0, 1 -> R.color.banana_green
@@ -143,7 +143,9 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     }
 
     private fun confirmSubmission() {
+        if (submitted || confirmationDialog?.isShowing == true) return
         val dialog = Dialog(this)
+        confirmationDialog = dialog
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_feedback_confirmation)
         dialog.setCanceledOnTouchOutside(true)
@@ -189,7 +191,11 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
             UserActionLogger.logFeedbackEvent(scanId, selectedRating, comments)
             SupabaseSyncManager.request(applicationContext)
             showSubmittedState(comments)
-        } else restoreSubmittedFeedback()
+        } else {
+            restoreSubmittedFeedback()
+            if (submitted) showSubmittedState(submittedComments)
+            else Toast.makeText(this, R.string.feedback_save_failed, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun restoreSubmittedFeedback() {
@@ -202,8 +208,12 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
     }
 
     private fun showSubmittedState(comments: String) {
+        val keyboard = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        keyboard.hideSoftInputFromWindow(findViewById<View>(R.id.etComments).windowToken, 0)
+        findViewById<View>(R.id.etComments).clearFocus()
         findViewById<View>(R.id.formScroll).visibility = View.GONE
         findViewById<View>(R.id.successScroll).visibility = View.VISIBLE
+        findViewById<View>(R.id.successScroll).announceForAccessibility(getString(R.string.feedback_thank_you))
         setSummary(
             R.id.summaryScan,
             getString(R.string.summary_scan),

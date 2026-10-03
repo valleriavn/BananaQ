@@ -3,6 +3,7 @@ package com.example.bananaq.data
 import android.content.Context
 import com.example.bananaq.BananaQApplication
 import com.example.bananaq.LocaleHelper
+import com.example.bananaq.R
 import com.example.bananaq.ScanHistoryAdapter
 import com.example.bananaq.data.sync.SupabaseSyncManager
 import com.example.bananaq.model.ClassificationResult
@@ -36,21 +37,32 @@ class ScanHistoryStore(context: Context) {
         val pattern = if (LocaleHelper.selectedLanguage(appContext) == "tl")
             "MMM dd, yyyy 'nang' h:mm a" else "MMM dd, yyyy 'at' h:mm a"
         val format = SimpleDateFormat(pattern, Locale.getDefault())
-        database.scans().map { record ->
-            val disease = record.predictedDisease ?: "Unknown"
-            val accuracyVal = record.confidenceScore?.let {
-                String.format(Locale.US, "%.1f", it * 100)
-            }
-            ScanHistoryAdapter.HistoryItem(
-                isHeader = false,
-                diseaseName = disease,
-                dateTime = format.format(Date(record.scannedAt)),
-                accuracy = accuracyVal,
-                isHealthy = record.isBananaLeaf && disease == "Healthy",
-                isValid = record.isBananaLeaf,
-                scanId = record.scanId,
-                imageUri = record.imagePath
-            )
+        val localizedContext = LocaleHelper.wrap(appContext)
+        ScanDateGrouping.group(database.scans()).flatMap { (period, records) ->
+            val title = localizedContext.getString(when (period) {
+                ScanDateGrouping.Period.TODAY -> R.string.history_group_today
+                ScanDateGrouping.Period.YESTERDAY -> R.string.history_group_yesterday
+                ScanDateGrouping.Period.THIS_WEEK -> R.string.history_group_this_week
+                ScanDateGrouping.Period.LAST_WEEK -> R.string.history_group_last_week
+                ScanDateGrouping.Period.OLDER -> R.string.history_group_older
+            })
+            listOf(ScanHistoryAdapter.HistoryItem(isHeader = true, headerTitle = title)) +
+                records.map { record ->
+                    val disease = record.predictedDisease ?: "Unknown"
+                    val accuracyVal = record.confidenceScore?.let {
+                        String.format(Locale.US, "%.1f", it * 100)
+                    }
+                    ScanHistoryAdapter.HistoryItem(
+                        isHeader = false,
+                        diseaseName = disease,
+                        dateTime = format.format(Date(record.scannedAt)),
+                        accuracy = accuracyVal,
+                        isHealthy = record.isBananaLeaf && disease == "Healthy",
+                        isValid = record.isBananaLeaf,
+                        scanId = record.scanId,
+                        imageUri = record.imagePath
+                    )
+                }
         }
     }
 

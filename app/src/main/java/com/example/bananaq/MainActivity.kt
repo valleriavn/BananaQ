@@ -64,6 +64,8 @@ class MainActivity : LocaleAwareActivity() {
         var currentLang = sharedPrefs.getString("language", "en") ?: "en"
 
         fun updateToggleUI(lang: String) {
+            tvLangEN.isSelected = lang == "en"
+            tvLangTL.isSelected = lang == "tl"
             if (lang == "en") {
                 tvLangEN.setBackgroundResource(R.drawable.btn_language_green)
                 tvLangEN.setTextColor(ContextCompat.getColor(this, R.color.white))

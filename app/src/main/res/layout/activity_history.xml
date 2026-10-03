@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
+    android:clipChildren="true"
+    android:clipToPadding="true"
     android:background="@color/banana_cream">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,7 +113,7 @@
         android:layout_marginTop="8dp"
         android:paddingStart="@dimen/page_horizontal_padding"
         android:paddingEnd="@dimen/page_horizontal_padding"
-        android:clipToPadding="false"
+        android:clipToPadding="true"
         android:paddingBottom="16dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"

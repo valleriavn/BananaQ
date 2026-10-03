@@ -33,6 +33,17 @@ class ScanLogicTest {
         assertEquals(1, ScanImageLoader.sampleSize(224, 224))
     }
 
+    @Test fun thumbnailsBoundBothPortraitAndLandscapeImages() {
+        assertEquals(32, ScanImageLoader.sampleSize(8000, 6000, 256))
+        assertEquals(32, ScanImageLoader.sampleSize(6000, 8000, 256))
+        assertEquals(1, ScanImageLoader.sampleSize(100, 200, 256))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun imageSamplingRejectsZeroDimensionLimit() {
+        ScanImageLoader.sampleSize(8000, 6000, 0)
+    }
+
     @Test fun fourClassOutputIncludesHealthyAndPanama() {
         assertEquals(2, PredictionScores.winner(floatArrayOf(.1f, .1f, .7f, .1f)))
         assertEquals(3, PredictionScores.winner(floatArrayOf(.1f, .1f, .1f, .7f)))

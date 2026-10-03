@@ -47,6 +47,7 @@
             android:exported="false" />
         <activity
             android:name=".FeedbackDetailActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".ScannerActivity"

@@ -13,7 +13,7 @@
         <item name="android:textColorSecondary">@color/banana_muted</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="android:windowBackground">@color/banana_cream</item>
-        <item name="android:windowAnimationStyle">@style/BananaQWindowAnimation</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <!-- Kept visually identical to activity_splash so startup looks like one

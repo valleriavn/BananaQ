@@ -39,8 +39,7 @@ class ScanHistoryAdapter(
         if (holder is HeaderViewHolder) {
             holder.tvHeader.text = item.headerTitle
         } else if (holder is ItemViewHolder) {
-            holder.ivScan.setImageDrawable(null)
-            item.imageUri?.let { holder.ivScan.setImageURI(android.net.Uri.parse(it)) }
+            ScanThumbnailLoader.load(holder.ivScan, item.imageUri)
             holder.tvDiseaseName.text = if (!item.isValid) {
                 holder.itemView.context.getString(R.string.unable_identify)
             } else item.diseaseName?.let {
@@ -69,6 +68,7 @@ class ScanHistoryAdapter(
 
             holder.itemView.isEnabled = true
             holder.itemView.isClickable = onItemClick != null
+            holder.itemView.isFocusable = onItemClick != null
             holder.itemView.contentDescription = if (feedbackSubmitted) {
                 holder.itemView.context.getString(
                     R.string.feedback_item_already_submitted,
@@ -79,6 +79,11 @@ class ScanHistoryAdapter(
                 onItemClick?.invoke(item)
             })
         }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        if (holder is ItemViewHolder) ScanThumbnailLoader.load(holder.ivScan, null)
+        super.onViewRecycled(holder)
     }
 
     override fun getItemCount(): Int = items.size

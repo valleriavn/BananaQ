@@ -175,4 +175,10 @@
     <string name="manual_treatment_body">Pagkatapos mag-scan, buksan ang tab na Paggamot sa detalye ng kondisyon. Basahin muna ang impormasyon tungkol sa kondisyon upang maunawaan ang kaugnay na gabay.\n\nMaaari ring buksan ang kondisyon mula sa Aklatan ng mga Sakit sa Home.\n\nPangkalahatang gabay lamang ang mga rekomendasyon. Kumpirmahin ang problema sa isang eksperto sa agrikultura bago pumili ng paggamot, lalo na kung hindi tiyak ang scan.</string>
     <string name="manual_prevention_body">Buksan ang tab na Pag-iwas sa detalye pagkatapos ng scan o mula sa Aklatan ng mga Sakit.\n\nGamitin ito upang malaman kung paano mababawasan ang panganib ng mga susunod na problema. Regular na suriin ang mga halaman at bantayan ang pagbabago sa dahon.\n\nPara sa payong angkop sa iyong sakahan at lokal na kondisyon, kumonsulta sa eksperto sa agrikultura.</string>
     <string name="manual_photo_body">• Gumamit ng maliwanag at pantay na ilaw. Iwasan ang matinding anino at silaw.\n\n• Hawakan nang steady ang camera at tiyaking naka-focus ang dahon.\n\n• I-frame ang isang dahon laban sa simpleng background. Gawing malinaw ang apektadong bahagi.\n\n• Huwag takpan ang dahon gamit ang daliri o ibang dahon.\n\n• Gumamit ng orihinal at malinaw na larawang walang filter. Kumuha ulit kung malabo, madilim, o masyadong malayo.</string>
+    <string name="feedback_save_failed">Hindi na-save ang feedback. Pakisubukan muli.</string>
+    <string name="history_group_today">Ngayong araw</string>
+    <string name="history_group_yesterday">Kahapon</string>
+    <string name="history_group_this_week">Ngayong linggo</string>
+    <string name="history_group_last_week">Nakaraang linggo</string>
+    <string name="history_group_older">Mas nauna</string>
 </resources>

@@ -9,13 +9,13 @@ import androidx.exifinterface.media.ExifInterface
 
 object ScanImageLoader {
     /** Bound decoded memory before allocating pixels, including on older low-memory phones. */
-    fun load(context: Context, uri: Uri): Bitmap {
+    fun load(context: Context, uri: Uri, maxDimension: Int = 1024): Bitmap {
         fun stream() = context.contentResolver.openInputStream(uri)
             ?: throw IllegalArgumentException("Cannot open image")
         val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
         stream().use { BitmapFactory.decodeStream(it, null, options) }
         require(options.outWidth > 0 && options.outHeight > 0) { "Unsupported image format" }
-        options.inSampleSize = sampleSize(options.outWidth, options.outHeight)
+        options.inSampleSize = sampleSize(options.outWidth, options.outHeight, maxDimension)
         options.inJustDecodeBounds = false
         options.inPreferredConfig = Bitmap.Config.ARGB_8888
         val bitmap = stream().use { BitmapFactory.decodeStream(it, null, options) }
@@ -45,9 +45,10 @@ object ScanImageLoader {
         }
     }
 
-    internal fun sampleSize(width: Int, height: Int): Int {
+    internal fun sampleSize(width: Int, height: Int, maxDimension: Int = 1024): Int {
+        require(maxDimension > 0)
         var sample = 1
-        while (width / sample > 1024 || height / sample > 1024) sample *= 2
+        while (width / sample > maxDimension || height / sample > maxDimension) sample *= 2
         return sample
     }
 }

@@ -39,7 +39,8 @@ class FeedbackActivity : LocaleAwareActivity() {
         } else {
             emptyState.visibility = View.GONE
             rvFeedback.visibility = View.VISIBLE
-            rvFeedback.layoutManager = LinearLayoutManager(this)
+            val scrollState = rvFeedback.layoutManager?.onSaveInstanceState()
+            if (rvFeedback.layoutManager == null) rvFeedback.layoutManager = LinearLayoutManager(this)
             
             val adapter = ScanHistoryAdapter(feedbackItems, submittedScanIds) { item ->
                 val intent = Intent(this, FeedbackDetailActivity::class.java).apply {
@@ -53,6 +54,7 @@ class FeedbackActivity : LocaleAwareActivity() {
                 startActivity(intent)
             }
             rvFeedback.adapter = adapter
+            rvFeedback.layoutManager?.onRestoreInstanceState(scrollState)
         }
 
     }

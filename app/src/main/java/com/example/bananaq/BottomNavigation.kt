@@ -23,9 +23,8 @@ fun AppCompatActivity.configureBottomNavigation(activeItemId: Int) {
         // The full-screen scanner behaves like a temporary camera task, so
         // keep the current destination underneath it for a natural Back flow.
         if (itemId != R.id.nav_scan) finish()
-        // Bottom destinations are peers, so a fade-through feels steadier than
-        // the directional transition used for opening a detail screen.
-        overridePendingTransition(R.anim.nav_fade_enter, R.anim.nav_fade_exit)
+        // Switch destinations immediately without a page animation.
+        overridePendingTransition(0, 0)
         true
     }
 }

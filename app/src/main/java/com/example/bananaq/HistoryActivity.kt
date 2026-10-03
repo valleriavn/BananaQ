@@ -37,7 +37,8 @@ class HistoryActivity : LocaleAwareActivity() {
         } else {
             emptyState.visibility = View.GONE
             rvHistory.visibility = View.VISIBLE
-            rvHistory.layoutManager = LinearLayoutManager(this)
+            val scrollState = rvHistory.layoutManager?.onSaveInstanceState()
+            if (rvHistory.layoutManager == null) rvHistory.layoutManager = LinearLayoutManager(this)
             rvHistory.adapter = ScanHistoryAdapter(historyItems) { item ->
                 startActivity(Intent(this, ScannerActivity::class.java).apply {
                     putExtra("DISEASE_NAME", item.diseaseName)
@@ -46,6 +47,7 @@ class HistoryActivity : LocaleAwareActivity() {
                     putExtra("IMAGE_URI", item.imageUri)
                 })
             }
+            rvHistory.layoutManager?.onRestoreInstanceState(scrollState)
         }
 
     }

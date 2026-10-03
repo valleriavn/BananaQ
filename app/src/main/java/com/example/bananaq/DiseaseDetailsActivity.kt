@@ -44,6 +44,8 @@ class DiseaseDetailsActivity : LocaleAwareActivity() {
         val currentLanguage = LocaleHelper.selectedLanguage(this)
 
         fun renderSelection(selectedLanguage: String) {
+            english.isSelected = selectedLanguage == "en"
+            tagalog.isSelected = selectedLanguage == "tl"
             val activeColor = ContextCompat.getColor(this, R.color.white)
             val inactiveColor = ContextCompat.getColor(this, R.color.button_text_black)
 

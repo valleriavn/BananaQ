@@ -120,4 +120,10 @@
     <string name="spread_cordana">Large numbers of spores form on the underside of lesions and spread during wet, windy weather. The fungus commonly enters through damaged leaf tissue and is more severe on plants stressed by waterlogging, drought, poor nutrition, or weak airflow.</string>
     <string name="treatment_cordana">• Remove severely damaged leaf portions using clean, disinfected tools\n• Improve drainage, airflow, and balanced nutrition to reduce plant stress\n• Check for and manage accompanying Sigatoka leaf spots\n• For persistent outbreaks, ask a qualified agriculturist about a locally registered banana leaf-spot program</string>
     <string name="prevention_cordana">• Avoid unnecessary leaf injury and keep cutting tools clean\n• Remove old, badly affected leaves and manage plant debris responsibly\n• Maintain proper spacing, drainage, irrigation, and plant nutrition\n• Inspect plants after wet and windy weather, especially older leaves\n• Begin management early before lesions merge and reduce functional leaf area</string>
+    <string name="feedback_save_failed">Could not save feedback. Please try again.</string>
+    <string name="history_group_today">Today</string>
+    <string name="history_group_yesterday">Yesterday</string>
+    <string name="history_group_this_week">This week</string>
+    <string name="history_group_last_week">Last week</string>
+    <string name="history_group_older">Older</string>
 </resources>
