@@ -7,8 +7,6 @@ import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlin.math.ceil
-
-/** Equal-width tabs when they fit, horizontally scrollable whole labels when they do not. */
 class ResponsiveTabRow @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : HorizontalScrollView(context, attrs, defStyleAttr) {

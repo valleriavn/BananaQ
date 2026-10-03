@@ -1,6 +1,5 @@
 package com.example.bananaq
 
-import android.content.Context
 import android.content.Intent
 import android.app.Dialog
 import android.graphics.Color
@@ -259,18 +258,5 @@ class AccountActivity : LocaleAwareActivity() {
         const val PREFS_NAME = "settings"
         const val KEY_SELECTED_AVATAR = "selected_avatar"
         private const val DEFAULT_AVATAR_ID = "farmer_1"
-
-        fun getSelectedAvatarResId(context: Context): Int {
-            val avatarId = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                .getString(KEY_SELECTED_AVATAR, DEFAULT_AVATAR_ID) ?: DEFAULT_AVATAR_ID
-            return when (avatarId) {
-                "farmer_2" -> R.drawable.avatar_farmer_2
-                "farmer_3" -> R.drawable.avatar_farmer_3
-                "farmer_4" -> R.drawable.avatar_farmer_4
-                "farmer_5" -> R.drawable.avatar_farmer_5
-                "farmer_6" -> R.drawable.avatar_farmer_6
-                else -> R.drawable.avatar_farmer_1
-            }
-        }
     }
 }

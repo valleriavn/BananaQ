@@ -76,7 +76,7 @@ class ScanHistoryAdapter(
                 )
             } else null
             holder.itemView.setOnClickListener(if (onItemClick == null) null else View.OnClickListener {
-                onItemClick?.invoke(item)
+                onItemClick(item)
             })
         }
     }

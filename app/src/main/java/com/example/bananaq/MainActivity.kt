@@ -52,7 +52,7 @@ class MainActivity : LocaleAwareActivity() {
             }
         }
 
-        animatePlantIllustration(findViewById(R.id.ivSoil))
+        animateLeafCanopy(findViewById(R.id.ivSoil))
 
         setupLanguageToggle()
         setupBottomNavigation()

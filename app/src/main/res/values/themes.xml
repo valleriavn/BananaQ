@@ -15,9 +15,6 @@
         <item name="android:windowBackground">@color/banana_cream</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
-
-    <!-- Kept visually identical to activity_splash so startup looks like one
-         continuous green screen rather than two separate splash screens. -->
     <style name="Theme.BananaQ.Splash" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_window_background</item>
         <item name="android:statusBarColor">@color/splash_green</item>
@@ -56,15 +53,5 @@
         <item name="cornerSizeTopRight">@dimen/scan_result_corner_radius</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
-    </style>
-
-    <style name="NavTextSmall" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TransparentDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

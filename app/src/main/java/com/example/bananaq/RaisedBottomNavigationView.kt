@@ -11,8 +11,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-
-/** Full-width bottom navigation with a centered Scan action and no empty top strip. */
 class RaisedBottomNavigationView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -71,8 +69,6 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
 
         addStandardTab(R.id.nav_home, R.drawable.ic_nav_home_rounded, R.string.nav_home)
         addStandardTab(R.id.nav_history, R.drawable.ic_nav_history_rounded, R.string.nav_history)
-
-        // Preserve the middle column so the four standard actions remain balanced.
         navigationRow.addView(
             View(context),
             LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f)
@@ -214,8 +210,6 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
     }
 
     private fun dp(value: Int): Int = (value * density + 0.5f).toInt()
-
-    /** Draws one continuous surface so page content cannot show through above the bar. */
     private class NavigationBarBackgroundView(context: Context) : View(context) {
         private val density = resources.displayMetrics.density
         private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {

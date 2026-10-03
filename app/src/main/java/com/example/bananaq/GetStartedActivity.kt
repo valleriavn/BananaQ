@@ -34,7 +34,7 @@ class GetStartedActivity : LocaleAwareActivity() {
             }
         }
 
-        animatePlantIllustration(findViewById(R.id.bananaPlant))
+        animateLeafCanopy(findViewById(R.id.bananaPlant))
 
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
         btnGetStarted.setOnClickListener {

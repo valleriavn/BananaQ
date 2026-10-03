@@ -127,7 +127,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="bottom|end"
-                        android:background="@drawable/bg_avatar_edit"
+                        android:background="@drawable/avatar_edit_button_background"
                         android:contentDescription="@string/edit_avatar"
                         android:elevation="0dp"
                         android:importantForAccessibility="yes"

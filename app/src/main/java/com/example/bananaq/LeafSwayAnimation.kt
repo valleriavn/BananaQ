@@ -60,7 +60,7 @@ private class SwayingLeavesDrawable(private val bitmap: Bitmap) : Drawable() {
     override fun getOpacity() = PixelFormat.TRANSLUCENT
 }
 
-fun LifecycleOwner.animatePlantIllustration(view: View) {
+fun LifecycleOwner.animateLeafCanopy(view: View) {
     val image = view as? ImageView ?: return
     // Prevent duplicate lifecycle observers when a screen returns to the foreground.
     if (image.drawable is SwayingLeavesDrawable) return

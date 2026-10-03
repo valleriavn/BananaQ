@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnLayout
 import androidx.core.widget.NestedScrollView
-
-/** Reflow only enlarged text; retain the existing layout at the default font size. */
 fun AppCompatActivity.adaptToFontScale() {
     val scale = resources.configuration.fontScale
     val density = resources.displayMetrics.density

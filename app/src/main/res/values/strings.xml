@@ -135,5 +135,4 @@
     <string name="view_avatar">View your avatar</string>
     <string name="save_avatar">Save</string>
     <string name="avatar_picker_heading">Choose your avatar</string>
-    <string name="avatar_picker_hint">Choose an avatar below, then save your selection.</string>
 </resources>
