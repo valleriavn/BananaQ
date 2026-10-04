@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">BananaQ</string>
     <string name="language_english">English</string>
-    <string name="language_tagalog">Tagalog</string>
-    <string name="language_current">Tagalog</string>
-    <string name="language_welcome">Magkaroon ng masaganang araw sa pagsasaka!</string>
+    <string name="language_tagalog">Filipino</string>
+    <string name="language_current">Filipino</string>
+    <string name="language_welcome">Nawa’y maging masagana ang iyong pagsasaka!</string>
     <string name="language_instruction">Piliin ang nais mong wika</string>
     <string name="continue_label">Magpatuloy</string>
     <string name="get_started_message">Layunin naming tulungan ka sa mga alalahanin tungkol sa mga dahon ng saging upang mapanatiling malusog ang iyong pananim at masagana ang ani.</string>
@@ -16,9 +16,9 @@
     <string name="nav_feedback">Feedback</string>
     <string name="scan_history_title">Kasaysayan ng Pag-scan</string>
     <string name="feedback_title">Feedback</string>
-    <string name="no_scans_yet">Wala pang scan. Gamitin ang smart scanner.</string>
+    <string name="no_scans_yet">Wala pang na-scan. Gamitin ang matalinong scanner.</string>
     <string name="disease_library_title">Aklatan ng mga Sakit</string>
-    <string name="disease_details_unavailable">Hindi available ang paglalarawan ng sakit.</string>
+    <string name="disease_details_unavailable">Hindi makuha ang impormasyon tungkol sa sakit.</string>
     <string name="disease_symptoms">Mga Sintomas</string>
     <string name="disease_treatment">Mga inirerekomendang hakbang</string>
     <string name="disease_prevention">Pag-iwas</string>
@@ -26,7 +26,7 @@
     <string name="disease_spread">Pagkalat at paglala</string>
     <string name="disease_scientific_name">Sanhi ng sakit</string>
     <string name="disease_image_content_description">Larawang sanggunian ng %1$s</string>
-    <string name="disease_guidance_note">Gabay lamang ang mga larawan at sintomas. Maaaring magkamukha ang iba’t ibang kondisyon. Ipakumpirma ang malubha o kumakalat na sakit sa municipal o city agriculturist. Gumamit lamang ng produktong rehistrado para sa inyong lugar at laging sundin ang label.</string>
+    <string name="disease_guidance_note">Gabay lamang ang mga larawan at sintomas. Maaaring magkamukha ang iba’t ibang kondisyon. Ipakumpirma sa agriculturist ng munisipyo o lungsod ang malubha o kumakalat na sakit. Gumamit lamang ng produktong rehistrado para sa inyong lugar at laging sundin ang nakasulat sa etiketa.</string>
     <string name="description_black_sigatoka">Ang Black Sigatoka, na kilala rin bilang black leaf streak disease, ay isa sa pinakamalubhang fungal disease na nakaaapekto sa mga halamang saging.\n\nDulot ito ng fungus na Mycosphaerella fijiensis.\n\nInaatake ng sakit na ito ang mga dahon ng saging at binabawasan ang kakayahan nitong magsagawa ng photosynthesis.\n\nKapag lumala ang impeksiyon, bumababa ang produksiyon, lumiliit ang mga bunga, at naaapektuhan ang kabuuang kalidad ng ani.\n\nMabilis kumalat ang Black Sigatoka sa maiinit at mahalumigmig na lugar, lalo na kapag matagal ang pag-ulan.</string>
     <string name="description_panama">Ang Panama Disease, na kilala rin bilang Fusarium wilt, ay isang mapaminsalang fungal disease na dulot ng Fusarium oxysporum f. sp. cubense.\n\nInaatake ng fungus ang vascular system ng saging at hinaharangan ang pagdaloy ng tubig at sustansiya mula sa ugat patungo sa mga dahon.\n\nIsa ito sa pinakamapanganib na banta sa produksiyon ng saging dahil maaaring manatili ang fungus sa lupa nang maraming taon.\n\nKapag nahawahan ang isang taniman, napakahirap nang tuluyang alisin ang sakit.</string>
     <string name="description_cordana">Ang Cordana Leaf Spot ay isang fungal disease ng saging na dulot ng Cordana musae.\n\nBagaman karaniwang hindi ito kasingsira ng Black Sigatoka, maaari pa rin nitong pahinain ang halaman kapag hindi napangasiwaan.\n\nPangunahing naaapektuhan nito ang matatandang dahon at mas karaniwan sa mga lugar na mataas ang halumigmig at mahina ang daloy ng hangin.\n\nAng tuloy-tuloy na impeksiyon ay maaaring magpababa sa photosynthetic activity at makaapekto sa paglaki at pamumunga.</string>
@@ -58,7 +58,7 @@
     <string name="treatment_label">Paggamot</string>
     <string name="scanned_banana_leaf">Na-scan na dahon ng saging</string>
     <string name="feedback_question">Gaano katumpak ang resultang ito?</string>
-    <string name="feedback_instruction">Pumili ng opsiyon upang i-rate ang diagnosis.</string>
+    <string name="feedback_instruction">Pumili ng opsiyon upang suriin ang katumpakan ng diagnosis.</string>
     <string name="rating_very_accurate">Napaka-\nTumpak</string>
     <string name="rating_accurate">Tumpak</string>
     <string name="rating_not_sure">Hindi Tiyak</string>
@@ -87,17 +87,17 @@
     <string name="disease_cordana">Cordana Leaf Spot</string>
     <string name="camera_permission_denied">Tinanggihan ang pahintulot sa camera. Maaari ka pa ring pumili ng larawan.</string>
     <string name="camera_unavailable">Hindi magamit ang camera. Pumili na lamang ng larawan.</string>
-    <string name="photo_save_failed">Hindi ma-save ang larawan. Suriin ang available na storage.</string>
+    <string name="photo_save_failed">Hindi ma-save ang larawan. Suriin ang natitirang espasyo sa device.</string>
     <string name="photo_capture_failed">Hindi makunan ang larawan. Subukan muli.</string>
-    <string name="photo_picker_missing">Walang naka-install na photo picker.</string>
+    <string name="photo_picker_missing">Walang naka-install na tagapili ng larawan.</string>
     <string name="processing_photo">Pinoproseso ang larawan…</string>
     <string name="scan_failed">Hindi ma-scan ang larawang ito. Sumubok ng ibang larawan o i-restart ang app.</string>
     <string name="unable_identify">Hindi matukoy</string>
     <string name="unable_identify_message">Hindi matukoy nang may sapat na katiyakan ang larawan. Pakiscan muli ang malinaw at maliwanag na dahon ng saging.</string>
     <string name="try_again">Subukan Muli</string>
     <string name="library_label">Aklatan</string>
-    <string name="feedback_select_rating">Mangyaring pumili ng rating</string>
-    <string name="feedback_select_scan">Pumili muna ng scan mula sa kasaysayan.</string>
+    <string name="feedback_select_rating">Mangyaring pumili ng antas ng katumpakan</string>
+    <string name="feedback_select_scan">Pumili muna ng na-scan na larawan mula sa kasaysayan.</string>
     <string name="feedback_submitted_badge">Tingnan ang Feedback</string>
     <string name="feedback_item_already_submitted">%1$s. Tingnan ang naisumiteng feedback.</string>
     <string name="summary_scan">Scan</string>
@@ -107,9 +107,9 @@
     <string name="summary_saved">Na-save</string>
     <string name="summary_additional_comments">Karagdagang komento:\n%1$s</string>
     <string name="today_at">Ngayon, %1$s</string>
-    <string name="prediction_summary">Prediksiyon: %1$s (%2$d%%)\nPindutin para sa detalye</string>
+    <string name="prediction_summary">Prediksiyon: %1$s (%2$d%%)\nI-tap para makita ang detalye</string>
     <string name="prediction_heading">Prediksiyon: %1$s (%2$d%%)</string>
-    <string name="tap_for_details">Pindutin para sa detalye</string>
+    <string name="tap_for_details">I-tap para makita ang detalye</string>
     <string name="expand_scan_result">Palawakin ang resulta ng scan</string>
     <string name="collapse_scan_result">Paliitin ang resulta ng scan</string>
     <string name="unknown_label">Hindi Kilala</string>
@@ -125,7 +125,7 @@
     <string name="getting_started">PAGSISIMULA</string>
     <string name="important_information">MAHALAGANG IMPORMASYON</string>
     <string name="capture_title">Kunan ang dahon</string>
-    <string name="capture_description">Kumuha ng malinaw na larawan. Panatilihing naka-focus ang dahon at gumamit ng maayos na liwanag.</string>
+    <string name="capture_description">Kumuha ng malinaw na larawan. Tiyaking malinaw ang dahon at gumamit ng sapat na liwanag.</string>
     <string name="analyze_title">Suriin</string>
     <string name="analyze_description">Hayaan ang BananaQ na i-scan ito. Buksan ang Scan, kumuha o pumili ng larawan, at hintayin ang pagsusuri.</string>
     <string name="results_title">Tingnan ang resulta</string>
@@ -134,11 +134,11 @@
     <string name="privacy_policy">Patakaran sa Privacy</string>
     <string name="legal_privacy">Legal at Privacy</string>
     <string name="user_agreement">Kasunduan ng Gumagamit</string>
-    <string name="legal_not_available">Hindi pa available ang dokumentong ito.</string>
+    <string name="legal_not_available">Hindi pa makukuha ang dokumentong ito.</string>
     <string name="back_label">Bumalik</string>
     <string name="account_section">ACCOUNT</string>
     <string name="settings_section">MGA SETTING</string>
-    <string name="legal_section">LEGAL AT PRIVACY</string>
+    <string name="legal_section">LEGAL AT PAGKAPRIBADO</string>
     <string name="guest_name">Bisita</string>
     <string name="guest_description">Ginagamit ang BananaQ sa device na ito</string>
     <string name="avatar_section">MGA AVATAR</string>
@@ -152,10 +152,10 @@
     <string name="avatar_farmer_5">Avatar ng magsasaka 5</string>
     <string name="avatar_farmer_6">Avatar ng magsasaka 6</string>
     <string name="profile_label">Profile</string>
-    <string name="notifications_label">Mga Notification</string>
+    <string name="notifications_label">Mga Abiso</string>
     <string name="settings_label">Mga Setting</string>
     <string name="logout_label">Mag-log Out</string>
-    <string name="account_unavailable">Hindi available ang profile, settings, at pag-sign in sa bersiyong ito.</string>
+    <string name="account_unavailable">Hindi magagamit ang profile, mga setting, at pag-sign in sa bersiyong ito.</string>
     <string name="close_avatar_picker">Isara ang pagpili ng avatar</string>
     <string name="choose_named_avatar">Piliin ang %1$s</string>
 
