@@ -136,9 +136,9 @@
     <string name="user_agreement">Kasunduan ng Gumagamit</string>
     <string name="legal_not_available">Hindi pa makukuha ang dokumentong ito.</string>
     <string name="back_label">Bumalik</string>
-    <string name="account_section">ACCOUNT</string>
+    <string name="account_section">Account</string>
     <string name="settings_section">MGA SETTING</string>
-    <string name="legal_section">LEGAL AT PAGKAPRIBADO</string>
+    <string name="legal_section">Legal at Pagkapribado</string>
     <string name="guest_name">Bisita</string>
     <string name="guest_description">Ginagamit ang BananaQ sa device na ito</string>
     <string name="avatar_section">MGA AVATAR</string>

@@ -42,6 +42,7 @@ class UserAgreementActivity : LocaleAwareActivity() {
             else -> null
         }
         if (sectionTitle != null) {
+            val documentTitle = findViewById<TextView>(sectionTitle).text
             // Only the selected document participates in scrolling and accessibility.
             mapOf(
                 R.id.titleUserAgreement to R.id.userAgreementContent,
@@ -49,21 +50,15 @@ class UserAgreementActivity : LocaleAwareActivity() {
                 R.id.titlePrivacyPolicy to R.id.privacyPolicyContent
             ).forEach { (title, content) ->
                 val visibility = if (title == sectionTitle) View.VISIBLE else View.GONE
-                findViewById<View>(title).visibility = visibility
+                findViewById<View>(title).visibility = View.GONE
                 findViewById<View>(content).visibility = visibility
+            }
+            findViewById<TextView>(R.id.titleUserAgreement).apply {
+                text = documentTitle
+                visibility = View.VISIBLE
             }
             findViewById<View>(R.id.agreementConfirmation).visibility = View.GONE
             findViewById<View>(R.id.agreementActions).visibility = View.GONE
-            // Replace the header logo with the only back action in document-only mode.
-            btnBack.visibility = View.GONE
-            findViewById<ImageView>(R.id.logoIcon).apply {
-                setImageResource(R.drawable.ic_arrow_back_green)
-                contentDescription = getString(R.string.back_label)
-                isFocusable = true
-                val size = (48 * resources.displayMetrics.density).toInt()
-                layoutParams = layoutParams.apply { width = size; height = size }
-                setOnClickListener { finish() }
-            }
             return
         }
 

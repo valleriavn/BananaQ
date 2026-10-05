@@ -61,12 +61,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E0E0E0"
+            android:background="@color/banana_divider"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/titleAccount"
+        style="@style/AccountMainHeading"
         android:layout_width="0dp"
         android:layout_marginEnd="@dimen/page_horizontal_padding"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,6 @@
         android:layout_marginTop="24dp"
         android:text="@string/account_title"
         android:textColor="@color/banana_text_dark"
-        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header" />
@@ -84,7 +84,7 @@
         android:id="@+id/accountContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/titleAccount">
@@ -93,15 +93,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/page_horizontal_padding">
+            android:paddingStart="@dimen/page_horizontal_padding"
+            android:paddingEnd="@dimen/page_horizontal_padding"
+            android:paddingBottom="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/manual_card"
+                android:background="@drawable/account_information_card"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="20dp">
 
                 <FrameLayout
                     android:id="@+id/profileAvatarFrame"
@@ -140,39 +142,37 @@
 
 
             <TextView
-                style="@style/ManualSection"
-                android:layout_marginTop="22dp"
+                style="@style/AccountSectionHeading"
                 android:text="@string/account_section" />
 
             <TextView
                 android:id="@+id/manualRow"
-                style="@style/ManualRow"
+                style="@style/AccountInformationRow"
                 android:drawableEnd="@drawable/ic_manual_chevron"
                 android:drawablePadding="12dp"
                 android:text="@string/user_manual" />
 
             <TextView
-                style="@style/ManualSection"
-                android:layout_marginTop="16dp"
+                style="@style/AccountSectionHeading"
                 android:text="@string/legal_section" />
 
             <TextView
                 android:id="@+id/termsRow"
-                style="@style/ManualRow"
+                style="@style/AccountInformationRow"
                 android:drawableEnd="@drawable/ic_manual_chevron"
                 android:drawablePadding="12dp"
                 android:text="@string/terms_of_use" />
 
             <TextView
                 android:id="@+id/privacyRow"
-                style="@style/ManualRow"
+                style="@style/AccountInformationRow"
                 android:drawableEnd="@drawable/ic_manual_chevron"
                 android:drawablePadding="12dp"
                 android:text="@string/privacy_policy" />
 
             <TextView
                 android:id="@+id/agreementRow"
-                style="@style/ManualRow"
+                style="@style/AccountInformationRow"
                 android:drawableEnd="@drawable/ic_manual_chevron"
                 android:drawablePadding="12dp"
                 android:text="@string/user_agreement" />

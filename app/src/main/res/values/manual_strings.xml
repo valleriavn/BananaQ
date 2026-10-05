@@ -18,9 +18,9 @@
     <string name="user_agreement">User Agreement</string>
     <string name="legal_not_available">This document has not been provided yet.</string>
     <string name="back_label">Go back</string>
-    <string name="account_section">ACCOUNT</string>
+    <string name="account_section">Account</string>
     <string name="settings_section">SETTINGS</string>
-    <string name="legal_section">LEGAL &amp; PRIVACY</string>
+    <string name="legal_section">Legal &amp; Privacy</string>
     <string name="guest_name">Guest</string>
     <string name="guest_description">Using BananaQ on this device</string>
     <string name="avatar_section">AVATAR OPTIONS</string>

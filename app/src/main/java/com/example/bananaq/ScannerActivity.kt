@@ -81,6 +81,10 @@ class ScannerActivity : LocaleAwareActivity() {
     }
 
     private fun showCompactResultMode() {
+        if (intent.getBooleanExtra("FROM_HISTORY", false)) {
+            showDetailsMode()
+            return
+        }
         showPhotoMode()
         findViewById<View>(R.id.cameraScrim).alpha = 0.3f
         for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
@@ -350,14 +354,10 @@ class ScannerActivity : LocaleAwareActivity() {
         val compactPanel = findViewById<View>(R.id.compactResultPanel)
         val compactHandle = findViewById<View>(R.id.compactResultDragHandle)
         val tryAgain = findViewById<View>(R.id.btnTryAgain)
-        if (intent.getBooleanExtra("FROM_HISTORY", false)) {
+        if (intent.getBooleanExtra("FROM_HISTORY", false) && detailsExpanded) {
             compactPanel.visibility = View.GONE
             showDetailsMode()
             showFullResult()
-            findViewById<View>(R.id.resultDragHandle).apply {
-                isClickable = false
-                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-            }
             return
         }
         if (result.isValid && detailsExpanded) {

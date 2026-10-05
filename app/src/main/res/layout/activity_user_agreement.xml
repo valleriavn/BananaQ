@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical" android:baselineAligned="false"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +50,7 @@
             android:layout_width="88dp"
             android:layout_height="wrap_content" android:minHeight="32dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_button_bg"
-            android:backgroundTint="#F2EBDC"
+            android:background="@drawable/library_language_pill"
             android:gravity="center"
             android:text="@string/language_current"
             android:textColor="@color/banana_text_dark"
@@ -87,31 +86,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical" android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/btnBack"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:contentDescription="@string/back_label"
                     android:focusable="true"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_arrow_back_green" />
+                    android:padding="12dp"
+                    android:src="@drawable/ic_arrow_back_green" android:scaleType="fitCenter" />
 
                 <TextView
                     android:id="@+id/titleUserAgreement"
+                style="@style/AccountPageHeading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="User Agreement"
                     android:textColor="@color/banana_text_dark"
-                    android:textSize="26sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -119,14 +118,14 @@
                 android:id="@+id/userAgreementContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
 
                 <View
-                    android:layout_width="15dp"
+                    android:layout_width="6dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_agreement_yellow_bar" />
 
@@ -164,7 +163,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="1. Purpose of the Application"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -181,7 +180,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="2. Eligibility"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -197,7 +196,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="3. User Responsibilities"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -213,7 +212,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="4. Accuracy of Results"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -229,7 +228,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="5. Availability of Service"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -245,7 +244,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="6. Termination"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -262,27 +261,27 @@
 
             <TextView
                 android:id="@+id/titleTermsOfUse"
+                style="@style/AccountPageHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page_horizontal_padding"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:text="Terms of Use"
                 android:textColor="@color/banana_text_dark"
-                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/termsOfUseContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
 
                 <View
-                    android:layout_width="15dp"
+                    android:layout_width="6dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_agreement_yellow_bar" />
 
@@ -310,7 +309,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="2. Permitted Use"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -326,7 +325,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="3. Prohibited Activities"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -342,7 +341,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="4. Intellectual Property"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -358,7 +357,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="5. Third-Party Technologies"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -374,7 +373,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="6. Disclaimer"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -390,7 +389,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="7. Limitation of Liability"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -406,7 +405,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="8. Changes to the Terms"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -423,27 +422,27 @@
 
             <TextView
                 android:id="@+id/titlePrivacyPolicy"
+                style="@style/AccountPageHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page_horizontal_padding"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:text="Privacy Policy"
                 android:textColor="@color/banana_text_dark"
-                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/privacyPolicyContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
 
                 <View
-                    android:layout_width="15dp"
+                    android:layout_width="6dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_agreement_yellow_bar" />
 
@@ -471,7 +470,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="1. Information We Collect"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -487,7 +486,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="2. How We Use the Information"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -503,7 +502,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="3. Data Storage and Security"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -519,7 +518,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="4. Data Sharing"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -535,7 +534,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="5. Research Use"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -551,7 +550,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="6. Data Retention"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -567,7 +566,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="7. User Rights"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -583,7 +582,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="8. Children's Privacy"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -599,7 +598,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="9. Consent"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -615,7 +614,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12dp"
                         android:text="10. Contact"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -637,7 +636,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/page_horizontal_padding"
                 android:layout_marginTop="24dp"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical" android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
