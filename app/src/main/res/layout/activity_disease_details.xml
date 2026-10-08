@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical" android:baselineAligned="false"
         android:paddingHorizontal="@dimen/header_horizontal_padding"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:paddingTop="@dimen/app_header_vertical_spacing"
+        android:paddingBottom="@dimen/app_header_vertical_spacing">
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -22,6 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/app_name"
             android:textColor="@color/banana_green"
@@ -66,8 +67,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginHorizontal="@dimen/page_horizontal_padding"
-        android:background="@color/banana_border" />
+        android:layout_marginHorizontal="@dimen/header_horizontal_padding"
+        android:background="@color/banana_divider" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
