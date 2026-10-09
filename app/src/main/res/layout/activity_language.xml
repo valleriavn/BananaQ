@@ -36,47 +36,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoSmall" />
 
-    <TextView
-        android:id="@+id/subTitleText"
+    <LinearLayout
+        android:id="@+id/languageIntroBlock"
         android:layout_width="0dp"
-        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="14dp"
         android:gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:text="@string/language_welcome"
-        android:textColor="@color/banana_text_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleText" />
+        app:layout_constraintTop_toBottomOf="@id/titleText">
 
-    <TextView
-        android:id="@+id/instructionText"
-        android:layout_width="0dp"
-        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/language_instruction"
-        android:textColor="@color/banana_text_dark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subTitleText" />
+        <TextView
+            android:id="@+id/subTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@string/language_welcome"
+            android:textColor="@color/banana_text_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/instructionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@string/language_instruction"
+            android:textColor="@color/banana_text_dark"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/btnEnglish"
         android:layout_width="0dp"
         app:layout_constraintWidth_max="@dimen/language_choice_width"
         android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-        android:layout_height="wrap_content" android:minHeight="52dp"
-        android:layout_marginTop="54dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="22dp"
         android:background="@drawable/btn_language_green"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/instructionText">
+        app:layout_constraintTop_toBottomOf="@id/languageIntroBlock">
 
         <ImageView
             android:layout_width="40dp"
@@ -89,9 +97,10 @@
         <TextView
             android:id="@+id/labelEnglish"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:minHeight="52dp"
-            android:paddingStart="48dp" android:paddingEnd="48dp"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:includeFontPadding="false"
+            android:translationX="6dp"
             android:text="@string/language_english"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -102,7 +111,7 @@
         android:layout_width="0dp"
         app:layout_constraintWidth_max="@dimen/language_choice_width"
         android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-        android:layout_height="wrap_content" android:minHeight="52dp"
+        android:layout_height="52dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/btn_language_yellow"
         android:clickable="true"
@@ -122,9 +131,10 @@
         <TextView
             android:id="@+id/labelTagalog"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:minHeight="52dp"
-            android:paddingStart="48dp" android:paddingEnd="48dp"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:includeFontPadding="false"
+            android:translationX="6dp"
             android:text="@string/language_tagalog"
             android:textColor="@color/button_text_black"
             android:textSize="18sp" />
@@ -132,12 +142,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnContinue"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/btnTagalog"
         app:layout_constraintVertical_bias="1"
         android:layout_width="wrap_content" android:minWidth="150dp"
         android:layout_height="wrap_content" android:minHeight="50dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/continue_label"

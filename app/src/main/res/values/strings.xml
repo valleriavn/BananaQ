@@ -2,7 +2,7 @@
     <string name="app_name">BananaQ</string>
     <string name="language_english">English</string>
     <string name="language_tagalog">Filipino</string>
-    <string name="language_code_english" translatable="false">EN</string>
+    <string name="language_code_english" translatable="false">ENG</string>
     <string name="language_code_tagalog" translatable="false">FIL</string>
     <string name="language_current">English</string>
     <string name="language_welcome">Have an agriculture-filled day!</string>

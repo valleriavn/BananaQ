@@ -2,6 +2,7 @@ package com.example.bananaq
 
 import android.content.Context
 import android.content.res.Configuration
+import android.util.DisplayMetrics
 import java.util.Locale
 
 object LocaleHelper {
@@ -24,6 +25,14 @@ object LocaleHelper {
         val configuration = Configuration(context.resources.configuration)
         configuration.setLocale(locale)
         configuration.setLayoutDirection(locale)
+
+        // Keep BananaQ's designed dimensions stable when the device's Font size
+        // or Display size setting changes. Screen-size resource qualifiers still
+        // adapt the UI for compact phones, landscape layouts, and tablets.
+        configuration.fontScale = DEFAULT_APP_FONT_SCALE
+        configuration.densityDpi = DisplayMetrics.DENSITY_DEVICE_STABLE
         return context.createConfigurationContext(configuration)
     }
+
+    private const val DEFAULT_APP_FONT_SCALE = 1f
 }
