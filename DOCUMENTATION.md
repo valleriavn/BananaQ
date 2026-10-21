@@ -37,11 +37,11 @@ No email, phone number, selected avatar, or selected language is stored in the r
 
 ## Project structure
 
-- `com.example.bananaq`: activities, localization, shared bottom navigation, and reusable UI utilities
-- `com.example.bananaq.data`: SQLite records, session lifecycle, disease content, and scan history
-- `com.example.bananaq.data.sync`: anonymous authentication, incremental WorkManager sync, Storage uploads
-- `com.example.bananaq.ml`: model loading, preprocessing, output validation, and classification
-- `com.example.bananaq.model`: domain models
+- `bananaq`: activities, localization, shared bottom navigation, and reusable UI utilities
+- `bananaq.data`: SQLite records, session lifecycle, disease content, and scan history
+- `bananaq.data.sync`: anonymous authentication, incremental WorkManager sync, Storage uploads
+- `bananaq.ml`: model loading, preprocessing, output validation, and classification
+- `bananaq.model`: domain models
 - `assets/diseases` and `assets/diseases_tl`: model and localized disease content
 - `supabase/schema.sql`: database function, RLS ownership policies, and private Storage setup
 

@@ -9,13 +9,13 @@
     android:background="@color/banana_cream">
 
 <LinearLayout android:id="@+id/header" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/header_horizontal_padding" android:paddingEnd="@dimen/header_horizontal_padding" android:paddingTop="@dimen/app_header_vertical_spacing" app:layout_constraintTop_toTopOf="parent" android:orientation="vertical">
-    <com.example.bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/app_header_vertical_spacing">
+    <bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/app_header_vertical_spacing">
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginEnd="@dimen/spacing_8" android:layout_weight="1">
             <ImageView android:id="@+id/headerLogo" android:layout_width="@dimen/app_header_logo_size" android:layout_height="@dimen/app_header_logo_size" android:src="@drawable/logo" />
             <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8" android:text="@string/app_name" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_brand_text_size" android:textStyle="bold" />
         </LinearLayout>
         <TextView android:id="@+id/feedbackHeaderLanguage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:background="@drawable/header_language_badge" android:gravity="center" android:text="@string/language_current" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_language_text_size" android:minWidth="88dp" android:paddingStart="@dimen/spacing_12" android:paddingEnd="@dimen/spacing_12" />
-    </com.example.bananaq.ResponsiveHeaderRow>
+    </bananaq.ResponsiveHeaderRow>
     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/banana_divider" app:layout_constraintBottom_toBottomOf="parent" />
 </LinearLayout>
 
@@ -58,7 +58,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintWidth_max="@dimen/page_content_max_width">
-        <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
+        <bananaq.ContentColumn android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="@dimen/card_content_padding">
-                    <com.example.bananaq.ResponsiveFeedbackHeader
+                    <bananaq.ResponsiveFeedbackHeader
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical" android:baselineAligned="false"
@@ -134,7 +134,7 @@
                                 android:textStyle="bold"
                                 tools:text="91.1%" />
                         </LinearLayout>
-                    </com.example.bananaq.ResponsiveFeedbackHeader>
+                    </bananaq.ResponsiveFeedbackHeader>
 
                     <View
                         android:layout_width="match_parent"
@@ -245,7 +245,7 @@
                 app:backgroundTint="@color/agreement_button_default_selector"
                 app:cornerRadius="@dimen/pill_corner_radius"
                 app:strokeWidth="0dp" />
-        </com.example.bananaq.ContentColumn>
+        </bananaq.ContentColumn>
     </ScrollView>
 
     <ScrollView
@@ -258,7 +258,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintWidth_max="@dimen/page_content_max_width">
-        <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
+        <bananaq.ContentColumn android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -384,10 +384,10 @@
                 app:backgroundTint="@color/agreement_button_default_selector"
                 app:cornerRadius="@dimen/pill_corner_radius"
                 app:strokeWidth="0dp" />
-        </com.example.bananaq.ContentColumn>
+        </bananaq.ContentColumn>
     </ScrollView>
 
-    <com.example.bananaq.RaisedBottomNavigationView
+    <bananaq.RaisedBottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_navigation_height"

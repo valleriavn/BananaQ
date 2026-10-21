@@ -64,7 +64,7 @@
         android:alignmentMode="alignBounds"
         android:columnCount="3"
         android:useDefaultMargins="false" />
-    <com.example.bananaq.ResponsiveActionRow
+    <bananaq.ResponsiveActionRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_16"
@@ -96,5 +96,5 @@
             android:textColor="@color/white"
             app:backgroundTint="@color/banana_green"
             app:cornerRadius="@dimen/pill_corner_radius" />
-    </com.example.bananaq.ResponsiveActionRow>
+    </bananaq.ResponsiveActionRow>
 </LinearLayout>

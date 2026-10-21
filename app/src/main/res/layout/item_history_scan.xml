@@ -9,7 +9,7 @@
     app:cardElevation="0dp"
     app:cardBackgroundColor="@color/banana_surface">
 
-    <com.example.bananaq.ResponsiveScanRow
+    <bananaq.ResponsiveScanRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_history_border"
@@ -116,5 +116,5 @@
                 tools:visibility="visible" />
         </LinearLayout>
 
-    </com.example.bananaq.ResponsiveScanRow>
+    </bananaq.ResponsiveScanRow>
 </androidx.cardview.widget.CardView>

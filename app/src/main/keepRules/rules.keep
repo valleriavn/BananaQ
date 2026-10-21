@@ -1,4 +1,4 @@
 # WorkManager constructs workers by class name after process recreation.
--keep class com.example.bananaq.data.sync.SupabaseSyncWorker {
+-keep class bananaq.data.sync.SupabaseSyncWorker {
     public <init>(android.content.Context, androidx.work.WorkerParameters);
 }

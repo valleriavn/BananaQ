@@ -18,10 +18,11 @@ val supabasePublishableKey = localProperties.getProperty("SUPABASE_PUBLISHABLE_K
     ?: System.getenv("SUPABASE_PUBLISHABLE_KEY").orEmpty()
 
 android {
-    namespace = "com.example.bananaq"
+    namespace = "bananaq"
     compileSdk = 35
 
     defaultConfig {
+        // Keep the installed app identity stable so updates retain existing data.
         applicationId = "com.example.bananaq"
         minSdk = 24
         targetSdk = 35

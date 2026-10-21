@@ -10,7 +10,7 @@
     android:background="@color/banana_cream">
 
 <LinearLayout android:id="@+id/header" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/header_horizontal_padding" android:paddingEnd="@dimen/header_horizontal_padding" android:paddingTop="@dimen/home_header_vertical_spacing" app:layout_constraintTop_toTopOf="parent" android:orientation="vertical">
-    <com.example.bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/home_header_vertical_spacing">
+    <bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/home_header_vertical_spacing">
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginEnd="@dimen/spacing_8" android:layout_weight="1">
             <ImageView android:id="@+id/logoIcon" android:layout_width="@dimen/app_header_logo_size" android:layout_height="@dimen/app_header_logo_size" android:src="@drawable/logo" />
             <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8" android:text="@string/app_name" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_brand_text_size" android:textStyle="bold" />
@@ -19,7 +19,7 @@
             <TextView android:id="@+id/tvLangEN" android:layout_width="wrap_content" android:minWidth="48dp" android:layout_height="wrap_content" android:minHeight="48dp" android:paddingStart="@dimen/spacing_8" android:paddingEnd="@dimen/spacing_8" android:layout_weight="1" android:background="@drawable/header_language_selected" android:gravity="center" android:text="@string/language_code_english" android:textColor="@color/white" android:textSize="@dimen/app_header_language_text_size" android:textStyle="bold" android:clickable="true" android:focusable="true" />
             <TextView android:id="@+id/tvLangTL" android:layout_width="wrap_content" android:minWidth="48dp" android:layout_height="wrap_content" android:minHeight="48dp" android:paddingStart="@dimen/spacing_8" android:paddingEnd="@dimen/spacing_8" android:layout_weight="1" android:gravity="center" android:text="@string/language_code_tagalog" android:textColor="@color/button_text_black" android:textSize="@dimen/app_header_language_text_size" android:clickable="true" android:focusable="true" />
         </LinearLayout>
-    </com.example.bananaq.ResponsiveHeaderRow>
+    </bananaq.ResponsiveHeaderRow>
     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/banana_divider" app:layout_constraintBottom_toBottomOf="parent" />
 </LinearLayout>
 
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation" app:layout_constraintWidth_max="@dimen/page_content_max_width">
-    <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
+    <bananaq.ContentColumn android:layout_gravity="center_horizontal"
         android:id="@+id/homeContent"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="vertical" android:paddingTop="@dimen/spacing_8"
@@ -51,7 +51,7 @@
             android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding" android:layout_marginTop="@dimen/spacing_8" android:layout_marginBottom="0dp"
             app:cardBackgroundColor="@color/banana_surface" app:cardCornerRadius="@dimen/container_corner_radius"
             app:cardElevation="2dp" app:strokeColor="@color/banana_border" app:strokeWidth="1dp">
-            <com.example.bananaq.ResponsiveDateTimeRow android:layout_width="match_parent" android:layout_height="wrap_content"
+            <bananaq.ResponsiveDateTimeRow android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:id="@+id/homeDateTimeRow" android:orientation="horizontal" android:gravity="center_vertical" android:padding="@dimen/compact_card_padding">
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:orientation="vertical">
@@ -65,7 +65,7 @@
                 <TextView android:id="@+id/timeText" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8"
                     android:textColor="@color/banana_text_dark" android:textSize="18sp" android:textStyle="bold" />
-            </com.example.bananaq.ResponsiveDateTimeRow>
+            </bananaq.ResponsiveDateTimeRow>
         </com.google.android.material.card.MaterialCardView>
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding" android:layout_marginTop="@dimen/section_gap"
@@ -80,11 +80,11 @@
             android:nestedScrollingEnabled="false"
             android:overScrollMode="never" android:scrollbars="none"
             android:contentDescription="@string/disease_library_title" />
-    </com.example.bananaq.ContentColumn>
+    </bananaq.ContentColumn>
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.example.bananaq.RaisedBottomNavigationView
+    <bananaq.RaisedBottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_navigation_height"

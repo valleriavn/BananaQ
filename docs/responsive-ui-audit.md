@@ -32,10 +32,10 @@ preserves Android's density and font settings; no global scaling override is use
 
 ## Files changed in this pass
 
-- `app/src/main/java/com/example/bananaq/ContentColumn.kt`: shared maximum reading width.
-- `app/src/main/java/com/example/bananaq/ResponsiveFeedbackHeader.kt`: adaptive image/metadata arrangement.
-- `app/src/main/java/com/example/bananaq/ResponsiveActionRow.kt`: content-based action stacking without shrinking text.
-- `app/src/main/java/com/example/bananaq/AdaptiveSizing.kt`: usable-window dialog height/width.
+- `app/src/main/java/bananaq/ContentColumn.kt`: shared maximum reading width.
+- `app/src/main/java/bananaq/ResponsiveFeedbackHeader.kt`: adaptive image/metadata arrangement.
+- `app/src/main/java/bananaq/ResponsiveActionRow.kt`: content-based action stacking without shrinking text.
+- `app/src/main/java/bananaq/DialogSizing.kt`: usable-window dialog height/width.
 - `AccountActivity.kt`, `HistoryActivity.kt`, `FeedbackDetailActivity.kt` in the same Java package: apply bounded dialog sizing.
 - `SystemBarInsets.kt`, `RaisedBottomNavigationView.kt`: prevent repeated inset resize work.
 - `ScanThumbnailLoader.kt`: preserve placeholder logo aspect ratio.
@@ -48,9 +48,9 @@ preserves Android's density and font settings; no global scaling override is use
 - `dialog_feedback_confirmation.xml`, `dialog_unidentified_scan.xml`, `dialog_avatar_picker.xml`: adaptive action rows; confirmation actions also receive padded 48dp targets.
 - `app/src/main/res/values/dimensions.xml`, `values-h600dp/dimensions.xml`, `values-h840dp/dimensions.xml`: shared reading width, choice width, and height-based illustration sizes.
 - `app/src/main/res/values/manual_styles.xml`: shared native-sized scanner instruction text.
-- `app/src/test/java/com/example/bananaq/ResponsiveLayoutTest.kt`: populated layouts, saved feedback, history rows, short dialogs.
-- `app/src/test/java/com/example/bananaq/ScalingScreenshotTest.kt` and screenshot PNGs: broader visual coverage and loading-state anchor assertions.
-- `app/src/androidTest/java/com/example/bananaq/WindowBehaviorTest.kt`: real keyboard, dialog actions, repeated insets, and device renders.
+- `app/src/test/java/bananaq/ResponsiveLayoutTest.kt`: populated layouts, saved feedback, history rows, short dialogs.
+- `app/src/test/java/bananaq/ScalingScreenshotTest.kt` and screenshot PNGs: broader visual coverage and loading-state anchor assertions.
+- `app/src/androidTest/java/bananaq/WindowBehaviorTest.kt`: real keyboard, dialog actions, repeated insets, and device renders.
 
 ## Automated verification
 

@@ -66,14 +66,14 @@ to use sp with the system font scale; dimensions use dp.
   `ResponsiveScanRow.kt`, `ResponsiveTabRow.kt`: shared resource gaps in native measurement.
 - `ScannerActivity.kt`: recommendation row gaps, title/body separation, and measured divider indentation.
 - `AccountActivity.kt`: avatar tile padding/margins share the same grid; tile sizing reserves that padding.
-- `AdaptiveSizing.kt`: dialog breathing room uses the shared 16dp token.
+- `DialogSizing.kt`: dialog breathing room uses the shared 16dp token.
 - `SystemBarInsets.kt`, `FeedbackDetailActivity.kt`: compact keyboard header policy; insets still apply once.
 - `MainActivity.kt`, `DiseaseLibraryAdapter.kt`: restored cached native looping and retained scroll position.
 - `ResponsiveLayoutTest.kt`, `ScalingScreenshotTest.kt`, `WindowBehaviorTest.kt`: boundary,
   rating alignment, library-bottom, loop-direction, and compact-keyboard checks.
 - `app/src/test/screenshots/*.png`: reviewed native-layout references for the changed spacing.
 
-Java/Kotlin filenames above are under `app/src/main/java/com/example/bananaq`; tests
+Java/Kotlin filenames above are under `app/src/main/java/bananaq`; tests
 are under the equivalent `src/test` and `src/androidTest` package directories.
 
 ## Verification

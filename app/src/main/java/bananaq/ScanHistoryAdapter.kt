@@ -1,0 +1,117 @@
+package bananaq
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class ScanHistoryAdapter(
+    private val items: List<HistoryItem>,
+    private val feedbackScanIds: Set<String> = emptySet(),
+    private val onItemClick: ((HistoryItem) -> Unit)? = null
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        const val TYPE_HEADER = 0
+        const val TYPE_ITEM = 1
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (items[position].isHeader) TYPE_HEADER else TYPE_ITEM
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == TYPE_HEADER) {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_history_header, parent, false)
+            HeaderViewHolder(view)
+        } else {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_history_scan, parent, false)
+            ItemViewHolder(view)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val item = items[position]
+        if (holder is HeaderViewHolder) {
+            holder.tvHeader.text = item.headerTitle
+        } else if (holder is ItemViewHolder) {
+            ScanThumbnailLoader.load(holder.ivScan, item.imageUri)
+            holder.tvDiseaseName.text = if (!item.isValid) {
+                holder.itemView.context.getString(R.string.unable_identify)
+            } else item.diseaseName?.let {
+                localizedDiseaseName(holder.itemView.context, it)
+            }
+            holder.tvDateTime.text = item.dateTime
+            holder.tvAccuracy.text = item.accuracy?.let { if (it.endsWith("%")) it else "$it%" } ?: "—"
+            holder.accuracyRow.visibility = if (item.isValid) View.VISIBLE else View.GONE
+            holder.tvStatus.setText(if (!item.isValid) R.string.status_uncertain
+                else if (item.isHealthy) R.string.status_healthy else R.string.status_diseased)
+            holder.tvStatus.setBackgroundResource(R.drawable.status_badge_bg)
+            holder.tvStatus.visibility = if (item.isValid) View.VISIBLE else View.GONE
+            val feedbackSubmitted = item.scanId?.let(feedbackScanIds::contains) == true
+            holder.tvFeedbackStatus.visibility = if (feedbackSubmitted) View.VISIBLE else View.GONE
+            
+            if (!item.isValid) {
+                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.GRAY)
+                holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
+            } else if (item.isHealthy) {
+                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#71C35E"))
+                holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
+            } else {
+                holder.tvStatus.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#F25C5C"))
+                holder.tvStatus.setTextColor(android.graphics.Color.WHITE)
+            }
+
+            holder.itemView.isEnabled = true
+            holder.itemView.isClickable = onItemClick != null
+            holder.itemView.isFocusable = onItemClick != null
+            holder.itemView.contentDescription = if (feedbackSubmitted) {
+                holder.itemView.context.getString(
+                    R.string.feedback_item_already_submitted,
+                    holder.tvDiseaseName.text
+                )
+            } else null
+            holder.itemView.setOnClickListener(if (onItemClick == null) null else View.OnClickListener {
+                onItemClick(item)
+            })
+        }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        if (holder is ItemViewHolder) ScanThumbnailLoader.load(holder.ivScan, null)
+        super.onViewRecycled(holder)
+    }
+
+    override fun getItemCount(): Int = items.size
+
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvHeader: TextView = view.findViewById(R.id.tvHeader)
+    }
+
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ivScan: ImageView = view.findViewById(R.id.ivScan)
+        val tvDiseaseName: TextView = view.findViewById(R.id.tvDiseaseName)
+        val tvDateTime: TextView = view.findViewById(R.id.tvDateTime)
+        val accuracyRow: View = view.findViewById(R.id.accuracyRow)
+        val tvAccuracy: TextView = view.findViewById(R.id.tvAccuracy)
+        val tvStatus: TextView = view.findViewById(R.id.tvStatus)
+        val tvFeedbackStatus: TextView = view.findViewById(R.id.tvFeedbackStatus)
+    }
+
+    data class HistoryItem(
+        val isHeader: Boolean,
+        val headerTitle: String? = null,
+        val diseaseName: String? = null,
+        val dateTime: String? = null,
+        val accuracy: String? = null,
+        val confidenceScore: Float? = null,
+        val isHealthy: Boolean = false,
+        val isValid: Boolean = true,
+        val scanId: String? = null,
+        val imageUri: String? = null
+    )
+}

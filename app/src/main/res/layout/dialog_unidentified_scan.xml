@@ -39,7 +39,7 @@
         android:textColor="@color/banana_muted"
         android:textSize="12sp" />
 
-    <com.example.bananaq.ResponsiveActionRow
+    <bananaq.ResponsiveActionRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_16"
@@ -79,5 +79,5 @@
             android:padding="@dimen/spacing_8"
             android:textSize="13sp"
             android:textStyle="bold" />
-</com.example.bananaq.ResponsiveActionRow>
+</bananaq.ResponsiveActionRow>
 </LinearLayout>

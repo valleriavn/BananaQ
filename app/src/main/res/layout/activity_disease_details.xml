@@ -6,7 +6,7 @@
     android:background="@color/banana_cream"
     android:orientation="vertical">
 
-<com.example.bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:baselineAligned="false" android:paddingStart="@dimen/header_horizontal_padding" android:paddingEnd="@dimen/header_horizontal_padding" android:paddingTop="@dimen/app_header_vertical_spacing" android:paddingBottom="@dimen/app_header_vertical_spacing">
+<bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:baselineAligned="false" android:paddingStart="@dimen/header_horizontal_padding" android:paddingEnd="@dimen/header_horizontal_padding" android:paddingTop="@dimen/app_header_vertical_spacing" android:paddingBottom="@dimen/app_header_vertical_spacing">
     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal" android:gravity="center_vertical">
         <ImageView android:layout_width="@dimen/app_header_logo_size" android:layout_height="@dimen/app_header_logo_size" android:importantForAccessibility="no" android:src="@drawable/logo" />
         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8" android:layout_marginEnd="@dimen/spacing_8" android:layout_weight="1" android:text="@string/app_name" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_brand_text_size" android:textStyle="bold" />
@@ -15,7 +15,7 @@
         <TextView android:id="@+id/detailLangEN" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:layout_weight="1" android:clickable="true" android:contentDescription="@string/language_english" android:focusable="true" android:gravity="center" android:text="@string/language_code_english" android:textColor="@color/button_text_black" android:textSize="@dimen/app_header_language_text_size" android:minWidth="48dp" android:paddingStart="@dimen/spacing_8" android:paddingEnd="@dimen/spacing_8" />
         <TextView android:id="@+id/detailLangTL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:layout_weight="1" android:clickable="true" android:contentDescription="@string/language_tagalog" android:focusable="true" android:gravity="center" android:text="@string/language_code_tagalog" android:textColor="@color/button_text_black" android:textSize="@dimen/app_header_language_text_size" android:minWidth="48dp" android:paddingStart="@dimen/spacing_8" android:paddingEnd="@dimen/spacing_8" />
     </LinearLayout>
-</com.example.bananaq.ResponsiveHeaderRow>
+</bananaq.ResponsiveHeaderRow>
 
     <View
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:layout_weight="1"
         android:clipToPadding="false"
         android:fillViewport="true">
-        <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
+        <bananaq.ContentColumn android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -146,6 +146,6 @@
                 android:textColor="@color/disease_guidance_text"
                 android:textStyle="italic"
                 android:textSize="13sp" />
-        </com.example.bananaq.ContentColumn>
+        </bananaq.ContentColumn>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>
