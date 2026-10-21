@@ -17,6 +17,7 @@
     <dimen name="disease_header_image_height">190dp</dimen>
     <dimen name="home_disease_carousel_height">140dp</dimen>
     <dimen name="onboarding_logo_top_margin">24dp</dimen>
+    <dimen name="get_started_logo_top_margin">8dp</dimen>
     <dimen name="app_header_vertical_spacing">6dp</dimen>
     <dimen name="home_illustration_height">180dp</dimen>
     <dimen name="app_header_brand_text_size">20sp</dimen>

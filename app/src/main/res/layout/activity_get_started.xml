@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:fillViewport="true" android:background="@color/onboarding_cream">
+    android:fillViewport="true" android:background="@color/onboarding_yellow">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F4E4B2">
+    android:background="@color/onboarding_yellow">
 
     <View
         android:id="@+id/pageBackground"
@@ -41,7 +41,7 @@
         android:id="@+id/logoOnboarding"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="@dimen/onboarding_logo_top_margin"
+        android:layout_marginTop="@dimen/get_started_logo_top_margin"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/page_horizontal_padding"
         android:layout_marginEnd="@dimen/page_horizontal_padding"
-        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_32"
         android:gravity="center"
         android:text="@string/get_started_message"
         android:textColor="@color/button_text_black"

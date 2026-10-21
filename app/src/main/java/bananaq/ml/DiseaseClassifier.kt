@@ -19,9 +19,8 @@ class DiseaseClassifier(private val model: TFLiteModel) {
         require(shape.size == 4 && shape[0] == 1 && shape[3] == 3 && shape[1] > 0 && shape[2] > 0) {
             "Expected a single RGB image tensor"
         }
-        // Resize to the exported tensor's dimensions, preserving the existing
-        // nearest-neighbor preprocessing contract.
-        val resized = Bitmap.createScaledBitmap(bitmap, shape[2], shape[1], false)
+        // Use filtered (bilinear) resizing to match the training image pipeline.
+        val resized = Bitmap.createScaledBitmap(bitmap, shape[2], shape[1], true)
         try {
             val buffer = ImagePreprocessor.createInputBuffer(resized, input)
             val output = interpreter.getOutputTensor(0)
