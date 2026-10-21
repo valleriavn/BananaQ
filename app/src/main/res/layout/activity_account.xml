@@ -77,14 +77,14 @@
 
                     <ImageButton
                         android:id="@+id/editAvatarButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_gravity="bottom|end"
                         android:background="@drawable/avatar_edit_button_background"
                         android:contentDescription="@string/edit_avatar"
                         android:elevation="0dp"
                         android:importantForAccessibility="yes"
-                        android:padding="@dimen/card_content_padding"
+                        android:padding="@dimen/spacing_12"
                         android:src="@drawable/ic_edit_avatar"
                         app:tint="@color/avatar_edit_icon_tint" />
                 </FrameLayout>

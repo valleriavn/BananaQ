@@ -24,11 +24,9 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
-    <style name="ManualTopicSection" parent="ManualSection">
-        <item name="android:textSize">18sp</item>
-        <item name="android:letterSpacing">0</item>
-        <item name="android:textColor">@color/banana_green</item>
+    <style name="ManualTopicSection" parent="AccountSectionHeading">
         <item name="android:layout_marginTop">@dimen/section_gap</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_12</item>
     </style>
     <style name="ManualTopicRow" parent="ManualRow">
         <item name="android:layout_marginBottom">0dp</item>
