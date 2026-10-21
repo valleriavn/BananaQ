@@ -29,6 +29,11 @@ Review the PNGs in `app/build/reports/scaling` before accepting changed referenc
 Then run `./tools/verify-android.ps1` to verify without replacing them. This helper
 also works around long Windows sandbox TEMP paths used by Java's internal sockets.
 
+Commit reviewed reference PNGs together with intentional UI changes, including shared
+drawables: a back-chevron edit also changes scanner and detail-page screenshots.
+CI stays in verification mode; do not record references in the workflow or skip the
+screenshot tests to make a failing check pass.
+
 The GitHub workflow verifies screenshots, unit tests, lint, and the APK with cached
 Gradle dependencies. Screenshots use Windows in both local recording and CI to keep
 native rendering consistent. Reports are uploaded even when verification fails.
