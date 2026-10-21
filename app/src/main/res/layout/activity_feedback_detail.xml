@@ -156,53 +156,37 @@
                         android:textColor="@color/banana_muted"
                         android:textSize="10sp" />
 
-                    <LinearLayout
+                    <bananaq.FeedbackRatingGrid
                         android:id="@+id/ratingGrid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_marginTop="@dimen/spacing_16">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|center_horizontal"
-                            android:orientation="horizontal">
-
-                            <LinearLayout android:id="@+id/rateVeryAccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_accurate" android:contentDescription="@null" />
-                                <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_very_accurate" />
-                            </LinearLayout>
-
-                            <LinearLayout android:id="@+id/rateAccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_accurate" android:contentDescription="@null" />
-                                <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_accurate" />
-                            </LinearLayout>
+                        <LinearLayout android:id="@+id/rateVeryAccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_accurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_very_accurate" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|center_horizontal"
-                            android:orientation="horizontal">
-
-                            <LinearLayout android:id="@+id/rateNotSure" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_not_sure" android:contentDescription="@null" />
-                                <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_not_sure" />
-                            </LinearLayout>
-
-                            <LinearLayout android:id="@+id/rateInaccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_inaccurate" android:contentDescription="@null" />
-                                <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_inaccurate" />
-                            </LinearLayout>
-
-                            <LinearLayout android:id="@+id/rateVeryInaccurate" style="@style/FeedbackRatingOption">
-                                <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_inaccurate" android:contentDescription="@null" />
-                                <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_very_inaccurate" />
-                            </LinearLayout>
+                        <LinearLayout android:id="@+id/rateAccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_accurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_accurate" />
                         </LinearLayout>
-                    </LinearLayout>
+
+                        <LinearLayout android:id="@+id/rateNotSure" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_not_sure" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_not_sure" />
+                        </LinearLayout>
+
+                        <LinearLayout android:id="@+id/rateInaccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_inaccurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_inaccurate" />
+                        </LinearLayout>
+
+                        <LinearLayout android:id="@+id/rateVeryInaccurate" style="@style/FeedbackRatingOption">
+                            <ImageView style="@style/FeedbackRatingIcon" android:src="@drawable/ic_rating_very_inaccurate" android:contentDescription="@null" />
+                            <TextView style="@style/FeedbackRatingLabel" android:text="@string/rating_very_inaccurate" />
+                        </LinearLayout>
+                    </bananaq.FeedbackRatingGrid>
 
                     <TextView
                         android:layout_width="match_parent"

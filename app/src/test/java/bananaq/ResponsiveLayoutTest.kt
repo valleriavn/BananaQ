@@ -53,6 +53,10 @@ class ResponsiveLayoutTest {
                             scroll.left + column.left + column.paddingLeft)
                     }
                     if (page == R.layout.activity_feedback_detail) {
+                        val options = listOf(R.id.rateVeryAccurate, R.id.rateAccurate, R.id.rateNotSure,
+                            R.id.rateInaccurate, R.id.rateVeryInaccurate).map { root.findViewById<View>(it) }
+                        assertEquals("Rating button widths differ: $label", 1, options.map { it.width }.distinct().size)
+                        assertEquals("Rating button heights differ: $label", 1, options.map { it.height }.distinct().size)
                         for (ids in listOf(listOf(R.id.rateVeryAccurate, R.id.rateAccurate),
                                 listOf(R.id.rateNotSure, R.id.rateInaccurate, R.id.rateVeryInaccurate))) {
                             val iconTops = ids.map { id ->
