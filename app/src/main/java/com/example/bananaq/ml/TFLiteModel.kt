@@ -23,7 +23,7 @@ class TFLiteModel(
         context: Context
     ): ByteBuffer {
 
-        return context.assets.openFd("diseases/BananaQ_CNN_Final.tflite").use { descriptor ->
+        return context.assets.openFd(MODEL_ASSET).use { descriptor ->
             FileInputStream(descriptor.fileDescriptor).use { input ->
                 input.channel.map(FileChannel.MapMode.READ_ONLY,
                     descriptor.startOffset, descriptor.declaredLength)
@@ -33,5 +33,9 @@ class TFLiteModel(
 
     fun close() {
         interpreter.close()
+    }
+
+    companion object {
+        const val MODEL_ASSET = "diseases/BananaQ_MobileNetV2_Final.tflite"
     }
 }

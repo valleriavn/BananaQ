@@ -23,7 +23,7 @@ class ResponsiveTabRow @JvmOverloads constructor(
                 val params = tab.layoutParams as LinearLayout.LayoutParams
                 margins += params.leftMargin + params.rightMargin
                 widest = maxOf(widest, ceil(tab.paint.measureText(tab.text.toString())).toInt() +
-                    tab.compoundPaddingLeft + tab.compoundPaddingRight + (8 * resources.displayMetrics.density).toInt())
+                    tab.compoundPaddingLeft + tab.compoundPaddingRight + resources.getDimensionPixelSize(R.dimen.spacing_8))
             }
             val width = maxOf(widest, (available - margins) / row.childCount)
             val rowWidth = width * row.childCount + margins

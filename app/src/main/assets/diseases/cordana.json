@@ -3,28 +3,40 @@
   "scientificName": "Neocordana musae",
   "symptoms": [
     {
-      "id": "cordana.symptoms.1",
+      "id": "cordana.symptoms.supplied.1",
       "essential": true,
-      "title": "Large oval or diamond-shaped spots",
-      "description": "Lesions expand into pale- to medium-brown oval, elongated, or diamond-shaped patches, often near leaf margins or injured tissue."
+      "title": "Early dark spots",
+      "description": "Small black or dark necrotic spots initially appear on the banana leaves."
     },
     {
-      "id": "cordana.symptoms.2",
+      "id": "cordana.symptoms.supplied.2",
       "essential": false,
-      "title": "Bright yellow halo",
-      "description": "A clear bright-yellow band commonly surrounds the brown lesion and separates it from green leaf tissue."
+      "title": "Expanding brown lesions",
+      "description": "The spots enlarge and develop into larger brown necrotic lesions."
     },
     {
-      "id": "cordana.symptoms.3",
+      "id": "cordana.symptoms.supplied.3",
       "essential": false,
-      "title": "Pale center and zoned pattern",
-      "description": "As a lesion ages, its center may become light brown to whitish and may show concentric zones or a darker border."
+      "title": "Yellow halos",
+      "description": "Lesions are commonly surrounded by a yellow/chlorotic halo."
     },
     {
-      "id": "cordana.symptoms.4",
+      "id": "cordana.symptoms.supplied.4",
       "essential": false,
-      "title": "Lesions merge in severe cases",
-      "description": "Nearby spots can join into broad dead areas, especially on wet, damaged, or weakened leaves."
+      "title": "Pale lesion centers",
+      "description": "The center of the lesion becomes light brown to white as it develops."
+    },
+    {
+      "id": "cordana.symptoms.supplied.5",
+      "essential": false,
+      "title": "Varied lesion shapes",
+      "description": "Lesions may become oval, elongated, or diamond-shaped, depending on the banana cultivar."
+    },
+    {
+      "id": "cordana.symptoms.supplied.6",
+      "essential": false,
+      "title": "Extensive leaf damage",
+      "description": "Severe infection causes lesions to expand and extensive leaf tissue to become necrotic and damaged."
     }
   ],
   "treatment": [

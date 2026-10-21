@@ -19,7 +19,8 @@ object ScanThumbnailLoader {
         (view.getTag(R.id.scan_image_request) as? Future<*>)?.cancel(true)
         executor.purge()
         view.setTag(R.id.scan_image_request, null)
-        view.setImageResource(R.drawable.ic_logo)
+        view.scaleType = ImageView.ScaleType.FIT_CENTER
+        view.setImageResource(R.drawable.logo)
         if (uri.isNullOrBlank()) return
         val target = WeakReference(view)
         val context = view.context.applicationContext
@@ -31,6 +32,7 @@ object ScanThumbnailLoader {
                 val image = target.get()
                 if (image == null || !image.post {
                     if (image.getTag(R.id.scan_image_request) === request) {
+                        image.scaleType = ImageView.ScaleType.CENTER_CROP
                         image.setImageBitmap(bitmap)
                     } else bitmap.recycle()
                 }) bitmap.recycle()

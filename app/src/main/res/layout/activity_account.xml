@@ -7,95 +7,46 @@
     android:clipToPadding="true"
     android:background="@color/banana_cream">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/header_horizontal_padding"
-        android:paddingTop="@dimen/app_header_vertical_spacing"
-        android:paddingEnd="@dimen/header_horizontal_padding"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_header_vertical_spacing"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/accountLanguageDisplay"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_logo" />
-
-            <TextView
-                android:layout_width="0dp" android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/app_name"
-                android:textColor="@color/banana_green"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+<LinearLayout android:id="@+id/header" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/header_horizontal_padding" android:paddingTop="@dimen/app_header_vertical_spacing" android:paddingEnd="@dimen/header_horizontal_padding" app:layout_constraintTop_toTopOf="parent" android:orientation="vertical">
+    <com.example.bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/app_header_vertical_spacing">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginEnd="@dimen/spacing_8" android:layout_weight="1">
+            <ImageView android:layout_width="@dimen/app_header_logo_size" android:layout_height="@dimen/app_header_logo_size" android:contentDescription="@string/app_name" android:src="@drawable/logo" />
+            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8" android:text="@string/app_name" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_brand_text_size" android:textStyle="bold" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/accountLanguageDisplay"
-            android:layout_width="88dp"
-            android:layout_height="wrap_content" android:minHeight="32dp"
-            android:layout_marginBottom="@dimen/app_header_vertical_spacing"
-            android:background="@drawable/library_language_pill"
-            android:gravity="center"
-            android:text="@string/language_current"
-            android:textColor="@color/banana_green"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/banana_divider"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView android:id="@+id/accountLanguageDisplay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:background="@drawable/header_language_badge" android:gravity="center" android:text="@string/language_current" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_language_text_size" android:minWidth="88dp" android:paddingStart="@dimen/spacing_12" android:paddingEnd="@dimen/spacing_12" />
+    </com.example.bananaq.ResponsiveHeaderRow>
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/banana_divider" app:layout_constraintBottom_toBottomOf="parent" />
+</LinearLayout>
 
     <TextView
         android:id="@+id/titleAccount"
         style="@style/AccountMainHeading"
         android:layout_width="0dp"
-        android:layout_marginEnd="@dimen/page_horizontal_padding"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/page_horizontal_padding"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/page_heading_gap"
         android:text="@string/account_title"
         android:textColor="@color/banana_text_dark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/header"  android:paddingStart="@dimen/page_horizontal_padding" android:paddingEnd="@dimen/page_horizontal_padding" app:layout_constraintWidth_max="@dimen/page_content_max_width" />
 
     <ScrollView
         android:id="@+id/accountContent"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_16"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/titleAccount">
+        app:layout_constraintTop_toBottomOf="@id/titleAccount" app:layout_constraintWidth_max="@dimen/page_content_max_width" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
+        <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingStart="@dimen/page_horizontal_padding"
             android:paddingEnd="@dimen/page_horizontal_padding"
-            android:paddingBottom="24dp">
+            android:paddingBottom="@dimen/spacing_24">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,7 +54,7 @@
                 android:background="@drawable/account_information_card"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="@dimen/card_content_padding">
 
                 <FrameLayout
                     android:id="@+id/profileAvatarFrame"
@@ -126,14 +77,14 @@
 
                     <ImageButton
                         android:id="@+id/editAvatarButton"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_gravity="bottom|end"
                         android:background="@drawable/avatar_edit_button_background"
                         android:contentDescription="@string/edit_avatar"
                         android:elevation="0dp"
                         android:importantForAccessibility="yes"
-                        android:padding="7dp"
+                        android:padding="@dimen/card_content_padding"
                         android:src="@drawable/ic_edit_avatar"
                         app:tint="@color/avatar_edit_icon_tint" />
                 </FrameLayout>
@@ -177,7 +128,7 @@
                 android:drawablePadding="12dp"
                 android:text="@string/user_agreement" />
 
-        </LinearLayout>
+        </com.example.bananaq.ContentColumn>
     </ScrollView>
 
     <com.example.bananaq.RaisedBottomNavigationView

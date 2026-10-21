@@ -19,12 +19,11 @@ import android.content.res.ColorStateList
 
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 
 import com.example.bananaq.data.DiseaseRepository
 import com.example.bananaq.data.RecommendationProvider
-import com.example.bananaq.data.ScanProcessor
+import androidx.lifecycle.ViewModelProvider
 import com.example.bananaq.ml.ScanImageLoader
 import com.example.bananaq.model.ClassificationResult
 import com.example.bananaq.model.ConfidenceLevel
@@ -49,7 +48,7 @@ class ScannerActivity : LocaleAwareActivity() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
-    private lateinit var scanProcessor: ScanProcessor
+    private lateinit var scanViewModel: ScannerViewModel
     private lateinit var diseaseRepository: DiseaseRepository
 
     private var classificationResult: ClassificationResult? = null
@@ -77,8 +76,10 @@ class ScannerActivity : LocaleAwareActivity() {
             alpha = 0.2f
         }
         findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
-        findViewById<View>(R.id.scannerHeader).visibility = View.GONE
-        findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
+        // Keep camera constraints measured when switching to a result. Removing
+        // their anchors changes the frame's position before the result is drawn.
+        findViewById<View>(R.id.scannerHeader).visibility = View.INVISIBLE
+        findViewById<View>(R.id.scanResultTitle).visibility = View.VISIBLE
     }
 
     private fun showCompactResultMode() {
@@ -88,8 +89,8 @@ class ScannerActivity : LocaleAwareActivity() {
         }
         showPhotoMode()
         findViewById<View>(R.id.cameraScrim).alpha = 0.3f
-        for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
-            findViewById<View>(id).visibility = View.VISIBLE
+        for (id in intArrayOf(R.id.scanFrame, R.id.instructionContainer, R.id.controlsLayout)) {
+            findViewById<View>(id).visibility = View.INVISIBLE
         }
         findViewById<View>(R.id.controlsLayout).alpha = 0.55f
         findViewById<View>(R.id.captureCircle).isEnabled = false
@@ -101,8 +102,8 @@ class ScannerActivity : LocaleAwareActivity() {
         showPhotoMode()
         findViewById<View>(R.id.cameraScrim).alpha = 0.18f
         findViewById<View>(R.id.scanResultTitle).visibility = View.VISIBLE
-        for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
-            findViewById<View>(id).visibility = View.GONE
+        for (id in intArrayOf(R.id.scanFrame, R.id.instructionContainer, R.id.controlsLayout)) {
+            findViewById<View>(id).visibility = View.INVISIBLE
         }
     }
 
@@ -158,7 +159,8 @@ class ScannerActivity : LocaleAwareActivity() {
         // Use the wrapped Activity context so recommendation JSON follows the
         // language currently selected in BananaQ.
         diseaseRepository = DiseaseRepository(this)
-        scanProcessor = ScanProcessor(applicationContext)
+        scanViewModel = ViewModelProvider(this,
+            (application as BananaQApplication).scannerViewModelFactory)[ScannerViewModel::class.java]
         setupBottomSheet()
         findViewById<View>(R.id.btnBack).setOnClickListener {
             if (classificationResult != null) hideResult() else finish()
@@ -179,7 +181,9 @@ class ScannerActivity : LocaleAwareActivity() {
         scanId = savedInstanceState?.getString("scanId") ?: scanId
         val savedDisease = savedInstanceState?.getString("resultDisease")
         detailsExpanded = savedInstanceState?.getBoolean("detailsExpanded") ?: false
-        if (savedDisease != null) {
+        if (scanViewModel.state.value != ScanUiState.Idle) {
+            // The retained ViewModel delivers the in-flight scan or completed result below.
+        } else if (savedDisease != null) {
             val confidence = savedInstanceState.getFloat("resultConfidence")
             classificationResult = ClassificationResult(savedDisease, confidence,
                 ConfidenceLevel.fromConfidence(confidence), savedInstanceState.getBoolean("resultValid"))
@@ -190,6 +194,7 @@ class ScannerActivity : LocaleAwareActivity() {
         } else if (savedInstanceState == null) {
             handleIncomingData()
         }
+        observeScanState()
         if (savedInstanceState == null && intent.getStringExtra("SOURCE") == "gallery") openGallery()
         else if (classificationResult == null && selectedImage == null) openCamera()
     }
@@ -300,44 +305,32 @@ class ScannerActivity : LocaleAwareActivity() {
         detailsExpanded = false
         fullResultCard.visibility = View.GONE
         findViewById<View>(R.id.compactResultPanel).visibility = View.GONE
-        isProcessing = true
-        findViewById<View>(R.id.controlsLayout).alpha = 0.55f
-        findViewById<View>(R.id.captureCircle).isEnabled = false
-        findViewById<View>(R.id.btnGallery).isEnabled = false
-        findViewById<View>(R.id.btnFlash).isEnabled = false
-        findViewById<TextView>(R.id.tvInstruction).setText(R.string.processing_photo)
-        worker.execute {
-            var bitmap: Bitmap? = null
-            try {
-                val decoded = scanProcessor.load(uri)
-                bitmap = decoded
-                val preview = requireNotNull(decoded.copy(Bitmap.Config.ARGB_8888, false))
-                runOnUiThread {
-                    if (!isDestroyed && !isFinishing) {
-                        showPhoto(preview)
-                        showPhotoMode()
-                    } else preview.recycle()
-                }
-                val processed = scanProcessor.classifyAndStore(decoded, currentScanId)
-                val result = processed.result
-                val savedPhoto = processed.savedImageUri
-                runOnUiThread {
-                    if (!isDestroyed && !isFinishing) {
-                        selectedImage = savedPhoto ?: selectedImage
-                        classificationResult = result
-                        displayResult(result)
+        scanViewModel.scan(uri, currentScanId)
+    }
+
+    private fun observeScanState() {
+        scanViewModel.state.observe(this) { state ->
+            isProcessing = state is ScanUiState.Processing
+            when (state) {
+                is ScanUiState.Processing -> {
+                    selectedImage = state.uri
+                    scanId = state.scanId
+                    findViewById<View>(R.id.controlsLayout).alpha = 0.55f
+                    for (id in intArrayOf(R.id.captureCircle, R.id.btnGallery, R.id.btnFlash)) {
+                        findViewById<View>(id).isEnabled = false
                     }
+                    findViewById<TextView>(R.id.tvInstruction).setText(R.string.processing_photo)
                 }
-            } catch (error: Exception) {
-                reportScanError(error)
-            } catch (error: LinkageError) {
-                reportScanError(error)
-            } finally {
-                bitmap?.recycle()
-                runOnUiThread {
-                    isProcessing = false
-                    if (!isDestroyed) findViewById<TextView>(R.id.tvInstruction).setText(R.string.scan_instruction)
+                is ScanUiState.Success -> {
+                    scanId = state.scanId
+                    selectedImage = state.scan.savedImageUri ?: state.uri
+                    classificationResult = state.scan.result
+                    findViewById<TextView>(R.id.tvInstruction).setText(R.string.scan_instruction)
+                    displayResult(state.scan.result)
+                    restorePhoto()
                 }
+                is ScanUiState.Failure -> reportScanError(state.cause)
+                ScanUiState.Idle -> Unit
             }
         }
     }
@@ -372,10 +365,15 @@ class ScannerActivity : LocaleAwareActivity() {
             findViewById<TextView>(R.id.predictionSummary).apply {
                 setText(R.string.unable_identify_message)
                 setOnClickListener(null)
+                setOnLongClickListener(null)
                 isClickable = false
+                isLongClickable = false
             }
             compactHandle.visibility = View.GONE
             compactHandle.setOnClickListener(null)
+            compactHandle.setOnLongClickListener(null)
+            compactHandle.isClickable = false
+            compactHandle.isLongClickable = false
             tryAgain.visibility = View.VISIBLE
             tryAgain.setOnClickListener { hideResult() }
             revealResultView(compactPanel)
@@ -390,6 +388,8 @@ class ScannerActivity : LocaleAwareActivity() {
                 showFullResult()
             }
             compactHandle.visibility = View.VISIBLE
+            compactHandle.setOnLongClickListener(null)
+            compactHandle.isLongClickable = false
             compactHandle.setOnClickListener(openDetails)
             findViewById<TextView>(R.id.predictionSummary).apply {
                 val heading = getString(R.string.prediction_heading,
@@ -408,7 +408,9 @@ class ScannerActivity : LocaleAwareActivity() {
                         ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)),
                         heading.length + 1, length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
-                isClickable = true
+                setOnLongClickListener(null)
+                isLongClickable = false
+                isFocusable = true
                 setOnClickListener(openDetails)
             }
             revealResultView(compactPanel)
@@ -589,91 +591,38 @@ class ScannerActivity : LocaleAwareActivity() {
         )
     }
     private fun setupBottomSheet() {
-        bottomSheetBehavior =
-            BottomSheetBehavior.from(
-                fullResultCard as CardView
-            )
-        val extraDetails =
-            findViewById<View>(
-                R.id.extraDetailsLayout
-            )
-        bottomSheetBehavior.state =
-            BottomSheetBehavior.STATE_HIDDEN
-        bottomSheetBehavior.isDraggable = false
-        val dragHandle = findViewById<View>(R.id.resultDragHandle)
-        dragHandle.setOnClickListener {
-            val result = classificationResult ?: return@setOnClickListener
-            detailsExpanded = false
-            fullResultCard.animate().cancel()
-            fullResultCard.animate()
-                .alpha(0f)
-                .setDuration(140L)
-                .withEndAction {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    fullResultCard.alpha = 1f
-                    fullResultCard.visibility = View.GONE
-                    displayResult(result)
-                }
-                .start()
+        bottomSheetBehavior = BottomSheetBehavior.from(fullResultCard).apply {
+            isHideable = true
+            skipCollapsed = true
+            isDraggable = true
+            state = BottomSheetBehavior.STATE_HIDDEN
         }
-        bottomSheetBehavior.addBottomSheetCallback(
-            object :
-                BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(
-                    bottomSheet: View,
-                    newState: Int
-                ) {
-                    if (classificationResult?.isValid != true) {
-                        extraDetails.visibility = View.GONE
-                        extraDetails.alpha = 0f
-                        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                            fullResultCard.visibility = View.GONE
-                        }
-                        return
+        val dragHandle = findViewById<View>(R.id.resultDragHandle)
+        // Keep an accessible click action alongside the native drag gesture.
+        dragHandle.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        detailsExpanded = true
+                        dragHandle.contentDescription = getString(R.string.collapse_scan_result)
                     }
-                    when (newState) {
-                        BottomSheetBehavior.STATE_EXPANDED -> {
-                            detailsExpanded = true
-                            dragHandle.contentDescription = getString(R.string.collapse_scan_result)
-                            extraDetails.visibility =
-                                View.VISIBLE
-                            extraDetails.alpha = 1f
-                        }
-                        BottomSheetBehavior.STATE_COLLAPSED -> {
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        fullResultCard.visibility = View.GONE
+                        val result = classificationResult
+                        if (detailsExpanded && result != null) {
                             detailsExpanded = false
-                            dragHandle.contentDescription = getString(R.string.expand_scan_result)
-                            extraDetails.visibility =
-                                View.INVISIBLE
-                            extraDetails.alpha = 0f
+                            // Return to the same photo and compact result after dismissal.
+                            displayResult(result)
                         }
-                        BottomSheetBehavior.STATE_HIDDEN -> {
-                            fullResultCard.visibility =
-                                View.GONE
-                        }
-                        else -> {}
-                    }
-                }
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float
-                ) {
-                    if (classificationResult?.isValid != true) {
-                        extraDetails.visibility = View.GONE
-                        extraDetails.alpha = 0f
-                        return
-                    }
-                    if (slideOffset > 0f) {
-                        extraDetails.visibility =
-                            View.VISIBLE
-                        extraDetails.alpha =
-                            slideOffset.coerceIn(
-                                0f,
-                                1f
-                            )
                     }
                 }
             }
-        )
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
+        })
     }
     private fun selectTab(
         index: Int
@@ -809,6 +758,7 @@ class ScannerActivity : LocaleAwareActivity() {
     ) {
         val density =
             resources.displayMetrics.density
+        val itemGap = resources.getDimensionPixelSize(R.dimen.spacing_12)
         val itemLayout =
             LinearLayout(this).apply {
                 orientation =
@@ -817,7 +767,7 @@ class ScannerActivity : LocaleAwareActivity() {
                     0,
                     0,
                     0,
-                    (18 * density).toInt()
+                    itemGap
                 )
             }
         val numberCircle =
@@ -839,7 +789,7 @@ class ScannerActivity : LocaleAwareActivity() {
                         (26 * density).toInt()
                     ).apply {
                         marginEnd =
-                            (14 * density).toInt()
+                            itemGap
                     }
             }
         // The number badge must grow with the actual font metrics, including Samsung font scaling.
@@ -876,6 +826,10 @@ class ScannerActivity : LocaleAwareActivity() {
             TextView(this).apply {
                 text = description
                 textSize = 12f
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                    topMargin = resources.getDimensionPixelSize(R.dimen.spacing_4)
+                }
                 setTextColor(
                     ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)
                 )
@@ -901,12 +855,15 @@ class ScannerActivity : LocaleAwareActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 density.toInt().coerceAtLeast(1)
             ).apply {
-                marginStart = (40 * density).toInt()
-                bottomMargin = (12 * density).toInt()
+                marginStart = badgeSize + itemGap
+                bottomMargin = itemGap
             }
         })
     }
     private fun hideResult() {
+        scanViewModel.reset()
+        isProcessing = false
+        findViewById<TextView>(R.id.tvInstruction).setText(R.string.scan_instruction)
         if (intent.getBooleanExtra("FROM_HISTORY", false)) {
             finish()
             return
@@ -925,7 +882,7 @@ class ScannerActivity : LocaleAwareActivity() {
         findViewById<View>(R.id.cameraScrim).visibility = View.GONE
         findViewById<View>(R.id.btnBack).visibility = View.VISIBLE
         viewFinder.visibility = View.VISIBLE
-        for (id in intArrayOf(R.id.scanFrame, R.id.tvInstruction, R.id.controlsLayout)) {
+        for (id in intArrayOf(R.id.scanFrame, R.id.instructionContainer, R.id.controlsLayout)) {
             findViewById<View>(id).visibility = View.VISIBLE
         }
         findViewById<View>(R.id.controlsLayout).alpha = 1f
@@ -943,8 +900,6 @@ class ScannerActivity : LocaleAwareActivity() {
     }
     override fun onDestroy() {
         cameraProvider?.unbindAll()
-        // Close on the inference queue so the interpreter cannot close during a scan.
-        worker.execute { if (::scanProcessor.isInitialized) scanProcessor.close() }
         worker.shutdown()
         super.onDestroy()
     }

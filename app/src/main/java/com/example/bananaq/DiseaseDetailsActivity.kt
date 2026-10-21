@@ -50,13 +50,13 @@ class DiseaseDetailsActivity : LocaleAwareActivity() {
             val inactiveColor = ContextCompat.getColor(this, R.color.button_text_black)
 
             english.setBackgroundResource(
-                if (selectedLanguage == "en") R.drawable.btn_language_green
+                if (selectedLanguage == "en") R.drawable.header_language_selected
                 else android.R.color.transparent
             )
             english.setTextColor(if (selectedLanguage == "en") activeColor else inactiveColor)
 
             tagalog.setBackgroundResource(
-                if (selectedLanguage == "tl") R.drawable.btn_language_green
+                if (selectedLanguage == "tl") R.drawable.header_language_selected
                 else android.R.color.transparent
             )
             tagalog.setTextColor(if (selectedLanguage == "tl") activeColor else inactiveColor)

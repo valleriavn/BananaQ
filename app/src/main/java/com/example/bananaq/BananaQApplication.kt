@@ -7,6 +7,9 @@ import com.example.bananaq.data.BananaQDatabase
 import kotlin.concurrent.thread
 
 class BananaQApplication : Application() {
+    val scannerViewModelFactory by lazy {
+        ScannerViewModelFactory { com.example.bananaq.data.ScanProcessor(this) }
+    }
     lateinit var sessionManager: AppSessionManager
         private set
 

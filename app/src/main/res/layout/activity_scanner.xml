@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <ImageView
         android:id="@+id/scannedPhoto"
@@ -69,39 +69,39 @@
     <TextView
         android:id="@+id/scannerHeader"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:minHeight="44dp"
-        android:layout_marginTop="18dp"
+        android:layout_height="wrap_content" android:minHeight="40dp"
+        android:layout_marginTop="@dimen/spacing_16"
         android:background="@drawable/scanner_header_bg"
         android:gravity="center"
         android:minWidth="164dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:paddingStart="@dimen/spacing_16"
+        android:paddingEnd="@dimen/spacing_16"
         android:text="@string/scanner_header"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  app:layout_constrainedWidth="true" android:layout_marginStart="72dp" android:layout_marginEnd="72dp"/>
+        app:layout_constraintTop_toTopOf="parent"  app:layout_constrainedWidth="true" android:layout_marginStart="@dimen/scanner_title_clearance" android:layout_marginEnd="@dimen/scanner_title_clearance"/>
 
     <TextView
         android:id="@+id/scanResultTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:minHeight="44dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content" android:minHeight="40dp"
+        android:layout_marginTop="@dimen/spacing_16"
         android:background="@drawable/scan_result_title_bg"
         android:gravity="center"
         android:minWidth="132dp"
-        android:paddingStart="18dp"
-        android:paddingEnd="18dp"
+        android:paddingStart="@dimen/spacing_16"
+        android:paddingEnd="@dimen/spacing_16"
         android:text="@string/scan_result"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"  app:layout_constrainedWidth="true" android:layout_marginStart="72dp" android:layout_marginEnd="72dp"/>
+        app:layout_constraintEnd_toEndOf="parent"  app:layout_constrainedWidth="true" android:layout_marginStart="@dimen/scanner_title_clearance" android:layout_marginEnd="@dimen/scanner_title_clearance"/>
 
     <FrameLayout
         android:id="@+id/scanFrame"
@@ -110,53 +110,55 @@
         android:background="@drawable/scanner_frame"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintWidth_max="340dp"
-        app:layout_constraintWidth_percent="0.78"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/spacing_32" android:layout_marginEnd="@dimen/spacing_32"
+        app:layout_constraintBottom_toTopOf="@id/instructionContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scannerHeader"
         app:layout_constraintVertical_bias="0.43">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
             android:background="@drawable/scanner_guide_line" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvInstruction"
-        app:layout_constrainedWidth="true"
-        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/instructionContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginBottom="@dimen/spacing_12"
         android:background="@drawable/scanner_instruction_bg"
-        android:gravity="center"
-        android:maxWidth="320dp"
-        android:paddingStart="18dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="18dp"
-        android:paddingBottom="10dp"
-        android:text="@string/scan_instruction"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="@dimen/spacing_16"
+        android:paddingEnd="@dimen/spacing_16"
+        android:paddingTop="@dimen/spacing_12"
+        android:paddingBottom="@dimen/spacing_12"
+        app:layout_constraintWidth_max="320dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scanFrame" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/controlsLayout">
+        <!-- Reserve the larger status at native text size, so inference cannot move the frame. -->
+        <TextView style="@style/ScannerInstructionText" android:text="@string/scan_instruction"
+            android:visibility="invisible" android:importantForAccessibility="no" />
+        <TextView style="@style/ScannerInstructionText" android:text="@string/processing_photo"
+            android:visibility="invisible" android:importantForAccessibility="no" />
+        <TextView android:id="@+id/tvInstruction" style="@style/ScannerInstructionText"
+            android:layout_gravity="center" android:text="@string/scan_instruction" />
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:padding="10dp"
+        android:padding="@dimen/spacing_12"
         android:contentDescription="@string/back_label"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_16"
         android:background="@drawable/scan_result_back_bg"
         android:src="@drawable/ic_arrow_back_green"
         android:visibility="visible"
@@ -168,25 +170,25 @@
         android:id="@+id/controlsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="@dimen/spacing_12"
         android:background="@drawable/scanner_control_dock"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingStart="10dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="8dp"
+        android:paddingStart="@dimen/spacing_12"
+        android:paddingTop="@dimen/spacing_8"
+        android:paddingEnd="@dimen/spacing_12"
+        android:paddingBottom="@dimen/spacing_8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/compactResultPanel">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
             android:id="@+id/btnGallery"
             android:contentDescription="@string/choose_photo"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/scanner_action_button_bg"
-            android:padding="12dp"
+            android:padding="@dimen/spacing_12"
             android:scaleType="centerInside"
             android:src="@drawable/ic_scan_gallery"
             app:tint="@color/white" />
@@ -198,23 +200,24 @@
             android:focusable="true"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_16"
             android:background="@drawable/scanner_capture_button" />
 
         <ImageButton
             android:id="@+id/btnFlash"
             android:contentDescription="@string/flash_on"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/scanner_action_button_bg"
-            android:padding="12dp"
+            android:padding="@dimen/spacing_12"
             android:scaleType="centerInside"
             android:src="@drawable/ic_scan_flash"
             app:tint="@color/white" />
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/resultCoordinator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -237,14 +240,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingStart="@dimen/page_horizontal_padding"
-                android:paddingEnd="@dimen/page_horizontal_padding"
-                android:paddingTop="6dp">
-
+                android:paddingTop="@dimen/spacing_8">
                 <FrameLayout
                     android:id="@+id/resultDragHandle"
                     android:layout_width="76dp"
-                    android:layout_height="24dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="0dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -258,91 +258,91 @@
                         android:layout_gravity="center"
                         android:background="@drawable/result_drag_handle" />
                 </FrameLayout>
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/largeTextResultScroll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/page_horizontal_padding"
+                android:paddingEnd="@dimen/page_horizontal_padding"
+>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+
+
+                <com.example.bananaq.ResponsiveHeaderRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/resultDiseaseName"
-                        android:layout_marginEnd="8dp"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/banana_text_dark"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/accuracyLayout"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Panama Disease" />
-
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/resultHeadingBottom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:barrierDirection="bottom"
-                        app:constraint_referenced_ids="resultDiseaseName,accuracyLayout" />
-
-                    <TextView
-                        android:id="@+id/resultScientificName"
-                        android:layout_width="0dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/banana_muted"
-                        android:textSize="11sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/resultHeadingBottom"
-                        tools:text="Fusarium oxysporum f. sp. cubense" />
-
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_12"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/resultDiseaseName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/banana_text_dark"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="Panama Disease" />
+                        <TextView
+                            android:id="@+id/resultScientificName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_4"
+                            android:textColor="@color/banana_muted"
+                            android:textSize="11sp"
+                            tools:text="Fusarium oxysporum f. sp. cubense" />
+                    </LinearLayout>
                     <LinearLayout
                         android:id="@+id/accuracyLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
+                        android:orientation="vertical">
                         <TextView
                             android:id="@+id/resultAccuracyValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#E57373"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             tools:text="92%" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/confidence_label"
-                            android:textColor="#BDBDBD"
+                            android:textColor="@color/banana_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.example.bananaq.ResponsiveHeaderRow>
 
                 <ProgressBar
                     android:id="@+id/resultAccuracyProgress"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="6dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/spacing_12"
                     android:progressTint="#71C35E"
                     tools:progress="92" />
 
                 <LinearLayout
                     android:id="@+id/extraDetailsLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="invisible">
 
                     <com.example.bananaq.ResponsiveTabRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:scrollbars="horizontal"
                         android:overScrollMode="ifContentScrolls">
                         <LinearLayout
@@ -351,55 +351,48 @@
                             android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tabSymptoms"
+                            android:id="@+id/tabSymptoms" android:minHeight="48dp"
                             android:singleLine="true"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/btn_language_yellow"
                             android:gravity="center"
-                            android:paddingTop="8dp" android:paddingBottom="8dp"
+                            android:paddingTop="@dimen/spacing_8" android:paddingBottom="@dimen/spacing_8"
                             android:text="@string/disease_symptoms"
                             android:textSize="13sp"
                             android:textColor="@color/button_text_black"
                             android:textStyle="normal" />
 
                         <TextView
-                            android:id="@+id/tabTreatment"
+                            android:id="@+id/tabTreatment" android:minHeight="48dp"
                             android:singleLine="true"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
+                            android:layout_marginLeft="@dimen/spacing_8" android:layout_marginRight="@dimen/spacing_8"
                             android:layout_weight="1"
                             android:background="@drawable/btn_language_yellow"
                             android:gravity="center"
-                            android:paddingTop="8dp" android:paddingBottom="8dp"
+                            android:paddingTop="@dimen/spacing_8" android:paddingBottom="@dimen/spacing_8"
                             android:text="@string/treatment_label"
                             android:textSize="13sp"
                             android:textColor="@color/button_text_black" />
 
                         <TextView
-                            android:id="@+id/tabPrevention"
+                            android:id="@+id/tabPrevention" android:minHeight="48dp"
                             android:singleLine="true"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/btn_language_yellow"
                             android:gravity="center"
-                            android:paddingTop="8dp" android:paddingBottom="8dp"
+                            android:paddingTop="@dimen/spacing_8" android:paddingBottom="@dimen/spacing_8"
                             android:text="@string/disease_prevention"
                             android:textSize="13sp"
                             android:textColor="@color/button_text_black" />
 
                         </LinearLayout>
                     </com.example.bananaq.ResponsiveTabRow>
-
-                    <androidx.core.widget.NestedScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:fillViewport="true"
-                        android:layout_marginTop="14dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -408,6 +401,7 @@
 
                             <TextView
                                 android:id="@+id/resultSectionTitle"
+                                android:layout_marginTop="@dimen/spacing_12"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                         android:textColor="@color/banana_body"
@@ -419,14 +413,16 @@
                                 android:id="@+id/resultContentContainer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="14dp"
-                                android:paddingBottom="20dp"
+                                android:layout_marginTop="@dimen/spacing_8"
+                                android:paddingBottom="@dimen/spacing_16"
                                 android:orientation="vertical">
                             </LinearLayout>
                         </LinearLayout>
-                    </androidx.core.widget.NestedScrollView>
+
                 </LinearLayout>
 
+            </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -438,10 +434,10 @@
         android:background="@drawable/result_summary_bg"
         android:minHeight="0dp"
         android:orientation="vertical"
-        android:paddingStart="24dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="24dp"
-        android:paddingBottom="12dp"
+        android:paddingStart="@dimen/spacing_24"
+        android:paddingTop="@dimen/spacing_4"
+        android:paddingEnd="@dimen/spacing_24"
+        android:paddingBottom="@dimen/spacing_12"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -450,7 +446,7 @@
         <FrameLayout
             android:id="@+id/compactResultDragHandle"
             android:layout_width="72dp"
-            android:layout_height="24dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
@@ -472,13 +468,13 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:textColor="@color/banana_text_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTryAgain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:minHeight="48dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/spacing_12"
             android:text="@string/try_again"
             android:textAllCaps="false"
             android:textColor="@color/white"

@@ -34,7 +34,6 @@
     <string name="avatar_farmer_5">Farmer avatar 5</string>
     <string name="avatar_farmer_6">Farmer avatar 6</string>
     <string name="profile_label">Profile</string>
-    <string name="notifications_label">Notifications</string>
     <string name="settings_label">Settings</string>
     <string name="logout_label">Log Out</string>
     <string name="account_unavailable">Profile, settings, and sign-in are not available in this version.</string>

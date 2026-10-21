@@ -11,7 +11,7 @@
         <item name="android:colorBackground">@color/banana_cream</item>
         <item name="android:textColorPrimary">@color/banana_body</item>
         <item name="android:textColorSecondary">@color/banana_muted</item>
-        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
         <item name="android:windowBackground">@color/banana_cream</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
@@ -20,8 +20,8 @@
         <item name="android:statusBarColor">@color/splash_green</item>
         <item name="android:navigationBarColor">@color/splash_green</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
-        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 

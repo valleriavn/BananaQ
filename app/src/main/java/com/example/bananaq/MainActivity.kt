@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
@@ -46,7 +45,7 @@ class MainActivity : LocaleAwareActivity() {
             val manager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             layoutManager = manager
             adapter = carouselAdapter
-            LinearSnapHelper().attachToRecyclerView(this)
+            setItemViewCacheSize(libraryDiseases.size * 2)
             if (savedInstanceState == null) {
                 manager.scrollToPositionWithOffset(carouselAdapter.initialPosition, 0)
             }
@@ -69,7 +68,7 @@ class MainActivity : LocaleAwareActivity() {
             tvLangEN.isSelected = lang == "en"
             tvLangTL.isSelected = lang == "tl"
             if (lang == "en") {
-                tvLangEN.setBackgroundResource(R.drawable.btn_language_green)
+                tvLangEN.setBackgroundResource(R.drawable.header_language_selected)
                 tvLangEN.setTextColor(ContextCompat.getColor(this, R.color.white))
                 tvLangEN.setTypeface(null, Typeface.NORMAL)
 
@@ -77,7 +76,7 @@ class MainActivity : LocaleAwareActivity() {
                 tvLangTL.setTextColor(ContextCompat.getColor(this, R.color.button_text_black))
                 tvLangTL.setTypeface(null, Typeface.NORMAL)
             } else {
-                tvLangTL.setBackgroundResource(R.drawable.btn_language_green)
+                tvLangTL.setBackgroundResource(R.drawable.header_language_selected)
                 tvLangTL.setTextColor(ContextCompat.getColor(this, R.color.white))
                 tvLangTL.setTypeface(null, Typeface.NORMAL)
 

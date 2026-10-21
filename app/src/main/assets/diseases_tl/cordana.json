@@ -3,28 +3,40 @@
   "scientificName": "Neocordana musae",
   "symptoms": [
     {
-      "id": "cordana.symptoms.1",
+      "id": "cordana.symptoms.supplied.1",
       "essential": true,
-      "title": "Malaking hugis-itlog o diyamanteng batik",
-      "description": "Lumalaki ang sugat bilang maputla hanggang katamtamang kayumangging oval, pahaba, o hugis-diyamanteng bahagi, madalas malapit sa gilid o pinsala ng dahon."
+      "title": "Unang maiitim na batik",
+      "description": "Sa simula, lumilitaw ang maliliit na itim o maiitim na patay na batik sa mga dahon ng saging."
     },
     {
-      "id": "cordana.symptoms.2",
+      "id": "cordana.symptoms.supplied.2",
       "essential": false,
-      "title": "Maliwanag na dilaw na palibot",
-      "description": "Karaniwang may malinaw at matingkad na dilaw na banda sa paligid ng kayumangging sugat na naghihiwalay rito sa berdeng tissue."
+      "title": "Lumalaki ang kayumangging sugat",
+      "description": "Lumalaki ang mga batik at nagiging mas malalaking kayumangging sugat na may patay na tisyu."
     },
     {
-      "id": "cordana.symptoms.3",
+      "id": "cordana.symptoms.supplied.3",
       "essential": false,
-      "title": "Maputlang gitna at paikot na pattern",
-      "description": "Habang tumatanda ang sugat, maaaring maging mapusyaw na kayumanggi o maputi ang gitna at magkaroon ng magkakapatong na zone o mas maitim na gilid."
+      "title": "Dilaw na palibot",
+      "description": "Karaniwang napapalibutan ng dilaw o maputlang halo ang mga sugat."
     },
     {
-      "id": "cordana.symptoms.4",
+      "id": "cordana.symptoms.supplied.4",
       "essential": false,
-      "title": "Pagsasanib ng sugat kapag malubha",
-      "description": "Maaaring magsanib ang magkakalapit na batik at maging malawak na patay na bahagi, lalo na sa basa, napinsala, o mahinang dahon."
+      "title": "Maputlang gitna ng sugat",
+      "description": "Habang lumalaki ang sugat, nagiging mapusyaw na kayumanggi hanggang puti ang gitna nito."
+    },
+    {
+      "id": "cordana.symptoms.supplied.5",
+      "essential": false,
+      "title": "Iba-ibang hugis ng sugat",
+      "description": "Maaaring maging hugis-itlog, pahaba, o hugis-diyamante ang mga sugat, depende sa barayti ng saging."
+    },
+    {
+      "id": "cordana.symptoms.supplied.6",
+      "essential": false,
+      "title": "Malawak na pinsala sa dahon",
+      "description": "Sa malubhang impeksiyon, lumalawak ang mga sugat at maraming tisyu ng dahon ang namamatay at napipinsala."
     }
   ],
   "treatment": [

@@ -10,6 +10,16 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class RecommendationSelectorTest {
+    @Test fun suppliedSymptomsAreAvailableInBothLanguages() {
+        for (folder in listOf("diseases", "diseases_tl")) {
+            for ((file, count) in mapOf("black_sigatoka" to 7, "panama" to 6, "cordana" to 6)) {
+                val info = load(file, folder)
+                assertEquals(count, info.symptoms.size)
+                assertTrue(info.symptoms.all { it.id.startsWith("$file.symptoms.supplied.") })
+            }
+        }
+    }
+
     private val files = listOf("black_sigatoka", "panama", "cordana", "healthy")
     private fun load(name: String, folder: String = "diseases"): DiseaseInfo =
         Gson().fromJson(File("src/main/assets/$folder/$name.json").readText(), DiseaseInfo::class.java)

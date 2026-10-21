@@ -3,6 +3,7 @@ package com.example.bananaq
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ val libraryDiseases = listOf(
     ),
 )
 
-/** Repeating positions allow swiping in either direction without an end card. */
+/** Repeat cached disease cards without an end stop or visible recentering during a swipe. */
 class DiseaseLibraryAdapter(private val onClick: (String) -> Unit) :
     RecyclerView.Adapter<DiseaseLibraryAdapter.Holder>() {
     private val images = mutableMapOf<Int, Bitmap?>()
@@ -53,9 +54,17 @@ class DiseaseLibraryAdapter(private val onClick: (String) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_disease_library, parent, false)
-        val scale = parent.resources.configuration.fontScale
-        if (scale > 1f) view.layoutParams = view.layoutParams.apply {
-            width = (width * scale).toInt()
+        val metrics = parent.resources.displayMetrics
+        // Resolve sp through Android (including nonlinear font scaling on API 34+).
+        val textScale = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14f, metrics) /
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14f, metrics)
+        val available = maxOf(parent.width, parent.measuredWidth) - parent.paddingLeft - parent.paddingRight
+        view.layoutParams = view.layoutParams.apply {
+            val desired = (width * maxOf(1f, textScale)).toInt()
+            val margins = (this as? ViewGroup.MarginLayoutParams)?.let {
+                it.leftMargin + it.rightMargin
+            } ?: 0
+            width = if (available > margins) minOf(desired, available - margins) else desired
         }
         return Holder(view)
     }

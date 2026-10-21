@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Shared spacing scale; dimensions of artwork and touch targets are separate. -->
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    <dimen name="spacing_32">32dp</dimen>
+    <dimen name="spacing_40">40dp</dimen>
+    <dimen name="spacing_48">48dp</dimen>
+    <dimen name="page_heading_gap">@dimen/spacing_16</dimen>
+    <dimen name="section_gap">@dimen/spacing_24</dimen>
+    <dimen name="content_bottom_padding">@dimen/spacing_24</dimen>
+    <dimen name="card_content_padding">@dimen/spacing_16</dimen>
+    <dimen name="compact_card_padding">@dimen/spacing_12</dimen>
+    <dimen name="dialog_content_padding">@dimen/spacing_24</dimen>
+    <!-- Accent stripe plus standard 16dp content inset; preserve the existing card motif. -->
+    <dimen name="accent_content_padding">22dp</dimen>
+    <dimen name="icon_action_clearance">52dp</dimen>
+    <!-- A 40dp circular flag centered inside a 52dp pill requires a 6dp edge. -->
+    <dimen name="language_flag_edge_inset">6dp</dimen>
+    <dimen name="scanner_title_clearance">72dp</dimen>
+    <dimen name="form_compact_ime_min_height">320dp</dimen>
+</resources>

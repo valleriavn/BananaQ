@@ -32,6 +32,8 @@ class ScanIntegrationTest {
         val bitmap = Bitmap.createBitmap(320, 240, Bitmap.Config.ARGB_8888)
         bitmap.eraseColor(Color.GREEN)
         try {
+            assertArrayEquals(intArrayOf(1, 224, 224, 3), model.interpreter.getInputTensor(0).shape())
+            assertTrue(model.interpreter.getInputTensor(0).name().contains("rgb_0_to_1"))
             assertEquals(4, model.interpreter.getOutputTensor(0).numElements())
             val result = DiseaseClassifier(model).classify(bitmap)
             assertTrue(result.confidence.isFinite())

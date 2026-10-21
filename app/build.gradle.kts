@@ -58,6 +58,9 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 androidComponents {
@@ -74,9 +77,30 @@ tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
         include("diseases/*.json", "diseases_tl/*.json")
     }).withPropertyName("recommendationPools")
         .withPathSensitivity(org.gradle.api.tasks.PathSensitivity.RELATIVE)
+    maxParallelForks = 1
+    maxHeapSize = "1536m"
+    jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "--add-opens=java.base/java.util=ALL-UNNAMED",
+        "--add-opens=java.base/java.io=ALL-UNNAMED",
+        "--add-opens=java.base/java.net=ALL-UNNAMED",
+        "--add-opens=java.base/java.security=ALL-UNNAMED",
+        "--add-opens=java.base/java.text=ALL-UNNAMED",
+        "--add-opens=java.base/jdk.internal.access=ALL-UNNAMED",
+        "--add-opens=java.desktop/java.awt.font=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED")
+    val screenshotMode = providers.gradleProperty("screenshots").orElse("verify")
+    inputs.property("screenshotMode", screenshotMode)
+    inputs.dir("src/test/screenshots").withPropertyName("screenshotBaselines")
+        .withPathSensitivity(org.gradle.api.tasks.PathSensitivity.RELATIVE)
+    systemProperty("bananaq.screenshots", screenshotMode.get())
+    systemProperty("robolectric.dependency.repo.url", "https://repo.maven.apache.org/maven2")
+    outputs.dir(layout.buildDirectory.dir("reports/scaling"))
 }
 
 dependencies {
+    implementation(project(":feature:scanner:domain"))
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-core:2.6.2")
     implementation("androidx.exifinterface:exifinterface:1.3.7")
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
@@ -91,6 +115,7 @@ dependencies {
     implementation(libs.androidx.work.runtime)
 
     testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
     implementation("com.google.code.gson:gson:2.14.0")

@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "BananaQ"
 include(":app")
- 
+include(":feature:scanner:domain")
+

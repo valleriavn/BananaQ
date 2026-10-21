@@ -3,28 +3,46 @@
   "scientificName": "Pseudocercospora fijiensis",
   "symptoms": [
     {
-      "id": "black_sigatoka.symptoms.1",
+      "id": "black_sigatoka.symptoms.supplied.1",
       "essential": true,
-      "title": "Early specks and streaks",
-      "description": "Tiny pale-yellow or reddish-brown specks usually begin on the underside of a leaf and lengthen into streaks parallel to the leaf veins."
+      "title": "Dense black streaks",
+      "description": "Dense aggregation of the black streak may form and when these areas become watersoaked, the leaf turns black, dries-up rapidly, and becomes brown"
     },
     {
-      "id": "black_sigatoka.symptoms.2",
+      "id": "black_sigatoka.symptoms.supplied.2",
       "essential": false,
-      "title": "Darkening lesions",
-      "description": "The streaks enlarge and darken from brown to nearly black, becoming narrow oval or elongated spots."
+      "title": "Early yellow spots",
+      "description": "Small yellowish/chlorotic spots initially appear on the underside of the leaf."
     },
     {
-      "id": "black_sigatoka.symptoms.3",
+      "id": "black_sigatoka.symptoms.supplied.3",
       "essential": false,
-      "title": "Gray centers and yellow halos",
-      "description": "Older lesions may develop dry light-gray centers, dark borders, and bright yellow halos."
+      "title": "Elongated brown streaks",
+      "description": "The spots develop into thin, elongated brown streaks, often running parallel to the leaf veins."
     },
     {
-      "id": "black_sigatoka.symptoms.4",
+      "id": "black_sigatoka.symptoms.supplied.4",
       "essential": false,
-      "title": "Coalescing and leaf death",
-      "description": "Numerous lesions can merge into large dead areas, reducing green leaf area and causing premature drying."
+      "title": "Darkening streaks",
+      "description": "The streaks gradually become darker brown, reddish-brown, or black."
+    },
+    {
+      "id": "black_sigatoka.symptoms.supplied.5",
+      "essential": false,
+      "title": "Enlarging lesions",
+      "description": "Lesions enlarge and develop fusiform or elliptical shapes."
+    },
+    {
+      "id": "black_sigatoka.symptoms.supplied.6",
+      "essential": false,
+      "title": "Yellow halos",
+      "description": "A yellow/chlorotic halo and sometimes a water-soaked appearance may develop around the lesions."
+    },
+    {
+      "id": "black_sigatoka.symptoms.supplied.7",
+      "essential": false,
+      "title": "Merging lesions and leaf death",
+      "description": "Lesions eventually coalesce and form extensive black or brown necrotic areas, resulting in leaf drying and premature leaf death."
     }
   ],
   "treatment": [

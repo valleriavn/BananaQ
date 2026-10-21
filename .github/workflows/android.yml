@@ -1,0 +1,49 @@
+name: Android checks
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-screenshots:
+    # Goldens are recorded with Windows native graphics; keep the renderer OS consistent.
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Cache Robolectric Android runtime
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/robolectric
+          key: robolectric-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+      - name: Install Android SDK packages
+        shell: pwsh
+        run: |
+          & "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" 'platforms;android-35' 'build-tools;36.0.0'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: JVM tests, screenshot verification, lint, and debug APK
+        shell: pwsh
+        run: ./gradlew.bat --no-daemon :feature:scanner:domain:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
+      - name: Upload checks and screenshot differences
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-reports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+            feature/scanner/domain/build/reports/
+          if-no-files-found: ignore

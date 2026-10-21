@@ -111,11 +111,7 @@ class AccountActivity : LocaleAwareActivity() {
             setGravity(Gravity.CENTER)
         }
         dialog.show()
-        dialog.window?.setLayout(
-            minOf((resources.displayMetrics.widthPixels * 0.86f).toInt(),
-                (360 * resources.displayMetrics.density).toInt()),
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        dialog.fitWithinActivity(this, maxWidthDp = 360, fraction = 0.86f)
     }
     private fun avatarTileBackground(option: AvatarOption, selected: Boolean): android.graphics.drawable.Drawable? {
         if (!selected) return ContextCompat.getDrawable(this, R.drawable.avatar_tile_default)
@@ -153,12 +149,9 @@ class AccountActivity : LocaleAwareActivity() {
             dialog.dismiss()
         }
         sheet.findViewById<View>(R.id.closeAvatarPicker).setOnClickListener { dialog.dismiss() }
-        val maximumWidth = (440 * density).toInt()
-        val dialogWidth = minOf(
-            (resources.displayMetrics.widthPixels * 0.90f).toInt(),
-            maximumWidth
-        )
-        val columnCount = if (dialogWidth >= (300 * density).toInt()) 3 else 2
+        val dialogWidth = dialogWidth()
+        val gridWidth = dialogWidth - sheet.paddingLeft - sheet.paddingRight
+        val columnCount = (gridWidth / (96 * density)).toInt().coerceIn(1, 3)
         grid.columnCount = columnCount
 
         avatarOptions.forEachIndexed { index, option ->
@@ -171,7 +164,7 @@ class AccountActivity : LocaleAwareActivity() {
                     this@AccountActivity, R.drawable.nav_item_ripple
                 )
                 clipToOutline = true
-                val padding = (6 * density).toInt()
+                val padding = resources.getDimensionPixelSize(R.dimen.spacing_8)
                 setPadding(padding, padding, padding, padding)
                 contentDescription = if (selected)
                     "${getString(option.nameResId)}, selected"
@@ -196,7 +189,8 @@ class AccountActivity : LocaleAwareActivity() {
 
             tiles += optionView
             var selectionMark: TextView? = null
-            val avatarSize = ((if (columnCount == 3) 76 else 86) * density).toInt()
+            val avatarSize = minOf(((if (columnCount == 3) 76 else 86) * density).toInt(),
+                (gridWidth / columnCount - 24 * density).toInt().coerceAtLeast(1))
             optionView.addView(FrameLayout(this).apply {
                 addView(ImageView(this@AccountActivity).apply {
                     setImageResource(option.resId)
@@ -232,7 +226,7 @@ class AccountActivity : LocaleAwareActivity() {
             ).apply {
                 width = 0
                 height = avatarSize + (16 * density).toInt()
-                val margin = (4 * density).toInt()
+                val margin = resources.getDimensionPixelSize(R.dimen.spacing_4)
                 setMargins(margin, margin, margin, margin)
                 setGravity(Gravity.FILL_HORIZONTAL)
             })
@@ -248,10 +242,7 @@ class AccountActivity : LocaleAwareActivity() {
             setGravity(Gravity.CENTER)
         }
         dialog.show()
-        dialog.window?.setLayout(
-            dialogWidth,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        dialog.fitWithinActivity(this)
     }
 
     companion object {

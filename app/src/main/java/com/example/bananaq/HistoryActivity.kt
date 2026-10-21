@@ -87,10 +87,7 @@ class HistoryActivity : LocaleAwareActivity() {
             setGravity(Gravity.CENTER)
         }
         dialog.show()
-        dialog.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.88f).toInt(),
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        dialog.fitWithinActivity(this, fraction = 0.88f)
     }
     private fun setupBottomNavigation() {
         configureBottomNavigation(R.id.nav_history)

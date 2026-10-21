@@ -3,28 +3,40 @@
   "scientificName": "Fusarium oxysporum f. sp. cubense",
   "symptoms": [
     {
-      "id": "panama.symptoms.1",
+      "id": "panama.symptoms.supplied.1",
       "essential": true,
-      "title": "Yellowing from older leaves",
-      "description": "Yellowing usually starts along the margins of older lower leaves, then progresses toward the midrib and younger leaves."
+      "title": "Yellowing leaf margins",
+      "description": "Yellowing of older leaves, usually beginning along the leaf margins and progressing toward the midrib."
     },
     {
-      "id": "panama.symptoms.2",
+      "id": "panama.symptoms.supplied.2",
       "essential": false,
-      "title": "Wilting and leaf collapse",
-      "description": "Leaf stalks may buckle, and collapsed older leaves can form a skirt around the pseudostem while a few young leaves remain upright."
+      "title": "Progressive yellowing",
+      "description": "Yellowing and chlorosis progressively spread from older leaves toward younger leaves."
     },
     {
-      "id": "panama.symptoms.3",
+      "id": "panama.symptoms.supplied.3",
       "essential": false,
-      "title": "Internal vascular discoloration",
-      "description": "A cut pseudostem or corm may show yellow, reddish-brown, or dark-brown discoloration in the water-conducting tissue."
+      "title": "Wilting and collapsed leaves",
+      "description": "Affected leaves wilt and collapse at the petiole, causing them to hang around the pseudostem."
     },
     {
-      "id": "panama.symptoms.4",
+      "id": "panama.symptoms.supplied.4",
       "essential": false,
-      "title": "Splitting and plant decline",
-      "description": "Some plants develop lengthwise splitting near the pseudostem base, followed by progressive wilt, decline, and death."
+      "title": "Splitting pseudostem",
+      "description": "The plant may develop longitudinal splitting at the base of the pseudostem."
+    },
+    {
+      "id": "panama.symptoms.supplied.5",
+      "essential": false,
+      "title": "Reduced leaf development",
+      "description": "Leaves may become poorly developed or malformed, with normal leaf production eventually declining."
+    },
+    {
+      "id": "panama.symptoms.supplied.6",
+      "essential": false,
+      "title": "Severe wilting and plant death",
+      "description": "In severe cases, progressive leaf necrosis, wilting, and plant death occur."
     }
   ],
   "treatment": [

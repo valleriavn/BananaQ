@@ -17,14 +17,14 @@ data class ProcessedClassification(
 )
 
 /** Owns model lifecycle and persistence so ScannerActivity only coordinates UI and camera state. */
-class ScanProcessor(context: Context) {
+class ScanProcessor(context: Context) : ScanRepository {
     private val appContext = context.applicationContext
     private var model: TFLiteModel? = null
     private var classifier: DiseaseClassifier? = null
 
-    fun load(uri: Uri): Bitmap = ScanImageLoader.load(appContext, uri)
+    override fun load(uri: Uri): Bitmap = ScanImageLoader.load(appContext, uri)
 
-    fun classifyAndStore(bitmap: Bitmap, scanId: String): ProcessedClassification {
+    override fun classifyAndStore(bitmap: Bitmap, scanId: String): ProcessedClassification {
         val activeModel = model ?: TFLiteModel(appContext).also { model = it }
         val activeClassifier = classifier ?: DiseaseClassifier(activeModel).also { classifier = it }
         val result = activeClassifier.classify(bitmap)
@@ -47,7 +47,7 @@ class ScanProcessor(context: Context) {
         return ProcessedClassification(result, savedImageUri)
     }
 
-    fun close() {
+    override fun close() {
         classifier = null
         model?.close()
         model = null

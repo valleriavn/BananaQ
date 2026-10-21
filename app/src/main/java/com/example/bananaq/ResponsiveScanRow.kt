@@ -43,7 +43,7 @@ class ResponsiveScanRow @JvmOverloads constructor(
                 badges.layoutParams = LayoutParams(originalBadges!!).apply {
                     if (stacked) {
                         width = ViewGroup.LayoutParams.MATCH_PARENT
-                        topMargin = (8 * resources.displayMetrics.density).toInt()
+                        topMargin = resources.getDimensionPixelSize(R.dimen.spacing_8)
                     }
                 }
                 badges.gravity = if (stacked) Gravity.START else Gravity.END

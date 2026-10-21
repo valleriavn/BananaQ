@@ -3,6 +3,7 @@
     <color name="rating_negative">#DD704A</color>
     <color name="banana_body">#252A22</color>
     <color name="banana_muted">#687060</color>
+    <color name="disease_guidance_text">#7A806F</color>
     <color name="banana_divider">#DDE4D7</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -27,4 +28,5 @@
     <color name="brown_dark">#5D4037</color>
     <color name="brown_light">#A18879</color>
     <color name="brown_background">#F5F5F0</color>
+    <color name="disease_guidance_background">#FFF5D8</color>
 </resources>

@@ -8,86 +8,39 @@
     android:background="@color/banana_cream"
     tools:context=".UserAgreementActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/header_horizontal_padding"
-        android:paddingTop="@dimen/app_header_vertical_spacing"
-        android:background="@color/banana_cream"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_header_vertical_spacing"
-            android:gravity="center_vertical" android:baselineAligned="false"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnLanguage"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/logoIcon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_logo" />
-
-            <TextView
-                android:layout_width="0dp" android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/app_name"
-                android:textColor="@color/banana_green"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+<LinearLayout android:id="@+id/header" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/header_horizontal_padding" android:paddingEnd="@dimen/header_horizontal_padding" android:paddingTop="@dimen/app_header_vertical_spacing" android:background="@color/banana_cream" app:layout_constraintTop_toTopOf="parent" android:orientation="vertical">
+    <com.example.bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/app_header_vertical_spacing">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:gravity="center_vertical" android:baselineAligned="false" android:orientation="horizontal" android:layout_marginEnd="@dimen/spacing_4" android:layout_weight="1">
+            <ImageView android:id="@+id/logoIcon" android:layout_width="@dimen/app_header_logo_size" android:layout_height="@dimen/app_header_logo_size" android:src="@drawable/logo" />
+            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8" android:text="@string/app_name" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_brand_text_size" android:textStyle="bold" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/btnLanguage"
-            android:layout_width="88dp"
-            android:layout_height="wrap_content" android:minHeight="32dp"
-            android:layout_marginBottom="@dimen/app_header_vertical_spacing"
-            android:background="@drawable/library_language_pill"
-            android:gravity="center"
-            android:text="@string/language_current"
-            android:textColor="@color/banana_text_dark"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/banana_divider"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView android:id="@+id/btnLanguage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:background="@drawable/header_language_badge" android:gravity="center" android:text="@string/language_current" android:textColor="@color/banana_text_dark" android:textSize="@dimen/app_header_language_text_size" android:minWidth="88dp" android:paddingStart="@dimen/spacing_12" android:paddingEnd="@dimen/spacing_12" />
+    </com.example.bananaq.ResponsiveHeaderRow>
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/banana_divider" app:layout_constraintBottom_toBottomOf="parent" />
+</LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/agreementScroll"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
         android:fadeScrollbars="false"
         android:scrollbarStyle="insideOverlay"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header">
+        app:layout_constraintTop_toBottomOf="@id/header" app:layout_constraintWidth_max="@dimen/page_content_max_width" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
+        <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="40dp">
+            android:paddingBottom="@dimen/content_bottom_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding"
+                android:layout_marginTop="@dimen/spacing_16"
                 android:gravity="center_vertical" android:baselineAligned="false"
                 android:orientation="horizontal">
 
@@ -99,7 +52,7 @@
                     android:clickable="true"
                     android:contentDescription="@string/back_label"
                     android:focusable="true"
-                    android:padding="12dp"
+                    android:padding="@dimen/spacing_12"
                     android:src="@drawable/ic_arrow_back_green" android:scaleType="fitCenter" />
 
                 <TextView
@@ -107,7 +60,7 @@
                 style="@style/AccountPageHeading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/spacing_8"
                     android:layout_weight="1"
                     android:text="User Agreement"
                     android:textColor="@color/banana_text_dark"
@@ -118,8 +71,8 @@
                 android:id="@+id/userAgreementContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
@@ -133,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="@dimen/spacing_16">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -145,7 +98,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="Welcome to BananaQ. By downloading, installing, accessing, or using the BananaQ mobile application (&quot;App&quot;), you agree to comply with and be bound by this User Agreement."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp"
@@ -154,7 +107,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="If you do not agree with any part of this Agreement, you should not use the application."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp"
@@ -163,7 +116,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="1. Purpose of the Application"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -171,7 +124,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="BananaQ is an educational and agricultural support application designed to help users identify and classify banana leaf diseases through image analysis using a Convolutional Neural Network (CNN).\n\nThe application currently supports the detection of:\n•  Black Sigatoka\n•  Panama Disease\n•  Cordana Leaf Spot"
                         android:textColor="@color/banana_body"
                         android:textSize="14sp"
@@ -180,7 +133,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="2. Eligibility"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -188,7 +141,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="You may use BananaQ if you:\n•  Are at least eighteen (18) years old, or\n•  Have the permission and supervision of a parent, guardian, or authorized organization."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -196,7 +149,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="3. User Responsibilities"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -204,7 +157,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="By using BananaQ, you agree to:\n•  Provide accurate and lawful information when required.\n•  Upload only images that you own or have permission to use.\n•  Use the application only for legal and legitimate agricultural purposes.\n•  Avoid uploading harmful, illegal, offensive, or malicious content."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -212,7 +165,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="4. Accuracy of Results"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -220,7 +173,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="BananaQ uses Artificial Intelligence and machine learning technologies to generate predictions.\n\nUsers acknowledge that:\n•  Detection results are estimates based on image analysis.\n•  Results should not replace professional agricultural consultation.\n•  The developers are not responsible for crop losses, financial losses, or damages resulting from reliance solely on the application's predictions."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -228,7 +181,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="5. Availability of Service"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -236,7 +189,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="The developers may update, improve, suspend, or discontinue parts of the application without prior notice for maintenance, research, or development purposes."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -244,7 +197,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="6. Termination"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -252,7 +205,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="The developers reserve the right to restrict or terminate access to users who:\n•  Violate this Agreement,\n•  Misuse the application,\n•  Attempt unauthorized access to the system, or\n•  Interfere with the application's operation."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -265,7 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page_horizontal_padding"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_24"
                 android:text="Terms of Use"
                 android:textColor="@color/banana_text_dark"
                 android:textStyle="bold" />
@@ -274,8 +227,8 @@
                 android:id="@+id/termsOfUseContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
@@ -289,7 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="@dimen/spacing_16">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -301,7 +254,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="By using BananaQ, you agree to these Terms of Use and any future updates."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -309,7 +262,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="2. Permitted Use"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -317,7 +270,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="You may use BananaQ for:\n•  Banana leaf disease identification,\n•  Agricultural learning,\n•  Crop monitoring assistance,\n•  Academic and research purposes."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -325,7 +278,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="3. Prohibited Activities"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -333,7 +286,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="Users shall not:\n•  Reverse engineer or attempt to extract the application's source code.\n•  Modify or distribute the application without permission.\n•  Upload viruses, malware, or harmful files.\n•  Use the application for fraudulent or illegal activities.\n•  Attempt to manipulate or exploit the AI prediction system."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -341,7 +294,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="4. Intellectual Property"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -349,7 +302,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="All rights, including but not limited to:\n•  Software,\n•  Source code,\n•  User interface,\n•  AI models,\n•  Graphics,\n•  Documentation,\n•  Logos, and\n•  Other content,\nremain the intellectual property of the BananaQ research and development team unless otherwise stated.\n\nUsers may not reproduce or redistribute these materials without written permission."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -357,7 +310,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="5. Third-Party Technologies"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -365,7 +318,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="BananaQ may use third-party frameworks, libraries, or machine learning models. Such technologies remain subject to their respective licenses.\n\nNavigation icons are Flaticon UIcons from www.flaticon.com/uicons and are used with attribution under the Flaticon License."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -373,7 +326,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="6. Disclaimer"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -381,7 +334,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="The application is provided on an &quot;as is&quot; and &quot;as available&quot; basis.\n\nThe developers make no guarantees regarding:\n•  Continuous availability,\n•  Absolute accuracy,\n•  Error-free operation,\n•  Suitability for every farming condition."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -389,7 +342,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="7. Limitation of Liability"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -397,7 +350,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="To the maximum extent permitted by law, the developers shall not be liable for:\n•  Crop damage,\n•  Financial losses,\n•  Business interruption,\n•  Data loss,\n•  Indirect or consequential damages,\narising from the use or inability to use BananaQ."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -405,7 +358,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="8. Changes to the Terms"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -413,7 +366,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="The developers may revise these Terms of Use from time to time. Continued use of the application constitutes acceptance of the updated terms."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -426,7 +379,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page_horizontal_padding"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_24"
                 android:text="Privacy Policy"
                 android:textColor="@color/banana_text_dark"
                 android:textStyle="bold" />
@@ -435,8 +388,8 @@
                 android:id="@+id/privacyPolicyContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding"
                 android:background="@drawable/bg_agreement_card"
                 android:orientation="horizontal"
                 android:clipToOutline="true">
@@ -450,7 +403,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="@dimen/spacing_16">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -462,7 +415,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="BananaQ respects the privacy of its users and is committed to protecting personal information."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -470,7 +423,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="1. Information We Collect"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -478,7 +431,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="The application may collect the following information when an internet connection is available:\n\na. Scan Images and Results\n•  Banana leaf images submitted for analysis\n•  Predicted condition, confidence score, and scan time\n\nb. Feedback and Session Data\n•  Accuracy rating and optional comments\n•  Anonymous session start and activity times\n•  A random Supabase installation identity used only to protect each device’s records\n\nThe selected avatar and language remain on the device and are not included in the research database."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -486,7 +439,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="2. How We Use the Information"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -494,7 +447,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="Collected information may be used to:\n•  Analyze banana leaf images,\n•  Improve AI model performance,\n•  Enhance application functionality,\n•  Generate anonymous research statistics,\n•  Provide treatment and prevention recommendations,\n•  Resolve technical issues."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -502,7 +455,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="3. Data Storage and Security"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -510,7 +463,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="Scans are stored locally first. Pending records are synchronized over encrypted HTTPS when a connection is available. Remote records are protected by authenticated ownership rules, and scan images are stored in a private Supabase Storage bucket. Android cloud backup excludes the local scan database, scan images, and authentication credentials.\n\nHowever, no electronic storage system or internet transmission is completely secure, and absolute security cannot be guaranteed."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -518,7 +471,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="4. Data Sharing"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -526,7 +479,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="BananaQ does not sell or rent personal information.\n\nInformation may only be shared:\n•  When required by law,\n•  For approved academic or research purposes in anonymized form,\n•  With authorized service providers assisting in system operation."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -534,7 +487,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="5. Research Use"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -542,7 +495,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="As BananaQ is developed as part of an academic capstone project, anonymized and aggregated data may be used for:\n•  System evaluation,\n•  Performance analysis,\n•  Academic publications,\n•  Future research and development.\n\nNo personally identifiable information will be disclosed without user consent unless required by law."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -550,7 +503,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="6. Data Retention"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -558,7 +511,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="User data will be retained only for as long as necessary to:\n•  Provide application services,\n•  Improve the AI model,\n•  Meet research and legal requirements.\n\nAfterward, data may be securely deleted or anonymized."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -566,7 +519,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="7. User Rights"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -574,7 +527,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="Users may request to:\n•  Access their personal information,\n•  Correct inaccurate information,\n•  Request deletion of their data,\n•  Withdraw consent for future data processing, subject to applicable laws and research requirements."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -582,7 +535,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="8. Children's Privacy"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -590,7 +543,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="BananaQ is not intended to knowingly collect personal information from children under thirteen (13) years of age without appropriate parental or guardian consent."
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -598,7 +551,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="9. Consent"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -606,7 +559,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="By using BananaQ, you confirm that:\n•  You understand these policies\n•  You agree to the collection and use of information described above\n•  You will use the application responsibly and lawfully"
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -614,7 +567,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="@dimen/spacing_12"
                         android:text="10. Contact"
                         android:textColor="@color/banana_body"
                         android:textSize="16sp"
@@ -622,7 +575,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_8"
                         android:text="For privacy concerns, account concerns, or policy questions, users may contact the BananaQ development team through the official support channels inside the application.\n\nEmail: bananaq020104@gmail.com\nPhone: 09917583912"
                         android:textColor="@color/banana_body"
                         android:textSize="14sp" />
@@ -634,8 +587,8 @@
                 android:id="@+id/agreementConfirmation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/page_horizontal_padding"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding"
+                android:layout_marginTop="@dimen/spacing_24"
                 android:gravity="center_vertical" android:baselineAligned="false"
                 android:orientation="horizontal">
 
@@ -658,14 +611,14 @@
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
 
-            <LinearLayout
+            <com.example.bananaq.ResponsiveActionRow
                 android:id="@+id/agreementActions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/page_horizontal_padding"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
+                android:paddingStart="@dimen/page_horizontal_padding" android:paddingEnd="@dimen/page_horizontal_padding"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginBottom="0dp"
                 android:gravity="center">
 
                 <com.google.android.material.button.MaterialButton
@@ -673,7 +626,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" android:minHeight="54dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="@dimen/spacing_4"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="Decline"
@@ -690,7 +643,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" android:minHeight="54dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/spacing_4"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="Submit"
@@ -702,8 +655,8 @@
                     app:backgroundTint="@color/agreement_submit_button_selector"
                     app:cornerRadius="@dimen/pill_corner_radius"
                     app:strokeWidth="0dp" />
-            </LinearLayout>
-        </LinearLayout>
+            </com.example.bananaq.ResponsiveActionRow>
+        </com.example.bananaq.ContentColumn>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

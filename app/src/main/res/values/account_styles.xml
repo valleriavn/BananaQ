@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AccountPageHeading">
-        <item name="android:textSize">26sp</item>
+        <item name="android:textSize">@dimen/page_heading_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/banana_text_dark</item>
     </style>
     <style name="AccountMainHeading" parent="AccountPageHeading">
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">@dimen/page_heading_text_size</item>
     </style>
     <style name="AccountSectionHeading" parent="ManualSection">
         <item name="android:textColor">@color/banana_green</item>
-        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginTop">@dimen/spacing_24</item>
         <item name="android:textSize">18sp</item>
         <item name="android:letterSpacing">0</item>
         <item name="android:layout_marginBottom">0dp</item>
     </style>
     <style name="AccountInformationRow" parent="ManualRow">
-        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginTop">@dimen/spacing_12</item>
         <item name="android:background">@drawable/account_information_card</item>
         <item name="android:textColor">@color/banana_body</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:paddingStart">22dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">@dimen/accent_content_padding</item>
+        <item name="android:paddingEnd">@dimen/spacing_16</item>
+        <item name="android:paddingTop">@dimen/spacing_16</item>
+        <item name="android:paddingBottom">@dimen/spacing_16</item>
         <item name="android:minHeight">56dp</item>
         <item name="android:layout_marginBottom">0dp</item>
     </style>

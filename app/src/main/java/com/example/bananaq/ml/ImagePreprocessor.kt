@@ -8,7 +8,9 @@ import java.nio.ByteOrder
 import kotlin.math.roundToInt
 
 object ImagePreprocessor {
-    // Training uses rescale=1/255. Quantization describes storage, not normalization.
+    // MobileNetV2's exported input is named rgb_0_to_1; its graph applies
+    // x * 2 - 1 internally. Do not apply MobileNet normalization a second time.
+    // Quantization describes storage, not normalization.
     fun createInputBuffer(bitmap: Bitmap, inputTensor: Tensor): ByteBuffer {
         require(inputTensor.shape().contentEquals(intArrayOf(1, bitmap.height, bitmap.width, 3))) {
             "Bitmap dimensions do not match the RGB input tensor"

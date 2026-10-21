@@ -3,28 +3,46 @@
   "scientificName": "Pseudocercospora fijiensis",
   "symptoms": [
     {
-      "id": "black_sigatoka.symptoms.1",
+      "id": "black_sigatoka.symptoms.supplied.1",
       "essential": true,
-      "title": "Maagang tuldok at guhit",
-      "description": "Karaniwang nagsisimula sa ilalim ng dahon ang napakaliit na maputlang dilaw o mapulang-kayumangging tuldok, saka humahaba bilang mga guhit na kaayon ng ugat ng dahon."
+      "title": "Siksik na maiitim na guhit",
+      "description": "Maaaring magsiksikan ang maiitim na guhit. Kapag nagmukhang babad sa tubig ang mga bahaging ito, nangingitim ang dahon, mabilis na natutuyo, at nagiging kayumanggi."
     },
     {
-      "id": "black_sigatoka.symptoms.2",
+      "id": "black_sigatoka.symptoms.supplied.2",
       "essential": false,
-      "title": "Pag-itim ng mga sugat",
-      "description": "Lumalaki at umiitim mula kayumanggi hanggang halos itim ang mga guhit, at nagiging makitid na hugis-itlog o pahabang batik."
+      "title": "Unang madidilaw na batik",
+      "description": "Sa simula, lumilitaw ang maliliit na madidilaw o maputlang batik sa ilalim ng dahon."
     },
     {
-      "id": "black_sigatoka.symptoms.3",
+      "id": "black_sigatoka.symptoms.supplied.3",
       "essential": false,
-      "title": "Abuhing gitna at dilaw na palibot",
-      "description": "Ang lumang batik ay maaaring magkaroon ng tuyong mapusyaw na abuhing gitna, maitim na gilid, at maliwanag na dilaw na palibot."
+      "title": "Pahabang kayumangging guhit",
+      "description": "Nagiging maninipis at pahabang kayumangging guhit ang mga batik, na madalas ay kahilera ng mga ugat ng dahon."
     },
     {
-      "id": "black_sigatoka.symptoms.4",
+      "id": "black_sigatoka.symptoms.supplied.4",
       "essential": false,
-      "title": "Pagsasanib at pagkamatay ng dahon",
-      "description": "Maaaring magsanib ang maraming batik at bumuo ng malaking patay na bahagi, kaya nababawasan ang berdeng bahagi at maagang natutuyo ang dahon."
+      "title": "Pag-itim ng mga guhit",
+      "description": "Unti-unting nagiging mas maitim na kayumanggi, mapula-kayumanggi, o itim ang mga guhit."
+    },
+    {
+      "id": "black_sigatoka.symptoms.supplied.5",
+      "essential": false,
+      "title": "Paglaki ng mga sugat",
+      "description": "Lumalaki ang mga sugat at nagiging hugis-hibla na patulis sa magkabilang dulo o hugis-itlog."
+    },
+    {
+      "id": "black_sigatoka.symptoms.supplied.6",
+      "essential": false,
+      "title": "Dilaw na palibot",
+      "description": "Maaaring magkaroon ng dilaw o maputlang palibot ang mga sugat at kung minsan ay magmukhang babad sa tubig."
+    },
+    {
+      "id": "black_sigatoka.symptoms.supplied.7",
+      "essential": false,
+      "title": "Pagsasanib ng mga sugat",
+      "description": "Kalaunan, nagsasanib ang mga sugat at bumubuo ng malalawak na itim o kayumangging patay na bahagi, na nagdudulot ng pagkatuyo at maagang pagkamatay ng dahon."
     }
   ],
   "treatment": [

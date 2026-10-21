@@ -40,7 +40,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_feedback_detail)
-        applySystemInsets()
+        applySystemInsets(compactImeHeaders = listOf(findViewById(R.id.header), findViewById(R.id.titleRow)))
 
         resultValid = intent.getBooleanExtra("RESULT_VALID", true)
         diseaseName = if (resultValid) {
@@ -148,11 +148,9 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
         confirmationDialog = dialog
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val content = layoutInflater.inflate(R.layout.dialog_feedback_confirmation, null)
-        if (resources.configuration.fontScale > 1f) {
-            val scroll = androidx.core.widget.NestedScrollView(this)
-            scroll.addView(content)
-            dialog.setContentView(scroll)
-        } else dialog.setContentView(content)
+        val scroll = androidx.core.widget.NestedScrollView(this)
+        scroll.addView(content)
+        dialog.setContentView(scroll)
         dialog.setCanceledOnTouchOutside(true)
         dialog.findViewById<View>(R.id.btnCancelFeedback).setOnClickListener {
             dialog.dismiss()
@@ -168,10 +166,7 @@ class FeedbackDetailActivity : LocaleAwareActivity() {
             setGravity(Gravity.CENTER)
         }
         dialog.show()
-        dialog.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.88f).toInt(),
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        dialog.fitWithinActivity(this, fraction = 0.88f)
     }
 
     private fun saveFeedback() {

@@ -2,9 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/banana_green" />
     <item>
-        <inset android:insetLeft="9.100%" android:insetTop="14.183%"
-            android:insetRight="10.900%" android:insetBottom="9.817%">
-            <bitmap android:src="@drawable/ic_logo" android:gravity="fill" android:filter="true" />
+        <inset android:insetLeft="10%" android:insetTop="10%"
+            android:insetRight="10%" android:insetBottom="10%">
+            <bitmap android:src="@drawable/logo" android:gravity="fill" android:filter="true" />
         </inset>
     </item>
 </layer-list>

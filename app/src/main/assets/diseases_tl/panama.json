@@ -3,28 +3,40 @@
   "scientificName": "Fusarium oxysporum f. sp. cubense",
   "symptoms": [
     {
-      "id": "panama.symptoms.1",
+      "id": "panama.symptoms.supplied.1",
       "essential": true,
-      "title": "Paninilaw mula sa matatandang dahon",
-      "description": "Karaniwang nagsisimula ang paninilaw sa gilid ng matatanda at ibabang dahon, saka umuusad patungo sa gitnang ugat at mas batang dahon."
+      "title": "Paninilaw sa gilid ng dahon",
+      "description": "Naninilaw ang matatandang dahon, karaniwang mula sa mga gilid patungo sa pangunahing ugat sa gitna."
     },
     {
-      "id": "panama.symptoms.2",
+      "id": "panama.symptoms.supplied.2",
+      "essential": false,
+      "title": "Paglawak ng paninilaw",
+      "description": "Unti-unting kumakalat ang paninilaw at pamumutla mula sa matatandang dahon patungo sa mas batang dahon."
+    },
+    {
+      "id": "panama.symptoms.supplied.3",
       "essential": false,
       "title": "Pagkalanta at pagbagsak ng dahon",
-      "description": "Maaaring matiklop ang tangkay ng dahon at lumaylay sa paligid ng pseudostem ang matatandang dahon habang nananatiling tuwid ang ilang batang dahon."
+      "description": "Nalalanta at bumabagsak sa tangkay ang mga apektadong dahon, kaya nakalaylay ang mga ito sa paligid ng pseudostem."
     },
     {
-      "id": "panama.symptoms.3",
+      "id": "panama.symptoms.supplied.4",
       "essential": false,
-      "title": "Pagbabago ng kulay sa loob",
-      "description": "Kapag hiniwa ang pseudostem o corm, maaaring makita ang dilaw, mapulang-kayumanggi, o maitim na kayumangging kulay sa water-conducting tissue."
+      "title": "Pagbitak ng pseudostem",
+      "description": "Maaaring magkaroon ng pahabang bitak sa paanan ng pseudostem."
     },
     {
-      "id": "panama.symptoms.4",
+      "id": "panama.symptoms.supplied.5",
       "essential": false,
-      "title": "Pagbitak at paghina ng halaman",
-      "description": "Maaaring magkaroon ng pahabang bitak malapit sa paanan ng pseudostem, kasunod ang tuloy-tuloy na pagkalanta, paghina, at pagkamatay."
+      "title": "Mahinang pagbuo ng dahon",
+      "description": "Maaaring hindi maayos ang paglaki o hugis ng mga dahon, at kalaunan ay bumababa ang normal na paggawa ng bagong dahon."
+    },
+    {
+      "id": "panama.symptoms.supplied.6",
+      "essential": false,
+      "title": "Malubhang pagkalanta",
+      "description": "Sa malalang kaso, patuloy na namamatay ang tisyu ng dahon, nalalanta ang halaman, at maaari itong mamatay."
     }
   ],
   "treatment": [

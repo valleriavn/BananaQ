@@ -6,68 +6,21 @@
     android:background="@color/banana_cream"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" android:baselineAligned="false"
-        android:paddingHorizontal="@dimen/header_horizontal_padding"
-        android:paddingTop="@dimen/app_header_vertical_spacing"
-        android:paddingBottom="@dimen/app_header_vertical_spacing">
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_logo" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="@string/app_name"
-            android:textColor="@color/banana_green"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-        <LinearLayout
-            android:layout_width="88dp"
-            android:layout_height="wrap_content" android:minHeight="32dp"
-            android:background="@drawable/btn_language_light_yellow"
-            android:gravity="center_vertical" android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <TextView
-                android:id="@+id/detailLangEN"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" android:minHeight="24dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:contentDescription="@string/language_english"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="@string/language_code_english"
-                android:textColor="@color/button_text_black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/detailLangTL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" android:minHeight="24dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:contentDescription="@string/language_tagalog"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="@string/language_code_tagalog"
-                android:textColor="@color/button_text_black"
-                android:textSize="14sp" />
-        </LinearLayout>
+<com.example.bananaq.ResponsiveHeaderRow android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:baselineAligned="false" android:paddingStart="@dimen/header_horizontal_padding" android:paddingEnd="@dimen/header_horizontal_padding" android:paddingTop="@dimen/app_header_vertical_spacing" android:paddingBottom="@dimen/app_header_vertical_spacing">
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:layout_width="@dimen/app_header_logo_size" android:layout_height="@dimen/app_header_logo_size" android:importantForAccessibility="no" android:src="@drawable/logo" />
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="@dimen/spacing_8" android:layout_marginEnd="@dimen/spacing_8" android:layout_weight="1" android:text="@string/app_name" android:textColor="@color/banana_green" android:textSize="@dimen/app_header_brand_text_size" android:textStyle="bold" />
     </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="32dp" android:background="@drawable/header_language_background" android:gravity="center_vertical" android:baselineAligned="false" android:orientation="horizontal" android:padding="0dp" android:minWidth="88dp">
+        <TextView android:id="@+id/detailLangEN" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:layout_weight="1" android:clickable="true" android:contentDescription="@string/language_english" android:focusable="true" android:gravity="center" android:text="@string/language_code_english" android:textColor="@color/button_text_black" android:textSize="@dimen/app_header_language_text_size" android:minWidth="48dp" android:paddingStart="@dimen/spacing_8" android:paddingEnd="@dimen/spacing_8" />
+        <TextView android:id="@+id/detailLangTL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp" android:layout_weight="1" android:clickable="true" android:contentDescription="@string/language_tagalog" android:focusable="true" android:gravity="center" android:text="@string/language_code_tagalog" android:textColor="@color/button_text_black" android:textSize="@dimen/app_header_language_text_size" android:minWidth="48dp" android:paddingStart="@dimen/spacing_8" android:paddingEnd="@dimen/spacing_8" />
+    </LinearLayout>
+</com.example.bananaq.ResponsiveHeaderRow>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginHorizontal="@dimen/header_horizontal_padding"
+        android:layout_marginStart="@dimen/header_horizontal_padding" android:layout_marginEnd="@dimen/header_horizontal_padding"
         android:background="@color/banana_divider" />
 
     <androidx.core.widget.NestedScrollView
@@ -76,41 +29,41 @@
         android:layout_weight="1"
         android:clipToPadding="false"
         android:fillViewport="true">
-        <LinearLayout
+        <com.example.bananaq.ContentColumn android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="32dp"
-            android:paddingHorizontal="@dimen/page_horizontal_padding">
+            android:paddingBottom="@dimen/content_bottom_padding"
+            android:paddingStart="@dimen/page_horizontal_padding" android:paddingEnd="@dimen/page_horizontal_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:orientation="horizontal" android:layout_marginTop="@dimen/page_heading_gap">
                 <ImageButton
                     android:id="@+id/backButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/back_label"
-                    android:padding="12dp"
+                    android:padding="@dimen/spacing_12"
                     android:src="@drawable/ic_arrow_back_green" android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/detailDiseaseName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/spacing_8"
                     android:layout_weight="1"
                     android:textColor="@color/banana_text_dark"
-                    android:textSize="23sp"
+                    android:textSize="@dimen/page_heading_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/disease_header_image_height"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_4"
                 app:cardCornerRadius="@dimen/container_corner_radius"
                 app:cardElevation="0dp"
                 app:strokeColor="@color/banana_border"
@@ -126,7 +79,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/spacing_12"
                 android:orientation="vertical"
                 android:clipToOutline="true"
                 android:background="@drawable/disease_note_background">
@@ -134,8 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingStart="16dp"
-                    android:padding="16dp">
+                    android:paddingStart="@dimen/spacing_16"
+                    android:padding="@dimen/spacing_16">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -147,7 +100,7 @@
                         android:id="@+id/detailScientificName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_4"
                         android:textColor="@color/banana_body"
                         android:textSize="15sp"
                         android:textStyle="italic" />
@@ -156,7 +109,7 @@
 
             <LinearLayout
                 style="@style/DiseaseDetailSectionCard"
-                android:layout_marginTop="14dp">
+                android:layout_marginTop="@dimen/spacing_12">
                 <LinearLayout style="@style/DiseaseDetailSectionContent">
                     <TextView style="@style/DiseaseDetailSectionTitle" android:text="@string/disease_description_heading" />
                     <TextView android:id="@+id/detailDescription" style="@style/DiseaseDetailSectionBody" />
@@ -165,7 +118,7 @@
 
             <LinearLayout
                 style="@style/DiseaseDetailSectionCard"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/spacing_12">
                 <LinearLayout style="@style/DiseaseDetailSectionContent">
                     <TextView style="@style/DiseaseDetailSectionTitle" android:text="@string/disease_symptoms" />
                     <TextView android:id="@+id/detailSymptoms" style="@style/DiseaseDetailSectionBody" />
@@ -174,7 +127,7 @@
 
             <LinearLayout
                 style="@style/DiseaseDetailSectionCard"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/spacing_12">
                 <LinearLayout style="@style/DiseaseDetailSectionContent">
                     <TextView style="@style/DiseaseDetailSectionTitle" android:text="@string/disease_spread" />
                     <TextView android:id="@+id/detailSpread" style="@style/DiseaseDetailSectionBody" />
@@ -184,14 +137,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/disease_note_background"
-                android:paddingStart="16dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:background="@drawable/disease_guidance_background"
+                android:paddingStart="@dimen/spacing_16"
                 android:lineSpacingExtra="2dp"
-                android:padding="16dp"
+                android:padding="@dimen/spacing_16"
                 android:text="@string/disease_guidance_note"
-                android:textColor="@color/banana_muted"
+                android:textColor="@color/disease_guidance_text"
+                android:textStyle="italic"
                 android:textSize="13sp" />
-        </LinearLayout>
+        </com.example.bananaq.ContentColumn>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

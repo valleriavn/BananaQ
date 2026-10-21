@@ -156,6 +156,7 @@ class RaisedBottomNavigationView @JvmOverloads constructor(
     }
 
     fun setSystemBottomInset(bottomInset: Int) {
+        if (systemBottomInset == bottomInset) return
         systemBottomInset = bottomInset
         barBackground.layoutParams = barBackground.layoutParams.apply {
             height = barHeight + bottomInset
