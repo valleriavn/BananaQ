@@ -107,8 +107,8 @@
     <string name="summary_saved">Na-save</string>
     <string name="summary_additional_comments">Karagdagang komento:\n%1$s</string>
     <string name="today_at">Ngayon, %1$s</string>
-    <string name="prediction_summary">Prediksiyon: %1$s (%2$d%%)\nI-tap para makita ang detalye</string>
-    <string name="prediction_heading">Prediksiyon: %1$s (%2$d%%)</string>
+    <string name="prediction_summary">Prediksiyon: %1$s (%2$.2f%%)\nI-tap para makita ang detalye</string>
+    <string name="prediction_heading">Prediksiyon: %1$s (%2$.2f%%)</string>
     <string name="tap_for_details">I-tap para makita ang detalye</string>
     <string name="expand_scan_result">Palawakin ang resulta ng scan</string>
     <string name="collapse_scan_result">Paliitin ang resulta ng scan</string>

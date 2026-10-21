@@ -2,19 +2,117 @@
   "diseaseName": "Healthy",
   "scientificName": "No supported disease pattern detected",
   "symptoms": [
-    {"title": "No supported disease pattern", "description": "The image did not show a strong pattern for Black Sigatoka, Panama Disease, or Cordana Leaf Spot. This is not proof that the whole plant is disease-free."},
-    {"title": "Inspect the whole plant", "description": "Check both leaf surfaces, older and younger leaves, the pseudostem, and the plant base for yellowing, spots, wilting, splitting, or internal discoloration."},
-    {"title": "Watch for changes", "description": "Symptoms can be absent or subtle in an early infection. Compare the plant over time and scan a clear, well-lit image of any new symptom."}
+    {
+      "id": "healthy.symptoms.1",
+      "essential": true,
+      "title": "No supported disease pattern",
+      "description": "The image did not show a strong pattern for Black Sigatoka, Panama Disease, or Cordana Leaf Spot. This is not proof that the whole plant is disease-free."
+    },
+    {
+      "id": "healthy.symptoms.2",
+      "essential": false,
+      "title": "Inspect the whole plant",
+      "description": "Check both leaf surfaces, older and younger leaves, the pseudostem, and the plant base for yellowing, spots, wilting, splitting, or internal discoloration."
+    },
+    {
+      "id": "healthy.symptoms.3",
+      "essential": false,
+      "title": "Watch for changes",
+      "description": "Symptoms can be absent or subtle in an early infection. Compare the plant over time and scan a clear, well-lit image of any new symptom."
+    }
   ],
   "treatment": [
-    {"title": "Do not apply a pesticide", "description": "A Healthy result does not require chemical treatment. Use a confirmed diagnosis before applying any pesticide."},
-    {"title": "Continue care suited to Sto. Tomas", "description": "Maintain balanced nutrition, good spacing, and drainage. Adjust watering after rainfall so the roots are not left waterlogged and the leaves do not remain wet unnecessarily."},
-    {"title": "Ask for help if symptoms continue", "description": "For continuing wilt, spreading spots, or internal discoloration, contact the Sto. Tomas City Agriculture Office at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph."}
+    {
+      "id": "healthy.treatment.v2.1",
+      "essential": false,
+      "title": "Keep functional leaves",
+      "description": "Maintain approximately 8–15 functional leaves to support healthy banana plant growth and development."
+    },
+    {
+      "id": "healthy.treatment.v2.2",
+      "essential": false,
+      "title": "Remove nonfunctional leaves",
+      "description": "Remove old, diseased, dried, and nonfunctional leaves as part of regular plant maintenance."
+    },
+    {
+      "id": "healthy.treatment.v2.3",
+      "essential": false,
+      "title": "Trim instead of removing the whole leaf",
+      "description": "When more than 50% of a leaf remains healthy, trim the affected portion rather than removing the entire leaf."
+    },
+    {
+      "id": "healthy.treatment.v2.4",
+      "essential": false,
+      "title": "Practice de-leafing and sanitation",
+      "description": "Practice regular de-leafing and field sanitation to prevent unnecessary accumulation of damaged or diseased foliage."
+    },
+    {
+      "id": "healthy.treatment.v2.5",
+      "essential": false,
+      "title": "Control weeds",
+      "description": "Maintain appropriate weed-control practices to reduce competition for water and nutrients."
+    },
+    {
+      "id": "healthy.treatment.v2.6",
+      "essential": false,
+      "title": "Provide water and drainage",
+      "description": "Provide adequate water for plant growth while maintaining proper drainage, particularly in flood-prone areas."
+    },
+    {
+      "id": "healthy.treatment.v2.7",
+      "essential": false,
+      "title": "Inspect leaf condition",
+      "description": "Regularly inspect leaves for discoloration, lesions, drying, or other visible symptoms of disease."
+    },
+    {
+      "id": "healthy.treatment.v2.8",
+      "essential": true,
+      "title": "Preserve healthy foliage",
+      "description": "Maintain healthy foliage as part of an overall crop-management strategy rather than removing leaves unnecessarily."
+    }
   ],
   "prevention": [
-    {"title": "Inspect every week", "description": "Check both sides of older and younger leaves, the pseudostem, and the plant base, especially after several rainy or humid days."},
-    {"title": "Keep biosecurity clean", "description": "Use clean tools and footwear, avoid moving soil between plots, and obtain healthy planting material from a reliable source."},
-    {"title": "Prepare drainage before heavy rain", "description": "Keep canals and runoff paths clear, avoid waterlogging, and maintain airflow and suitable spacing around each mat."},
-    {"title": "Record changes", "description": "Photograph and rescan new symptoms in good light. Seek advice from the City Agriculture Office when symptoms persist or spread."}
+    {
+      "id": "healthy.prevention.v2.1",
+      "essential": false,
+      "title": "Inspect for early symptoms",
+      "description": "Regularly inspect banana leaves to identify disease symptoms at an early stage."
+    },
+    {
+      "id": "healthy.prevention.v2.2",
+      "essential": false,
+      "title": "Remove dried and diseased foliage",
+      "description": "Remove dried and diseased foliage promptly while preserving functional healthy leaves."
+    },
+    {
+      "id": "healthy.prevention.v2.3",
+      "essential": true,
+      "title": "Avoid unnecessary leaf removal",
+      "description": "Avoid unnecessary removal of healthy leaves because functional foliage contributes to plant maintenance and development."
+    },
+    {
+      "id": "healthy.prevention.v2.4",
+      "essential": false,
+      "title": "Maintain water management",
+      "description": "Maintain adequate drainage and appropriate water management."
+    },
+    {
+      "id": "healthy.prevention.v2.5",
+      "essential": false,
+      "title": "Keep the field clean",
+      "description": "Practice regular weed control and field sanitation."
+    },
+    {
+      "id": "healthy.prevention.v2.6",
+      "essential": false,
+      "title": "Monitor functional leaves",
+      "description": "Monitor the number and condition of functional leaves throughout crop development."
+    },
+    {
+      "id": "healthy.prevention.v2.7",
+      "essential": false,
+      "title": "Prune leaves properly",
+      "description": "Use proper leaf-pruning practices to maintain sufficient healthy foliage."
+    }
   ]
 }

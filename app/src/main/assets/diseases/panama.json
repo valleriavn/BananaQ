@@ -2,21 +2,129 @@
   "diseaseName": "Panama Disease",
   "scientificName": "Fusarium oxysporum f. sp. cubense",
   "symptoms": [
-    {"title": "Yellowing from older leaves", "description": "Yellowing usually starts along the margins of older lower leaves, then progresses toward the midrib and younger leaves."},
-    {"title": "Wilting and leaf collapse", "description": "Leaf stalks may buckle, and collapsed older leaves can form a skirt around the pseudostem while a few young leaves remain upright."},
-    {"title": "Internal vascular discoloration", "description": "A cut pseudostem or corm may show yellow, reddish-brown, or dark-brown discoloration in the water-conducting tissue."},
-    {"title": "Splitting and plant decline", "description": "Some plants develop lengthwise splitting near the pseudostem base, followed by progressive wilt, decline, and death."}
+    {
+      "id": "panama.symptoms.1",
+      "essential": true,
+      "title": "Yellowing from older leaves",
+      "description": "Yellowing usually starts along the margins of older lower leaves, then progresses toward the midrib and younger leaves."
+    },
+    {
+      "id": "panama.symptoms.2",
+      "essential": false,
+      "title": "Wilting and leaf collapse",
+      "description": "Leaf stalks may buckle, and collapsed older leaves can form a skirt around the pseudostem while a few young leaves remain upright."
+    },
+    {
+      "id": "panama.symptoms.3",
+      "essential": false,
+      "title": "Internal vascular discoloration",
+      "description": "A cut pseudostem or corm may show yellow, reddish-brown, or dark-brown discoloration in the water-conducting tissue."
+    },
+    {
+      "id": "panama.symptoms.4",
+      "essential": false,
+      "title": "Splitting and plant decline",
+      "description": "Some plants develop lengthwise splitting near the pseudostem base, followed by progressive wilt, decline, and death."
+    }
   ],
   "treatment": [
-    {"title": "Do not disturb the suspected plant", "description": "Do not uproot, cut, or move the plant, suckers, or surrounding soil. Stop people, tools, footwear, water, and vehicles from carrying soil to another part of the farm."},
-    {"title": "Isolate the area", "description": "Mark the location, restrict entry, and prevent rainwater or irrigation runoff from leaving the suspected area. Clean visible soil from footwear and equipment without spreading it."},
-    {"title": "Contact the Sto. Tomas City Agriculture Office", "description": "Request confirmation and containment instructions at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph. The office is at the Basement Floor, City Hall Main Building, Gov. Malvar Street, Poblacion I."},
-    {"title": "There is no curative fungicide", "description": "Fungicides do not cure Panama Disease. Do not destroy or chemically treat a suspected plant until the agriculture or plant-health authority provides instructions."}
+    {
+      "id": "panama.treatment.v2.1",
+      "essential": true,
+      "title": "Prioritize prevention and containment",
+      "description": "Emphasize prevention and containment because Fusarium wilt is difficult to manage once established."
+    },
+    {
+      "id": "panama.treatment.v2.2",
+      "essential": false,
+      "title": "Plan for resistant or tolerant cultivars",
+      "description": "Use resistant or tolerant banana cultivars as an important long-term management strategy."
+    },
+    {
+      "id": "panama.treatment.v2.3",
+      "essential": false,
+      "title": "Manage severely infected plants only where recommended",
+      "description": "Remove and appropriately manage severely infected plants where recommended to limit sources of pathogen spread."
+    },
+    {
+      "id": "panama.treatment.v2.4",
+      "essential": false,
+      "title": "Establish plants from disease-free material",
+      "description": "Use healthy and disease-free planting materials when establishing or replacing banana plants."
+    },
+    {
+      "id": "panama.treatment.v2.5",
+      "essential": false,
+      "title": "Maintain sanitation and biosecurity",
+      "description": "Maintain appropriate sanitation and farm biosecurity practices."
+    },
+    {
+      "id": "panama.treatment.v2.6",
+      "essential": false,
+      "title": "Monitor affected fields",
+      "description": "Monitor affected fields and plants for additional symptoms and disease spread."
+    },
+    {
+      "id": "panama.treatment.v2.7",
+      "essential": true,
+      "title": "Do not rely on a generic fungicide treatment",
+      "description": "Avoid treating Panama Disease as a condition that can be resolved through a generic fungicide recommendation."
+    },
+    {
+      "id": "panama.treatment.v2.8",
+      "essential": false,
+      "title": "Integrate management measures",
+      "description": "Integrate resistant planting materials, sanitation, disease monitoring, and other appropriate management measures rather than depending on a single intervention."
+    }
   ],
   "prevention": [
-    {"title": "Use certified clean plants", "description": "Plant disease-free tissue-culture plants or other material from a trusted, traceable source. Never obtain suckers from a field with unexplained wilting."},
-    {"title": "Keep soil from moving", "description": "Limit farm entry and remove soil from boots, tools, tires, and equipment before moving between plots. Keep dedicated tools for suspect areas."},
-    {"title": "Control water movement", "description": "Maintain drainage and prevent runoff or floodwater from carrying soil from a suspect area into clean plantings, especially during heavy Batangas rains."},
-    {"title": "Plan with the City Agriculture Office", "description": "Ask the Sto. Tomas City Agriculture Office which resistant or tolerant cultivars and containment practices are appropriate before replanting."}
+    {
+      "id": "panama.prevention.v2.1",
+      "essential": false,
+      "title": "Use disease-free planting material",
+      "description": "Use healthy and disease-free planting materials."
+    },
+    {
+      "id": "panama.prevention.v2.2",
+      "essential": true,
+      "title": "Prevent contaminated soil movement",
+      "description": "Prevent the movement of contaminated soil between production areas."
+    },
+    {
+      "id": "panama.prevention.v2.3",
+      "essential": true,
+      "title": "Keep suspect planting material out",
+      "description": "Avoid introducing potentially contaminated planting materials into disease-free areas."
+    },
+    {
+      "id": "panama.prevention.v2.4",
+      "essential": false,
+      "title": "Keep equipment and tools clean",
+      "description": "Maintain clean farm equipment and tools."
+    },
+    {
+      "id": "panama.prevention.v2.5",
+      "essential": false,
+      "title": "Limit contaminated soil and water movement",
+      "description": "Limit the movement of potentially contaminated soil and water."
+    },
+    {
+      "id": "panama.prevention.v2.6",
+      "essential": false,
+      "title": "Monitor for Fusarium wilt",
+      "description": "Regularly monitor banana plants for symptoms of Fusarium wilt."
+    },
+    {
+      "id": "panama.prevention.v2.7",
+      "essential": false,
+      "title": "Use suitable resistant or tolerant cultivars",
+      "description": "Use resistant or tolerant cultivars where suitable."
+    },
+    {
+      "id": "panama.prevention.v2.8",
+      "essential": false,
+      "title": "Integrate biosecurity and disease management",
+      "description": "Apply integrated disease-management and biosecurity practices to reduce pathogen establishment and dissemination."
+    }
   ]
 }

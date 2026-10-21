@@ -15,9 +15,6 @@ class ScanLogicTest {
         assertEquals(ConfidenceLevel.LOW, ConfidenceLevel.fromConfidence(0.3f))
         assertEquals(ConfidenceLevel.MODERATE, ConfidenceLevel.fromConfidence(0.6f))
         assertEquals(ConfidenceLevel.HIGH, ConfidenceLevel.fromConfidence(0.8f))
-        assertFalse(ConfidenceLevel.LOW.isReliable)
-        assertFalse(ConfidenceLevel.MODERATE.isReliable)
-        assertTrue(ConfidenceLevel.HIGH.isReliable)
     }
 
     @Test fun quantizationSaturatesInsteadOfWrapping() {
@@ -49,24 +46,25 @@ class ScanLogicTest {
         assertEquals(3, PredictionScores.winner(floatArrayOf(.1f, .1f, .1f, .7f)))
     }
 
-    @Test fun acceptanceMatchesNotebookForEveryClass() {
+    @Test fun acceptanceIncludesEveryClassAndLowConfidenceResults() {
         for (label in 0..3) {
             val scores = FloatArray(4) { 0.05f }
             scores[label] = 0.85f
             assertEquals(label, PredictionScores.winner(scores))
             assertTrue(PredictionScores.isAccepted(scores))
         }
-        assertEquals(ConfidenceLevel.HIGH_THRESHOLD, PredictionScores.MIN_CONFIDENCE)
         assertTrue(PredictionScores.isAccepted(floatArrayOf(.8f, .2f, 0f, 0f)))
-        assertFalse(PredictionScores.isAccepted(floatArrayOf(.7999f, .2001f, 0f, 0f)))
-        assertFalse(PredictionScores.isAccepted(floatArrayOf(.6f, .2f, .1f, .1f)))
-        assertFalse(PredictionScores.isAccepted(floatArrayOf(.5f, .5f, 0f, 0f)))
+        assertTrue(PredictionScores.isAccepted(floatArrayOf(.7999f, .2001f, 0f, 0f)))
+        assertTrue(PredictionScores.isAccepted(floatArrayOf(.6f, .2f, .1f, .1f)))
+        assertTrue(PredictionScores.isAccepted(floatArrayOf(.5f, .5f, 0f, 0f)))
+        assertTrue(PredictionScores.isAccepted(floatArrayOf(.25f, .25f, .25f, .25f)))
+        assertEquals(0, PredictionScores.winner(floatArrayOf(.25f, .25f, .25f, .25f)))
     }
 
-    @Test fun notebookCordanaMistakeIsRejectedRatherThanDiagnosedAsPanama() {
+    @Test fun previouslyRejectedPredictionReturnsHighestScoringClass() {
         val scores = floatArrayOf(.0203f, .1571f, .2230f, .5996f)
         assertEquals(3, PredictionScores.winner(scores))
-        assertFalse(PredictionScores.isAccepted(scores))
+        assertTrue(PredictionScores.isAccepted(scores))
     }
 
     @Test(expected = IllegalArgumentException::class)

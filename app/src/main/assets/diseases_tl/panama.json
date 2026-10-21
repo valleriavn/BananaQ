@@ -2,21 +2,129 @@
   "diseaseName": "Panama Disease",
   "scientificName": "Fusarium oxysporum f. sp. cubense",
   "symptoms": [
-    {"title": "Paninilaw mula sa matatandang dahon", "description": "Karaniwang nagsisimula ang paninilaw sa gilid ng matatanda at ibabang dahon, saka umuusad patungo sa gitnang ugat at mas batang dahon."},
-    {"title": "Pagkalanta at pagbagsak ng dahon", "description": "Maaaring matiklop ang tangkay ng dahon at lumaylay sa paligid ng pseudostem ang matatandang dahon habang nananatiling tuwid ang ilang batang dahon."},
-    {"title": "Pagbabago ng kulay sa loob", "description": "Kapag hiniwa ang pseudostem o corm, maaaring makita ang dilaw, mapulang-kayumanggi, o maitim na kayumangging kulay sa water-conducting tissue."},
-    {"title": "Pagbitak at paghina ng halaman", "description": "Maaaring magkaroon ng pahabang bitak malapit sa paanan ng pseudostem, kasunod ang tuloy-tuloy na pagkalanta, paghina, at pagkamatay."}
+    {
+      "id": "panama.symptoms.1",
+      "essential": true,
+      "title": "Paninilaw mula sa matatandang dahon",
+      "description": "Karaniwang nagsisimula ang paninilaw sa gilid ng matatanda at ibabang dahon, saka umuusad patungo sa gitnang ugat at mas batang dahon."
+    },
+    {
+      "id": "panama.symptoms.2",
+      "essential": false,
+      "title": "Pagkalanta at pagbagsak ng dahon",
+      "description": "Maaaring matiklop ang tangkay ng dahon at lumaylay sa paligid ng pseudostem ang matatandang dahon habang nananatiling tuwid ang ilang batang dahon."
+    },
+    {
+      "id": "panama.symptoms.3",
+      "essential": false,
+      "title": "Pagbabago ng kulay sa loob",
+      "description": "Kapag hiniwa ang pseudostem o corm, maaaring makita ang dilaw, mapulang-kayumanggi, o maitim na kayumangging kulay sa water-conducting tissue."
+    },
+    {
+      "id": "panama.symptoms.4",
+      "essential": false,
+      "title": "Pagbitak at paghina ng halaman",
+      "description": "Maaaring magkaroon ng pahabang bitak malapit sa paanan ng pseudostem, kasunod ang tuloy-tuloy na pagkalanta, paghina, at pagkamatay."
+    }
   ],
   "treatment": [
-    {"title": "Huwag galawin ang hinihinalang halaman", "description": "Huwag bunutin, hiwain, o ilipat ang halaman, suhi, o nakapaligid na lupa. Pigilan ang tao, kagamitan, sapatos, tubig, at sasakyan sa pagdadala ng lupa sa ibang bahagi ng bukid."},
-    {"title": "Ihiwalay ang lugar", "description": "Markahan ang lokasyon, limitahan ang pagpasok, at pigilan ang ulan o irrigation runoff sa paglabas mula sa hinihinalang lugar. Alisin ang nakikitang lupa sa sapatos at kagamitan nang hindi ito ikinakalat."},
-    {"title": "Kontakin ang Sto. Tomas City Agriculture Office", "description": "Humingi ng kumpirmasyon at containment instructions sa (043) 784-8022 local 307 o agri@cityofstotomas.gov.ph. Matatagpuan ang opisina sa Basement Floor, City Hall Main Building, Gov. Malvar Street, Poblacion I."},
-    {"title": "Walang curative fungicide", "description": "Hindi napagagaling ng fungicide ang Panama Disease. Huwag sirain o gamitan ng kemikal ang hinihinalang halaman hangga’t walang tagubilin mula sa agriculture o plant-health authority."}
+    {
+      "id": "panama.treatment.v2.1",
+      "essential": true,
+      "title": "Unahin ang pag-iwas at pagpigil sa pagkalat",
+      "description": "Unahin ang pag-iwas at pagpigil sa pagkalat dahil mahirap pamahalaan ang Fusarium wilt kapag nakapamahay na ito sa taniman."
+    },
+    {
+      "id": "panama.treatment.v2.2",
+      "essential": false,
+      "title": "Magplano para sa resistant o tolerant na barayti",
+      "description": "Gumamit ng resistant o tolerant na barayti ng saging bilang mahalagang pangmatagalang paraan ng pamamahala sa sakit."
+    },
+    {
+      "id": "panama.treatment.v2.3",
+      "essential": false,
+      "title": "Alisin ang malubhang nahawaang halaman kung inirerekomenda",
+      "description": "Kung inirerekomenda, alisin at wastong pangasiwaan ang mga halamang malubhang nahawaan upang malimitahan ang pinagmumulan ng pagkalat ng sanhi ng sakit."
+    },
+    {
+      "id": "panama.treatment.v2.4",
+      "essential": false,
+      "title": "Gumamit ng malusog na pantanim sa pagtatanim o pagpapalit",
+      "description": "Gumamit ng malusog at walang sakit na pantanim kapag magtatatag ng bagong tanim o magpapalit ng halamang saging."
+    },
+    {
+      "id": "panama.treatment.v2.5",
+      "essential": false,
+      "title": "Panatilihin ang kalinisan at biosecurity sa bukid",
+      "description": "Sundin ang angkop na paglilinis at biosecurity sa bukid upang makatulong na maiwasan ang pagpasok at pagkalat ng sakit."
+    },
+    {
+      "id": "panama.treatment.v2.6",
+      "essential": false,
+      "title": "Bantayan ang mga apektadong taniman",
+      "description": "Bantayan ang mga apektadong taniman at halaman para sa karagdagang sintomas at pagkalat ng sakit."
+    },
+    {
+      "id": "panama.treatment.v2.7",
+      "essential": true,
+      "title": "Huwag ituring na malulutas ng karaniwang fungicide",
+      "description": "Huwag ituring ang Panama Disease na sakit na malulutas sa simpleng rekomendasyon ng karaniwang fungicide."
+    },
+    {
+      "id": "panama.treatment.v2.8",
+      "essential": false,
+      "title": "Pagsamahin ang mga hakbang sa pamamahala",
+      "description": "Pagsamahin ang resistant na pantanim, kalinisan, pagbabantay sa sakit, at iba pang angkop na hakbang sa halip na umasa sa iisang paraan lamang."
+    }
   ],
   "prevention": [
-    {"title": "Gumamit ng sertipikadong malinis na halaman", "description": "Gumamit ng disease-free tissue-culture plants o pantanim mula sa mapagkakatiwalaan at natutukoy na pinagmulan. Huwag kumuha ng suhi sa bukid na may hindi maipaliwanag na pagkalanta."},
-    {"title": "Pigilan ang paglipat ng lupa", "description": "Limitahan ang pagpasok sa bukid at alisin ang lupa sa bota, tools, gulong, at kagamitan bago lumipat ng plot. Maglaan ng hiwalay na tools para sa hinihinalang lugar."},
-    {"title": "Kontrolin ang daloy ng tubig", "description": "Panatilihin ang drainage at pigilan ang runoff o baha sa pagdadala ng lupa mula sa hinihinalang lugar patungo sa malinis na taniman, lalo na sa malakas na ulan sa Batangas."},
-    {"title": "Magplano kasama ang City Agriculture Office", "description": "Tanungin ang Sto. Tomas City Agriculture Office tungkol sa angkop na resistant o tolerant cultivar at containment practice bago muling magtanim."}
+    {
+      "id": "panama.prevention.v2.1",
+      "essential": false,
+      "title": "Gumamit ng pantanim na walang sakit",
+      "description": "Gumamit ng malusog at walang sakit na pantanim."
+    },
+    {
+      "id": "panama.prevention.v2.2",
+      "essential": true,
+      "title": "Pigilan ang paglipat ng kontaminadong lupa",
+      "description": "Pigilan ang paglipat ng kontaminadong lupa sa pagitan ng mga taniman."
+    },
+    {
+      "id": "panama.prevention.v2.3",
+      "essential": true,
+      "title": "Huwag magpasok ng posibleng kontaminadong pantanim",
+      "description": "Iwasang magpasok ng posibleng kontaminadong pantanim sa mga lugar na walang sakit."
+    },
+    {
+      "id": "panama.prevention.v2.4",
+      "essential": false,
+      "title": "Panatilihing malinis ang kagamitan",
+      "description": "Panatilihing malinis ang mga kagamitan at kasangkapan sa bukid."
+    },
+    {
+      "id": "panama.prevention.v2.5",
+      "essential": false,
+      "title": "Limitahan ang paggalaw ng kontaminadong lupa at tubig",
+      "description": "Limitahan ang paggalaw ng lupa at tubig na posibleng kontaminado."
+    },
+    {
+      "id": "panama.prevention.v2.6",
+      "essential": false,
+      "title": "Bantayan ang mga sintomas ng Fusarium wilt",
+      "description": "Regular na siyasatin ang mga halamang saging para sa mga sintomas ng Fusarium wilt."
+    },
+    {
+      "id": "panama.prevention.v2.7",
+      "essential": false,
+      "title": "Pumili ng angkop na resistant o tolerant na barayti",
+      "description": "Gumamit ng resistant o tolerant na barayti kung angkop ito sa inyong taniman."
+    },
+    {
+      "id": "panama.prevention.v2.8",
+      "essential": false,
+      "title": "Pagsamahin ang biosecurity at pamamahala sa sakit",
+      "description": "Sundin ang pinagsama-samang pamamahala sa sakit at biosecurity upang mabawasan ang pagkapamahay at pagkalat ng sanhi ng sakit sa taniman."
+    }
   ]
 }

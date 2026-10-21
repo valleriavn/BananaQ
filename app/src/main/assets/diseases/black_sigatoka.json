@@ -2,21 +2,111 @@
   "diseaseName": "Black Sigatoka",
   "scientificName": "Pseudocercospora fijiensis",
   "symptoms": [
-    {"title": "Early specks and streaks", "description": "Tiny pale-yellow or reddish-brown specks usually begin on the underside of a leaf and lengthen into streaks parallel to the leaf veins."},
-    {"title": "Darkening lesions", "description": "The streaks enlarge and darken from brown to nearly black, becoming narrow oval or elongated spots."},
-    {"title": "Gray centers and yellow halos", "description": "Older lesions may develop dry light-gray centers, dark borders, and bright yellow halos."},
-    {"title": "Coalescing and leaf death", "description": "Numerous lesions can merge into large dead areas, reducing green leaf area and causing premature drying."}
+    {
+      "id": "black_sigatoka.symptoms.1",
+      "essential": true,
+      "title": "Early specks and streaks",
+      "description": "Tiny pale-yellow or reddish-brown specks usually begin on the underside of a leaf and lengthen into streaks parallel to the leaf veins."
+    },
+    {
+      "id": "black_sigatoka.symptoms.2",
+      "essential": false,
+      "title": "Darkening lesions",
+      "description": "The streaks enlarge and darken from brown to nearly black, becoming narrow oval or elongated spots."
+    },
+    {
+      "id": "black_sigatoka.symptoms.3",
+      "essential": false,
+      "title": "Gray centers and yellow halos",
+      "description": "Older lesions may develop dry light-gray centers, dark borders, and bright yellow halos."
+    },
+    {
+      "id": "black_sigatoka.symptoms.4",
+      "essential": false,
+      "title": "Coalescing and leaf death",
+      "description": "Numerous lesions can merge into large dead areas, reducing green leaf area and causing premature drying."
+    }
   ],
   "treatment": [
-    {"title": "Inspect after rainy periods", "description": "Warm, humid weather and prolonged leaf wetness favor Black Sigatoka. In Sto. Tomas City, check both sides of younger leaves after repeated rain and mark plants with spreading streaks."},
-    {"title": "Remove infected tissue carefully", "description": "Cut only heavily spotted or dead leaf portions using disinfected tools. Keep enough healthy leaf area for the plant, and do not carry infected leaves into another growing area."},
-    {"title": "Improve field conditions", "description": "Clear weeds, manage excess suckers, improve airflow and drainage, and maintain balanced nutrition to reduce leaf wetness and plant stress."},
-    {"title": "Ask the Sto. Tomas City Agriculture Office", "description": "For severe or spreading cases, contact the City Agriculture Office at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph. Use only a Philippine FPA-registered product labeled for banana and Black Sigatoka, exactly as directed."}
+    {
+      "id": "black_sigatoka.treatment.v2.1",
+      "essential": false,
+      "title": "Use fungicides within integrated management",
+      "description": "Apply appropriate fungicide treatments as part of an integrated disease-management program."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.2",
+      "essential": true,
+      "title": "Avoid relying only on fungicides",
+      "description": "Avoid relying exclusively on repeated fungicide applications because fungicide resistance can develop."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.3",
+      "essential": false,
+      "title": "Consider complementary biological control",
+      "description": "Consider biological control as a complementary management strategy where appropriate."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.4",
+      "essential": false,
+      "title": "Consider resistant or tolerant cultivars",
+      "description": "Consider resistant or tolerant banana cultivars as a longer-term management strategy."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.5",
+      "essential": false,
+      "title": "Remove severely diseased foliage",
+      "description": "Remove severely diseased leaves or affected foliage to reduce potential sources of infection."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.6",
+      "essential": false,
+      "title": "Monitor disease progression",
+      "description": "Regularly monitor banana leaves for the development and progression of disease symptoms."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.7",
+      "essential": true,
+      "title": "Combine management approaches",
+      "description": "Combine chemical, biological, cultural, and varietal approaches rather than relying on a single control method."
+    }
   ],
   "prevention": [
-    {"title": "Prepare for wet weather", "description": "Keep canals and drainage paths clear before periods of heavy rain, and avoid irrigation that leaves foliage wet for long periods."},
-    {"title": "Maintain airflow", "description": "Use suitable spacing, control excess suckers and weeds, and remove only severely infected tissue so leaves dry faster."},
-    {"title": "Use clean planting material and tools", "description": "Obtain healthy planting material from a reliable source and disinfect cutting tools between plants and growing areas."},
-    {"title": "Monitor consistently", "description": "Inspect younger leaves every week during humid or rainy conditions so new streaks are managed before lesions merge."}
+    {
+      "id": "black_sigatoka.prevention.v2.1",
+      "essential": false,
+      "title": "Inspect for Black Sigatoka early",
+      "description": "Regularly inspect banana leaves for early signs of Black Sigatoka."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.2",
+      "essential": false,
+      "title": "Remove severely diseased foliage",
+      "description": "Practice field sanitation by removing severely diseased foliage."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.3",
+      "essential": false,
+      "title": "Use suitable resistant planting material",
+      "description": "Use resistant or tolerant planting materials when available and suitable."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.4",
+      "essential": false,
+      "title": "Support healthy plant growth",
+      "description": "Maintain appropriate crop-management practices that support healthy plant growth."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.5",
+      "essential": false,
+      "title": "Act before disease becomes extensive",
+      "description": "Monitor disease development so that management measures can be implemented before disease becomes extensive."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.6",
+      "essential": true,
+      "title": "Manage fungicide resistance responsibly",
+      "description": "Follow appropriate fungicide-management practices, including responsible application and rotation where applicable, to help reduce the development of fungicide resistance."
+    }
   ]
 }

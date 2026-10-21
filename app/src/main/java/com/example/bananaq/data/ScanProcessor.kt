@@ -36,7 +36,10 @@ class ScanProcessor(context: Context) {
             photo.outputStream().use { check(bitmap.compress(Bitmap.CompressFormat.JPEG, 90, it)) }
             val candidateUri = Uri.fromFile(photo).toString()
             val inserted = ScanHistoryStore(appContext).add(result, scanId, candidateUri)
-            if (inserted) savedImageUri = candidateUri else photo.delete()
+            if (inserted) {
+                savedImageUri = candidateUri
+                if (result.isValid) RecommendationProvider(appContext).forScan(result.diseaseName, scanId)
+            } else photo.delete()
             UserActionLogger.logScanEvent(scanId, result.diseaseName, result.confidence, result.isValid)
         } catch (error: Exception) {
             Log.w(TAG, "Unable to save scan history", error)

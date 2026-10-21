@@ -68,6 +68,14 @@ androidComponents {
     }
 }
 
+// Recommendation tests read these assets directly; content edits must invalidate their results.
+tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
+    inputs.files(fileTree("src/main/assets") {
+        include("diseases/*.json", "diseases_tl/*.json")
+    }).withPropertyName("recommendationPools")
+        .withPathSensitivity(org.gradle.api.tasks.PathSensitivity.RELATIVE)
+}
+
 dependencies {
     implementation("androidx.exifinterface:exifinterface:1.3.7")
     implementation(libs.androidx.activity.ktx)

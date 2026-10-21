@@ -108,6 +108,7 @@ class ScanHistoryAdapter(
         val diseaseName: String? = null,
         val dateTime: String? = null,
         val accuracy: String? = null,
+        val confidenceScore: Float? = null,
         val isHealthy: Boolean = false,
         val isValid: Boolean = true,
         val scanId: String? = null,

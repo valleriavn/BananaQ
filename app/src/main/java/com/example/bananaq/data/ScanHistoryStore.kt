@@ -50,13 +50,14 @@ class ScanHistoryStore(context: Context) {
                 records.map { record ->
                     val disease = record.predictedDisease ?: "Unknown"
                     val accuracyVal = record.confidenceScore?.let {
-                        String.format(Locale.US, "%.1f", it * 100)
+                        String.format(Locale.US, "%.2f", it * 100)
                     }
                     ScanHistoryAdapter.HistoryItem(
                         isHeader = false,
                         diseaseName = disease,
                         dateTime = format.format(Date(record.scannedAt)),
                         accuracy = accuracyVal,
+                        confidenceScore = record.confidenceScore?.toFloat(),
                         isHealthy = record.isBananaLeaf && disease == "Healthy",
                         isValid = record.isBananaLeaf,
                         scanId = record.scanId,

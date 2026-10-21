@@ -23,13 +23,14 @@ class DiseaseRepository(
     )
 
     fun getDiseaseInfo(
-        diseaseName: String
+        diseaseName: String,
+        language: String = context.resources.configuration.locales[0].language
     ): DiseaseInfo? {
 
         val baseName =
             diseaseFiles[diseaseName]
                 ?: return null
-        val activeLanguage = context.resources.configuration.locales[0].language
+        val activeLanguage = language
         val folder = if (activeLanguage == "tl" || activeLanguage == "fil")
             "diseases_tl" else "diseases"
         val fileName = "$folder/$baseName"

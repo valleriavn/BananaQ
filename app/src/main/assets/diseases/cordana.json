@@ -2,21 +2,117 @@
   "diseaseName": "Cordana Leaf Spot",
   "scientificName": "Neocordana musae",
   "symptoms": [
-    {"title": "Large oval or diamond-shaped spots", "description": "Lesions expand into pale- to medium-brown oval, elongated, or diamond-shaped patches, often near leaf margins or injured tissue."},
-    {"title": "Bright yellow halo", "description": "A clear bright-yellow band commonly surrounds the brown lesion and separates it from green leaf tissue."},
-    {"title": "Pale center and zoned pattern", "description": "As a lesion ages, its center may become light brown to whitish and may show concentric zones or a darker border."},
-    {"title": "Lesions merge in severe cases", "description": "Nearby spots can join into broad dead areas, especially on wet, damaged, or weakened leaves."}
+    {
+      "id": "cordana.symptoms.1",
+      "essential": true,
+      "title": "Large oval or diamond-shaped spots",
+      "description": "Lesions expand into pale- to medium-brown oval, elongated, or diamond-shaped patches, often near leaf margins or injured tissue."
+    },
+    {
+      "id": "cordana.symptoms.2",
+      "essential": false,
+      "title": "Bright yellow halo",
+      "description": "A clear bright-yellow band commonly surrounds the brown lesion and separates it from green leaf tissue."
+    },
+    {
+      "id": "cordana.symptoms.3",
+      "essential": false,
+      "title": "Pale center and zoned pattern",
+      "description": "As a lesion ages, its center may become light brown to whitish and may show concentric zones or a darker border."
+    },
+    {
+      "id": "cordana.symptoms.4",
+      "essential": false,
+      "title": "Lesions merge in severe cases",
+      "description": "Nearby spots can join into broad dead areas, especially on wet, damaged, or weakened leaves."
+    }
   ],
   "treatment": [
-    {"title": "Confirm the leaf spot", "description": "Cordana can occur beside or resemble Sigatoka lesions. If spots are extensive or uncertain, contact the Sto. Tomas City Agriculture Office at (043) 784-8022 local 307 or agri@cityofstotomas.gov.ph."},
-    {"title": "Remove badly affected tissue", "description": "Prune severely affected portions with disinfected tools while retaining healthy leaf area. Keep removed material away from clean banana plants."},
-    {"title": "Correct moisture and plant stress", "description": "After wet weather, clear drainage, improve airflow, avoid injuring leaves, and correct water or nutrient stress that can favor Cordana infection."},
-    {"title": "Use products only with local advice", "description": "Apply a fungicide only after confirmation and only when the product is currently registered by the Philippine FPA for the crop and target disease. Follow the label exactly."}
+    {
+      "id": "cordana.treatment.v2.1",
+      "essential": false,
+      "title": "Remove affected leaves",
+      "description": "Remove infected or severely affected leaves as part of field sanitation and disease management."
+    },
+    {
+      "id": "cordana.treatment.v2.2",
+      "essential": false,
+      "title": "Monitor affected plants",
+      "description": "Regularly monitor affected plants for the development or progression of symptoms."
+    },
+    {
+      "id": "cordana.treatment.v2.3",
+      "essential": false,
+      "title": "Support plant health",
+      "description": "Maintain appropriate crop-management practices that support plant health."
+    },
+    {
+      "id": "cordana.treatment.v2.4",
+      "essential": true,
+      "title": "Manage moisture, drainage and stress",
+      "description": "Manage environmental and cultural conditions that may favor disease development, including poor drainage, excessive moisture, and plant stress."
+    },
+    {
+      "id": "cordana.treatment.v2.5",
+      "essential": false,
+      "title": "Use agriculturally supported control measures",
+      "description": "Use appropriate disease-control measures when necessary and when supported by applicable agricultural recommendations."
+    },
+    {
+      "id": "cordana.treatment.v2.6",
+      "essential": false,
+      "title": "Treat biological control as emerging or complementary",
+      "description": "Biological control may be considered an emerging or complementary management approach, but research findings should not be presented as an established treatment protocol."
+    },
+    {
+      "id": "cordana.treatment.v2.7",
+      "essential": false,
+      "title": "Monitor after management measures",
+      "description": "Continue monitoring disease development after management measures are applied."
+    }
   ],
   "prevention": [
-    {"title": "Reduce prolonged leaf wetness", "description": "Water near the soil when practical, keep drainage clear, and maintain spacing and airflow so foliage dries faster after rain."},
-    {"title": "Prevent injury and stress", "description": "Protect leaves from avoidable damage and maintain suitable irrigation and balanced nutrition because weakened tissue is more vulnerable."},
-    {"title": "Keep tools and plots clean", "description": "Disinfect pruning tools between plants and remove severely diseased tissue without carrying it into clean growing areas."},
-    {"title": "Inspect after humid or rainy weather", "description": "Pay close attention to older and injured leaves for enlarging brown spots with bright yellow halos, and act before lesions merge."}
+    {
+      "id": "cordana.prevention.v2.1",
+      "essential": false,
+      "title": "Inspect banana leaves regularly",
+      "description": "Conduct regular field inspection and monitoring of banana leaves."
+    },
+    {
+      "id": "cordana.prevention.v2.2",
+      "essential": false,
+      "title": "Remove infected or severely affected leaves",
+      "description": "Remove infected or severely affected leaves as part of field sanitation."
+    },
+    {
+      "id": "cordana.prevention.v2.3",
+      "essential": false,
+      "title": "Maintain crop and environmental management",
+      "description": "Maintain appropriate crop and environmental management practices."
+    },
+    {
+      "id": "cordana.prevention.v2.4",
+      "essential": false,
+      "title": "Avoid leaving infected material unnecessarily",
+      "description": "Avoid allowing infected plant material to remain unnecessarily within the production area."
+    },
+    {
+      "id": "cordana.prevention.v2.5",
+      "essential": true,
+      "title": "Maintain water, drainage and plant health",
+      "description": "Maintain plant health through appropriate water, drainage, and general crop management."
+    },
+    {
+      "id": "cordana.prevention.v2.6",
+      "essential": false,
+      "title": "Watch for new symptoms",
+      "description": "Monitor plants for new symptoms so that affected foliage can be managed promptly."
+    },
+    {
+      "id": "cordana.prevention.v2.7",
+      "essential": false,
+      "title": "Consider biological control subject to validation",
+      "description": "Consider biological control as a potential complementary or future approach subject to further validation."
+    }
   ]
 }

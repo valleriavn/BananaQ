@@ -55,7 +55,7 @@ class HistoryActivity : LocaleAwareActivity() {
                         putExtra("FROM_HISTORY", true)
                         putExtra("SCAN_ID", item.scanId)
                         putExtra("DISEASE_NAME", item.diseaseName)
-                        putExtra("CONFIDENCE", item.accuracy?.toFloatOrNull()?.toInt() ?: 0)
+                        putExtra("CONFIDENCE_SCORE", item.confidenceScore ?: 0f)
                         putExtra("RESULT_VALID", item.isValid)
                         putExtra("IMAGE_URI", item.imageUri)
                     })

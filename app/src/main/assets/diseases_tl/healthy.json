@@ -2,19 +2,117 @@
   "diseaseName": "Healthy",
   "scientificName": "Walang natukoy na pattern ng suportadong sakit",
   "symptoms": [
-    {"title": "Walang natukoy na suportadong pattern", "description": "Walang malinaw na pattern ng Black Sigatoka, Panama Disease, o Cordana Leaf Spot sa larawan. Hindi nito pinatutunayang disease-free ang buong halaman."},
-    {"title": "Suriin ang buong halaman", "description": "Tingnan ang magkabilang panig ng dahon, matatanda at batang dahon, pseudostem, at paanan para sa paninilaw, batik, pagkalanta, pagbitak, o pagbabago ng kulay sa loob."},
-    {"title": "Bantayan ang mga pagbabago", "description": "Maaaring wala o mahina pa ang sintomas sa maagang impeksiyon. Ihambing ang halaman sa paglipas ng panahon at i-scan ang malinaw at maliwanag na larawan ng bagong sintomas."}
+    {
+      "id": "healthy.symptoms.1",
+      "essential": true,
+      "title": "Walang natukoy na suportadong pattern",
+      "description": "Walang malinaw na pattern ng Black Sigatoka, Panama Disease, o Cordana Leaf Spot sa larawan. Hindi nito pinatutunayang disease-free ang buong halaman."
+    },
+    {
+      "id": "healthy.symptoms.2",
+      "essential": false,
+      "title": "Suriin ang buong halaman",
+      "description": "Tingnan ang magkabilang panig ng dahon, matatanda at batang dahon, pseudostem, at paanan para sa paninilaw, batik, pagkalanta, pagbitak, o pagbabago ng kulay sa loob."
+    },
+    {
+      "id": "healthy.symptoms.3",
+      "essential": false,
+      "title": "Bantayan ang mga pagbabago",
+      "description": "Maaaring wala o mahina pa ang sintomas sa maagang impeksiyon. Ihambing ang halaman sa paglipas ng panahon at i-scan ang malinaw at maliwanag na larawan ng bagong sintomas."
+    }
   ],
   "treatment": [
-    {"title": "Huwag maglagay ng pesticide", "description": "Hindi kailangan ng chemical treatment ang Healthy na resulta. Kailangan muna ng kumpirmadong diagnosis bago gumamit ng anumang pesticide."},
-    {"title": "Ipagpatuloy ang pag-aalagang angkop sa Sto. Tomas", "description": "Panatilihin ang balanseng nutrisyon, tamang pagitan, at drainage. Iayon ang pagdidilig pagkatapos ng ulan upang hindi ma-waterlog ang ugat at hindi manatiling basa ang dahon."},
-    {"title": "Humingi ng tulong kung nagpapatuloy ang sintomas", "description": "Para sa tuloy-tuloy na pagkalanta, kumakalat na batik, o pagbabago ng kulay sa loob, kontakin ang Sto. Tomas City Agriculture Office sa (043) 784-8022 local 307 o agri@cityofstotomas.gov.ph."}
+    {
+      "id": "healthy.treatment.v2.1",
+      "essential": false,
+      "title": "Magtira ng sapat na malulusog na dahon",
+      "description": "Panatilihin ang humigit-kumulang 8–15 dahong maayos pa ang kondisyon at nakatutulong sa malusog na paglaki at pag-unlad ng halamang saging."
+    },
+    {
+      "id": "healthy.treatment.v2.2",
+      "essential": false,
+      "title": "Alisin ang mga dahong hindi na nakatutulong sa halaman",
+      "description": "Bilang bahagi ng regular na pag-aalaga, alisin ang mga dahong luma, may sakit, tuyo, at hindi na nakatutulong sa halaman."
+    },
+    {
+      "id": "healthy.treatment.v2.3",
+      "essential": false,
+      "title": "Putulin lamang ang apektadong bahagi",
+      "description": "Kung mahigit 50% ng dahon ay malusog pa, putulin lamang ang apektadong bahagi sa halip na alisin ang buong dahon."
+    },
+    {
+      "id": "healthy.treatment.v2.4",
+      "essential": false,
+      "title": "Regular na maglinis at mag-alis ng sirang dahon",
+      "description": "Regular na mag-alis ng mga sirang dahon at maglinis ng taniman upang hindi maipon ang mga dahong napinsala o may sakit."
+    },
+    {
+      "id": "healthy.treatment.v2.5",
+      "essential": false,
+      "title": "Kontrolin ang mga damo",
+      "description": "Panatilihin ang angkop na pagkontrol sa damo upang mabawasan ang kaagaw ng saging sa tubig at sustansiya."
+    },
+    {
+      "id": "healthy.treatment.v2.6",
+      "essential": false,
+      "title": "Magbigay ng sapat na tubig at maayos na daluyan",
+      "description": "Magbigay ng sapat na tubig para sa paglaki ng halaman at tiyaking maayos ang daluyan nito, lalo na sa mga lugar na madaling bahain."
+    },
+    {
+      "id": "healthy.treatment.v2.7",
+      "essential": false,
+      "title": "Regular na tingnan ang kalagayan ng dahon",
+      "description": "Regular na tingnan ang mga dahon kung may pagbabago ng kulay, mga batik o sugat, pagkatuyo, o iba pang nakikitang palatandaan ng sakit."
+    },
+    {
+      "id": "healthy.treatment.v2.8",
+      "essential": true,
+      "title": "Panatilihin ang malulusog na dahon",
+      "description": "Panatilihin ang malulusog na dahon bilang bahagi ng kabuuang pangangalaga sa tanim. Huwag mag-alis ng dahon kung hindi naman kailangan."
+    }
   ],
   "prevention": [
-    {"title": "Suriin bawat linggo", "description": "Tingnan ang magkabilang panig ng matanda at batang dahon, pseudostem, at paanan ng halaman, lalo na pagkatapos ng ilang maulan o mahalumigmig na araw."},
-    {"title": "Panatilihing malinis ang biosecurity", "description": "Gumamit ng malinis na tools at sapatos, huwag maglipat ng lupa sa pagitan ng mga plot, at kumuha ng malusog na pantanim sa mapagkakatiwalaang pinagmulan."},
-    {"title": "Ihanda ang drainage bago ang malakas na ulan", "description": "Panatilihing malinis ang kanal at daluyan ng runoff, iwasan ang waterlogging, at panatilihin ang airflow at tamang pagitan ng bawat mat."},
-    {"title": "Itala ang pagbabago", "description": "Kuhanan at i-scan muli sa maliwanag na lugar ang bagong sintomas. Humingi ng payo sa City Agriculture Office kapag nagpapatuloy o kumakalat ang sintomas."}
+    {
+      "id": "healthy.prevention.v2.1",
+      "essential": false,
+      "title": "Siyasatin para sa maagang palatandaan ng sakit",
+      "description": "Regular na siyasatin ang mga dahon ng saging upang maagang makita ang mga sintomas ng sakit."
+    },
+    {
+      "id": "healthy.prevention.v2.2",
+      "essential": false,
+      "title": "Alisin agad ang tuyong dahon at may sakit",
+      "description": "Alisin agad ang mga dahong tuyo at may sakit, habang pinananatili ang malulusog na dahong nakatutulong pa sa halaman."
+    },
+    {
+      "id": "healthy.prevention.v2.3",
+      "essential": true,
+      "title": "Huwag mag-alis ng malusog na dahon nang hindi kailangan",
+      "description": "Iwasang mag-alis ng malulusog na dahon kung hindi kailangan dahil nakatutulong ang mga ito sa paglaki at pagpapanatili ng halaman."
+    },
+    {
+      "id": "healthy.prevention.v2.4",
+      "essential": false,
+      "title": "Pangalagaan ang patubig at daluyan ng tubig",
+      "description": "Panatilihin ang maayos na daluyan ng tubig at angkop na pamamahala sa patubig."
+    },
+    {
+      "id": "healthy.prevention.v2.5",
+      "essential": false,
+      "title": "Panatilihing malinis ang taniman",
+      "description": "Regular na kontrolin ang mga damo at linisin ang taniman."
+    },
+    {
+      "id": "healthy.prevention.v2.6",
+      "essential": false,
+      "title": "Bantayan ang bilang at kondisyon ng mga dahon",
+      "description": "Sa buong panahon ng paglaki ng tanim, bantayan ang bilang at kalagayan ng mga dahong nakatutulong pa sa halaman."
+    },
+    {
+      "id": "healthy.prevention.v2.7",
+      "essential": false,
+      "title": "Gumamit ng wastong pagputol ng dahon",
+      "description": "Sundin ang wastong pagputol ng dahon upang may matirang sapat na malulusog na dahon."
+    }
   ]
 }

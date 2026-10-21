@@ -23,6 +23,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 
 import com.example.bananaq.data.DiseaseRepository
+import com.example.bananaq.data.RecommendationProvider
 import com.example.bananaq.data.ScanProcessor
 import com.example.bananaq.ml.ScanImageLoader
 import com.example.bananaq.model.ClassificationResult
@@ -292,7 +293,9 @@ class ScannerActivity : LocaleAwareActivity() {
         intent.removeExtra("LIBRARY")
         intent.removeExtra("DISEASE_NAME")
         intent.removeExtra("CONFIDENCE")
+        intent.removeExtra("CONFIDENCE_SCORE")
         intent.removeExtra("RESULT_VALID")
+        intent.removeExtra("FROM_HISTORY")
         classificationResult = null
         detailsExpanded = false
         fullResultCard.visibility = View.GONE
@@ -391,7 +394,7 @@ class ScannerActivity : LocaleAwareActivity() {
             findViewById<TextView>(R.id.predictionSummary).apply {
                 val heading = getString(R.string.prediction_heading,
                     localizedDiseaseName(this@ScannerActivity, result.diseaseName),
-                    (result.confidence * 100).toInt())
+                    result.confidence * 100.0)
                 val detail = getString(R.string.tap_for_details)
                 text = android.text.SpannableString("$heading\n$detail").apply {
                     setSpan(android.text.style.StyleSpan(Typeface.BOLD), 0, heading.length,
@@ -432,11 +435,15 @@ class ScannerActivity : LocaleAwareActivity() {
             scanId = intent.getStringExtra("SCAN_ID") ?: scanId
             detailsExpanded = true
         }
-        val confidence = (intent.getIntExtra("CONFIDENCE", 0) / 100f).coerceIn(0f, 1f)
+        val confidence = (if (intent.hasExtra("CONFIDENCE_SCORE")) {
+            intent.getFloatExtra("CONFIDENCE_SCORE", 0f)
+        } else {
+            intent.getIntExtra("CONFIDENCE", 0) / 100f
+        }).coerceIn(0f, 1f)
         val level = ConfidenceLevel.fromConfidence(confidence)
         classificationResult = ClassificationResult(diseaseName, confidence, level,
             intent.getBooleanExtra("LIBRARY", false) ||
-                (intent.getBooleanExtra("RESULT_VALID", false) && (fromHistory || level.isReliable)))
+                intent.getBooleanExtra("RESULT_VALID", false))
         selectedImage = intent.getStringExtra("IMAGE_URI")
         displayResult(classificationResult!!)
         restorePhoto()
@@ -526,7 +533,7 @@ class ScannerActivity : LocaleAwareActivity() {
                 )
                 .toInt()
         resultAccuracyValue.text =
-            "$confidenceInt%"
+            String.format(java.util.Locale.getDefault(), "%.2f%%", result.confidence * 100.0)
         resultAccuracyProgress.progress =
             confidenceInt
         if (intent.getBooleanExtra("LIBRARY", false)) {
@@ -675,11 +682,12 @@ class ScannerActivity : LocaleAwareActivity() {
             classificationResult
                 ?: return
         if (!result.isValid) return
-        val info =
-            diseaseRepository.getDiseaseInfo(
-                result.diseaseName
-            )
-                ?: return
+        val info = if (intent.getBooleanExtra("LIBRARY", false)) {
+            diseaseRepository.getDiseaseInfo(result.diseaseName)
+        } else {
+            RecommendationProvider(this).forScan(result.diseaseName, scanId,
+                historical = intent.getBooleanExtra("FROM_HISTORY", false))
+        } ?: return
         val selectedColor =
             ContextCompat.getColor(this, R.color.banana_green)
         val unselectedColor =

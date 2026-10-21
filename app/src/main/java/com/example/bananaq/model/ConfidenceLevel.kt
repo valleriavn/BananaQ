@@ -7,9 +7,6 @@ enum class ConfidenceLevel {
     MODERATE,
     HIGH;
 
-    val isReliable: Boolean
-        get() = this == HIGH
-
     companion object {
 
         const val MINIMUM_THRESHOLD = 0.30f

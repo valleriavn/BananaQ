@@ -2,21 +2,117 @@
   "diseaseName": "Cordana Leaf Spot",
   "scientificName": "Neocordana musae",
   "symptoms": [
-    {"title": "Malaking hugis-itlog o diyamanteng batik", "description": "Lumalaki ang sugat bilang maputla hanggang katamtamang kayumangging oval, pahaba, o hugis-diyamanteng bahagi, madalas malapit sa gilid o pinsala ng dahon."},
-    {"title": "Maliwanag na dilaw na palibot", "description": "Karaniwang may malinaw at matingkad na dilaw na banda sa paligid ng kayumangging sugat na naghihiwalay rito sa berdeng tissue."},
-    {"title": "Maputlang gitna at paikot na pattern", "description": "Habang tumatanda ang sugat, maaaring maging mapusyaw na kayumanggi o maputi ang gitna at magkaroon ng magkakapatong na zone o mas maitim na gilid."},
-    {"title": "Pagsasanib ng sugat kapag malubha", "description": "Maaaring magsanib ang magkakalapit na batik at maging malawak na patay na bahagi, lalo na sa basa, napinsala, o mahinang dahon."}
+    {
+      "id": "cordana.symptoms.1",
+      "essential": true,
+      "title": "Malaking hugis-itlog o diyamanteng batik",
+      "description": "Lumalaki ang sugat bilang maputla hanggang katamtamang kayumangging oval, pahaba, o hugis-diyamanteng bahagi, madalas malapit sa gilid o pinsala ng dahon."
+    },
+    {
+      "id": "cordana.symptoms.2",
+      "essential": false,
+      "title": "Maliwanag na dilaw na palibot",
+      "description": "Karaniwang may malinaw at matingkad na dilaw na banda sa paligid ng kayumangging sugat na naghihiwalay rito sa berdeng tissue."
+    },
+    {
+      "id": "cordana.symptoms.3",
+      "essential": false,
+      "title": "Maputlang gitna at paikot na pattern",
+      "description": "Habang tumatanda ang sugat, maaaring maging mapusyaw na kayumanggi o maputi ang gitna at magkaroon ng magkakapatong na zone o mas maitim na gilid."
+    },
+    {
+      "id": "cordana.symptoms.4",
+      "essential": false,
+      "title": "Pagsasanib ng sugat kapag malubha",
+      "description": "Maaaring magsanib ang magkakalapit na batik at maging malawak na patay na bahagi, lalo na sa basa, napinsala, o mahinang dahon."
+    }
   ],
   "treatment": [
-    {"title": "Kumpirmahin ang leaf spot", "description": "Maaaring sumabay o magmukhang Sigatoka lesion ang Cordana. Kung malawak o hindi tiyak ang batik, kontakin ang Sto. Tomas City Agriculture Office sa (043) 784-8022 local 307 o agri@cityofstotomas.gov.ph."},
-    {"title": "Alisin ang malubhang apektadong bahagi", "description": "Putulin ang malubhang apektadong bahagi gamit ang disinfected na kagamitan habang nagtitira ng malusog na dahon. Ilayo ang tinanggal na bahagi sa malinis na halamang saging."},
-    {"title": "Ayusin ang moisture at stress ng halaman", "description": "Pagkatapos ng basang panahon, linisin ang drainage, pagandahin ang airflow, iwasang masugatan ang dahon, at ayusin ang kakulangan o sobra sa tubig at nutrisyon."},
-    {"title": "Gumamit lamang ng produktong may lokal na payo", "description": "Gumamit lamang ng fungicide kapag kumpirmado at kasalukuyang rehistrado ng Philippine FPA para sa crop at target disease. Sundin nang eksakto ang label."}
+    {
+      "id": "cordana.treatment.v2.1",
+      "essential": false,
+      "title": "Alisin ang mga apektadong dahon",
+      "description": "Alisin ang mga dahong nahawaan o malubhang apektado bilang bahagi ng paglilinis ng taniman at pamamahala sa sakit."
+    },
+    {
+      "id": "cordana.treatment.v2.2",
+      "essential": false,
+      "title": "Bantayan ang mga apektadong halaman",
+      "description": "Regular na bantayan ang mga apektadong halaman para sa paglitaw o paglala ng mga sintomas."
+    },
+    {
+      "id": "cordana.treatment.v2.3",
+      "essential": false,
+      "title": "Pangalagaan ang kalusugan ng halaman",
+      "description": "Sundin ang angkop na mga gawaing pangbukid na nakatutulong sa kalusugan ng halaman."
+    },
+    {
+      "id": "cordana.treatment.v2.4",
+      "essential": true,
+      "title": "Ayusin ang sobrang basa, daluyan ng tubig, at stress",
+      "description": "Ayusin ang mga kondisyon sa taniman at mga gawaing maaaring magpalala ng sakit, gaya ng hindi maayos na daluyan ng tubig, sobrang pagkabasa, at stress ng halaman."
+    },
+    {
+      "id": "cordana.treatment.v2.5",
+      "essential": false,
+      "title": "Gumamit ng mga hakbang na may angkop na gabay",
+      "description": "Gumamit ng angkop na paraan ng pagkontrol sa sakit kung kailangan at kung suportado ito ng naaangkop na rekomendasyong pang-agrikultura."
+    },
+    {
+      "id": "cordana.treatment.v2.6",
+      "essential": false,
+      "title": "Ituring ang biological control na umuusbong o pandagdag",
+      "description": "Maaaring isaalang-alang ang biological control bilang umuusbong o pandagdag na paraan ng pamamahala. Gayunman, hindi dapat ituring ang mga resulta ng pananaliksik bilang subok at tanggap nang pamantayan ng paggamot."
+    },
+    {
+      "id": "cordana.treatment.v2.7",
+      "essential": false,
+      "title": "Patuloy na magbantay matapos ang mga hakbang",
+      "description": "Patuloy na bantayan ang pag-usad ng sakit pagkatapos maisagawa ang mga hakbang sa pamamahala."
+    }
   ],
   "prevention": [
-    {"title": "Bawasan ang matagal na pagkabasa ng dahon", "description": "Diligan malapit sa lupa kung maaari, panatilihing malinis ang drainage, at ayusin ang spacing at airflow upang mas mabilis matuyo ang dahon pagkatapos ng ulan."},
-    {"title": "Iwasan ang pinsala at stress", "description": "Protektahan ang dahon sa maiiwasang pinsala at panatilihin ang angkop na irrigation at balanseng nutrisyon dahil mas madaling maapektuhan ang mahinang tissue."},
-    {"title": "Panatilihing malinis ang kagamitan at taniman", "description": "I-disinfect ang pruning tools sa pagitan ng mga halaman at alisin ang malubhang apektadong bahagi nang hindi ito dinadala sa malinis na taniman."},
-    {"title": "Suriin pagkatapos ng mahalumigmig o maulang panahon", "description": "Tingnang mabuti ang matanda at nasugatang dahon para sa lumalaking kayumangging batik na may matingkad na dilaw na palibot at agapan bago magsanib ang mga lesion."}
+    {
+      "id": "cordana.prevention.v2.1",
+      "essential": false,
+      "title": "Regular na siyasatin ang mga dahon",
+      "description": "Regular na magsiyasat sa taniman at bantayan ang mga dahon ng saging."
+    },
+    {
+      "id": "cordana.prevention.v2.2",
+      "essential": false,
+      "title": "Alisin ang nahawaan o malubhang apektadong dahon",
+      "description": "Alisin ang mga dahong nahawaan o malubhang apektado bilang bahagi ng paglilinis ng taniman."
+    },
+    {
+      "id": "cordana.prevention.v2.3",
+      "essential": false,
+      "title": "Pangalagaan ang tanim at kondisyon ng paligid",
+      "description": "Sundin ang angkop na pamamahala sa tanim at sa mga kondisyon ng kapaligiran sa taniman."
+    },
+    {
+      "id": "cordana.prevention.v2.4",
+      "essential": false,
+      "title": "Huwag hayaang maipon ang nahawaang bahagi",
+      "description": "Huwag hayaang manatili nang hindi kailangan ang mga nahawaang bahagi ng halaman sa loob ng taniman."
+    },
+    {
+      "id": "cordana.prevention.v2.5",
+      "essential": true,
+      "title": "Panatilihin ang maayos na patubig at malusog na halaman",
+      "description": "Pangalagaan ang kalusugan ng halaman sa pamamagitan ng angkop na patubig, maayos na daluyan ng tubig, at pangkalahatang pag-aalaga sa tanim."
+    },
+    {
+      "id": "cordana.prevention.v2.6",
+      "essential": false,
+      "title": "Bantayan ang mga bagong sintomas",
+      "description": "Bantayan ang mga halaman para sa bagong sintomas upang maagapan ang pangangasiwa sa mga apektadong dahon."
+    },
+    {
+      "id": "cordana.prevention.v2.7",
+      "essential": false,
+      "title": "Isaalang-alang ang biological control kung mapatutunayang angkop",
+      "description": "Maaaring isaalang-alang ang biological control bilang posibleng pandagdag o paraang magagamit sa hinaharap, ngunit kailangan pa ito ng karagdagang pagpapatunay."
+    }
   ]
 }

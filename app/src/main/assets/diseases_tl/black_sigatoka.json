@@ -2,21 +2,111 @@
   "diseaseName": "Black Sigatoka",
   "scientificName": "Pseudocercospora fijiensis",
   "symptoms": [
-    {"title": "Maagang tuldok at guhit", "description": "Karaniwang nagsisimula sa ilalim ng dahon ang napakaliit na maputlang dilaw o mapulang-kayumangging tuldok, saka humahaba bilang mga guhit na kaayon ng ugat ng dahon."},
-    {"title": "Pag-itim ng mga sugat", "description": "Lumalaki at umiitim mula kayumanggi hanggang halos itim ang mga guhit, at nagiging makitid na hugis-itlog o pahabang batik."},
-    {"title": "Abuhing gitna at dilaw na palibot", "description": "Ang lumang batik ay maaaring magkaroon ng tuyong mapusyaw na abuhing gitna, maitim na gilid, at maliwanag na dilaw na palibot."},
-    {"title": "Pagsasanib at pagkamatay ng dahon", "description": "Maaaring magsanib ang maraming batik at bumuo ng malaking patay na bahagi, kaya nababawasan ang berdeng bahagi at maagang natutuyo ang dahon."}
+    {
+      "id": "black_sigatoka.symptoms.1",
+      "essential": true,
+      "title": "Maagang tuldok at guhit",
+      "description": "Karaniwang nagsisimula sa ilalim ng dahon ang napakaliit na maputlang dilaw o mapulang-kayumangging tuldok, saka humahaba bilang mga guhit na kaayon ng ugat ng dahon."
+    },
+    {
+      "id": "black_sigatoka.symptoms.2",
+      "essential": false,
+      "title": "Pag-itim ng mga sugat",
+      "description": "Lumalaki at umiitim mula kayumanggi hanggang halos itim ang mga guhit, at nagiging makitid na hugis-itlog o pahabang batik."
+    },
+    {
+      "id": "black_sigatoka.symptoms.3",
+      "essential": false,
+      "title": "Abuhing gitna at dilaw na palibot",
+      "description": "Ang lumang batik ay maaaring magkaroon ng tuyong mapusyaw na abuhing gitna, maitim na gilid, at maliwanag na dilaw na palibot."
+    },
+    {
+      "id": "black_sigatoka.symptoms.4",
+      "essential": false,
+      "title": "Pagsasanib at pagkamatay ng dahon",
+      "description": "Maaaring magsanib ang maraming batik at bumuo ng malaking patay na bahagi, kaya nababawasan ang berdeng bahagi at maagang natutuyo ang dahon."
+    }
   ],
   "treatment": [
-    {"title": "Suriin pagkatapos ng maulang panahon", "description": "Pabor sa Black Sigatoka ang mainit, mahalumigmig, at matagal na basang dahon. Sa Lungsod ng Sto. Tomas, tingnan ang magkabilang panig ng mas batang dahon pagkatapos ng sunod-sunod na ulan at markahan ang may kumakalat na guhit."},
-    {"title": "Maingat na alisin ang apektadong bahagi", "description": "Putulin lamang ang bahaging maraming batik o patay na gamit ang disinfected na kagamitan. Magtira ng sapat na malusog na dahon at huwag dalhin ang nahawaang dahon sa ibang taniman."},
-    {"title": "Ayusin ang kondisyon ng taniman", "description": "Alisin ang damo, kontrolin ang sobrang suhi, pagandahin ang airflow at drainage, at panatilihin ang balanseng nutrisyon upang mabawasan ang pagkabasa ng dahon at stress ng halaman."},
-    {"title": "Kumonsulta sa City Agriculture Office", "description": "Para sa malubha o kumakalat na kaso, tawagan ang Sto. Tomas City Agriculture Office sa (043) 784-8022 local 307 o mag-email sa agri@cityofstotomas.gov.ph. Gumamit lamang ng produktong rehistrado ng Philippine FPA para sa saging at Black Sigatoka at sundin nang eksakto ang label."}
+    {
+      "id": "black_sigatoka.treatment.v2.1",
+      "essential": false,
+      "title": "Isama ang angkop na fungicide sa kabuuang pamamahala",
+      "description": "Gumamit ng angkop na fungicide bilang bahagi ng pinagsama-samang pamamahala sa sakit."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.2",
+      "essential": true,
+      "title": "Huwag umasa lamang sa paulit-ulit na fungicide",
+      "description": "Huwag umasa lamang sa paulit-ulit na paggamit ng fungicide dahil maaaring magkaroon ng resistansiya ang sanhi ng sakit at humina ang bisa ng gamot."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.3",
+      "essential": false,
+      "title": "Isaalang-alang ang biological control bilang pandagdag",
+      "description": "Kung angkop, maaaring isaalang-alang ang biological control bilang pandagdag sa iba pang paraan ng pamamahala sa sakit."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.4",
+      "essential": false,
+      "title": "Isaalang-alang ang resistant o tolerant na barayti",
+      "description": "Bilang pangmatagalang paraan ng pamamahala, isaalang-alang ang mga barayti ng saging na resistant o tolerant sa sakit."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.5",
+      "essential": false,
+      "title": "Alisin ang malubhang apektadong dahon",
+      "description": "Alisin ang mga dahong malubhang may sakit o ang apektadong bahagi upang mabawasan ang maaaring pagmulan ng impeksiyon."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.6",
+      "essential": false,
+      "title": "Bantayan ang paglala ng mga sintomas",
+      "description": "Regular na siyasatin ang mga dahon ng saging upang mabantayan ang paglitaw at paglala ng mga sintomas ng sakit."
+    },
+    {
+      "id": "black_sigatoka.treatment.v2.7",
+      "essential": true,
+      "title": "Pagsamahin ang iba't ibang paraan ng pamamahala",
+      "description": "Pagsamahin ang angkop na paggamit ng kemikal, biological control, mga gawaing pangbukid, at pagpili ng barayti sa halip na umasa sa iisang paraan lamang."
+    }
   ],
   "prevention": [
-    {"title": "Maghanda bago ang maulang panahon", "description": "Panatilihing malinis ang kanal at daluyan ng tubig bago ang malakas na ulan, at iwasan ang irrigation na matagal magbasa sa dahon."},
-    {"title": "Panatilihin ang airflow", "description": "Maglaan ng tamang pagitan, kontrolin ang sobrang suhi at damo, at alisin lamang ang malubhang apektadong bahagi upang mas mabilis matuyo ang dahon."},
-    {"title": "Gumamit ng malinis na pantanim at kagamitan", "description": "Kumuha ng malusog na pantanim sa mapagkakatiwalaang pinagmulan at i-disinfect ang pamutol sa pagitan ng mga halaman at taniman."},
-    {"title": "Regular na mag-monitor", "description": "Suriin bawat linggo ang mas batang dahon kapag mahalumigmig o maulan upang maagapan ang bagong guhit bago magsanib ang mga lesion."}
+    {
+      "id": "black_sigatoka.prevention.v2.1",
+      "essential": false,
+      "title": "Suriin ang unang palatandaan ng Black Sigatoka",
+      "description": "Regular na siyasatin ang mga dahon ng saging upang maagang makita ang mga palatandaan ng Black Sigatoka."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.2",
+      "essential": false,
+      "title": "Alisin ang malubhang may sakit na dahon",
+      "description": "Panatilihing malinis ang taniman sa pamamagitan ng pag-aalis ng mga dahong malubhang may sakit."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.3",
+      "essential": false,
+      "title": "Gumamit ng angkop na resistant na pantanim",
+      "description": "Gumamit ng resistant o tolerant na pantanim kung mayroon at angkop ito sa inyong taniman."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.4",
+      "essential": false,
+      "title": "Suportahan ang malusog na paglaki ng halaman",
+      "description": "Sundin ang angkop na mga gawaing pangbukid na nakatutulong sa malusog na paglaki ng halaman."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.5",
+      "essential": false,
+      "title": "Bantayan ang sakit bago ito lumawak",
+      "description": "Bantayan ang pag-usad ng sakit upang maisagawa ang mga hakbang sa pamamahala bago ito lumawak."
+    },
+    {
+      "id": "black_sigatoka.prevention.v2.6",
+      "essential": true,
+      "title": "Gumamit ng fungicide nang responsable",
+      "description": "Sundin ang wastong pamamahala sa fungicide, kabilang ang responsableng paglalagay at pagpapalit-palit ng angkop na fungicide kung naaangkop, upang mabawasan ang pagkakaroon ng resistansiya."
+    }
   ]
 }
