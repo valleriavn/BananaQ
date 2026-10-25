@@ -8,26 +8,20 @@ import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 /** Local bilingual snapshots; no schema or Supabase changes are needed. */
-class RecommendationProvider(private val context: Context) {
-    private val repository = DiseaseRepository(context)
+class RecommendationProvider(
+    private val context: Context,
+    private val repository: DiseaseRepository = DiseaseRepository(context)
+) {
     private val preferences = context.applicationContext.getSharedPreferences("scan_recommendations_v1", Context.MODE_PRIVATE)
     private val gson = Gson()
+    private var lastSnapshot: Pair<String, Snapshot>? = null
 
     fun forScan(disease: String, scanId: String, historical: Boolean = false): DiseaseInfo? = synchronized(lock) {
         require(scanId.isNotBlank())
         val key = "scan:$scanId"
-        val saved = preferences.getString(key, null)?.let { json ->
-            runCatching { gson.fromJson(json, Snapshot::class.java).takeIf { snapshot ->
-                snapshot.english.diseaseName == disease && snapshot.tagalog.diseaseName == disease &&
-                    listOf(snapshot.english, snapshot.tagalog).all { info ->
-                        listOf(info.symptoms, info.treatment, info.prevention).all { tips ->
-                            tips.isNotEmpty() && tips.all { it.id.isNotBlank() }
-                        }
-                    }
-            } }
-                .onFailure { Log.w("Recommendations", "Unable to read recommendation snapshot", it) }.getOrNull()
-        }
-        val snapshot = saved?.takeIf { it.english.diseaseName == disease } ?: run {
+        val saved = lastSnapshot?.takeIf { it.first == key && it.second.english.diseaseName == disease }?.second
+            ?: readSnapshot(key, disease)
+        val snapshot = saved ?: run {
             val english = repository.getDiseaseInfo(disease, "en") ?: return@synchronized null
             val tagalog = repository.getDiseaseInfo(disease, "tl") ?: return@synchronized null
             // Legacy history showed the complete lists. Preserve that behavior on first open.
@@ -43,8 +37,23 @@ class RecommendationProvider(private val context: Context) {
             editor.apply()
             created
         }
+        lastSnapshot = key to snapshot
         val language = context.resources.configuration.locales[0].language
         if (language == "tl" || language == "fil") snapshot.tagalog else snapshot.english
+    }
+
+    private fun readSnapshot(key: String, disease: String): Snapshot? {
+        val json = preferences.getString(key, null) ?: return null
+        return runCatching {
+            gson.fromJson(json, Snapshot::class.java).takeIf { snapshot ->
+                snapshot.english.diseaseName == disease && snapshot.tagalog.diseaseName == disease &&
+                    listOf(snapshot.english, snapshot.tagalog).all { info ->
+                        listOf(info.symptoms, info.treatment, info.prevention).all { tips ->
+                            tips.isNotEmpty() && tips.all { it.id.isNotBlank() }
+                        }
+                    }
+            }
+        }.onFailure { Log.w("Recommendations", "Unable to read recommendation snapshot", it) }.getOrNull()
     }
 
     private fun translate(selection: DiseaseInfo, localized: DiseaseInfo): DiseaseInfo {

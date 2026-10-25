@@ -351,3 +351,79 @@ M  app/src/main/assets/diseases/BananaQ_MobileNetV2_Final.tflite
 ?? feature/scanner/domain/src/main/kotlin/bananaq/model/ConfidenceLevel.kt
 ?? feature/scanner/domain/src/test/kotlin/bananaq/ClassificationRulesTest.kt
 ```
+
+
+## October 25 bilingual cleanup audit
+
+This incremental pass retains the existing native Kotlin/XML architecture and
+all current UI geometry. Existing scan-result spacing and five-item Prevention
+behavior are preserved. It adds the missing Filipino fixed-practice content and
+localized Healthy care note, extracts the repeated numbered recommendation UI
+into `ui/scan/ScanRecommendationRenderer`, and removes the obsolete unused
+additional-practices heading field. The camera Activity no longer constructs
+recommendation rows itself.
+
+DiseaseRepository reuses parsed immutable content per localized asset path.
+ScannerActivity reuses one repository, provider and renderer per screen.
+RecommendationProvider retains only the current bilingual snapshot in memory,
+while keeping SharedPreferences snapshots and historical wording unchanged.
+No application-global Activity or View cache was introduced. Input image
+sampling, EXIF handling, bilinear resizing, tensor preprocessing, confidence
+rules and output-label order were reviewed and left unchanged. The model's
+SHA-256 matches HEAD:
+`09a218be82fe39f48c749673b3720be2ebe4f9c6f6edc04e987e402630b73218`.
+
+The code/import inventory found no clearly unused Kotlin imports. Binary SHA-256
+comparison found no exact duplicate packaged images or models. Large logo,
+farmer artwork and disease images are referenced and were retained without
+lossy recompression. Existing CameraX, LiteRT, WorkManager, Gson, lifecycle,
+EXIF, Material and AndroidX dependencies have active callers; versions and
+build configuration are unchanged. Worker reflection, legacy launcher alias,
+R8 rules, manifests, permissions and installed identity are retained. No tracked
+APK, build-directory output, log or temporary file was found. Shared Android
+Studio project configuration remains because it is not a generated app artifact.
+
+Sync and anonymous-auth failure logs now report HTTP status without copying
+untrusted server response bodies, which could contain identifiers or submitted
+content. Connection cleanup and retry behavior remain intact. Useful debug-only
+action logs already exclude comment text and remain available. No new auth,
+analytics, personal-data field, account UI or dependency was added.
+
+Verification covers bilingual fixed-practice ID parity and caching, all four
+actual result tabs with large Filipino text, tab reopening and saved-snapshot
+stability. Existing JVM, screenshot and responsive tests, Android lint, debug
+build and minified release build are run for this pass. Source attribution and
+the incomplete farmer instruction remain subject to the verification limits in
+`recommendations.md`; cleanup does not claim new agronomic validation.
+
+
+Lint and exact-reference checks confirmed additional dead resources. Removed
+`ic_manual_arrow.xml`, `ic_manual_back.xml`, the unused `nav_fade_enter/exit` and
+`page_back_enter/exit` animations, and their unused `BananaQWindowAnimation`
+style. SplashActivity still uses `page_forward_enter/exit`; both are retained.
+Removed 23 obsolete interface-string keys and their Filipino definitions, four
+unused brown palette colors, and the unused carousel-height dimension with its
+screen-size overrides (54 value declarations, plus the obsolete style). The
+live manual topics, avatar picker, legal documents, shared spacing scale and
+all disease-treatment/prevention content remain. No resource-name lookup
+(`getIdentifier`) or runtime resource reflection was found for the removed
+names. These removals are verified with fresh builds, JVM tests and strict
+existing screenshot comparisons, not baseline regeneration.
+
+
+Final verification: 49 JVM tests passed (46 app, 3 domain), including all 72
+strict screenshot references and the bilingual result/caching checks. Android
+lint reported 0 errors; warnings fell from 243 to 208. Seven unused-resource
+warnings are deliberately retained: six legacy disease recommendation strings
+(content preservation) and the shared 48dp spacing token. Debug and minified
+release APK builds passed; both packaged English/Filipino practice assets and
+the original model hash were verified. Live phone-camera and live cloud-service
+checks were not performed in this pass.
+
+
+Latest prevention clarification: removed the five-item display cap. Every scan
+retains its selected nonduplicate advice plus the three fixed precautions.
+Healthy also always includes the existing bilingual healthy-foliage preservation
+recommendation, once. Full-list history remains uncapped; continuous numbering,
+spacing and footer removal are preserved. This supersedes the earlier five-item
+limit documented in this report.

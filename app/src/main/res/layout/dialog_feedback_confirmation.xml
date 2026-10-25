@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/confirmation_dialog_background"
@@ -44,37 +45,35 @@
         android:layout_marginTop="@dimen/spacing_16"
         android:orientation="horizontal">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelFeedback"
             android:layout_width="0dp"
             android:layout_height="wrap_content" android:minHeight="48dp" android:padding="@dimen/spacing_8"
             android:layout_weight="1"
-            android:background="@drawable/btn_language_yellow"
-            android:backgroundTint="@color/agreement_button_default_selector"
+            app:backgroundTint="@color/agreement_button_default_selector"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:text="@string/go_back"
             android:textColor="@color/agreement_button_text_selector"
             android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" android:textAllCaps="false" android:insetTop="0dp" android:insetBottom="0dp" android:minWidth="0dp" />
 
         <Space
             android:layout_width="8dp"
             android:layout_height="1dp" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfirmFeedback"
             android:layout_width="0dp"
             android:layout_height="wrap_content" android:minHeight="48dp" android:padding="@dimen/spacing_8"
             android:layout_weight="1"
-            android:background="@drawable/btn_language_green"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:text="@string/confirm_label"
             android:textColor="@color/white"
             android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" app:backgroundTint="@color/banana_green" android:textAllCaps="false" android:insetTop="0dp" android:insetBottom="0dp" android:minWidth="0dp" />
 </bananaq.ResponsiveActionRow>
 </LinearLayout>

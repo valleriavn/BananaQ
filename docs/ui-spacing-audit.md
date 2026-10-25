@@ -112,3 +112,29 @@ combinations are also simulated; they do not prove every hardware/keyboard combi
 Existing non-spacing lint findings remain outside this change.
 No lint warnings were suppressed. Repeat the same device suite on an older phone and
 resizable tablet as follow-up coverage, and review reference screenshots when content changes.
+
+
+### Shared action button appearance
+
+Action buttons inherit `BananaActionButton` through the app theme. Its Material 3
+parent matches the User Agreement buttons, including their default and pressed
+elevation behavior; pill corners remain rounded when labels wrap. Farming Help
+uses this same parent instead of the older Material Components button style.
+Feedback confirmation and unidentified-scan actions now use MaterialButton too,
+preserving their IDs, labels, colors, and click behavior. Circular icon controls
+and the composite language choices share the same Material 3 elevation states.
+Back arrows and avatar close controls have transparent resting backgrounds, with
+an oval ripple only for interaction feedback. Avatar selection uses white text on
+the green Save action and black text on the yellow Cancel action. These changes do not impose fixed text
+heights or change the user's font scale.
+
+
+### Account subpage heading consistency
+
+User Manual and its topic pages explicitly share AccountPageHeading with the
+Account and legal document page titles (22sp, bold, dark green). Their title rows
+use page_heading_gap. Numbered headings within User Agreement, Terms of Use, and
+Privacy Policy now share AccountSectionHeading with Account and User Manual:
+18sp bold green, 24dp before each section, with body text separated by 12dp.
+Farming Help's dialog title also uses AccountPageHeading. Both locales use these
+same layouts, and all headings retain wrap-content height and scalable sp text.

@@ -52,9 +52,8 @@ internal object SupabaseAuthManager {
         return try {
             connection.outputStream.use { it.write(body.toString().toByteArray(Charsets.UTF_8)) }
             if (connection.responseCode !in 200..299) {
-                val message = connection.errorStream?.bufferedReader()?.use { it.readText() }
-                    ?.take(300).orEmpty()
-                Log.w(TAG, "Anonymous authentication failed (${connection.responseCode}): $message")
+                connection.errorStream?.close()
+                Log.w(TAG, "Anonymous authentication failed (HTTP ${connection.responseCode})")
                 null
             } else {
                 connection.inputStream.bufferedReader().use { JSONObject(it.readText()) }

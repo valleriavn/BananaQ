@@ -160,9 +160,8 @@ object SupabaseSyncManager {
         connection.outputStream.use(write)
         val status = connection.responseCode
         if (status in 200..299) true else {
-            val message = connection.errorStream?.bufferedReader()?.use { it.readText() }
-                ?.take(500).orEmpty()
-            Log.w(TAG, "Supabase request failed ($status): $message")
+            connection.errorStream?.close()
+            Log.w(TAG, "Supabase request failed (HTTP $status)")
             false
         }
     } catch (error: Exception) {

@@ -16,6 +16,7 @@
         <item name="android:layout_marginBottom">0dp</item>
     </style>
     <style name="AccountInformationRow" parent="ManualRow">
+        <item name="android:textSize">18sp</item>
         <item name="android:layout_marginTop">@dimen/spacing_12</item>
         <item name="android:background">@drawable/account_information_card</item>
         <item name="android:textColor">@color/banana_body</item>
@@ -24,7 +25,38 @@
         <item name="android:paddingEnd">@dimen/spacing_16</item>
         <item name="android:paddingTop">@dimen/spacing_16</item>
         <item name="android:paddingBottom">@dimen/spacing_16</item>
-        <item name="android:minHeight">56dp</item>
+        <item name="android:minHeight">64dp</item>
         <item name="android:layout_marginBottom">0dp</item>
+    </style>
+    <style name="AgricultureDetailLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/spacing_16</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/banana_body</item>
+    </style>
+    <style name="AgricultureDetailValue">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/spacing_4</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/banana_body</item>
+        <item name="android:textIsSelectable">true</item>
+    </style>
+    <style name="AgricultureActionButton" parent="BananaActionButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingTop">@dimen/spacing_12</item>
+        <item name="android:paddingBottom">@dimen/spacing_12</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:singleLine">false</item>
+        <item name="cornerRadius">@dimen/pill_corner_radius</item>
     </style>
 </resources>

@@ -20,7 +20,6 @@
     <string name="disease_library_title">Aklatan ng mga Sakit</string>
     <string name="disease_details_unavailable">Hindi makuha ang impormasyon tungkol sa sakit.</string>
     <string name="disease_symptoms">Mga Sintomas</string>
-    <string name="disease_treatment">Mga inirerekomendang hakbang</string>
     <string name="disease_prevention">Pag-iwas</string>
     <string name="disease_description_heading">Pangkalahatang Impormasyon</string>
     <string name="disease_spread">Pagkalat at paglala</string>
@@ -105,7 +104,6 @@
     <string name="summary_confidence">Antas ng Kumpiyansa</string>
     <string name="summary_submitted">Isinumite</string>
     <string name="summary_saved">Na-save</string>
-    <string name="summary_additional_comments">Karagdagang komento:\n%1$s</string>
     <string name="today_at">Ngayon, %1$s</string>
     <string name="prediction_summary">Prediksiyon: %1$s (%2$.2f%%)\nI-tap para makita ang detalye</string>
     <string name="prediction_heading">Prediksiyon: %1$s (%2$.2f%%)</string>
@@ -120,30 +118,12 @@
 
     <string name="account_title">Account</string>
     <string name="user_manual">Gabay ng Gumagamit</string>
-    <string name="manual_heading">Paano kami makatutulong?</string>
-    <string name="manual_intro">Alamin kung paano gamitin ang BananaQ.</string>
-    <string name="getting_started">PAGSISIMULA</string>
-    <string name="important_information">MAHALAGANG IMPORMASYON</string>
-    <string name="capture_title">Kunan ang dahon</string>
-    <string name="capture_description">Kumuha ng malinaw na larawan. Tiyaking malinaw ang dahon at gumamit ng sapat na liwanag.</string>
-    <string name="analyze_title">Suriin</string>
-    <string name="analyze_description">Hayaan ang BananaQ na i-scan ito. Buksan ang Scan, kumuha o pumili ng larawan, at hintayin ang pagsusuri.</string>
-    <string name="results_title">Tingnan ang resulta</string>
-    <string name="results_description">Suriin ang diagnosis at mga rekomendasyon. Maaari mong balikan ang mga scan sa Kasaysayan.</string>
     <string name="terms_of_use">Mga Tuntunin ng Paggamit</string>
     <string name="privacy_policy">Patakaran sa Privacy</string>
-    <string name="legal_privacy">Legal at Privacy</string>
     <string name="user_agreement">Kasunduan ng Gumagamit</string>
-    <string name="legal_not_available">Hindi pa makukuha ang dokumentong ito.</string>
     <string name="back_label">Bumalik</string>
     <string name="account_section">Tulong at Gabay</string>
-    <string name="settings_section">MGA SETTING</string>
     <string name="legal_section">Legal at Pagkapribado</string>
-    <string name="guest_name">Bisita</string>
-    <string name="guest_description">Ginagamit ang BananaQ sa device na ito</string>
-    <string name="avatar_section">MGA AVATAR</string>
-    <string name="choose_avatar">Piliin ang iyong avatar</string>
-    <string name="avatar_hint">Pumili ng avatar para sa iyong profile picture</string>
     <string name="avatar_updated">Matagumpay na napalitan ang avatar</string>
     <string name="avatar_farmer_1">Avatar ng magsasaka 1</string>
     <string name="avatar_farmer_2">Avatar ng magsasaka 2</string>
@@ -152,9 +132,6 @@
     <string name="avatar_farmer_5">Avatar ng magsasaka 5</string>
     <string name="avatar_farmer_6">Avatar ng magsasaka 6</string>
     <string name="profile_label">Profile</string>
-    <string name="settings_label">Mga Setting</string>
-    <string name="logout_label">Mag-log Out</string>
-    <string name="account_unavailable">Hindi magagamit ang profile, mga setting, at pag-sign in sa bersiyong ito.</string>
     <string name="close_avatar_picker">Isara ang pagpili ng avatar</string>
     <string name="choose_named_avatar">Piliin ang %1$s</string>
 
@@ -189,4 +166,16 @@
     <string name="view_avatar">Tingnan ang iyong avatar</string>
     <string name="save_avatar">I-save</string>
     <string name="avatar_picker_heading">Piliin ang iyong avatar</string>
+    <string name="healthy_result_care_note">Hindi ipinapakita ng resultang ito na kailangan ng paggamot sa sakit. Ang mga sumusunod ay karaniwang pag-aalaga sa halaman.</string>
+    <string name="agricultural_assistance">Tulong sa pagsasaka</string>
+    <string name="agriculture_office_source">Tingnan ang opisyal na pahina</string>
+    <string name="call_agriculture_office">Tumawag</string>
+    <string name="assistance_app_unavailable">Walang app na makapagbubukas ng link na ito. Maaari mong kopyahin ang contact details sa itaas.</string>
+    <string name="close_label">Isara</string>
+    <string name="agriculture_phone_label">Numero ng telepono</string>
+    <string name="agriculture_extension">Extension %1$s</string>
+    <string name="agriculture_hours_label">Oras ng tanggapan</string>
+    <string name="agriculture_address_label">Lokasyon ng tanggapan</string>
+    <string name="agriculture_email_label">Email address</string>
+    <string name="agriculture_back_to_account">Bumalik sa Account</string>
 </resources>

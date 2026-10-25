@@ -40,15 +40,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding"
-                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/page_heading_gap"
                 android:gravity="center_vertical" android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <ImageView
+                    style="@style/BananaButtonSurface"
                     android:id="@+id/btnBack"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/avatar_close_button_bg"
                     android:clickable="true"
                     android:contentDescription="@string/back_label"
                     android:focusable="true"
@@ -114,13 +115,10 @@
                         android:lineSpacingExtra="3dp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="1. Purpose of the Application"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="1. Purpose of the Application" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,13 +129,10 @@
                         android:lineSpacingExtra="3dp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="2. Eligibility"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="2. Eligibility" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -147,13 +142,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="3. User Responsibilities"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="3. User Responsibilities" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -163,13 +155,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="4. Accuracy of Results"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="4. Accuracy of Results" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -179,13 +168,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="5. Availability of Service"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="5. Availability of Service" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -195,13 +181,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="6. Termination"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="6. Termination" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -245,12 +228,10 @@
                     android:padding="@dimen/spacing_16">
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="1. Acceptance of Terms"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="1. Acceptance of Terms" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -260,13 +241,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="2. Permitted Use"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="2. Permitted Use" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -276,13 +254,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="3. Prohibited Activities"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="3. Prohibited Activities" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -292,13 +267,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="4. Intellectual Property"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="4. Intellectual Property" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -308,13 +280,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="5. Third-Party Technologies"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="5. Third-Party Technologies" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -324,13 +293,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="6. Disclaimer"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="6. Disclaimer" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -340,13 +306,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="7. Limitation of Liability"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="7. Limitation of Liability" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -356,13 +319,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="8. Changes to the Terms"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="8. Changes to the Terms" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -421,13 +381,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="1. Information We Collect"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="1. Information We Collect" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -437,13 +394,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="2. How We Use the Information"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="2. How We Use the Information" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -453,13 +407,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="3. Data Storage and Security"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="3. Data Storage and Security" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -469,13 +420,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="4. Data Sharing"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="4. Data Sharing" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -485,13 +433,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="5. Research Use"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="5. Research Use" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -501,13 +446,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="6. Data Retention"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="6. Data Retention" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -517,13 +459,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="7. User Rights"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="7. User Rights" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -533,13 +472,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="8. Children's Privacy"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="8. Children's Privacy" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -549,13 +485,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="9. Consent"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="9. Consent" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -565,13 +498,10 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        style="@style/AccountSectionHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_12"
-                        android:text="10. Contact"
-                        android:textColor="@color/banana_body"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="10. Contact" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

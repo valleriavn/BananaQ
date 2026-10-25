@@ -1,0 +1,42 @@
+{
+  "practices": [
+    {
+      "id": "farm.prevention.biosecurity.v1",
+      "essential": true,
+      "title": "Farm biosecurity measures",
+      "description": "Control entry to banana-growing areas and avoid bringing in contaminated soil, tools, footwear, or planting materials. Ask the local agriculturist about suitable farm-entry precautions."
+    },
+    {
+      "id": "farm.prevention.harvesting_tools.v1",
+      "essential": true,
+      "title": "Clean and disinfect harvesting tools",
+      "description": "Clean harvesting tools and disinfect them appropriately before reuse to reduce pathogen transfer. Ask the local agriculturist which disinfectant and procedure are suitable; follow the product label."
+    },
+    {
+      "id": "farm.prevention.planting_material.v1",
+      "essential": true,
+      "title": "Use disease-free planting materials",
+      "description": "Use disease-free planting materials from a reliable source. Ask the local agriculture office to verify supplier accreditation or registration and the planting material's health status before purchase."
+    }
+  ],
+  "source": "General prevention reference: Department of Agriculture — Banana Production Manual, Fusarium wilt management. These precautions do not treat an existing infection.",
+  "sourceUrl": "https://hvcdp.da.gov.ph/wp-content/uploads/2022/05/Banana-Production-Manual.pdf",
+  "requestedSourceUrl": "https://rfo3.da.gov.ph/index.php/regional-crop-protection-center/",
+  "verificationNote": "Requested attribution: Regional Crop Protection Center, Department of Agriculture. The original RCPC document, exact harvesting-tool procedure, and supplier-registration terminology still need verification. These summaries are not confirmed RCPC-issued instructions. RCPC III is in Region III; Sto. Tomas, Batangas is in Region IV-A (CALABARZON).",
+  "contactSourceUrl": "https://cityofstotomas.gov.ph/city-agriculture-office/",
+  "healthyPractice": {
+    "id": "healthy.prevention.v2.3",
+    "essential": true,
+    "title": "Avoid unnecessary leaf removal",
+    "description": "Avoid unnecessary removal of healthy leaves because functional foliage contributes to plant maintenance and development."
+  },
+  "office": {
+    "name": "City Agriculture Office\nCity of Sto. Tomas, Batangas",
+    "phone": "(043) 784-8022",
+    "extension": "307",
+    "dialNumber": "+63437848022",
+    "email": "agri@cityofstotomas.gov.ph",
+    "address": "Basement Floor, City Hall Main Building, Gov. Malvar St., Poblacion I",
+    "hours": "Monday–Friday, 8:00 AM–5:00 PM"
+  }
+}

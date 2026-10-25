@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="@dimen/dialog_content_padding"
+    android:background="@drawable/confirmation_dialog_background">
+
+    <TextView style="@style/AccountPageHeading"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/agricultural_assistance" />
+    <TextView android:id="@+id/agricultureOfficeName" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8" android:textSize="16sp"
+        android:lineSpacingExtra="2dp" android:textColor="@color/banana_body" />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:layout_marginTop="@dimen/spacing_16"
+        android:padding="@dimen/spacing_16" android:background="@drawable/disease_note_background">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/agriculture_phone_label" android:gravity="center"
+            android:textSize="14sp" android:textStyle="bold" android:textColor="@color/banana_body" />
+        <TextView android:id="@+id/agricultureOfficePhone" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8" android:gravity="center"
+            android:textSize="24sp" android:textStyle="bold" android:textIsSelectable="true"
+            android:textColor="@color/banana_text_dark" />
+        <TextView android:id="@+id/agricultureOfficeExtension" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8" android:gravity="center" android:textSize="14sp"
+            android:textIsSelectable="true" android:textColor="@color/banana_body" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/callAgricultureOffice"
+            style="@style/AgricultureActionButton" android:layout_marginTop="@dimen/spacing_16"
+            android:text="@string/call_agriculture_office" android:textColor="@color/white"
+            app:backgroundTint="@color/banana_text_dark" app:icon="@drawable/ic_office_phone"
+            app:iconTint="@color/white" app:iconSize="20dp" app:iconGravity="textStart" />
+    </LinearLayout>
+
+    <TextView style="@style/AgricultureDetailLabel" android:text="@string/agriculture_hours_label" />
+    <TextView android:id="@+id/agricultureOfficeHours" style="@style/AgricultureDetailValue" />
+    <TextView style="@style/AgricultureDetailLabel" android:text="@string/agriculture_address_label" />
+    <TextView android:id="@+id/agricultureOfficeAddress" style="@style/AgricultureDetailValue" />
+    <TextView style="@style/AgricultureDetailLabel" android:text="@string/agriculture_email_label" />
+    <TextView android:id="@+id/agricultureOfficeEmail" style="@style/AgricultureDetailValue" />
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/agricultureOfficeSource"
+        style="@style/AgricultureActionButton" android:layout_marginTop="@dimen/spacing_16"
+        android:text="@string/agriculture_office_source" android:textSize="16sp"
+        android:textColor="@color/banana_text_dark" app:backgroundTint="@color/banana_surface"
+        app:strokeWidth="1dp" app:strokeColor="@color/banana_text_dark" />
+    <com.google.android.material.button.MaterialButton android:id="@+id/closeAgriculturalAssistance"
+        style="@style/AgricultureActionButton" android:layout_marginTop="@dimen/spacing_12"
+        android:text="@string/agriculture_back_to_account" android:textColor="@color/button_text_black"
+        app:backgroundTint="@color/banana_yellow" />
+</LinearLayout>

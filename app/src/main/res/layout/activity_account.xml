@@ -76,13 +76,13 @@
                         android:src="@drawable/avatar_farmer_1" />
 
                     <ImageButton
+                        style="@style/BananaButtonSurface"
                         android:id="@+id/editAvatarButton"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="bottom|end"
                         android:background="@drawable/avatar_edit_button_background"
                         android:contentDescription="@string/edit_avatar"
-                        android:elevation="0dp"
                         android:importantForAccessibility="yes"
                         android:padding="@dimen/spacing_12"
                         android:src="@drawable/ic_edit_avatar"
@@ -102,6 +102,13 @@
                 android:drawableEnd="@drawable/ic_manual_chevron"
                 android:drawablePadding="12dp"
                 android:text="@string/user_manual" />
+
+            <TextView
+                android:id="@+id/agriculturalAssistanceRow"
+                style="@style/AccountInformationRow"
+                android:drawableEnd="@drawable/ic_manual_chevron"
+                android:drawablePadding="@dimen/spacing_12"
+                android:text="@string/agricultural_assistance" />
 
             <TextView
                 style="@style/AccountSectionHeading"

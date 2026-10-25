@@ -25,9 +25,5 @@
     <color name="banana_text_dark">#3F6E28</color>
 
     <!-- Legacy aliases retained for existing layouts. -->
-    <color name="brown_primary">#795548</color>
-    <color name="brown_dark">#5D4037</color>
-    <color name="brown_light">#A18879</color>
-    <color name="brown_background">#F5F5F0</color>
     <color name="disease_guidance_background">#FFF5D8</color>
 </resources>

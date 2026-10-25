@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.graphics.Typeface
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -22,12 +21,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 
 import bananaq.data.DiseaseRepository
+import bananaq.ui.scan.ScanRecommendationRenderer
 import bananaq.data.RecommendationProvider
 import androidx.lifecycle.ViewModelProvider
 import bananaq.ml.ScanImageLoader
 import bananaq.model.ClassificationResult
 import bananaq.model.ConfidenceLevel
-import bananaq.model.DiseaseInfo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ScannerActivity : LocaleAwareActivity() {
@@ -36,6 +35,8 @@ class ScannerActivity : LocaleAwareActivity() {
     private lateinit var fullResultCard: View
     private lateinit var resultContentContainer: LinearLayout
     private lateinit var resultSectionTitle: TextView
+    private lateinit var recommendationRenderer: ScanRecommendationRenderer
+    private lateinit var recommendationProvider: RecommendationProvider
 
     private lateinit var tabSymptoms: TextView
     private lateinit var tabTreatment: TextView
@@ -159,6 +160,8 @@ class ScannerActivity : LocaleAwareActivity() {
         // Use the wrapped Activity context so recommendation JSON follows the
         // language currently selected in BananaQ.
         diseaseRepository = DiseaseRepository(this)
+        recommendationProvider = RecommendationProvider(this, diseaseRepository)
+        recommendationRenderer = ScanRecommendationRenderer(resultContentContainer, diseaseRepository.getDefaultPrevention())
         scanViewModel = ViewModelProvider(this,
             (application as BananaQApplication).scannerViewModelFactory)[ScannerViewModel::class.java]
         setupBottomSheet()
@@ -634,7 +637,7 @@ class ScannerActivity : LocaleAwareActivity() {
         val info = if (intent.getBooleanExtra("LIBRARY", false)) {
             diseaseRepository.getDiseaseInfo(result.diseaseName)
         } else {
-            RecommendationProvider(this).forScan(result.diseaseName, scanId,
+            recommendationProvider.forScan(result.diseaseName, scanId,
                 historical = intent.getBooleanExtra("FROM_HISTORY", false))
         } ?: return
         val selectedColor =
@@ -675,17 +678,17 @@ class ScannerActivity : LocaleAwareActivity() {
                     } else {
                         getString(R.string.visual_characteristics)
                     }
-                showSymptoms(info)
+                recommendationRenderer.showSymptoms(info)
             }
             2 -> {
                 resultSectionTitle.text =
                     getString(R.string.recommended_actions)
-                showTreatment(info)
+                recommendationRenderer.showTreatment(info)
             }
             3 -> {
                 resultSectionTitle.text =
                     getString(R.string.prevention_best_practices)
-                showPrevention(info)
+                recommendationRenderer.showPrevention(info)
             }
         }
         resultSectionTitle.animate().alpha(1f).setDuration(160L).start()
@@ -711,154 +714,6 @@ class ScannerActivity : LocaleAwareActivity() {
             val scroller = row?.parent as? ResponsiveTabRow
             scroller?.smoothScrollTo(textView.left - (scroller.width - textView.width) / 2, 0)
         }
-    }
-    private fun showSymptoms(
-        info: DiseaseInfo
-    ) {
-        info.symptoms.forEachIndexed {
-                index,
-                tip ->
-            addContentItem(
-                index + 1,
-                tip.title,
-                tip.description
-            )
-        }
-    }
-    private fun showTreatment(
-        info: DiseaseInfo
-    ) {
-        info.treatment.forEachIndexed {
-                index,
-                tip ->
-            addContentItem(
-                index + 1,
-                tip.title,
-                tip.description
-            )
-        }
-    }
-    private fun showPrevention(
-        info: DiseaseInfo
-    ) {
-        info.prevention.forEachIndexed {
-                index,
-                tip ->
-            addContentItem(
-                index + 1,
-                tip.title,
-                tip.description
-            )
-        }
-    }
-    private fun addContentItem(
-        number: Int,
-        title: String,
-        description: String
-    ) {
-        val density =
-            resources.displayMetrics.density
-        val itemGap = resources.getDimensionPixelSize(R.dimen.spacing_12)
-        val itemLayout =
-            LinearLayout(this).apply {
-                orientation =
-                    LinearLayout.HORIZONTAL
-                setPadding(
-                    0,
-                    0,
-                    0,
-                    itemGap
-                )
-            }
-        val numberCircle =
-            TextView(this).apply {
-                text =
-                    number.toString()
-                gravity =
-                    Gravity.CENTER
-                setTextColor(
-                    ContextCompat.getColor(this@ScannerActivity, R.color.button_text_black)
-                )
-                setBackgroundResource(
-                    R.drawable.result_number_circle
-                )
-                textSize = 12f
-                layoutParams =
-                    LinearLayout.LayoutParams(
-                        (26 * density).toInt(),
-                        (26 * density).toInt()
-                    ).apply {
-                        marginEnd =
-                            itemGap
-                    }
-            }
-        // The number badge must grow with the actual font metrics, including Samsung font scaling.
-        val badgePadding = (8 * density).toInt()
-        val badgeSize = maxOf((26 * density).toInt(),
-            kotlin.math.ceil(numberCircle.paint.fontMetrics.bottom - numberCircle.paint.fontMetrics.top).toInt() + badgePadding,
-            kotlin.math.ceil(numberCircle.paint.measureText(numberCircle.text.toString())).toInt() + badgePadding)
-        numberCircle.layoutParams = numberCircle.layoutParams.apply {
-            width = badgeSize
-            height = badgeSize
-        }
-        val textLayout =
-            LinearLayout(this).apply {
-                orientation =
-                    LinearLayout.VERTICAL
-                layoutParams =
-                    LinearLayout.LayoutParams(
-                        0,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        1f
-                    )
-            }
-        val titleView =
-            TextView(this).apply {
-                text = title
-                textSize = 14f
-                setTextColor(ContextCompat.getColor(this@ScannerActivity, R.color.banana_body))
-                setTypeface(
-                    null,
-                    Typeface.BOLD
-                )
-            }
-        val descView =
-            TextView(this).apply {
-                text = description
-                textSize = 12f
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                    topMargin = resources.getDimensionPixelSize(R.dimen.spacing_4)
-                }
-                setTextColor(
-                    ContextCompat.getColor(this@ScannerActivity, R.color.banana_muted)
-                )
-            }
-        textLayout.addView(
-            titleView
-        )
-        textLayout.addView(
-            descView
-        )
-        itemLayout.addView(
-            numberCircle
-        )
-        itemLayout.addView(
-            textLayout
-        )
-        resultContentContainer.addView(
-            itemLayout
-        )
-        resultContentContainer.addView(View(this).apply {
-            setBackgroundColor(ContextCompat.getColor(this@ScannerActivity, R.color.banana_yellow_light))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                density.toInt().coerceAtLeast(1)
-            ).apply {
-                marginStart = badgeSize + itemGap
-                bottomMargin = itemGap
-            }
-        })
     }
     private fun hideResult() {
         scanViewModel.reset()

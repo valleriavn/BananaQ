@@ -38,6 +38,7 @@ class AccountActivity : LocaleAwareActivity() {
 
     private lateinit var profileAvatar: ImageView
     private var selectedAvatarId = DEFAULT_AVATAR_ID
+    private var assistanceDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,9 @@ class AccountActivity : LocaleAwareActivity() {
             UserActionLogger.log("button_click", mapOf("target" to "UserManual"))
             startActivity(Intent(this, UserManualActivity::class.java))
         }
+        findViewById<View>(R.id.agriculturalAssistanceRow).setOnClickListener {
+            showAgriculturalAssistance()
+        }
 
         mapOf(
             R.id.termsRow to UserAgreementActivity.SECTION_TERMS,
@@ -77,6 +81,55 @@ class AccountActivity : LocaleAwareActivity() {
 
     private fun setupBottomNavigation() {
         configureBottomNavigation(R.id.nav_account)
+    }
+
+    private fun showAgriculturalAssistance() {
+        if (assistanceDialog?.isShowing == true) return
+        val assistance = bananaq.data.DiseaseRepository(this).getDefaultPrevention()
+        val office = assistance.office
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val content = layoutInflater.inflate(R.layout.dialog_agricultural_assistance, null)
+        content.findViewById<TextView>(R.id.agricultureOfficeName).text = office.name
+        content.findViewById<TextView>(R.id.agricultureOfficePhone).text = office.phone
+        content.findViewById<TextView>(R.id.agricultureOfficeExtension).text =
+            getString(R.string.agriculture_extension, office.extension)
+        content.findViewById<TextView>(R.id.agricultureOfficeHours).text = office.hours
+        content.findViewById<TextView>(R.id.agricultureOfficeAddress).text = office.address
+        content.findViewById<TextView>(R.id.agricultureOfficeEmail).text = office.email
+        content.findViewById<View>(R.id.closeAgriculturalAssistance).setOnClickListener { dialog.dismiss() }
+        content.findViewById<View>(R.id.callAgricultureOffice).setOnClickListener {
+            openAssistanceIntent(Intent(Intent.ACTION_DIAL,
+                android.net.Uri.fromParts("tel", office.dialNumber, null)))
+        }
+        content.findViewById<View>(R.id.agricultureOfficeSource).setOnClickListener {
+            openAssistanceIntent(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(assistance.contactSourceUrl)))
+        }
+        dialog.setContentView(androidx.core.widget.NestedScrollView(this).apply { addView(content) })
+        dialog.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            attributes = attributes.apply { dimAmount = 0.55f }
+            setGravity(Gravity.CENTER)
+        }
+        dialog.setOnDismissListener { assistanceDialog = null }
+        assistanceDialog = dialog
+        dialog.show()
+        dialog.fitWithinActivity(this, maxWidthDp = 480, fraction = 0.96f)
+    }
+
+    private fun openAssistanceIntent(intent: Intent) {
+        try {
+            startActivity(intent)
+        } catch (_: android.content.ActivityNotFoundException) {
+            android.widget.Toast.makeText(this, R.string.assistance_app_unavailable,
+                android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDestroy() {
+        assistanceDialog?.dismiss()
+        super.onDestroy()
     }
 
     private fun updateProfileAvatar() {

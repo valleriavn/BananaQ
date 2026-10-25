@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Match the User Agreement's Material 3 shape and elevation states. -->
+    <style name="BananaActionButton" parent="Widget.Material3.Button">
+        <item name="shapeAppearanceOverlay">@style/BananaButtonShape</item>
+        <item name="cornerRadius">@dimen/pill_corner_radius</item>
+    </style>
+    <style name="BananaButtonShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <!-- Composite language choices and icon controls retain their own circular backgrounds. -->
+    <style name="BananaButtonSurface" parent="">
+        <item name="android:elevation">@dimen/m3_btn_elevation</item>
+        <item name="android:stateListAnimator">@animator/m3_btn_state_list_anim</item>
+    </style>
+</resources>

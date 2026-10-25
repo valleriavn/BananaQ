@@ -9,5 +9,4 @@
     <dimen name="bottom_navigation_item_width">54dp</dimen>
     <dimen name="bottom_navigation_item_height">44dp</dimen>
     <dimen name="disease_header_image_height">220dp</dimen>
-    <dimen name="home_disease_carousel_height">156dp</dimen>
 </resources>

@@ -31,10 +31,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintWidth_max="@dimen/page_content_max_width">
         <ImageButton
+            style="@style/BananaButtonSurface"
             android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/avatar_close_button_bg"
             android:contentDescription="@string/back_label"
             android:src="@drawable/ic_arrow_back_green"
             app:tint="@color/banana_green" android:padding="@dimen/spacing_12" android:scaleType="fitCenter" />

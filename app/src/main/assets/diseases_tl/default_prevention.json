@@ -1,0 +1,42 @@
+{
+  "practices": [
+    {
+      "id": "farm.prevention.biosecurity.v1",
+      "essential": true,
+      "title": "Mga hakbang sa biosecurity ng bukid",
+      "description": "Kontrolin ang pagpasok sa taniman ng saging at iwasang magdala ng kontaminadong lupa, kagamitan, sapatos, o pantanim. Magtanong sa lokal na agriculturist tungkol sa angkop na pag-iingat sa pagpasok sa bukid."
+    },
+    {
+      "id": "farm.prevention.harvesting_tools.v1",
+      "essential": true,
+      "title": "Linisin at disimpektahin ang mga kagamitan sa pag-aani",
+      "description": "Linisin at wastong disimpektahin ang mga kagamitan sa pag-aani bago muling gamitin upang mabawasan ang paglipat ng mga sanhi ng sakit. Magtanong sa lokal na agriculturist tungkol sa angkop na disinfectant at pamamaraan; sundin ang etiketa ng produkto."
+    },
+    {
+      "id": "farm.prevention.planting_material.v1",
+      "essential": true,
+      "title": "Gumamit ng pantanim na walang sakit",
+      "description": "Gumamit ng pantanim na walang sakit mula sa mapagkakatiwalaang pinagmulan. Bago bumili, ipasuri sa lokal na tanggapan ng agrikultura ang akreditasyon o rehistrasyon ng supplier at ang kalagayan ng pantanim."
+    }
+  ],
+  "source": "Pangkalahatang sanggunian sa pag-iwas: Department of Agriculture — Banana Production Manual, pamamahala sa Fusarium wilt. Hindi lunas sa kasalukuyang impeksiyon ang mga pag-iingat na ito.",
+  "sourceUrl": "https://hvcdp.da.gov.ph/wp-content/uploads/2022/05/Banana-Production-Manual.pdf",
+  "requestedSourceUrl": "https://rfo3.da.gov.ph/index.php/regional-crop-protection-center/",
+  "verificationNote": "Hinihiling na pinagmulan: Regional Crop Protection Center, Department of Agriculture. Kailangan pang patunayan ang orihinal na dokumento ng RCPC, eksaktong paraan ng pagdisimpekta ng kagamitan sa pag-aani, at terminolohiya sa rehistrasyon ng supplier. Hindi pa kumpirmadong tagubilin ng RCPC ang mga buod na ito. Nasa Rehiyon III ang RCPC III; nasa Rehiyon IV-A (CALABARZON) ang Sto. Tomas, Batangas.",
+  "contactSourceUrl": "https://cityofstotomas.gov.ph/city-agriculture-office/",
+  "healthyPractice": {
+    "id": "healthy.prevention.v2.3",
+    "essential": true,
+    "title": "Huwag mag-alis ng malusog na dahon nang hindi kailangan",
+    "description": "Iwasang mag-alis ng malulusog na dahon kung hindi kailangan dahil nakatutulong ang mga ito sa paglaki at pagpapanatili ng halaman."
+  },
+  "office": {
+    "name": "Tanggapan ng Agrikultura\nLungsod ng Sto. Tomas, Batangas",
+    "phone": "(043) 784-8022",
+    "extension": "307",
+    "dialNumber": "+63437848022",
+    "email": "agri@cityofstotomas.gov.ph",
+    "address": "Basement Floor, City Hall Main Building, Gov. Malvar St., Poblacion I",
+    "hours": "Lunes–Biyernes, 8:00 AM–5:00 PM"
+  }
+}

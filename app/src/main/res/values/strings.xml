@@ -80,7 +80,6 @@
     <string name="summary_confidence">Confidence Score</string>
     <string name="summary_submitted">Submitted</string>
     <string name="summary_saved">Saved</string>
-    <string name="summary_additional_comments">Additional comments:\n%1$s</string>
     <string name="today_at">Today at %1$s</string>
     <string name="prediction_summary">Prediction: %1$s (%2$.2f%%)\nTap to see details</string>
     <string name="prediction_heading">Prediction: %1$s (%2$.2f%%)</string>
@@ -95,7 +94,6 @@
     <string name="disease_library_title">Disease Library</string>
     <string name="disease_details_unavailable">Disease description is unavailable.</string>
     <string name="disease_symptoms">Symptoms</string>
-    <string name="disease_treatment">Recommended actions</string>
     <string name="disease_prevention">Prevention</string>
     <string name="disease_description_heading">Overview</string>
     <string name="disease_spread">How it spreads and develops</string>
@@ -135,4 +133,16 @@
     <string name="view_avatar">View your avatar</string>
     <string name="save_avatar">Save</string>
     <string name="avatar_picker_heading">Choose your avatar</string>
+    <string name="healthy_result_care_note">This result does not indicate a need for disease treatment. The following actions are routine plant care.</string>
+    <string name="agricultural_assistance">Farming help</string>
+    <string name="agriculture_office_source">View official office page</string>
+    <string name="call_agriculture_office">Call office</string>
+    <string name="assistance_app_unavailable">No app is available to open this link. You can copy the contact details above.</string>
+    <string name="close_label">Close</string>
+    <string name="agriculture_phone_label">Phone number</string>
+    <string name="agriculture_extension">Extension %1$s</string>
+    <string name="agriculture_hours_label">Office hours</string>
+    <string name="agriculture_address_label">Office address</string>
+    <string name="agriculture_email_label">Email address</string>
+    <string name="agriculture_back_to_account">Back to Account</string>
 </resources>

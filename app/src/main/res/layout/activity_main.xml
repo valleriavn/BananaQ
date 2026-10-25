@@ -35,7 +35,7 @@
     <bananaq.ContentColumn android:layout_gravity="center_horizontal"
         android:id="@+id/homeContent"
         android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:paddingTop="@dimen/spacing_8"
+        android:orientation="vertical" android:paddingTop="@dimen/page_heading_gap"
 >
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/page_horizontal_padding" android:layout_marginEnd="@dimen/page_horizontal_padding" android:text="@string/home_greeting"

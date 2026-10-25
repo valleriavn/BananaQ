@@ -42,10 +42,11 @@
                 android:gravity="center_vertical" android:baselineAligned="false"
                 android:orientation="horizontal" android:layout_marginTop="@dimen/page_heading_gap">
                 <ImageButton
+                    style="@style/BananaButtonSurface"
                     android:id="@+id/backButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/avatar_close_button_bg"
                     android:contentDescription="@string/back_label"
                     android:padding="@dimen/spacing_12"
                     android:src="@drawable/ic_arrow_back_green" android:scaleType="fitCenter" />

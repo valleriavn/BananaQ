@@ -29,6 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageButton
+            style="@style/BananaButtonSurface"
             android:id="@+id/closeAvatarPicker"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -78,7 +79,7 @@
             android:padding="@dimen/spacing_8"
             android:text="@string/cancel_scan_again"
             android:textAllCaps="false"
-            android:textColor="@color/banana_green"
+            android:textColor="@color/button_text_black"
             app:backgroundTint="@color/banana_yellow"
             app:strokeColor="@color/banana_green"
             app:strokeWidth="0dp"
