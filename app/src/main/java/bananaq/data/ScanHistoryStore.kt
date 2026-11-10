@@ -33,10 +33,17 @@ class ScanHistoryStore(context: Context) {
         inserted
     }
 
-    fun items(): List<ScanHistoryAdapter.HistoryItem> = synchronized(lock) {
+    fun itemForScan(scanId: String): ScanHistoryAdapter.HistoryItem? =
+        database.scan(scanId)?.let { it.toHistoryItem(dateFormat()) }
+
+    private fun dateFormat(): SimpleDateFormat {
         val pattern = if (LocaleHelper.selectedLanguage(appContext) == "tl")
             "MMM dd, yyyy 'nang' h:mm a" else "MMM dd, yyyy 'at' h:mm a"
-        val format = SimpleDateFormat(pattern, Locale.getDefault())
+        return SimpleDateFormat(pattern, Locale.getDefault())
+    }
+
+    fun items(): List<ScanHistoryAdapter.HistoryItem> = synchronized(lock) {
+        val format = dateFormat()
         val localizedContext = LocaleHelper.wrap(appContext)
         ScanDateGrouping.group(database.scans()).flatMap { (period, records) ->
             val title = localizedContext.getString(when (period) {
@@ -47,24 +54,23 @@ class ScanHistoryStore(context: Context) {
                 ScanDateGrouping.Period.OLDER -> R.string.history_group_older
             })
             listOf(ScanHistoryAdapter.HistoryItem(isHeader = true, headerTitle = title)) +
-                records.map { record ->
-                    val disease = record.predictedDisease ?: "Unknown"
-                    val accuracyVal = record.confidenceScore?.let {
-                        String.format(Locale.US, "%.2f", it * 100)
-                    }
-                    ScanHistoryAdapter.HistoryItem(
-                        isHeader = false,
-                        diseaseName = disease,
-                        dateTime = format.format(Date(record.scannedAt)),
-                        accuracy = accuracyVal,
-                        confidenceScore = record.confidenceScore?.toFloat(),
-                        isHealthy = record.isBananaLeaf && disease == "Healthy",
-                        isValid = record.isBananaLeaf,
-                        scanId = record.scanId,
-                        imageUri = record.imagePath
-                    )
-                }
+                records.map { it.toHistoryItem(format) }
         }
+    }
+
+    private fun ScanRecord.toHistoryItem(format: SimpleDateFormat): ScanHistoryAdapter.HistoryItem {
+        val disease = predictedDisease ?: "Unknown"
+        return ScanHistoryAdapter.HistoryItem(
+            isHeader = false,
+            diseaseName = disease,
+            dateTime = format.format(Date(scannedAt)),
+            accuracy = confidenceScore?.let { String.format(Locale.US, "%.2f", it * 100) },
+            confidenceScore = confidenceScore?.toFloat(),
+            isHealthy = isBananaLeaf && disease == "Healthy",
+            isValid = isBananaLeaf,
+            scanId = scanId,
+            imageUri = imagePath
+        )
     }
 
     companion object { private val lock = Any() }

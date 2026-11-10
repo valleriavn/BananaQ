@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import bananaq.data.DiseaseRepository
 import bananaq.ui.scan.ScanRecommendationRenderer
 import bananaq.data.RecommendationProvider
+import bananaq.data.ScanHistoryStore
 import androidx.lifecycle.ViewModelProvider
 import bananaq.ml.ScanImageLoader
 import bananaq.model.ClassificationResult
@@ -308,6 +309,7 @@ class ScannerActivity : LocaleAwareActivity() {
         detailsExpanded = false
         fullResultCard.visibility = View.GONE
         findViewById<View>(R.id.compactResultPanel).visibility = View.GONE
+        findViewById<View>(R.id.btnScanFeedback).visibility = View.GONE
         scanViewModel.scan(uri, currentScanId)
     }
 
@@ -350,6 +352,15 @@ class ScannerActivity : LocaleAwareActivity() {
 
     private fun displayResult(result: ClassificationResult) {
         findViewById<TextView>(R.id.scanResultTitle).setText(R.string.scan_result)
+        val savedScan = ScanHistoryStore(this).itemForScan(scanId)
+        findViewById<View>(R.id.btnScanFeedback).apply {
+            visibility = if (savedScan == null) View.GONE else View.VISIBLE
+            setOnClickListener(savedScan?.let { scan ->
+                View.OnClickListener {
+                    startActivity(FeedbackDetailActivity.intentForScan(this@ScannerActivity, scan))
+                }
+            })
+        }
         val compactPanel = findViewById<View>(R.id.compactResultPanel)
         val compactHandle = findViewById<View>(R.id.compactResultDragHandle)
         val tryAgain = findViewById<View>(R.id.btnTryAgain)
@@ -733,6 +744,7 @@ class ScannerActivity : LocaleAwareActivity() {
         photoBitmap?.takeIf { !it.isRecycled }?.recycle()
         photoBitmap = null
         findViewById<View>(R.id.scanResultTitle).visibility = View.GONE
+        findViewById<View>(R.id.btnScanFeedback).visibility = View.GONE
         findViewById<View>(R.id.scannerHeader).visibility = View.VISIBLE
         findViewById<View>(R.id.cameraScrim).visibility = View.GONE
         findViewById<View>(R.id.btnBack).visibility = View.VISIBLE

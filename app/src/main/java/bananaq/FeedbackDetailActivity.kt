@@ -5,6 +5,8 @@ import bananaq.data.FeedbackRecord
 import bananaq.data.sync.SupabaseSyncManager
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -24,6 +26,18 @@ import java.util.Date
 import java.util.Locale
 
 class FeedbackDetailActivity : LocaleAwareActivity() {
+
+    companion object {
+        fun intentForScan(context: Context, item: ScanHistoryAdapter.HistoryItem): Intent =
+            Intent(context, FeedbackDetailActivity::class.java).apply {
+                putExtra("SCAN_ID", item.scanId)
+                putExtra("DISEASE_NAME", item.diseaseName)
+                putExtra("DATE_TIME", item.dateTime)
+                putExtra("ACCURACY", item.accuracy)
+                putExtra("IMAGE_URI", item.imageUri)
+                putExtra("RESULT_VALID", item.isValid)
+            }
+    }
 
     private var confirmationDialog: Dialog? = null
     private var selectedRating = ""

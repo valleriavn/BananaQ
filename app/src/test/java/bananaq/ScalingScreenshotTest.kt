@@ -157,6 +157,7 @@ class ScalingScreenshotTest {
         root.findViewById<View>(R.id.compactResultPanel).visibility = View.VISIBLE
         root.findViewById<View>(R.id.scannerHeader).visibility = View.INVISIBLE
         root.findViewById<View>(R.id.scanResultTitle).visibility = View.VISIBLE
+        root.findViewById<View>(R.id.btnScanFeedback).visibility = View.VISIBLE
         for (id in intArrayOf(R.id.scanFrame, R.id.controlsLayout, R.id.instructionContainer)) {
             root.findViewById<View>(id).visibility = View.INVISIBLE
         }
@@ -165,6 +166,9 @@ class ScalingScreenshotTest {
         assertEquals("Controls moved when the summary appeared", controls, bounds(R.id.controlsLayout))
         assertEquals("Details anchor moved", anchor, bounds(R.id.resultCoordinator))
         assertTrue("Result summary extends above the window", bounds(R.id.compactResultPanel).top >= 0)
+        val feedback = bounds(R.id.btnScanFeedback)
+        assertTrue("Feedback overlaps the result title", feedback.left >= bounds(R.id.scanResultTitle).right)
+        assertTrue("Feedback touch target is too small", feedback.height() >= 48 * density)
         snapshot(root, "${name}_summary")
 
         root.findViewById<View>(R.id.compactResultPanel).visibility = View.GONE

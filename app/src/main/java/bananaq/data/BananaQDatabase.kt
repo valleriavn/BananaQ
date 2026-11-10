@@ -227,14 +227,20 @@ class BananaQDatabase private constructor(context: Context) :
     }
 
     @Synchronized
-    fun scans(): List<ScanRecord> {
+    fun scans(): List<ScanRecord> = readScans()
+
+    @Synchronized
+    fun scan(scanId: String): ScanRecord? = readScans(scanId).firstOrNull()
+
+    private fun readScans(scanId: String? = null): List<ScanRecord> {
         val result = mutableListOf<ScanRecord>()
         readableDatabase.query(
             "scans",
             arrayOf(
                 "scanId", "sessionId", "imagePath", "predictedDisease",
                 "confidenceScore", "isBananaLeaf", "scannedAt"
-            ), null, null, null, null, "scannedAt DESC"
+            ), scanId?.let { "scanId = ?" }, scanId?.let { arrayOf(it) },
+            null, null, "scannedAt DESC"
         ).use { cursor ->
             while (cursor.moveToNext()) {
                 val confidenceIndex = cursor.getColumnIndexOrThrow("confidenceScore")

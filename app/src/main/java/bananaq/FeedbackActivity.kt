@@ -3,7 +3,6 @@ package bananaq
 import bananaq.data.BananaQDatabase
 import bananaq.data.ScanHistoryStore
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -43,15 +42,7 @@ class FeedbackActivity : LocaleAwareActivity() {
             if (rvFeedback.layoutManager == null) rvFeedback.layoutManager = LinearLayoutManager(this)
             
             val adapter = ScanHistoryAdapter(feedbackItems, submittedScanIds) { item ->
-                val intent = Intent(this, FeedbackDetailActivity::class.java).apply {
-                    putExtra("SCAN_ID", item.scanId)
-                    putExtra("DISEASE_NAME", item.diseaseName)
-                    putExtra("DATE_TIME", item.dateTime)
-                    putExtra("ACCURACY", item.accuracy)
-                    putExtra("IMAGE_URI", item.imageUri)
-                    putExtra("RESULT_VALID", item.isValid)
-                }
-                startActivity(intent)
+                startActivity(FeedbackDetailActivity.intentForScan(this, item))
             }
             rvFeedback.adapter = adapter
             rvFeedback.layoutManager?.onRestoreInstanceState(scrollState)
