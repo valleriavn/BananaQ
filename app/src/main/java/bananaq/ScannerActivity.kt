@@ -103,7 +103,6 @@ class ScannerActivity : LocaleAwareActivity() {
     private fun showDetailsMode() {
         showPhotoMode()
         findViewById<View>(R.id.cameraScrim).alpha = 0.18f
-        findViewById<View>(R.id.scanResultTitle).visibility = View.VISIBLE
         for (id in intArrayOf(R.id.scanFrame, R.id.instructionContainer, R.id.controlsLayout)) {
             findViewById<View>(id).visibility = View.INVISIBLE
         }
@@ -351,7 +350,6 @@ class ScannerActivity : LocaleAwareActivity() {
     }
 
     private fun displayResult(result: ClassificationResult) {
-        findViewById<TextView>(R.id.scanResultTitle).setText(R.string.scan_result)
         val savedScan = ScanHistoryStore(this).itemForScan(scanId)
         findViewById<View>(R.id.btnScanFeedback).apply {
             visibility = if (savedScan == null) View.GONE else View.VISIBLE

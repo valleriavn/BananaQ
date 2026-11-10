@@ -72,5 +72,3 @@ introduced as part of this layout change.
 
 Build optimization and memory checks complement responsive constraints; the screenshot
 and geometry tests are the part of this change that detects layout scaling regressions.
-
-See `responsive-ui-audit.md` for the app-wide findings, file list, test matrix, and hardware limitations.

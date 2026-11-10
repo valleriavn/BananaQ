@@ -67,6 +67,9 @@ Run before producing an APK:
 .\gradlew.bat assembleRelease
 ```
 
+To check the ELF alignment of native libraries in the debug APK, run
+`python tools/check_native_alignment.py app/build/outputs/apk/debug/BananaQ.apk`.
+
 Manual checks should include a 320dp phone, a typical phone, tablet, landscape, 200% font size, TalkBack, offline scanning, reconnect-and-sync, camera denial, process recreation, and English/Tagalog switching.
 
 ## Release checklist

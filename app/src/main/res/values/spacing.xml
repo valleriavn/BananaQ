@@ -8,7 +8,6 @@
     <dimen name="spacing_24">24dp</dimen>
     <dimen name="spacing_32">32dp</dimen>
     <dimen name="spacing_40">40dp</dimen>
-    <dimen name="spacing_48">48dp</dimen>
     <dimen name="page_heading_gap">@dimen/spacing_16</dimen>
     <dimen name="section_gap">@dimen/spacing_24</dimen>
     <dimen name="content_bottom_padding">@dimen/spacing_24</dimen>
