@@ -43,7 +43,7 @@ export function Explorer({ tables, refreshSchema }: { tables: Table[]; refreshSc
   const [params, setParams] = useSearchParams()
   const active = tables.find((table) => table.name === params.get('table')) ?? tables[0]
   return <>
-    <PageHeading title="Database Explorer" description="Inspect approved Supabase tables, columns, relationships, and records."
+    <PageHeading title="Database Explorer"
       actions={<RefreshButton onClick={refreshSchema} />} />
     {!active ? <section className="panel"><Empty label="No approved tables discovered."
       detail="Ask the project owner to approve the study tables for dashboard access." /></section>

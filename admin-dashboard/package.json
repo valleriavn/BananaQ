@@ -11,8 +11,7 @@
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "test:sql": "node --test tests/dashboard-sql.test.mjs"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.100.0",
@@ -24,7 +23,6 @@
     "recharts": "^3.8.0"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.3.15",
     "@tailwindcss/vite": "^4.2.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",

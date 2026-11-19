@@ -4,3 +4,5 @@ dist/
 !.env.example
 *.local
 .pnpm-store/
+/README.md
+/supabase/dashboard.sql

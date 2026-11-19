@@ -36,6 +36,18 @@ export function getSchema(signal: AbortSignal) {
   return rpc<Table[]>('get_dashboard_schema', {}, signal)
 }
 
+export function getUserCount(signal: AbortSignal) {
+  return rpc<{ total: number }>('get_dashboard_user_count', {}, signal).then(({ total }) => total)
+}
+
+export function deleteRecord(table: string, key: Record<string, unknown>, signal: AbortSignal) {
+  return rpc<number>('delete_dashboard_record', { p_table: table, p_key: key }, signal)
+}
+
+export function restoreTable(table: string, rows: Record<string, unknown>[], signal: AbortSignal) {
+  return rpc<number>('restore_dashboard_table', { p_table: table, p_rows: rows }, signal)
+}
+
 export function getData<T>(view: Pick<View, 'table' | 'relation'>, params: Params, signal: AbortSignal) {
   return rpc<T>('get_dashboard_data', {
     p_table: view.table.name,

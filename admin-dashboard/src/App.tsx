@@ -50,7 +50,7 @@ function Authorized({ session }: { session: Session }) {
           : <Unavailable title="Feedback" reason="No approved feedback table was discovered." />} />
         <Route path="analytics" element={views.feedback || views.scans ? <Analytics views={views} />
           : <Unavailable title="Analytics" reason="No supported scan or feedback metrics are available." />} />
-        <Route path="settings" element={<SettingsPage email={session.user.email ?? ''} />} />
+        <Route path="settings" element={<SettingsPage email={session.user.email ?? ''} tables={schema} />} />
         <Route path="login" element={<Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

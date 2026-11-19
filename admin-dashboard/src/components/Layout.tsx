@@ -1,4 +1,4 @@
-import { BarChart3, ChevronRight, CircleUserRound, Database, Home, Menu, MessageCircle, ScanLine, Settings, UsersRound, X } from 'lucide-react'
+import { BarChart3, ChevronRight, CircleUserRound, Database, Home, Menu, MessageCircle, ScanLine, UsersRound, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import type { StudyViews } from '../lib/schema'
@@ -24,9 +24,8 @@ export function Layout({ views, email }: { views: StudyViews; email: string }) {
     { to: '/scans', label: 'Scan Records', Icon: ScanLine, enabled: !!views.scans },
     { to: '/feedback', label: 'Feedback', Icon: MessageCircle, enabled: !!views.feedback },
     { to: '/analytics', label: 'Analytics', Icon: BarChart3, enabled: !!(views.scans || views.feedback) },
-    { to: '/settings', label: 'Settings', Icon: Settings, enabled: true },
   ]
-  const section = routes.find((route) => route.to === pathname)?.label ?? 'Dashboard'
+  const section = routes.find((route) => route.to === pathname)?.label ?? (pathname === '/settings' ? 'Settings' : 'Dashboard')
 
   return <div className="shell">
     <a href="#content" className="skip-link" onClick={(event) => {

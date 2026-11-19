@@ -54,7 +54,6 @@ export function Login() {
 
   return <AuthFrame>
     <h1>Sign in to BananaQ Admin</h1>
-    <p className="auth-intro">Access the administrative dashboard for the BananaQ banana disease study.</p>
     <form onSubmit={signIn} className="auth-form">
       <label>Email
         <span className="icon-input"><Mail size={17} /><input name="email" type="email"

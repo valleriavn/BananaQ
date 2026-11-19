@@ -1,14 +1,13 @@
-import { BarChart3, Database, MessageCircle, ScanLine, UsersRound } from 'lucide-react'
+import { BarChart3, Database, MessageCircle, ScanLine, UserRound, UsersRound } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Link } from 'react-router-dom'
 import { Empty, ErrorState, Loading, PageHeading, RefreshButton, Status } from '../components/Ui'
 import { useRequest } from '../hooks/useRequest'
-import { getSeries, getTotal } from '../lib/data'
+import { getSeries, getTotal, getUserCount } from '../lib/data'
 import { countFormat } from '../lib/format'
 import type { Field, StudyViews, Table, View } from '../lib/schema'
-import { projectHost } from '../lib/supabase'
 
 function Total({ table, title, Icon, revision }: { table: Table; title: string; Icon: LucideIcon; revision: number }) {
   const request = useCallback((signal: AbortSignal) => getTotal(table, signal), [table])
@@ -16,6 +15,16 @@ function Total({ table, title, Icon, revision }: { table: Table; title: string; 
   return <section className="panel metric-card">
     <div className="metric-icon"><Icon size={26} /></div>
     <div><h2>{title}</h2><strong aria-live="polite">{data === undefined ? '—' : countFormat.format(data)}</strong>
+      {loading ? <small>Loading total…</small> : error ? <small>Count unavailable</small> : null}</div>
+  </section>
+}
+
+function RegisteredUsers({ revision }: { revision: number }) {
+  const request = useCallback((signal: AbortSignal) => getUserCount(signal), [])
+  const { data, loading, error } = useRequest(request, revision)
+  return <section className="panel metric-card">
+    <div className="metric-icon"><UserRound size={26} /></div>
+    <div><h2>Users</h2><strong aria-live="polite">{data === undefined ? '—' : countFormat.format(data)}</strong>
       {loading ? <small>Loading total…</small> : error ? <small>Count unavailable</small> : null}</div>
   </section>
 }
@@ -77,10 +86,11 @@ export function Overview({ views, tables }: { views: StudyViews; tables: Table[]
   const [revision, setRevision] = useState(0)
   const { scans, feedback, participants, sessions } = views
   return <>
-    <PageHeading title="Dashboard Overview" description="Monitor BananaQ activity, data, and system status."
+    <PageHeading title="Dashboard Overview"
       actions={<RefreshButton onClick={() => setRevision((value) => value + 1)} />} />
     {!tables.length && <section className="panel"><Empty label="No approved tables discovered." /></section>}
     <div className="metrics-grid">
+      <RegisteredUsers revision={revision} />
       {scans && <Total table={scans.table} title="Scans" Icon={ScanLine} revision={revision} />}
       {feedback && <Total table={feedback.table} title="Feedback submissions" Icon={MessageCircle} revision={revision} />}
       {sessions && <Total table={sessions} title="Sessions" Icon={UsersRound} revision={revision} />}
@@ -93,10 +103,8 @@ export function Overview({ views, tables }: { views: StudyViews; tables: Table[]
         description="Last 30 days, grouped by UTC date" revision={revision} />}
     </div>}
     <section className="panel source-panel">
-      <div><h2>Source status</h2><p><Database size={20} /> {tables.length} approved {tables.length === 1 ? 'table' : 'tables'} in Supabase</p></div>
+      <div><h2>Source status</h2><p><Database size={20} /> {tables.length} {tables.length === 1 ? 'table' : 'tables'} in Supabase</p></div>
       <div className="source-actions"><Status label="Schema verified" /><Link to="/database" className="button secondary">Explore tables</Link></div>
-      <small className="break-text">{projectHost}</small>
-      {!participants && <small>No participant table was discovered. Sessions and installation IDs are separate from participant counts.</small>}
     </section>
     {(scans?.label || feedback?.rating || feedback?.result) && <div className="chart-grid">
       {scans?.label && <MetricChart view={scans} field={scans.label} mode="distribution"
@@ -116,7 +124,7 @@ export function Analytics({ views }: { views: StudyViews }) {
   const hasMetrics = scans?.date || scans?.label || scans?.confidence || scans?.result ||
     feedback?.date || feedback?.label || feedback?.rating || feedback?.result || feedback?.confidence
   return <>
-    <PageHeading title="Analytics" description="Track study activity, prediction patterns, and ratings."
+    <PageHeading title="Analytics"
       actions={<RefreshButton onClick={() => setRevision((value) => value + 1)} />} />
     {!hasMetrics ? <section className="panel"><Empty label="No supported analytics columns were discovered." /></section> : <>
       {(scans?.date || feedback?.date) && <>

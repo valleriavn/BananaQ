@@ -28,7 +28,7 @@ export function FeedbackPage({ view }: { view: View }) {
   const searchFields = [view.label, view.rating, view.comment].filter((item) => item !== undefined)
   const safeFallback = view.fields.filter((item) => !item.primaryKey && !/(^id$|_id$|email|phone|token)/i.test(item.name)).slice(0, 5)
   return <>
-    <PageHeading title="Feedback" description="Review submitted ratings and comments from BananaQ." />
+    <PageHeading title="Feedback" />
     <RecordTable view={view} columns={columns.length ? columns : safeFallback}
       searchFields={searchFields} facets={facets} />
   </>
@@ -45,7 +45,7 @@ export function ScanPage({ view }: { view: View }) {
     ...labelField(field(view, 'session_id'), 'Session ID'),
   ]
   return <>
-    <PageHeading title="Scan Records" description="Inspect scan timestamps, predictions, and available confidence scores." />
+    <PageHeading title="Scan Records" />
     <RecordTable view={view} columns={columns} searchFields={searchable(view)}
       facets={view.label ? [{ field: view.label, label: 'Predicted label' }] : []} />
   </>
@@ -85,9 +85,7 @@ export function ParticipantPage({ table, sessions }: { table: Table; sessions?: 
   const relationship = sessions?.relationships.find((key) =>
     key.readable && key.targetSchema === 'public' && key.targetTable === table.name)
   return <>
-    <PageHeading title="Participants" description={relationship
-      ? 'Review participant records and sessions linked by the database.'
-      : 'Review participant records. No verified session relationship is available.'} />
+    <PageHeading title="Participants" />
     <RecordTable view={view} columns={view.fields.slice(0, 6)} searchFields={searchable(view)} exactFilter
       extraDetails={relationship && sessions ? (row) => relationship.targetColumns.every((name) => row.record[name] != null)
         ? <RelatedSessions sessions={sessions} relationship={relationship} row={row} /> : null : undefined} />

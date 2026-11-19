@@ -2,7 +2,7 @@ import { ArrowDownWideNarrow, ArrowUpNarrowWide, ChevronLeft, ChevronRight, Eye,
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 import { useRequest } from '../hooks/useRequest'
-import { getData, getSeries, valueOf } from '../lib/data'
+import { deleteRecord, errorMessage, getData, getSeries, valueOf } from '../lib/data'
 import type { Page, Row } from '../lib/data'
 import { countFormat, formatCell } from '../lib/format'
 import type { Field, View } from '../lib/schema'
@@ -29,10 +29,12 @@ function FacetSelect({ view, facet, value, onChange }: {
   </label>
 }
 
-function Details({ row, view, onClose, extra }: {
-  row: Row; view: View; onClose: () => void; extra?: (row: Row) => ReactNode
+function Details({ row, view, onClose, extra, onDelete }: {
+  row: Row; view: View; onClose: () => void; extra?: (row: Row) => ReactNode; onDelete?: () => Promise<void>
 }) {
   const dialog = useRef<HTMLDialogElement>(null)
+  const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
   useEffect(() => {
     const element = dialog.current
     element?.showModal()
@@ -57,6 +59,17 @@ function Details({ row, view, onClose, extra }: {
         </section>
       )}
       {extra?.(row)}
+      {onDelete && <section className="record-actions">
+        <h3>Actions</h3>
+        <p className="muted">Deleting this record may also delete related records.</p>
+        {deleteError && <p className="problem-text" role="alert">{deleteError}</p>}
+        <button type="button" className="button danger" disabled={deleting} onClick={async () => {
+          if (!window.confirm('Delete this record? This action cannot be undone and may delete related records.')) return
+          setDeleting(true)
+          setDeleteError('')
+          try { await onDelete() } catch (error) { setDeleteError(errorMessage(error)); setDeleting(false) }
+        }}>{deleting ? 'Deleting…' : 'Delete record'}</button>
+      </section>}
     </div>
   </dialog>
 }
@@ -183,6 +196,15 @@ export function RecordTable({ view, columns, searchFields, facets = [], exactFil
         </div>
       </footer>
     </section>
-    {detail && <Details row={detail} view={view} onClose={() => setDetail(null)} extra={extraDetails} />}
+    {detail && <Details row={detail} view={view} onClose={() => setDetail(null)} extra={extraDetails}
+      onDelete={view.table.columns.some((column) => column.primaryKey) ? async () => {
+        const primary = view.table.columns.filter((column) => column.primaryKey)
+        const key = Object.fromEntries(primary.map((column) => [column.name, detail.record[column.name]]))
+        const controller = new AbortController()
+        const deleted = await deleteRecord(view.table.name, key, controller.signal)
+        if (!deleted) throw new Error('This record no longer exists. Refresh the table and try again.')
+        setDetail(null)
+        refresh()
+      } : undefined} />}
   </div>
 }
