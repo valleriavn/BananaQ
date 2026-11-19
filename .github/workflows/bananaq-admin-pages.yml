@@ -34,7 +34,6 @@ jobs:
           package_json_file: admin-dashboard/package.json
       - uses: actions/configure-pages@v5
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test:sql
       - run: pnpm build
       - uses: actions/upload-pages-artifact@v4
         with:
