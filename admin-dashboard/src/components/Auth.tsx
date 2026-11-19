@@ -53,7 +53,6 @@ export function Login() {
   }
 
   return <AuthFrame>
-    <h1>Sign in to BananaQ Admin</h1>
     <form onSubmit={signIn} className="auth-form">
       <label>Email
         <span className="icon-input"><Mail size={17} /><input name="email" type="email"
