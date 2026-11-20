@@ -20,7 +20,9 @@ export function Layout({ views, email }: { views: StudyViews; email: string }) {
   const routes = [
     { to: '/', label: 'Overview', Icon: Home, enabled: true },
     { to: '/database', label: 'Database Explorer', Icon: Database, enabled: true },
+    { to: '/users', label: 'Users', Icon: UsersRound, enabled: true },
     { to: '/participants', label: 'Participants', Icon: UsersRound, enabled: !!views.participants },
+    { to: '/sessions', label: 'Sessions', Icon: UsersRound, enabled: !!views.sessions },
     { to: '/scans', label: 'Scan Records', Icon: ScanLine, enabled: !!views.scans },
     { to: '/feedback', label: 'Feedback', Icon: MessageCircle, enabled: !!views.feedback },
     { to: '/analytics', label: 'Analytics', Icon: BarChart3, enabled: !!(views.scans || views.feedback) },

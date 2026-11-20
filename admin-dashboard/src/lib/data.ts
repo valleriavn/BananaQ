@@ -40,6 +40,22 @@ export function getUserCount(signal: AbortSignal) {
   return rpc<{ total: number }>('get_dashboard_user_count', {}, signal).then(({ total }) => total)
 }
 
+export function getUsers(offset: number, signal: AbortSignal) {
+  return rpc<{ total: number, rows: OwnerSummary[] }>('get_dashboard_users', {
+    p_limit: 100, p_offset: offset,
+  }, signal)
+}
+
+export function deleteOwnerRecords(ownerId: string, signal: AbortSignal) {
+  return rpc<number>('delete_dashboard_owner_records', { p_owner_id: ownerId }, signal)
+}
+
+export type OwnerSummary = {
+  owner_id: string
+  record_count: number
+  sources: { table: string, records: number }[]
+}
+
 export function deleteRecord(table: string, key: Record<string, unknown>, signal: AbortSignal) {
   return rpc<number>('delete_dashboard_record', { p_table: table, p_key: key }, signal)
 }

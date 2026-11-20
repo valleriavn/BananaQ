@@ -13,8 +13,10 @@ const Analytics = lazy(() => import('./pages/Metrics').then((module) => ({ defau
 const Explorer = lazy(() => import('./pages/Explorer').then((module) => ({ default: module.Explorer })))
 const FeedbackPage = lazy(() => import('./pages/Records').then((module) => ({ default: module.FeedbackPage })))
 const ParticipantPage = lazy(() => import('./pages/Records').then((module) => ({ default: module.ParticipantPage })))
+const SessionPage = lazy(() => import('./pages/Records').then((module) => ({ default: module.SessionPage })))
 const ScanPage = lazy(() => import('./pages/Records').then((module) => ({ default: module.ScanPage })))
 const SettingsPage = lazy(() => import('./pages/Settings').then((module) => ({ default: module.SettingsPage })))
+const UsersPage = lazy(() => import('./pages/Users').then((module) => ({ default: module.UsersPage })))
 
 function Unavailable({ title, reason }: { title: string; reason: string }) {
   return <><PageHeading title={title} /><section className="panel message-panel"><p>{reason}</p></section></>
@@ -40,10 +42,13 @@ function Authorized({ session }: { session: Session }) {
     <Routes>
       <Route element={<Layout views={views} email={session.user.email ?? ''} />}>
         <Route index element={<Overview views={views} tables={schema} />} />
+        <Route path="users" element={<UsersPage />} />
         <Route path="database" element={<Explorer tables={schema} refreshSchema={() => setRevision((n) => n + 1)} />} />
         <Route path="participants" element={views.participants
           ? <ParticipantPage table={views.participants} sessions={views.sessions} />
           : <Unavailable title="Participants" reason="No approved participant table was discovered. Session and installation IDs do not identify individual participants." />} />
+        <Route path="sessions" element={views.sessions ? <SessionPage table={views.sessions} />
+          : <Unavailable title="Sessions" reason="No approved session table was discovered." />} />
         <Route path="scans" element={views.scans ? <ScanPage view={views.scans} />
           : <Unavailable title="Scan Records" reason="No approved scan or prediction table was discovered." />} />
         <Route path="feedback" element={views.feedback ? <FeedbackPage view={views.feedback} />

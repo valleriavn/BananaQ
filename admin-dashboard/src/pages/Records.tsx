@@ -51,6 +51,16 @@ export function ScanPage({ view }: { view: View }) {
   </>
 }
 
+export function SessionPage({ table }: { table: Table }) {
+  const view = useMemo(() => ({ table, fields: toFields(table) }), [table])
+  const columns = view.fields.filter((column) =>
+    column.primaryKey || ['owner_id', 'started_at', 'last_active_at', 'ended_at'].includes(column.name)).slice(0, 6)
+  return <>
+    <PageHeading title="Sessions" />
+    <RecordTable view={view} columns={columns.length ? columns : view.fields.slice(0, 6)} searchFields={searchable(view)} />
+  </>
+}
+
 function RelatedSessions({ sessions, relationship, row }: { sessions: Table; relationship: Relationship; row: Row }) {
   const [page, setPage] = useState(0)
   const size = 10

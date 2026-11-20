@@ -9,24 +9,24 @@ import { getSeries, getTotal, getUserCount } from '../lib/data'
 import { countFormat } from '../lib/format'
 import type { Field, StudyViews, Table, View } from '../lib/schema'
 
-function Total({ table, title, Icon, revision }: { table: Table; title: string; Icon: LucideIcon; revision: number }) {
+function Total({ table, title, Icon, revision, to }: { table: Table; title: string; Icon: LucideIcon; revision: number; to: string }) {
   const request = useCallback((signal: AbortSignal) => getTotal(table, signal), [table])
   const { data, loading, error } = useRequest(request, revision)
-  return <section className="panel metric-card">
+  return <Link to={to} className="panel metric-card metric-card-link">
     <div className="metric-icon"><Icon size={26} /></div>
     <div><h2>{title}</h2><strong aria-live="polite">{data === undefined ? '—' : countFormat.format(data)}</strong>
       {loading ? <small>Loading total…</small> : error ? <small>Count unavailable</small> : null}</div>
-  </section>
+  </Link>
 }
 
 function RegisteredUsers({ revision }: { revision: number }) {
   const request = useCallback((signal: AbortSignal) => getUserCount(signal), [])
   const { data, loading, error } = useRequest(request, revision)
-  return <section className="panel metric-card">
+  return <Link to="/users" className="panel metric-card metric-card-link">
     <div className="metric-icon"><UserRound size={26} /></div>
     <div><h2>Users</h2><strong aria-live="polite">{data === undefined ? '—' : countFormat.format(data)}</strong>
       {loading ? <small>Loading total…</small> : error ? <small>Count unavailable</small> : null}</div>
-  </section>
+  </Link>
 }
 
 const shortDate = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', timeZone: 'UTC' })
@@ -91,10 +91,10 @@ export function Overview({ views, tables }: { views: StudyViews; tables: Table[]
     {!tables.length && <section className="panel"><Empty label="No approved tables discovered." /></section>}
     <div className="metrics-grid">
       <RegisteredUsers revision={revision} />
-      {scans && <Total table={scans.table} title="Scans" Icon={ScanLine} revision={revision} />}
-      {feedback && <Total table={feedback.table} title="Feedback submissions" Icon={MessageCircle} revision={revision} />}
-      {sessions && <Total table={sessions} title="Sessions" Icon={UsersRound} revision={revision} />}
-      {participants && <Total table={participants} title="Participants" Icon={UsersRound} revision={revision} />}
+      {scans && <Total table={scans.table} title="Scans" Icon={ScanLine} revision={revision} to="/scans" />}
+      {feedback && <Total table={feedback.table} title="Feedback submissions" Icon={MessageCircle} revision={revision} to="/feedback" />}
+      {sessions && <Total table={sessions} title="Sessions" Icon={UsersRound} revision={revision} to="/sessions" />}
+      {participants && <Total table={participants} title="Participants" Icon={UsersRound} revision={revision} to="/participants" />}
     </div>
     {(scans?.date || feedback?.date) && <div className="chart-grid">
       {scans?.date && <MetricChart view={scans} field={scans.date} mode="daily" title="Scans over time"

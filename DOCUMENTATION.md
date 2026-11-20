@@ -1,5 +1,11 @@
 # BananaQ Technical and Operational Guide
 
+## Review notes
+
+- [Android app architecture](docs/bananaq-app-architecture-notes.md)
+- [Model architecture and training](docs/bananaq-model-architecture-notes.md)
+- [Admin dashboard architecture](docs/bananaq-admin-dashboard-notes.md)
+
 ## Product overview
 
 BananaQ is an offline-first Android application that classifies banana-leaf images as Black Sigatoka, Cordana Leaf Spot, Healthy, or Panama Disease. It runs its TensorFlow Lite model on the device, stores scan history locally, and synchronizes consented research records and private scan images to Supabase when a connection is available.
